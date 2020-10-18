@@ -1,0 +1,591 @@
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="report.css" type="text/css"/>
+	<title>Use Case Diagram - Cocktail (vue Générale)</title>
+	<META name="Description" content="Ensemble des interactions en lien avec les cocktails (point de vue générale)"/>
+	<script type="text/javascript" src="report.js"></script>
+	<script type="text/javascript" src="link_popup.js"></script>
+	<script type="text/javascript" src="tooltip.js"></script>
+</head>
+<body style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" onload="initPage();initDiagram();initGridDiagram();">
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_top">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_bottom">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_left">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_right">
+	</div>
+	<canvas width="100" style="position:absolute; z-index:2; visibility:hidden" id="spotlight_c" height="100">
+	</canvas>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesTop">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesRight">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+			</tr>
+			<tr>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute;z-index:4;visibility:hidden" id="linkPopupMenuLayer">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="linkPopupMenuTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="referenceIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Ref.gif" style="border:none" onclick="movePopupPositionToReferenceIconPosition();resetPopupForReference();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="subdiagramIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Subdiagram.gif" style="border:none" onclick="movePopupPositionToSubdiagramIconPosition();resetPopupForSubdiagram();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="transitorIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Transitor.gif" style="border:none" onclick="movePopupPositionToTransitorIconPosition();resetPopupForTransitor();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="documentationIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Documentation.png" style="border:none" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="HeaderText">
+		ShakerMagique	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="HeaderLine1">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine2">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine3">
+			</td>
+		</tr>
+	</table>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="referencedBys">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="referencedBysTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="vplink">
+		<table border="1" cellpadding="0" cellspacing="0" bordercolor="#A9BFD3">
+			<tr>
+				<td>
+					<table border="0" cellpadding="0" width="100%" cellspacing="0">
+						<tr style="background:#DDDDDD">
+							<td style="font-size: 12px;" align="left">
+								<select onchange="vpLinkToggleName()" id="vplink-linkType">
+	<option value="Project Link">Project Link</option>
+	<option value="Page URL">Page URL</option>
+</select>
+							</td>
+							<td style="font-size: 12px;" align="right">
+								<input onclick="javascript: vpLinkToggleName()" id="vplink-checkbox" type="checkbox" />
+								<label for="vplink-checkbox">with Name</label>							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="vplink-text" style="width: 348px; height: 60px; border-color: #7EADD9; outline: none;"></textarea>				</td>
+			</tr>
+		</table>
+	</div>
+	<p class="PageTitle">
+		<span id="PageTitleText">
+			Use Case Diagram - Cocktail (vue Générale)		</span>
+<a onclick="javascript: showVpLink('Analyse_ShakerMagique.vpp://diagram/GV689y6GAqACEh6h', 'Cocktail (vue G&#xe9;n&#xe9;rale)\nAnalyse_ShakerMagique.vpp://diagram/GV689y6GAqACEh6h', 'Cocktail (vue G&#xe9;n&#xe9;rale)', this); return false;" style="padding-left: 16px; font-size: 12px" href="#"><img src="../images/icons/link.png" border="0"> link</a>	</p>
+	<div style="position: relative; padding-bottom: 20px;">
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: absolute; top: 0; left: 0; z-index: 20;" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),hideLinkPopup(),hideReferencedBys();">
+			<tr>
+				<td>
+<span class="TableContent">Jump to:</span>					<select id="SelectShape" class="TableContent" onChange="scrollWin('diagram', this.value);hideLinkPopup();showSpotLight('diagram', this.value)">
+<option value="">Please select a model element</option>
+<option value="shape|120.0|2.0|407.0|537.0|System_owm89y6GAqACEh9b.html|System_owm89y6GAqACEh9b.html|owm89y6GAqACEh9Z" id="optionowm89y6GAqACEh9Z">Système  : System</option>
+<option value="shape|17.0|433.0|30.0|60.0|Actor_PEG8dy6GAqACEgkj.html|Actor_PEG8dy6GAqACEgkj.html|0w4uzy6GAqACEg8E" id="option0w4uzy6GAqACEg8E">Membre : Actor</option>
+<option value="shape|17.0|95.0|30.0|60.0|Actor_PhCfdy6GAqACEg3u.html|Actor_PhCfdy6GAqACEg3u.html|KsqC9y6GAqACEiEf" id="optionKsqC9y6GAqACEiEf">Visiteur : Actor</option>
+<option value="shape|158.0|251.0|135.0|40.0|UseCase_0wm89y6GAqACEh9g.html|UseCase_0wm89y6GAqACEh9g.html|0wm89y6GAqACEh9e" id="option0wm89y6GAqACEh9e">Rechercher des cocktails : Use Case</option>
+<option value="shape|340.0|203.0|138.0|40.0|UseCase_mwm89y6GAqACEh9v.html|UseCase_mwm89y6GAqACEh9v.html|mwm89y6GAqACEh9t" id="optionmwm89y6GAqACEh9t">Filtrer par ingrédient(s) : Use Case</option>
+<option value="shape|158.0|347.0|83.0|40.0|UseCase_Lwm89y6GAqACEh_M.html|UseCase_Lwm89y6GAqACEh_M.html|Lwm89y6GAqACEh.K" id="optionLwm89y6GAqACEh.K">Lister cocktails : Use Case</option>
+<option value="shape|340.0|251.0|138.0|40.0|UseCase_HIm89y6GAqACEh_X.html|UseCase_HIm89y6GAqACEh_X.html|7Im89y6GAqACEh_V" id="option7Im89y6GAqACEh_V">Filtrer par force : Use Case</option>
+<option value="shape|340.0|299.0|138.0|40.0|UseCase_kom89y6GAqACEh_l.html|UseCase_kom89y6GAqACEh_l.html|kom89y6GAqACEh_j" id="optionkom89y6GAqACEh_j">Filtrer par catégorie : Use Case</option>
+<option value="shape|340.0|155.0|138.0|40.0|UseCase_aom89y6GAqACEh_z.html|UseCase_aom89y6GAqACEh_z.html|qom89y6GAqACEh_x" id="optionqom89y6GAqACEh_x">Filtrer par nom : Use Case</option>
+<option value="shape|160.0|443.0|162.0|40.0|UseCase_tom89y6GAqACEiAP.html|UseCase_tom89y6GAqACEiAP.html|Nom89y6GAqACEiAN" id="optionNom89y6GAqACEiAN">Suggestions selon préférences : Use Case</option>
+<option value="shape|160.0|33.0|105.0|40.0|UseCase_7om89y6GAqACEiAd.html|UseCase_7om89y6GAqACEiAd.html|7om89y6GAqACEiAb" id="option7om89y6GAqACEiAb">Consulter fiche cocktail : Use Case</option>
+<option value="shape|340.0|33.0|138.0|40.0|UseCase_7_gyDy6GAqACEh6Z.html|UseCase_7_gyDy6GAqACEh6Z.html|7.gyDy6GAqACEh6Y" id="option7.gyDy6GAqACEh6Y">Ajouter/retirer au favori* : Use Case</option>
+<option value="shape|340.0|80.0|138.0|40.0|UseCase_nT1yDy6GAqACEh_Q.html|UseCase_nT1yDy6GAqACEh_Q.html|nT1yDy6GAqACEh_P" id="optionnT1yDy6GAqACEh_P">Noter le cocktail* : Use Case</option>
+</select>				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: relative; top: 24;">
+			<tr>
+				<td>
+					<img id="diagram" src="../images/Cocktail_vue_Gnrale.png" usemap="#diagram_map" class="Image" width="531" height="599"/>
+					<map name="diagram_map">
+<area imageId="diagram" coords="340.0, 184.39131, 220.0, 247.0, 221.53847, 251.0, 242.25, 251.0, 349.58334, 195.0, 340.0, 195.0, 340.0, 184.39131" coords2="340.0, 184.39131, 220.0, 247.0, 221.53847, 251.0, 242.25, 251.0, 349.58334, 195.0, 340.0, 195.0, 340.0, 184.39131" shape="poly" alt=":Generalization" id="areadiagram_map_oYm89y6GAqACEiAu_default" href="Generalization_oYm89y6GAqACEiAw.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="293.0, 263.0, 293.0, 277.0, 340.0, 277.0, 340.0, 263.0" coords2="293.0, 263.0, 293.0, 277.0, 340.0, 277.0, 340.0, 263.0" shape="poly" alt=":Generalization" id="areadiagram_map_0Ym89y6GAqACEiA4_default" href="Generalization_MYm89y6GAqACEiA6.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="340.0, 230.50381, 236.0, 244.0, 236.5, 251.0, 290.94116, 251.0, 352.58823, 243.0, 340.0, 243.0, 340.0, 230.50381" coords2="340.0, 230.50381, 236.0, 244.0, 236.5, 251.0, 290.94116, 251.0, 352.58823, 243.0, 340.0, 243.0, 340.0, 230.50381" shape="poly" alt=":Generalization" id="areadiagram_map_8Ym89y6GAqACEiA9_default" href="Generalization_8Ym89y6GAqACEiA_.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="293.0, 287.94116, 293.0, 291.0, 237.0, 291.0, 237.0, 297.0, 340.0, 306.08823, 340.0, 306.08823, 340.0, 299.0, 373.0, 299.0, 373.0, 295.0, 293.0, 287.94116" coords2="293.0, 287.94116, 293.0, 291.0, 237.0, 291.0, 237.0, 297.0, 340.0, 306.08823, 340.0, 306.08823, 340.0, 299.0, 373.0, 299.0, 373.0, 295.0, 293.0, 287.94116" shape="poly" alt=":Generalization" id="areadiagram_map_yYm89y6GAqACEiBC_default" href="Generalization_yYm89y6GAqACEiBE.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="189.0, 291.0, 189.0, 347.0, 203.0, 347.0, 203.0, 291.0" coords2="189.0, 291.0, 189.0, 347.0, 203.0, 347.0, 203.0, 291.0" shape="poly" alt=":Include" id="areadiagram_map_4x5SDy6GAqACEh4G_default" href="Include_nR5SDy6GAqACEh4F.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="187.0, 387.0, 187.0, 443.0, 201.0, 443.0, 201.0, 387.0" coords2="187.0, 387.0, 187.0, 443.0, 201.0, 443.0, 201.0, 387.0" shape="poly" alt=":Include" id="areadiagram_map_1nFSDy6GAqACEh4S_default" href="Include_2nFSDy6GAqACEh4R.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="265.0, 46.0, 265.0, 60.0, 340.0, 60.0, 340.0, 46.0" coords2="265.0, 46.0, 265.0, 60.0, 340.0, 60.0, 340.0, 46.0" shape="poly" alt=":Extend" id="areadiagram_map_FRIyDy6GAqACEh6t_default" href="Extend_GRIyDy6GAqACEh6r.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="160.0, 65.10345, 47.0, 116.53793, 47.0, 131.8138, 47.0, 131.8138, 176.21213, 73.0, 160.0, 73.0, 160.0, 65.10345" coords2="160.0, 65.10345, 47.0, 116.53793, 47.0, 131.8138, 47.0, 131.8138, 176.21213, 73.0, 160.0, 73.0, 160.0, 65.10345" shape="poly" alt=":Association" id="areadiagram_map_7OKyDy6GAqACEh8F_default" href="Association_5OKyDy6GAqACEh8A.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="47.0, 113.15151, 47.0, 134.81818, 47.0, 134.81818, 158.0, 262.63635, 158.0, 251.0, 166.71053, 251.0, 47.0, 113.15151" coords2="47.0, 113.15151, 47.0, 134.81818, 47.0, 134.81818, 158.0, 262.63635, 158.0, 251.0, 166.71053, 251.0, 47.0, 113.15151" shape="poly" alt=":Association" id="areadiagram_map_qgqyDy6GAqACEh8P_default" href="Association_YgqyDy6GAqACEh8K.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="265.0, 62.35294, 265.0, 73.0, 239.0, 73.0, 340.0, 87.11029, 340.0, 80.0, 376.7143, 80.0, 377.0, 78.0, 265.0, 62.35294" coords2="265.0, 62.35294, 265.0, 73.0, 239.0, 73.0, 340.0, 87.11029, 340.0, 80.0, 376.7143, 80.0, 377.0, 78.0, 265.0, 62.35294" shape="poly" alt=":Extend" id="areadiagram_map_3ezyDy6GAqACEiAH_default" href="Extend_1ezyDy6GAqACEiAF.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="21.0, 163.0, 21.0, 433.0, 35.0, 433.0, 35.0, 163.0" coords2="21.0, 163.0, 21.0, 433.0, 35.0, 433.0, 35.0, 163.0" shape="poly" alt=":Generalization" id="areadiagram_map_7F4uzy6GAqACEg8K_default" href="Generalization_BZ5Ozy6GAqACEg5I.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="47.0, 458.0, 47.0, 472.0, 160.0, 472.0, 160.0, 458.0" coords2="47.0, 458.0, 47.0, 472.0, 160.0, 472.0, 160.0, 458.0" shape="poly" alt=":Association" id="areadiagram_map_nlEuzy6GAqACEg8f_default" href="Association_llEuzy6GAqACEg8a.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Utilisateur connect&amp;#233; &amp;#224; un compte &amp;lt;b&amp;gt;(mode connect&amp;#233;)&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="17, 433, 47, 493" coords2="17, 433, 47, 493" shape="rect" alt="Membre:Actor" id="areadiagram_map_0w4uzy6GAqACEg8E_default" href="Actor_PEG8dy6GAqACEgkj.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Noter le cocktail sur 5 &amp;#233;toiles &amp;lt;b&amp;gt;(si membre)&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="340, 80, 478, 120" coords2="340, 80, 478, 120" shape="rect" alt="Noter le cocktail*:Use Case" id="areadiagram_map_nT1yDy6GAqACEh_P_default" href="UseCase_nT1yDy6GAqACEh_Q.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Ajouter ou retirer le cocktail en consultation au favori &amp;lt;b&amp;gt;(si membre)&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="340, 33, 478, 73" coords2="340, 33, 478, 73" shape="rect" alt="Ajouter/retirer au favori*:Use Case" id="areadiagram_map_7.gyDy6GAqACEh6Y_default" href="UseCase_7_gyDy6GAqACEh6Z.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Carte de cocktails automatiquement cr&amp;#233;&amp;#233;e selon les pr&amp;#233;f&amp;#233;rences de 
+      l'utilisateur telles que cocktails, ingr&amp;#233;dients favoris et notations.
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      La carte prend en compte les stocks en ingr&amp;#233;dients
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="160, 443, 322, 483" coords2="160, 443, 322, 483" shape="rect" alt="Suggestions selon préférences:Use Case" id="areadiagram_map_Nom89y6GAqACEiAN_default" href="UseCase_tom89y6GAqACEiAP.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Utilisateur qui n'est pas connect&amp;#233; &amp;#224; un compte &amp;lt;b&amp;gt;(mode 
+      anonyme)&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="17, 95, 47, 155" coords2="17, 95, 47, 155" shape="rect" alt="Visiteur:Actor" id="areadiagram_map_KsqC9y6GAqACEiEf_default" href="Actor_PhCfdy6GAqACEg3u.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="160, 33, 265, 73" coords2="160, 33, 265, 73" shape="rect" alt="Consulter fiche cocktail:Use Case" id="areadiagram_map_7om89y6GAqACEiAb_default" href="UseCase_7om89y6GAqACEiAd.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="340, 155, 478, 195" coords2="340, 155, 478, 195" shape="rect" alt="Filtrer par nom:Use Case" id="areadiagram_map_qom89y6GAqACEh_x_default" href="UseCase_aom89y6GAqACEh_z.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Ap&amp;#233;ritif, digestif, les deux
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="340, 299, 478, 339" coords2="340, 299, 478, 339" shape="rect" alt="Filtrer par catégorie:Use Case" id="areadiagram_map_kom89y6GAqACEh_j_default" href="UseCase_kom89y6GAqACEh_l.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      0 &amp;#233;tant sans alcool
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="340, 251, 478, 291" coords2="340, 251, 478, 291" shape="rect" alt="Filtrer par force:Use Case" id="areadiagram_map_7Im89y6GAqACEh_V_default" href="UseCase_HIm89y6GAqACEh_X.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Lister la carte des cocktails selon les filtres
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="158, 347, 241, 387" coords2="158, 347, 241, 387" shape="rect" alt="Lister cocktails:Use Case" id="areadiagram_map_Lwm89y6GAqACEh.K_default" href="UseCase_Lwm89y6GAqACEh_M.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="340, 203, 478, 243" coords2="340, 203, 478, 243" shape="rect" alt="Filtrer par ingrédient(s):Use Case" id="areadiagram_map_mwm89y6GAqACEh9t_default" href="UseCase_mwm89y6GAqACEh9v.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Possibilit&amp;#233; d'inclure ou exclure des crit&amp;#232;res.
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      Par exemple exclure un certain ingr&amp;#233;dient&amp;lt;b&amp;gt;. &amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;&amp;quot;&amp;gt;
+      &amp;lt;b&amp;gt;On doit pouvoir choisir entre recherche &amp;lt;u&amp;gt;chez l'h&amp;#244;te&amp;lt;/u&amp;gt; ou &amp;lt;u&amp;gt;chez 
+      soi&amp;lt;/u&amp;gt;&amp;lt;/b&amp;gt;
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="158, 251, 293, 291" coords2="158, 251, 293, 291" shape="rect" alt="Rechercher des cocktails:Use Case" id="areadiagram_map_0wm89y6GAqACEh9e_default" href="UseCase_0wm89y6GAqACEh9g.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="120, 2, 527, 539" coords2="120, 2, 527, 539" shape="rect" alt="Système :System" id="areadiagram_map_owm89y6GAqACEh9Z_default" href="System_owm89y6GAqACEh9b.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+</map>
+				</td>
+			</tr>
+		</table>
+		<p>
+		</p>
+	</div>
+	<p>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0">
+			<tr>
+				<td>
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Ensemble des interactions en lien avec les cocktails (point de vue 
+      g&#233;n&#233;rale)
+    </p>
+  </body></span>				</td>
+			</tr>
+		</table>
+	</p>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="Category">
+				Model Elements			</td>
+		</tr>
+		<tr>
+			<td style="height: 5px">
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td colSpan="4" class="TableHeaderLine">
+			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine1">
+			</td>
+		</tr>
+		<tr class="TableHeader">
+			<td class="TableCellSpaceHolder10Px">
+			</td>
+			<td width="30%">
+<span class="TableHeaderText">Name</span>			</td>
+			<td class="TableCellSpaceHolder20Px">
+			</td>
+			<td>
+<span class="TableHeaderText">Description</span>			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine2">
+			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/System.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/System.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="System_owm89y6GAqACEh9b.html" class="ItemLink">Système  : System</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Actor.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Actor.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Actor_PEG8dy6GAqACEgkj.html" class="ItemLink">Membre : Actor</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Utilisateur connect&#233; &#224; un compte <b>(mode connect&#233;)</b>
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Actor.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Actor.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Actor_PhCfdy6GAqACEg3u.html" class="ItemLink">Visiteur : Actor</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Utilisateur qui n'est pas connect&#233; &#224; un compte <b>(mode 
+      anonyme)</b>
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_0wm89y6GAqACEh9g.html" class="ItemLink">Rechercher des cocktails : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Possibilit&#233; d'inclure ou exclure des crit&#232;res.
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Par exemple exclure un certain ingr&#233;dient<b>. </b>
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      <b>On doit pouvoir choisir entre recherche <u>chez l'h&#244;te</u> ou <u>chez 
+      soi</u></b>
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_mwm89y6GAqACEh9v.html" class="ItemLink">Filtrer par ingrédient(s) : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_Lwm89y6GAqACEh_M.html" class="ItemLink">Lister cocktails : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Lister la carte des cocktails selon les filtres
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_HIm89y6GAqACEh_X.html" class="ItemLink">Filtrer par force : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      0 &#233;tant sans alcool
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_kom89y6GAqACEh_l.html" class="ItemLink">Filtrer par catégorie : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Ap&#233;ritif, digestif, les deux
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_aom89y6GAqACEh_z.html" class="ItemLink">Filtrer par nom : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_tom89y6GAqACEiAP.html" class="ItemLink">Suggestions selon préférences : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Carte de cocktails automatiquement cr&#233;&#233;e selon les pr&#233;f&#233;rences de 
+      l'utilisateur telles que cocktails, ingr&#233;dients favoris et notations.
+    </p>
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      La carte prend en compte les stocks en ingr&#233;dients
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_7om89y6GAqACEiAd.html" class="ItemLink">Consulter fiche cocktail : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_7_gyDy6GAqACEh6Z.html" class="ItemLink">Ajouter/retirer au favori* : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Ajouter ou retirer le cocktail en consultation au favori <b>(si membre)</b>
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/UseCase.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/UseCase.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="UseCase_nT1yDy6GAqACEh_Q.html" class="ItemLink">Noter le cocktail* : Use Case</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="margin-left:0;color:#000000;font-weight:normal;margin-right:0;font-size:12px;font-family:Dialog;">
+    <p style="margin-left:0pt;margin-right:0pt;margin-top:0pt;margin-bottom:.0001pt;">
+      Noter le cocktail sur 5 &#233;toiles <b>(si membre)</b>
+    </p>
+  </body></span>			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="TableCellSpaceHolder1PxTall">
+			</td>
+		</tr>
+		<tr>
+			<td class="TableFooter">
+			</td>
+		</tr>
+	</table>
+	<div style="height: 20px">
+	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="FooterLine">
+			</td>
+		</tr>
+	</table>
+	<div class="HeaderText">
+		ShakerMagique	</div>
+</body>
+</html>
