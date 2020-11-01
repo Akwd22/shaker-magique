@@ -1,0 +1,35 @@
+id,intitule,illustration_url,categorie,description,forcealc
+4,Godfather,,D,"Verre à digestif
+
+Mettre 2 glaçons dans le verre
+Ajouter alcools et mélanger",NULL
+5,"Love Cocktail",,A,"Grand tumbler
+
+Glaçons dans 1/2 shaker
+Verser les ingrédients
+Shake 5 secondes
+Servir dans verres à long drink en retenant la glace
+Ajouter 2 glaçons par verre",NULL
+3,"Blue Lagoon",,A,"Verre à long drink (grand tumbler)
+givrer fortement le verre au curaçao+sucre
+
+Verser liquides dans le shaker
+Ajouter de la glace pilée
+Shake 10 secondes
+Servir le tout dans le verre givré",NULL
+2,Alexandra,a,AD,"Verre à cocktail
+Verre givré au cacao
+
+Quelques cubes de glace au shaker
+Ajout crème de cacao, cognac, crème fraiche
+Shake 20 secondes
+Servir dans le verre en retenant la glace
+Saupoudrer de cacao",0
+1,Acapulco,a,A,"Verre à cocktail
+tranche d’ananas sur le bord du verre et long zeste de citron vert dans le verre
+
+Glace pilée dans 1/2 shaker
+Ajout Tequila, cointreau, ananas, sucre et oeuf
+Shake 15 secondes
+Servir et ajouter quelques glaçons
+Terminer avec grenadine + la déco",1
