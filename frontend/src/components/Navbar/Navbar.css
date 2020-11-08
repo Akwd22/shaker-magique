@@ -11,7 +11,7 @@ a {
 
 li {
   list-style-type: none;
-  font-variant: small-caps;
+  text-transform: uppercase;
 }
 
 nav {
@@ -31,6 +31,9 @@ nav {
   text-transform: uppercase;
   color: var(--bg-color-items);
 }
+.navbar-logo:hover{
+  color:var(--filter-box-font-color-hover);
+}
 
 .navbar-logo > i {
   margin: 5px;
@@ -43,8 +46,8 @@ nav {
   color: var(--bg-color-items);
 }
 
-.navbar-links a:first-child {
-  display:none;
+.navbar-links li:first-child {
+  display: none;
 }
 
 .navbar-links a {
@@ -54,13 +57,13 @@ nav {
 }
 
 .navbar-links li > .fas {
-  font-size: 19px;
+  font-size: 22px;
   margin-right: 10px;
 }
 
-.navbar-links a:hover {
-  font-size: 19px;
+.navbar-links li:hover {
   cursor: pointer;
+  color:var(--filter-box-font-color-hover);
 }
 
 .navbar-burger {
@@ -81,34 +84,34 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
     top: 10vh;
     right: 0;
     height: 100vh;
     background-image: linear-gradient(135deg, #bb4e75 10%, #ff9d6c 100%);
     padding-top: 40px;
-    padding-left: 30px;
-    width: 50%;
+    width: 45%;
     transform: translateX(500px);
     transition: 0.5s ease-in-out;
   }
 
-  .navbar-links a:first-child {
-    display:initial;
+  .navbar-links li:first-child {
+    display: initial;
   }
-
 
   .navbar-links li {
     display: flex;
     flex-direction: row;
     padding: 25px;
-    border-bottom: 1px solid #f1f2f6;
+    border-bottom: 1px solid #ccc;
   }
-
 
   .navbar-links > li > a {
     display: inline-block;
     overflow: visible;
+  }
+
+  .navbar-links > li:nth-child(2) {
+    line-height: 26px;
   }
 
   .navbar-links > li > i {

@@ -25,6 +25,7 @@ function Navbar() {
           style={{ transform: open ? "translateX(0px)" : "" }}
         >
           <li>
+          <i className="fas fa-glass-martini-alt"></i>
             <a>Accueil</a>
           </li>
           <li >
