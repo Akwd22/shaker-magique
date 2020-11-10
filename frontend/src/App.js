@@ -1,16 +1,14 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
-import CocktailBox from "./components/CocktailBox/CocktailBox";
-import CocktailFilterBox from "./components/CocktailFilterBox/CocktailFilterBox";
-import CocktailFilterBar from "./components/CocktailFilterBox/CocktailFilterBar";
+import Navbar from "./components/Header/Navbar/Navbar";
+import MainComponent from "./components/main/MainComponent";
+//import CocktailBox from "./components/main/CocktailBox/CocktailBox";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <CocktailFilterBar />
-      <CocktailFilterBox/>
+      <MainComponent/>
     </div>
   );
 }

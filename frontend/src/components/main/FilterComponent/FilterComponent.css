@@ -3,6 +3,50 @@
   padding: 0;
 }
 
+.cocktailFilterBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 35px 0px;
+}
+
+.filter-button-component {
+  display: flex;
+  justify-content: center;
+}
+
+.filter-button {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
+}
+.filter-button {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+
+  border-radius: 10px;
+  display: none;
+  border: none;
+  outline: none;
+}
+
+.filter-button:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .filterBar {
   display: flex;
   flex-direction: column;
@@ -70,8 +114,22 @@ input[type="checkbox"] {
 }
 
 .filterBar-bottomPart-button:hover {
-    background-position: right center; /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none; 
-    cursor: pointer;
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .filter-button {
+    display: flex;
+  }
+
+  .filterBar-bottomPart {
+    order: 1;
+  }
+
+  .filterBar {
+    display: none;
+  }
 }
