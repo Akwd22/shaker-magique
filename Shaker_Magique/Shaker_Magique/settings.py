@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'shaker.apps.ShakerConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'Shaker_Magique.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,12 +76,12 @@ WSGI_APPLICATION = 'Shaker_Magique.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # on utilise l'adaptateur postgresql
-        'NAME': 'zeohflnw',  # le nom de notre base de donnees creee precedemment
-        'USER': 'zeohflnw',  # attention : remplacez par votre nom d'utilisateur
-        'PASSWORD': 'pdRRrnwnPWBdsUP_B77VESA7q58RfXh8',
-        'HOST': 'kandula.db.elephantsql.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.mysql',  # on utilise l'adaptateur postgresql
+        'NAME': 'pts3',  # le nom de notre base de donnees creee precedemment
+        'USER': 'root',  # attention : remplacez par votre nom d'utilisateur
+        'PASSWORD': 'root',
+        'HOST': '',
+        'PORT': '3306',
     }
 }
 
