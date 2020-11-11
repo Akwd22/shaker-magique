@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.cocktailbox {
+  height: 300px;
+  width: 400px;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 175px 1fr;
+  grid-template-rows: 1fr 5fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas:
+    "title title"
+    "img desc"
+    "btn btn";
+}
+
+.cocktailbox > * {
+  border: 1px solid black;
+}
+.cocktailbox-title {
+  grid-area: title;
+}
+
+.cocktailbox-img {
+  grid-area: img;
+  width: 100%;
+  height: 100%;
+}
+
+.cocktailbox-desc {
+  grid-area: desc;
+  overflow: hidden;
+}
+
+.cocktailbox-button {
+  grid-area: btn;
+  justify-self: center;
+}

@@ -1,0 +1,16 @@
+.pagecontainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+@media screen and (max-width: 1024px) {
+  .pagecontainer {
+    margin-left: 0px;
+    margin-right: 0px ;
+  }
+}

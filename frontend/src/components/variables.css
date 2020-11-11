@@ -1,0 +1,9 @@
+:root {
+  --bg-color-navbar: #ff7f50;
+  --bg-color-navbar-sc: #f77b4e;
+  --bg-color-items: #fff;
+  --filter-box-font-color: black;
+  --filter-box-font-color-hover: #f1f2f6;
+  font-family: Helvetica;
+  /* background-image: linear-gradient( 135deg, #FF9D6C 10%, #BB4E75 100%); */
+}
