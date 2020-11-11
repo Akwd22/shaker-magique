@@ -14,39 +14,41 @@ function Navbar() {
   return (
     <div className="navbar">
       <header>
-        <div className="test">
-          <nav>
-            <div className="navbar-logo">
-              <i className="fas fa-glass-martini-alt"></i>
-              Shaker Magique
-            </div>
-            <ul
-              className="navbar-links"
-              /*Si on click sur le bouton hamburger on ouvre le menu en mode responsive*/
-              style={{ transform: open ? "translateX(0px)" : "" }}
-            >
-              <li>
-                <i className="fas fa-glass-martini-alt"></i>
-                <a>Accueil</a>
-              </li>
-              <li>
-                <i className="fas fa-user-friends"></i>
-                <a>Rechercher un hôte</a>
-              </li>
-              <li>
-                <i className="fas fa-user"></i>
-                <a>Connexion</a>
-              </li>
-            </ul>
-            {/*navbar-logo*/}
+        <nav>
+          <div className="navbar-logo">
+            <i className="fas fa-glass-martini-alt"></i>
+            Shaker Magique
+          </div>
+          {/*navbar-logo*/}
+          <ul
+            className="navbar-links"
+            /*Si on click sur le bouton hamburger on ouvre le menu en mode responsive*/
+            style={{ transform: open ? "translateX(0px)" : "" }}
+          >
             <i
               onClick={() => setOpen(!open)}
-              className="fas fa-bars navbar-burger"
+              className="fas fa-times navbar-burger-active"
             ></i>
-          </nav>
-        </div>
+            <li>
+              <i className="fas fa-glass-martini-alt"></i>
+              <a>Accueil</a>
+            </li>
+            <li>
+              <i className="fas fa-user-friends"></i>
+              <a>Rechercher un hôte</a>
+            </li>
+            <li>
+              <i className="fas fa-user"></i>
+              <a>Connexion</a>
+            </li>
+          </ul>
+          <i
+            onClick={() => setOpen(!open)}
+            className="fas fa-bars navbar-burger"
+          ></i>
+        </nav>
       </header>
-    </div> //navbar
+    </div>
   );
 }
 
