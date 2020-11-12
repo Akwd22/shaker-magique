@@ -1,5 +1,5 @@
 import React from "react";
-import CocktailBox from "./CocktailBox_GRID/CocktailBox";
+import CocktailBox from "./CocktailBox_FLEX/CocktailBox";
 import CocktailList from "./CocktailList/CocktailList";
 import FilterComponent from "./FilterComponent/FilterComponent";
 import "./HomePage.css";

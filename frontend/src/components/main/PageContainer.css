@@ -4,8 +4,17 @@
   align-items: center;
   margin-top: 50px;
   margin-bottom: 50px;
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.pagecontainer div {
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @media screen and (max-width: 1024px) {
