@@ -1,21 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomePage from "./components/main/HomePage/HomePage";
-import CocktailPage from "./components/main/CocktailPage/CocktailPage";
+import Navbar from "./components/Header/Navbar/Navbar";
+import PageContainer from "./components/main/PageContainer";
 import "./App.css";
-import Header from "./components/Header/Header";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Router>
-        <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/cocktail" exact component={CocktailPage} />
-          <Route path="/" component={() => <div>ERREUR 404</div>} />
-        </Switch>
-      </Router>
+      <Navbar />
+      <PageContainer />
     </div>
   );
 }

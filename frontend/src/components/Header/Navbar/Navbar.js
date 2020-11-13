@@ -1,49 +1,53 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-
 import "../../variables.css";
-import Button from "../../Button";
-import NavBarMobile from "./NavbarMobile";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
-  const [classNav, setStateClassNav] = useState("navbar-mobile none");
+  // Hook return un tableau ["État du composant", "fonction qui va modifier l'état"] et prend en paramètre létat initiale du composant
+  // Les hooks fonctionneront toujours sur ce modèle
 
-  const action_bars = (e) => {
-    setStateClassNav("navbar-mobile slide_to_left");
-  };
+  //Hook : const["État du composant", "fonction qui va modifier l'état"] = useState("État initial du composant")
+  // Un useState ne peux pas être dans un composant ou dans une boucle sinon cela change l'ordre des appel et peux poser des problèmes aux niveau des Hooks
 
-  const action_cross = (e) => {
-    setStateClassNav("navbar-mobile slide_to_right");
-  };
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="navbar">
-      <nav>
-        <div className="navbar-container">
+      <header>
+        <nav>
           <div className="navbar-logo">
             <i className="fas fa-glass-martini-alt"></i>
-            <span className="navbar-logo-title">Shaker Magique</span>
+            Shaker Magique
           </div>
-          <div className="navbar-navlinks">
+          {/*navbar-logo*/}
+          <ul
+            className="navbar-links"
+            /*Si on click sur le bouton hamburger on ouvre le menu en mode responsive*/
+            style={{ transform: open ? "translateX(0px)" : "" }}
+          >
+            <i
+              onClick={() => setOpen(!open)}
+              className="fas fa-times navbar-burger-active"
+            ></i>
+            <li>
+              <i className="fas fa-glass-martini-alt"></i>
+              <a>Accueil</a>
+            </li>
             <li>
               <i className="fas fa-user-friends"></i>
-              <a>rejoindre un hôte</a>
+              <a>Rechercher un hôte</a>
             </li>
             <li>
               <i className="fas fa-user"></i>
-              <a>connexion</a>
+              <a>Connexion</a>
             </li>
-          </div>
-          <Button
-            content={<FontAwesomeIcon icon={faBars} />}
-            class_name="btn-bars"
-            action={action_bars}
-          ></Button>
-        </div>
-        <NavBarMobile class_name={classNav} action_cross={action_cross} />
-      </nav>
+          </ul>
+          <i
+            onClick={() => setOpen(!open)}
+            className="fas fa-bars navbar-burger"
+          ></i>
+        </nav>
+      </header>
     </div>
   );
 }

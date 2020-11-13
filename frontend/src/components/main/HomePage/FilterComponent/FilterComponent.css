@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.cocktailFilterBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 35px 0px;
+}
+
+.filter-button-component {
+  display: flex;
+  justify-content: center;
+}
+
+.filter-button {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
+}
+.filter-button {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: none;
+  border: none;
+  outline: none;
+}
+
+.filter-button:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.filterBar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 18px;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 20%;
+}
+
+.filterBar-cat,
+.filterBar-filterBy {
+  text-transform: uppercase;
+}
+
+.filterBar-cat-elements,
+.filterBar-filterBy-elements {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px 0px;
+}
+
+.filterBar-cat-apero {
+  display: inline-block;
+}
+
+.filterBar-cat-elements-col1,
+.filterBar-filterBy-elements-col1 {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filterBar-cat-elements-col2 {
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.filterBar-bottomPart-button {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
+  margin: 10px;
+  padding: 10px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: none;
+  outline: none;
+}
+
+.filterBar-bottomPart-button:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .filter-button {
+  }
+
+  .filterBar-bottomPart {
+    order: 1;
+  }
+
+  .filterBar {
+    display: none;
+  }
+}
