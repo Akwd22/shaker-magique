@@ -7,7 +7,7 @@ class CocktailPage extends React.Component {
 
   render() {
     return (
-      <div className="cocktailpage">
+      <div className="page cocktailpage">
         CECI EST UNE PAGE D'UN COCKTAIL...
         <Link to="/">
           <button>Retour</button>

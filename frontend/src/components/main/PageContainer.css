@@ -1,3 +1,12 @@
+body {
+  background-image: linear-gradient(
+    45deg,
+    #dcdcdc 100%,
+    #efefef 100%,
+    #d6d4d4 100%
+  );
+}
+
 .pagecontainer {
   display: flex;
   justify-content: space-around;
@@ -8,18 +17,26 @@
   margin-right: 100px;
 }
 
-.pagecontainer div {
+/* Animation de fondue lors de l'affichage d'une page */
+
+.pagecontainer .page {
   animation: fadein 1s;
 }
 
 @keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
+/* Responsive */
 
 @media screen and (max-width: 1024px) {
   .pagecontainer {
     margin-left: 0px;
-    margin-right: 0px ;
+    margin-right: 0px;
   }
 }

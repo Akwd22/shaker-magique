@@ -6,26 +6,30 @@ import { Link } from "react-router-dom";
 class CocktailBox extends React.Component {
   render() {
     return (
-      <div className="cocktailbox">
-        <h1 className="cocktailbox-title">Titre cocktail</h1>
-        <img className="cocktailbox-img" src="img/placeholder.jpg" alt="" />
-        <div className="cocktailbox-desc">
-          <h2>Description</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
-            aliquid laudantium ratione natus temporibus quae dolor delectus esse
-            expedita deleniti. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Vitae aliquid laudantium ratione natus temporibus
-            quae dolor delectus esse expedita deleniti. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Vitae aliquid laudantium ratione
-            natus temporibus quae dolor delectus esse expedita deleniti.
-          </p>
+      <Link
+        style={{ color: "inherit", textDecoration: "inherit" }}
+        to="/cocktail"
+      >
+        <div className="cocktailbox">
+          <div className="cocktailbox-img"></div>
+          <div className="cocktailbox-body">
+            <h1>Titre Cocktail</h1>
+            <h2>Description</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+              ut deserunt fugit. Possimus magnam incidunt nihil beatae
+              exercitationem esse corrupti, reiciendis atque suscipit, ratione
+              dolorum voluptate error ad quia commodi.
+            </p>
+          </div>
+          <div className="cocktailbox-overlay">
+            <div className="cocktail-overlay-body">
+              <i className="fas fa-book-open"></i>
+              <p>Voir la recette</p>
+            </div>
+          </div>
         </div>
-
-        <Link to="/cocktail" className="cocktailbox-button">
-          <button>Voir la recette</button>
-        </Link>
-      </div>
+      </Link>
     );
   }
 }
