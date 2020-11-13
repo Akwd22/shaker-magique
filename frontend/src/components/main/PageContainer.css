@@ -1,12 +1,3 @@
-body {
-  background-image: linear-gradient(
-    45deg,
-    #dcdcdc 100%,
-    #efefef 100%,
-    #d6d4d4 100%
-  );
-}
-
 .pagecontainer {
   display: flex;
   justify-content: space-around;
