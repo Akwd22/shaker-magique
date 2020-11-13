@@ -8,8 +8,8 @@ import Header from "./components/Header/Header";
 function App() {
   return (
     <div className="App">
+      <Header />
       <Router>
-        <Header />
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/cocktail" exact component={CocktailPage} />
