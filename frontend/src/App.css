@@ -1,8 +1,42 @@
-body {
+.App {
   background-image: linear-gradient(
     45deg,
     #dcdcdc 100%,
     #efefef 100%,
     #d6d4d4 100%
   );
+}
+
+.page {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+/* Animation de fondue lors de l'affichage d'une page */
+
+.page {
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+
+@media screen and (max-width: 1024px) {
+  .page {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
