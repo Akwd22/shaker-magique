@@ -7,6 +7,14 @@ body {
   );
 }
 
+.app {
+  /* Prendre 100% de la hauteur du viewport
+    Pour voir la différence entre % et vh/vw : https://stackoverflow.com/a/31040007 */
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 .page {
   display: flex;
   justify-content: space-around;
