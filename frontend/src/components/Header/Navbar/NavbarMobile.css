@@ -1,0 +1,59 @@
+.navbar-mobile {
+    background-image: linear-gradient(135deg, #bb4e75 10%, #ff9d6c 100%);
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    width: 30%;
+    right: 0;
+    z-index: 10;
+    display: flex;
+  }
+  
+  .slide_to_left {
+    animation: slide_to_left 1s forwards;
+  }
+  
+  .slide_to_right {
+    animation: slide_to_right 1s forwards;
+  }
+  
+  @keyframes slide_to_right {
+    0% {
+      transform: translateX(0);
+    }
+  
+    100% {
+      transform: translateX(100vh);
+    }
+  }
+  
+  @keyframes slide_to_left {
+    0% {
+      transform: translateX(100vh);
+    }
+  
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .container-nav-mobile{
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .container-nav-mobile div{
+    margin-top: 5%;
+  }
+  
+  .container-nav-mobile div a{
+    color: white;
+  }
+  
+  .cross-icon{
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    right: 2%;
+    cursor: pointer;
+  }

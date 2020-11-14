@@ -1,18 +1,18 @@
 .cocktailbox {
   position: relative;
   margin: 8px 8px 8px 8px;
-  height: 250px;
-  width: 440px;
   display: grid;
-  grid-template-columns: 30% minmax(50px, 285px);
+  grid-template-columns: 30% minmax(0px, 440px);
+  grid-template-rows: 250px;
   border-radius: 15px;
   box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.5);
   background-color: white;
+  overflow: hidden;
 }
 
 .cocktailbox-img {
   grid-column: 1;
-  background: url(../../../../asset/img/placeholder.jpg) no-repeat center center;
+  background: url(../../../../assets/imgs/placeholder.jpg) no-repeat center center;
   background-size: cover;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 }

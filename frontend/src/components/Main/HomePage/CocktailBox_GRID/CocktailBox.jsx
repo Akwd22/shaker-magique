@@ -20,6 +20,14 @@ class CocktailBox extends React.Component {
               ut deserunt fugit. Possimus magnam incidunt nihil beatae
               exercitationem esse corrupti, reiciendis atque suscipit, ratione
               dolorum voluptate error ad quia commodi.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+              ut deserunt fugit. Possimus magnam incidunt nihil beatae
+              exercitationem esse corrupti, reiciendis atque suscipit, ratione
+              dolorum voluptate error ad quia commodi.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+              ut deserunt fugit. Possimus magnam incidunt nihil beatae
+              exercitationem esse corrupti, reiciendis atque suscipit, ratione
+              dolorum voluptate error ad quia commodi.
             </p>
           </div>
           <div className="cocktailbox-overlay">
