@@ -1,59 +1,80 @@
 .navbar-mobile {
-    background-image: linear-gradient(135deg, #bb4e75 10%, #ff9d6c 100%);
-    position: fixed;
-    height: 100vh;
-    top: 0;
-    width: 30%;
-    right: 0;
-    z-index: 10;
-    display: flex;
+  background-image: linear-gradient(135deg, #bb4e75 10%, #ff9d6c 100%);
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 50%;
+  z-index: 10;
+}
+
+.slide_to_left {
+  animation: slide_to_left 1s forwards;
+}
+
+.slide_to_right {
+  animation: slide_to_right 1s forwards;
+}
+
+@keyframes slide_to_right {
+  0% {
+    transform: translateX(0);
   }
-  
-  .slide_to_left {
-    animation: slide_to_left 1s forwards;
+
+  100% {
+    transform: translateX(100vh);
   }
-  
-  .slide_to_right {
-    animation: slide_to_right 1s forwards;
+}
+
+@keyframes slide_to_left {
+  0% {
+    transform: translateX(100vh);
   }
-  
-  @keyframes slide_to_right {
-    0% {
-      transform: translateX(0);
-    }
-  
-    100% {
-      transform: translateX(100vh);
-    }
+
+  100% {
+    transform: translateX(0);
   }
-  
-  @keyframes slide_to_left {
-    0% {
-      transform: translateX(100vh);
-    }
-  
-    100% {
-      transform: translateX(0);
-    }
-  }
-  
-  .container-nav-mobile{
-    width: 80%;
-    margin: 0 auto;
-  }
-  
-  .container-nav-mobile div{
-    margin-top: 5%;
-  }
-  
-  .container-nav-mobile div a{
-    color: white;
-  }
-  
-  .cross-icon{
-    color: white;
-    font-size: 30px;
-    position: absolute;
-    right: 2%;
-    cursor: pointer;
-  }
+}
+
+.container-nav-mobile {
+  margin: 0 0;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.container-nav-mobile div {
+  margin-top: 5%;
+  color: white;
+  padding: 25px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+}
+
+
+.container-nav-mobile div:last-of-type{
+  border-bottom: none;
+}
+
+.container-nav-mobile div a {
+  color: white;
+  text-transform: uppercase;
+  display: inline-block;
+  overflow: visible;
+}
+
+.container-nav-mobile div i {
+  display: inline-block;
+  margin-right: 10px;
+  overflow: visible;
+}
+
+.cross-icon {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  right: 2%;
+  cursor: pointer;
+}

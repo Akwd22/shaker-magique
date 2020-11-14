@@ -1,4 +1,4 @@
-.cocktaillist
+.list-cocktail
 {
     height: 100%;
     width: 100%;
@@ -7,4 +7,18 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+}
+
+.title-page{
+    display: inline-block;
+    margin-left: 9%;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px){
+    .title-page{
+        margin-left: 3%;
+    }
 }
