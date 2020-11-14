@@ -41,6 +41,7 @@ li {
   font-size: 24px;
   font-weight: normal;
   margin-right: 40px;
+  cursor: pointer;
 }
 
 .navbar-navlinks li > .fas {
