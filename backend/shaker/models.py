@@ -16,10 +16,7 @@ class Cocktail(models.Model):
     description = models.TextField(db_column='DESCRIPTION', blank=True, null=True)  # Field name made lowercase.
     forcealc = models.IntegerField(db_column='FORCEALC', blank=True, null=True)  # Field name made lowercase.
 
-    
-
     class Meta:
-        managed = False
         db_table = 'cocktail'
 
 
@@ -35,7 +32,6 @@ class Compte(models.Model):
     idmembre = models.ForeignKey('Membre', models.DO_NOTHING, db_column='IDMEMBRE', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'compte'
 
 
@@ -46,7 +42,6 @@ class Contenir(models.Model):
     unite = models.CharField(db_column='UNITE', max_length=16, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'contenir'
         unique_together = (('idcocktail', 'idingredient'),)
 
@@ -56,7 +51,6 @@ class Favori(models.Model):
     idmembre = models.OneToOneField('Membre', models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'favori'
         unique_together = (('idmembre', 'idcocktail'),)
 
@@ -67,7 +61,6 @@ class Ingredient(models.Model):
     degrealcool = models.IntegerField(db_column='DEGREALCOOL', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'ingredient'
 
 
@@ -81,7 +74,6 @@ class Membre(models.Model):
     idhote = models.ForeignKey('self', models.DO_NOTHING, db_column='IDHOTE', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'membre'
 
 
@@ -91,7 +83,6 @@ class Noter(models.Model):
     note = models.IntegerField(db_column='NOTE')  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'noter'
         unique_together = (('idmembre', 'idcocktail'),)
 
@@ -101,7 +92,6 @@ class Preference(models.Model):
     idmembre = models.OneToOneField(Membre, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'preference'
         unique_together = (('idmembre', 'idingredient'),)
 
@@ -111,7 +101,6 @@ class Propose(models.Model):
     idmembre = models.OneToOneField(Membre, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'propose'
         unique_together = (('idmembre', 'idcocktail'),)
 
@@ -122,6 +111,5 @@ class Stocker(models.Model):
     enreserve = models.IntegerField(db_column='ENRESERVE')  # Field name made lowercase.
 
     class Meta:
-        managed = False
         db_table = 'stocker'
         unique_together = (('idmembre', 'idingredient'),)
