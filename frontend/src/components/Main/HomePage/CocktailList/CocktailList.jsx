@@ -21,19 +21,28 @@ class CocktailList extends React.Component {
       .catch((error) => console.log(error));
   }
 
+  renderCocktails() {
+    // Les cocktails n'ont pas encore été chargés
+    if (!this.state.cocktails)
+      return
+
+    // Créer toutes les CocktailBox
+    let t = []
+    for (let i = 0; i < this.state.cocktails.length; i++) {
+      t[i] = (<CocktailBox cocktail={this.state.cocktails[i]} />);
+    }
+
+    return t
+  }
+
   render() {
     return (
       <div className="cocktaillist">
         <div className="title-page">
-          <h1>vos cocktails</h1>
+          <h1>Vos cocktails</h1>
         </div>
         <div className="list-cocktail">
-          {this.state.cocktails &&
-            (() => {
-              for (let i = 0; i < this.state.cocktails.length; i++) {
-                <CocktailBox cocktail={this.state.cocktails[i]} />;
-              }
-            })}
+          {this.renderCocktails()}
         </div>
       </div>
     );
