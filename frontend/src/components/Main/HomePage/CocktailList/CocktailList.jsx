@@ -1,24 +1,24 @@
 import React from "react";
-import CocktailBox from "../CocktailBox_GRID/CocktailBox"
+import CocktailBox from "../CocktailBox_GRID/CocktailBox";
 import "./CocktailList.css";
 import "../../../variables.css";
 import Axios from "axios";
 
 class CocktailList extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
 
-    this.state = {}
+    this.state = {};
   }
 
   componentDidMount() {
-    this.getCocktails()
+    this.getCocktails();
   }
 
   async getCocktails() {
-    await Axios.get('/api/cocktails')
-    .then(response => this.setState({cocktails: response.data}))
-    .catch(error => console.log(error));
+    await Axios.get("/api/cocktails")
+      .then((response) => this.setState({ cocktails: response.data }))
+      .catch((error) => console.log(error));
   }
 
   render() {
@@ -28,7 +28,12 @@ class CocktailList extends React.Component {
           <h1>vos cocktails</h1>
         </div>
         <div className="list-cocktail">
-           {this.state.cocktails && (<CocktailBox cocktail={this.state.cocktails[0]}/>)}
+          {this.state.cocktails &&
+            (() => {
+              for (let i = 0; i < this.state.cocktails.length; i++) {
+                <CocktailBox cocktail={this.state.cocktails[i]} />;
+              }
+            })}
         </div>
       </div>
     );
