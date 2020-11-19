@@ -26,7 +26,7 @@ class CocktailBox extends React.Component {
         <div className="cocktailbox">
           <div className="cocktailbox-img"></div>
           <div className="cocktailbox-body">
-            <h1>Titre Cocktail</h1>
+            <h1>{this.state.cocktail_data.intitule}</h1>
             <h2>Description</h2>
             <p>
               {this.state.cocktail_data.description}
