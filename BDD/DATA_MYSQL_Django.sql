@@ -49,10 +49,6 @@ INSERT INTO `CONTENIR` (`QUANTITE`, `UNITE`, `IDCOCKTAIL`, `IDINGREDIENT`) VALUE
 	('2', 'doses', 5, 56);
 /*!40000 ALTER TABLE `CONTENIR` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.etreami 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `etreami` DISABLE KEYS */;
-/*!40000 ALTER TABLE `etreami` ENABLE KEYS */;
-
 -- 正在导出表  pts3-dut_pts3.FAVORI 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `FAVORI` DISABLE KEYS */;
 /*!40000 ALTER TABLE `FAVORI` ENABLE KEYS */;
