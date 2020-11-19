@@ -1,6 +1,6 @@
 from rest_framework import generics
-from shaker.models import Cocktail
-from .serializers import CocktailSerializer
+from shaker.models import *
+from .serializers import *
 
 
 class CocktailList(generics.ListCreateAPIView):
@@ -11,3 +11,32 @@ class CocktailList(generics.ListCreateAPIView):
 class CocktailDetail(generics.RetrieveDestroyAPIView):
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer
+
+
+class ContenirList(generics.ListCreateAPIView):
+    queryset = Contenir.objects.all()
+    serializer_class = ContenirSerializer
+
+class CompteList(generics.ListCreateAPIView):
+    queryset = Contenir.objects.all()
+    serializer_class = CompteSerializer
+
+class FavoriList(generics.ListCreateAPIView):
+    queryset = Favori.objects.all()
+    serializer_class = CompteSerializer
+    
+class IngredientList(generics.ListCreateAPIView):
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+
+class MembreList(generics.ListCreateAPIView):
+    queryset = Membre.objects.all()
+    serializer_class = MembreSerializer
+
+class NoterList(generics.ListCreateAPIView):
+    queryset = Noter.objects.all()
+    serializer_class = NoterSerializer
+
+class PreferenceList(generics.ListCreateAPIView):
+    queryset = Preference.objects.all()
+    serializer_class = PreferenceSerializer
