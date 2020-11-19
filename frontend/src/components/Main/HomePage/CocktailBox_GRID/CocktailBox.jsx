@@ -4,6 +4,19 @@ import "../../../variables.css";
 import { Link } from "react-router-dom";
 
 class CocktailBox extends React.Component {
+
+  constructor (props) {
+    super(props)
+
+    console.log(props)
+
+    this.state = {
+      cocktail_data: this.props.cocktail
+    }
+
+    console.log(this.state.cocktail_data)
+  }
+
   render() {
     return (
       <Link
@@ -16,18 +29,7 @@ class CocktailBox extends React.Component {
             <h1>Titre Cocktail</h1>
             <h2>Description</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-              ut deserunt fugit. Possimus magnam incidunt nihil beatae
-              exercitationem esse corrupti, reiciendis atque suscipit, ratione
-              dolorum voluptate error ad quia commodi.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-              ut deserunt fugit. Possimus magnam incidunt nihil beatae
-              exercitationem esse corrupti, reiciendis atque suscipit, ratione
-              dolorum voluptate error ad quia commodi.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-              ut deserunt fugit. Possimus magnam incidunt nihil beatae
-              exercitationem esse corrupti, reiciendis atque suscipit, ratione
-              dolorum voluptate error ad quia commodi.
+              {this.state.cocktail_data.description}
             </p>
           </div>
           <div className="cocktailbox-overlay">
