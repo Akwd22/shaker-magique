@@ -12,12 +12,15 @@ function Navbar() {
   const [classNav, setStateClassNav] = useState("navbar-mobile none");
 
   const action_bars = (e) => {
+    e.preventDefault();
     setStateClassNav("navbar-mobile slide_to_left");
   };
 
   const action_cross = (e) => {
+    e.preventDefault();
     setStateClassNav("navbar-mobile slide_to_right");
   };
+
   return (
     <div className="navbar">
       <nav>
@@ -29,11 +32,11 @@ function Navbar() {
           <div className="navbar-navlinks">
             <li>
               <i className="fas fa-user-friends"></i>
-              <a>rejoindre un hôte</a>
+              <a href="">rejoindre un hôte</a>
             </li>
             <li>
               <i className="fas fa-user"></i>
-              <a>connexion</a>
+              <a href="">connexion</a>
             </li>
           </div>
           <Button

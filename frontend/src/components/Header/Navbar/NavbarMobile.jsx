@@ -11,15 +11,15 @@ const NavBarMobile = ({ class_name, action_cross }) => {
       <div className="container-nav-mobile">
         <div>
           <i className="fas fa-glass-martini-alt"></i>
-          <a href="/#">accueil</a>
+          <a href="">accueil</a>
         </div>
         <div>
           <i className="fas fa-user-friends"></i>
-          <a href="/#">rejoindre un hote</a>
+          <a href="">rejoindre un hote</a>
         </div>
         <div>
           <i className="fas fa-user"></i>
-          <a href="/#">connexion</a>
+          <a href="">connexion</a>
         </div>
       </div>
       <FontAwesomeIcon

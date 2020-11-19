@@ -1,6 +1,6 @@
 .navbar-mobile {
   background-image: linear-gradient(135deg, #bb4e75 10%, #ff9d6c 100%);
-  display: none;
+  display: block;
   position: fixed;
   right: 0;
   top: 0;
