@@ -2,6 +2,7 @@ import React from "react";
 import FilterComponent from "./FilterComponent/FilterComponent";
 import Navbar from "./Navbar/Navbar";
 import "./Header.css";
+import { useLocation } from "react-router-dom";
 
 function Header() {
   return (
@@ -13,7 +14,7 @@ function Header() {
             width="1938"
             height="471.408"
             /*viewBox="9 9 1920 471.408"*/
-            viewBox= "9 9 1920 471.408"
+            viewBox="9 9 1920 471.408"
             preserveAspectRatio="none"
             className="wave"
           >

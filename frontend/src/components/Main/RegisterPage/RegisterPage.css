@@ -1,0 +1,150 @@
+.register-page-component {
+  background-color: #ffffff;
+  height: 855px;
+}
+.page-right-side {
+  width: 45%;
+  height: 100%;
+  background: url(../../../assets/imgs/cocktail-register.png) no-repeat;
+  background-size: cover;
+}
+
+.page-left-side {
+  width: 60%;
+  height: 100%;
+}
+.page-left-side-component {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20%;
+}
+
+.left-side-title {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.form-sexe {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #f5926d;
+  font-weight: 300;
+}
+
+.form-sexe input {
+  margin-right: 5px;
+}
+
+.left-side-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-side-title > h1 {
+  color: #f5926d;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.left-side-form input[type="text"],
+.left-side-form input[type="date"] {
+  height: 60px;
+  border-radius: 12px;
+  outline: none;
+  border: 1px solid #d2e0e5;
+  background-color: #f7f8f9;
+  margin-bottom: 17px;
+  line-height: 24px;
+  font-size: 24px;
+  padding: 10px;
+}
+.form-name {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-name > input {
+  width: 45%;
+}
+
+.left-side-form input::placeholder {
+  font-weight: 500;
+  color: #d2e0e5;
+}
+
+.left-side-form input[type="date"] {
+  font-weight: 500;
+  color: #d2e0e5;
+}
+
+.left-side-form > span {
+  font-size: 15px;
+  font-weight: 300;
+  color: #889296;
+  margin-bottom: 12px;
+}
+
+.left-side-policy {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+  margin-top: 40px;
+  font-size: 20px;
+  font-style: italic;
+  color: #889296;
+  justify-content: center;
+}
+
+.left-side-policy > input {
+  height: 20px;
+  width: 20px;
+}
+
+.left-side-policy > label > a {
+  color: #f5926d;
+}
+
+.left-side-button > button {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
+  margin-top: 50px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.left-side-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+     .page-right-side{
+         display: none;
+     }
+
+     .page-left-side-component{
+        margin: 0px 0%;
+     }
+     .page-left-side {
+         width: 90%;
+     }
+}

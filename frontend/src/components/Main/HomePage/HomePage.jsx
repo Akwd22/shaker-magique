@@ -1,6 +1,4 @@
 import React from "react";
-
-import CocktailBox from "./CocktailBox_GRID/CocktailBox";
 import CocktailList from "./CocktailList/CocktailList";
 import "./HomePage.css";
 
