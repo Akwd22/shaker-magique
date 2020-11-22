@@ -83,6 +83,7 @@
 .left-side-form input[type="date"] {
   font-weight: 500;
   color: #d2e0e5;
+  width: 100%;
 }
 
 .left-side-form > span {
@@ -141,6 +142,11 @@
 @media screen and (max-width: 1024px) {
      .page-right-side{
          display: none;
+     }
+
+     .register-page-component{
+       margin: 0;
+       padding: 0;
      }
 
      .page-left-side-component{
