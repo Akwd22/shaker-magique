@@ -27,10 +27,14 @@ li {
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500; /*400= normal 500=medium 700=bold*/
   text-transform: uppercase;
   color: var(--bg-color-items);
+}
+
+.navbar-logo > .fas{
+  overflow: visible;
 }
 
 .navbar-navlinks {
@@ -39,15 +43,16 @@ li {
 }
 
 .navbar-navlinks a {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
   margin-right: 40px;
   cursor: pointer;
 }
 
 .navbar-navlinks li > .fas {
-  font-size: 24px;
+  font-size: 20px;
   margin-right: 10px;
+  overflow: visible;
 }
 
 .btn-bars{

@@ -8,6 +8,8 @@ import NavBarMobile from "./NavbarMobile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
+import { NavLink } from "react-router-dom";
+
 function Navbar() {
   const [classNav, setStateClassNav] = useState("navbar-mobile none");
 
@@ -25,19 +27,31 @@ function Navbar() {
     <div className="navbar">
       <nav>
         <div className="navbar-container">
-          <div className="navbar-logo">
-            <i className="fas fa-glass-martini-alt"></i>
-            <span className="navbar-logo-title">Shaker Magique</span>
-          </div>
+          <NavLink to="/">
+            <div className="navbar-logo">
+              <i className="fas fa-glass-martini-alt"></i>
+              <span className="navbar-logo-title">Shaker Magique</span>
+            </div>
+          </NavLink>
           <div className="navbar-navlinks">
-            <li>
-              <i className="fas fa-user-friends"></i>
-              <a href="">rejoindre un hôte</a>
-            </li>
-            <li>
-              <i className="fas fa-user"></i>
-              <a href="">connexion</a>
-            </li>
+            <NavLink to="/rejoindre-hote">
+              <li>
+                <i className="fas fa-user-friends"></i>
+                <a href="#/">rejoindre un hôte</a>
+              </li>
+            </NavLink>
+            <NavLink to="/connexion">
+              <li>
+                <i className="fas fa-user"></i>
+                <a href="#/">connexion</a>
+              </li>
+            </NavLink>
+            <NavLink to="/inscription">
+              <li>
+                <i className="fas fa-user"></i>
+                <a href="#/">inscription</a>
+              </li>
+            </NavLink>
           </div>
           <Button
             content={<FontAwesomeIcon icon={faBars} />}

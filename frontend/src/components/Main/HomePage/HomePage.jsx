@@ -9,20 +9,6 @@ function HomePage() {
   return (
     <div className="page homepage">
       <CocktailList>
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
-        <CocktailBox />
       </CocktailList>
     </div>
   );

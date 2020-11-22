@@ -54,7 +54,7 @@
 }
 
 
-.container-nav-mobile div:last-of-type{
+.container-nav-mobile-div:last-child div{
   border-bottom: none;
 }
 
