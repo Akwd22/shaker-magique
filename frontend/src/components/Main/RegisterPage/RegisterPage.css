@@ -1,6 +1,8 @@
 .register-page-component {
   background-color: #ffffff;
   height: 855px;
+  margin-right: 250px;
+  margin-left: 250px;
 }
 .page-right-side {
   width: 45%;
