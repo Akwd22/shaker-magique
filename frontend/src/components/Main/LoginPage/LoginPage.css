@@ -1,0 +1,136 @@
+.navbar-mobile {
+  display: none;
+}
+
+.login-page {
+  background-color: #ffffff;
+  height: 665px;
+  margin-right: 20%;
+  margin-left: 20%;
+}
+.lp-right-side {
+  width: 45%;
+  height: 100%;
+  background: url(../../../assets/imgs/cocktail-login.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.lp-left-side {
+  width: 60%;
+  height: 100%;
+}
+.lp-left-side-component {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20%;
+}
+
+.lp-left-side-title {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.lp-left-side-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.lp-left-side-title > h1 {
+  color: #f5926d;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.lp-left-side-form input[type="text"],
+.lp-left-side-form input[type="password"] {
+  height: 60px;
+  border-radius: 12px;
+  outline: none;
+  border: 1px solid #d2e0e5;
+  background-color: #f7f8f9;
+  margin-bottom: 17px;
+  line-height: 24px;
+  font-size: 24px;
+  padding: 10px;
+}
+
+.lp-left-side-form input::placeholder {
+  font-weight: 500;
+  color: #d2e0e5;
+}
+
+.lp-left-side-remember {
+  display: flex;
+  column-gap: 7px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-style: italic;
+  color: #889296;
+}
+
+.lp-left-side-remember > input {
+  height: 20px;
+  width: 20px;
+}
+
+.lp-left-side-noaccount {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+  margin-top: 40px;
+  font-size: 20px;
+  color: #889296;
+  justify-content: center;
+}
+
+.lp-left-side-noaccount > a {
+  color: #f5926d;
+}
+
+.lp-left-side-button > button {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
+  margin-top: 50px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.lp-left-side-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .lp-right-side {
+    display: none;
+  }
+
+  .login-page {
+    margin: 0;
+    padding: 0;
+  }
+
+  .lp-left-side-component {
+    margin: 0px 0%;
+  }
+  .lp-left-side {
+    width: 90%;
+  }
+}
