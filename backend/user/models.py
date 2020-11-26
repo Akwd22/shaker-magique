@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, User
 from django.conf import settings
 
 
@@ -39,16 +39,22 @@ class CustomAccountManager(BaseUserManager):
 
 class Member(AbstractBaseUser, PermissionsMixin):
 
+    GENDER = [
+        'M',
+        'F',
+    ]
+    user_id = models.AutoField(primary_key=True)
     user_name = models.CharField(max_length=32, unique=True)
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     start_date = models.DateTimeField(default=timezone.now)
     birthday = models.DateTimeField()
-    gender = models.TextChoices('M', 'F')
+    gender = models.CharField(max_length=1, choices = GENDER, default = "F")
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    id_hote = models.ForeignKey('self', models.DO_NOTHING, db_column='id') # ERREUR ICI
+    id_hote = models.ForeignKey('self', models.DO_NOTHING)
+    
 
     objects = CustomAccountManager()
 
