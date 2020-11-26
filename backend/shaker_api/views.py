@@ -40,3 +40,12 @@ class NoterList(generics.ListCreateAPIView):
 class PreferenceList(generics.ListCreateAPIView):
     queryset = Preference.objects.all()
     serializer_class = PreferenceSerializer
+    
+class StockerList(generics.ListCreateAPIView):
+    queryset = Stocker.objects.all()  
+    serializer_class = StockerSerializer
+    
+class ProposerList(generics.ListCreateAPIView):
+    queryset = Propose.objects.all()
+    serializer_class = ProposerSerializer
+    

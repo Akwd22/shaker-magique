@@ -13,4 +13,6 @@ urlpatterns = [
     path('membres/', MembreList.as_view(), name='membres'),
     path('notes/', NoterList.as_view(), name='notes'),
     path('preferences/', PreferenceList.as_view(), name='preferences'),
+    path('stock/', StockerList.as_view(), name='stocker'),
+    path('proposer/', ProposerList.as_view(), name='Proposer'),
 ]

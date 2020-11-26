@@ -32,7 +32,7 @@ class Compte(models.Model):
     sessionid = models.CharField(db_column='SESSIONID', unique=True, max_length=20, blank=True, null=True)  # Field name made lowercase.
     idmembre = models.ForeignKey('MEMBRE', models.DO_NOTHING, db_column='IDMEMBRE', blank=True, null=True)  # Field name made lowercase.
 
-    class Meta:
+    class Meta: 
         managed = False;
         db_table = 'COMPTE'
 
@@ -106,8 +106,9 @@ class Preference(models.Model):
 
 
 class Propose(models.Model):
+    idpropose = models.IntegerField(db_column='IDPROPOSE', primary_key=True)
     idcocktail = models.ForeignKey(Cocktail, models.DO_NOTHING, db_column='IDCOCKTAIL')  # Field name made lowercase.
-    idmembre = models.OneToOneField(Membre, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
+    idmembre = models.ForeignKey(Membre, models.DO_NOTHING, db_column='IDMEMBRE')  # Field name made lowercase.
 
     class Meta:
         managed = False;
@@ -116,11 +117,13 @@ class Propose(models.Model):
 
 
 class Stocker(models.Model):
+    idstocker = models.IntegerField(db_column='IDSTOCKER', primary_key=True)
     idingredient = models.ForeignKey(Ingredient, models.DO_NOTHING, db_column='IDINGREDIENT')  # Field name made lowercase.
-    idmembre = models.OneToOneField(Membre, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
-    enreserve = models.IntegerField(db_column='ENRESERVE')  # Field name made lowercase.
+    idmembre = models.ForeignKey(Membre, models.DO_NOTHING, db_column='IDMEMBRE')  # Field name made lowercase.
+    enreserve = models.BooleanField(db_column='ENRESERVE')  # Field name made lowercase.
 
     class Meta:
         managed = False;
         db_table = 'STOCKER'
         unique_together = (('idmembre', 'idingredient'),)
+

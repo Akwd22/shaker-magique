@@ -6,7 +6,6 @@ class CocktailSerializer(serializers.ModelSerializer):
         fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description', 'forcealc')
         model = Cocktail
 
-
 class ContenirSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
@@ -41,3 +40,14 @@ class PreferenceSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idingredient', 'idmembre')
         model = Preference
+        
+class StockerSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('idingredient','idmembre','enreserve')
+        model = Stocker
+        
+
+class ProposerSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('idcocktail','idmembre')
+        model = Propose
