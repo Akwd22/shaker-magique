@@ -3,6 +3,7 @@ from .views import *
 import rest_framework
 from django.conf.urls import include
 
+
 app_name = 'shaker_api'
 
 urlpatterns = [
