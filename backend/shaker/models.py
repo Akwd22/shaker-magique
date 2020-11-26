@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.conf import settings
 
 
 class Cocktail(models.Model):
@@ -19,22 +20,6 @@ class Cocktail(models.Model):
     class Meta:
         managed = False;
         db_table = 'COCKTAIL'
-
-
-class Compte(models.Model):
-    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    login = models.CharField(db_column='LOGIN', unique=True, max_length=32)  # Field name made lowercase.
-    passhash = models.CharField(db_column='PASSHASH', max_length=255)  # Field name made lowercase.
-    email = models.CharField(db_column='EMAIL', unique=True, max_length=255)  # Field name made lowercase.
-    datecreation = models.DateField(db_column='DATECREATION', blank=True, null=True)  # Field name made lowercase.
-    derniereconnexion = models.DateField(db_column='DERNIERECONNEXION', blank=True, null=True)  # Field name made lowercase.
-    enligne = models.IntegerField(db_column='ENLIGNE')  # Field name made lowercase.
-    sessionid = models.CharField(db_column='SESSIONID', unique=True, max_length=20, blank=True, null=True)  # Field name made lowercase.
-    idmembre = models.ForeignKey('MEMBRE', models.DO_NOTHING, db_column='IDMEMBRE', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta: 
-        managed = False;
-        db_table = 'COMPTE'
 
 
 class Contenir(models.Model):
@@ -52,7 +37,7 @@ class Contenir(models.Model):
 
 class Favori(models.Model):
     idcocktail = models.ForeignKey(Cocktail, models.DO_NOTHING, db_column='IDCOCKTAIL')  # Field name made lowercase.
-    idmembre = models.OneToOneField('MEMBRE', models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
+    idmembre = models.OneToOneField(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='id', primary_key=True)  # Field name made lowercase.
 
     class Meta:
         managed = False;
@@ -70,22 +55,8 @@ class Ingredient(models.Model):
         db_table = 'INGREDIENT'
 
 
-class Membre(models.Model):
-    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    prenom = models.CharField(db_column='PRENOM', max_length=32, blank=True, null=True)  # Field name made lowercase.
-    nom = models.CharField(db_column='NOM', max_length=32, blank=True, null=True)  # Field name made lowercase.
-    daten = models.DateField(db_column='DATEN', blank=True, null=True)  # Field name made lowercase.
-    genre = models.CharField(db_column='GENRE', max_length=1, blank=True, null=True)  # Field name made lowercase.
-    idcompte = models.ForeignKey(Compte, models.DO_NOTHING, db_column='IDCOMPTE')  # Field name made lowercase.
-    idhote = models.ForeignKey('self', models.DO_NOTHING, db_column='IDHOTE', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False;
-        db_table = 'MEMBRE'
-
-
 class Noter(models.Model):
-    idmembre = models.OneToOneField(Membre, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
+    idmembre = models.OneToOneField(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='id', primary_key=True)  # Field name made lowercase.
     idcocktail = models.ForeignKey(Cocktail, models.DO_NOTHING, db_column='IDCOCKTAIL')  # Field name made lowercase.
     note = models.IntegerField(db_column='NOTE')  # Field name made lowercase.
 
@@ -97,7 +68,7 @@ class Noter(models.Model):
 
 class Preference(models.Model):
     idingredient = models.ForeignKey(Ingredient, models.DO_NOTHING, db_column='IDINGREDIENT')  # Field name made lowercase.
-    idmembre = models.OneToOneField(Membre, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
+    idmembre = models.OneToOneField(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='id', primary_key=True)  # Field name made lowercase.
 
     class Meta:
         managed = False;
@@ -108,7 +79,7 @@ class Preference(models.Model):
 class Propose(models.Model):
     idpropose = models.IntegerField(db_column='IDPROPOSE', primary_key=True)
     idcocktail = models.ForeignKey(Cocktail, models.DO_NOTHING, db_column='IDCOCKTAIL')  # Field name made lowercase.
-    idmembre = models.ForeignKey(Membre, models.DO_NOTHING, db_column='IDMEMBRE')  # Field name made lowercase.
+    idmembre = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='id')  # Field name made lowercase.
 
     class Meta:
         managed = False;
@@ -119,7 +90,7 @@ class Propose(models.Model):
 class Stocker(models.Model):
     idstocker = models.IntegerField(db_column='IDSTOCKER', primary_key=True)
     idingredient = models.ForeignKey(Ingredient, models.DO_NOTHING, db_column='IDINGREDIENT')  # Field name made lowercase.
-    idmembre = models.ForeignKey(Membre, models.DO_NOTHING, db_column='IDMEMBRE')  # Field name made lowercase.
+    idmembre = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='id')  # Field name made lowercase.
     enreserve = models.BooleanField(db_column='ENRESERVE')  # Field name made lowercase.
 
     class Meta:

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shaker.apps.ShakerConfig',
     'shaker_api.apps.ShakerApiConfig',
+    'user.apps.UserConfig',
     'rest_framework',
     'corsheaders',
 
@@ -151,4 +152,26 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
+]
+
+# Custom user model
+AUTH_USER_MODEL = "user.Member"
+
+# Sécurité force des mots de passe
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 6,
+        }
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+    {
+        'NAME': 'user.pwdvalidators.LetterPasswordValidator',
+    }
 ]
