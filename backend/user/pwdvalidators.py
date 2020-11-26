@@ -8,7 +8,7 @@ class LetterPasswordValidator:
         ValidationError: Le mot de passe ne contient que des lettres
     """
 
-    def validate(self, password):
+    def validate(self, password, user=None):
         if password.isalpha():
             raise ValidationError(_("Le mot de passe doit contenir au minimum 1 chiffre."))
 

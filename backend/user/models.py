@@ -40,10 +40,10 @@ class CustomAccountManager(BaseUserManager):
 class Member(AbstractBaseUser, PermissionsMixin):
 
     GENDER = [
-        'M',
-        'F',
+        ('M', 'M'),
+        ('F', 'F'),
     ]
-    user_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     user_name = models.CharField(max_length=32, unique=True)
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=32)
@@ -53,9 +53,8 @@ class Member(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=1, choices = GENDER, default = "F")
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    id_hote = models.ForeignKey('self', models.DO_NOTHING)
+    id_hote = models.ForeignKey('self', models.DO_NOTHING, default=None, blank=True, null=True)
     
-
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'user_name'
