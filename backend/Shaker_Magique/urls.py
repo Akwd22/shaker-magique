@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shaker.urls')),
     path('api/', include('shaker_api.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]

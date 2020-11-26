@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import *
+import rest_framework
+from django.conf.urls import include
 
 app_name = 'shaker_api'
 
@@ -15,4 +17,5 @@ urlpatterns = [
     path('preferences/', PreferenceList.as_view(), name='preferences'),
     path('stock/', StockerList.as_view(), name='stocker'),
     path('proposer/', ProposerList.as_view(), name='Proposer'),
+    path('proposer/<int:pk>', ProposeDetail.as_view(), name='Proposer'),
 ]
