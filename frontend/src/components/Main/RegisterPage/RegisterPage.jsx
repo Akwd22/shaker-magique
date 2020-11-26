@@ -27,6 +27,7 @@ function RegisterPage() {
               <input type="text" name="" id="" placeholder="Prénom"/>
             </div>
             <input type="date" name="" id=""/>
+            <input type="text" name="" id="" placeholder="Pseudo"/>
             <input type="text" name="" id="" placeholder="Email"/>
             <span>6 caractères minimum, au moins 1 chiffre et une lettre </span>
             <input type="text" name="" id="" placeholder="Mot de passe"/>
