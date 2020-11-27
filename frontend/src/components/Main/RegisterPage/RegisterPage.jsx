@@ -7,12 +7,13 @@ import { useHistory } from "react-router-dom";
 export default function SignUp() {
   const history = useHistory();
   const initialFormData = Object.freeze({
+    gender: "",
     email: "",
-    user_name: "",
+    username: "",
     password: "",
     passwordConfirm: "",
-    first_name: "",
-    last_name: "",
+    firstname: "",
+    lastname: "",
     birthday: "",
   });
 
@@ -32,13 +33,13 @@ export default function SignUp() {
 
     axiosInstance
       .post(`user/register/`, {
-        //gender: formData.gender,
+        gender: formData.gender,
         email: formData.email,
-        user_name: formData.user_name,
+        user_name: formData.username,
         password: formData.password,
         passwordConfirm: formData.passwordConfirm,
-        first_name: formData.first_name,
-        last_name: formData.last_name,
+        first_name: formData.firstname,
+        last_name: formData.lastname,
         birthday: formData.birthday,
       })
       .then((res) => {
@@ -62,6 +63,7 @@ export default function SignUp() {
                     type="radio"
                     name="gender"
                     id="radio-sexe-femme"
+                    value="F"
                     onChange={handleChange}
                     required
                   />
@@ -72,6 +74,7 @@ export default function SignUp() {
                     type="radio"
                     name="gender"
                     id="radio-sexe-homme"
+                    value="M"
                     onChange={handleChange}
                     required
                   />
@@ -82,16 +85,16 @@ export default function SignUp() {
               <div className="form-name">
                 <input
                   type="text"
-                  name="last_name"
-                  id="last_name"
+                  name="lastname"
+                  id="lastname"
                   placeholder="Nom"
                   required
                   onChange={handleChange}
                 />
                 <input
                   type="text"
-                  name="first_name"
-                  id="first_name"
+                  name="firstname"
+                  id="firstname"
                   placeholder="Prénom"
                   required
                   onChange={handleChange}
@@ -106,8 +109,8 @@ export default function SignUp() {
               />
               <input
                 type="text"
-                name="user_name"
-                id="user_name"
+                name="username"
+                id="username"
                 placeholder="Pseudo"
                 onChange={handleChange}
                 required

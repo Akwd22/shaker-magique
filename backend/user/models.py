@@ -8,7 +8,7 @@ from django import forms
 
 class CustomAccountManager(BaseUserManager):
 
-    def create_superuser(self, user_name, email, first_name, last_name, birthday, password, **other_fields):
+    def create_superuser(self, user_name, email, first_name, last_name, birthday, password, gender, **other_fields):
 
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -21,9 +21,9 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(
                 'Superuser must be assigned to is_superuser=True.')
 
-        return self.create_user(user_name, email, first_name, last_name, birthday, password, **other_fields)
+        return self.create_user(user_name, email, first_name, last_name, birthday, password, gender, **other_fields)
 
-    def create_user(self, user_name, email, first_name, last_name, birthday, password, **other_fields):
+    def create_user(self, user_name, email, first_name, last_name, birthday, password, gender ,**other_fields):
 
         if not user_name:
             raise ValueError(_('Vous devez fournir un nom d''utilisateur'))
@@ -32,7 +32,7 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(_('Vous devez fournir une adresse email'))
 
         email = self.normalize_email(email)
-        user = self.model(user_name=user_name, email=email, first_name=first_name, last_name=last_name, birthday=birthday, **other_fields)
+        user = self.model(user_name=user_name, email=email, first_name=first_name, last_name=last_name, birthday=birthday, gender=gender, **other_fields)
         user.set_password(password)
         user.save()
         return user
@@ -59,7 +59,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'user_name'
-    REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'birthday']
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'birthday', "gender"]
 
     def __str__(self):
         return self.user_name
