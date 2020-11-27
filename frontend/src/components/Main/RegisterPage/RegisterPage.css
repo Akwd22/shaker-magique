@@ -56,7 +56,8 @@
 }
 
 .left-side-form input[type="text"],
-.left-side-form input[type="date"] {
+.left-side-form input[type="date"],
+.left-side-form input[type="password"] {
   height: 60px;
   border-radius: 12px;
   outline: none;
