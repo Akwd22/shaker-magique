@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, User
 from django.conf import settings
+from django import forms
 
 
 class CustomAccountManager(BaseUserManager):
@@ -42,7 +43,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     GENDER = [
         ('M', 'M'),
         ('F', 'F'),
-    ]
+    ]   
     id = models.AutoField(primary_key=True)
     user_name = models.CharField(max_length=32, unique=True)
     email = models.EmailField(_('email address'), unique=True)

@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 export default function SignUp() {
   const history = useHistory();
   const initialFormData = Object.freeze({
-    gender: "",
     email: "",
     user_name: "",
     password: "",
@@ -33,7 +32,7 @@ export default function SignUp() {
 
     axiosInstance
       .post(`user/register/`, {
-        gender: formData.gender,
+        //gender: formData.gender,
         email: formData.email,
         user_name: formData.user_name,
         password: formData.password,
@@ -55,15 +54,27 @@ export default function SignUp() {
           <div className="left-side-title">
             <h1>inscription</h1>
           </div>
-          <form className= "left-side-formulaire" noValidate>
+          <form className="left-side-formulaire"  onSubmit={handleSubmit} noValidate>
             <div className="left-side-form">
               <div className="form-sexe">
                 <div className="form-sexe-femme">
-                  <input type="radio" name="gender" id="radio-sexe-femme" onChange={handleChange} required/>
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="radio-sexe-femme"
+                    onChange={handleChange}
+                    required
+                  />
                   <label htmlFor="radio-sexe-femme">Mme</label>
                 </div>
                 <div className="form-sexe-homme">
-                  <input type="radio" name="gender" id="radio-sexe-homme" onChange={handleChange} required />
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="radio-sexe-homme"
+                    onChange={handleChange}
+                    required
+                  />
                   <label htmlFor="radio-sexe-femme">Mr</label>
                 </div>
               </div>
@@ -86,7 +97,13 @@ export default function SignUp() {
                   onChange={handleChange}
                 />
               </div>
-              <input type="date" name="birthday" id="birthday" onChange={handleChange} required/>
+              <input
+                type="date"
+                name="birthday"
+                id="birthday"
+                onChange={handleChange}
+                required
+              />
               <input
                 type="text"
                 name="user_name"
@@ -95,7 +112,14 @@ export default function SignUp() {
                 onChange={handleChange}
                 required
               />
-              <input type="text" name="email" id="email" placeholder="Email" onChange={handleChange} required/>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Email"
+                onChange={handleChange}
+                required
+              />
               <span>
                 6 caractères minimum, au moins 1 chiffre et une lettre{" "}
               </span>
@@ -116,19 +140,19 @@ export default function SignUp() {
                 required
               />
             </div>
+            <div className="left-side-policy">
+              <input type="checkbox" id="checkBoxPolicy" required />
+              <label htmlFor="checkBoxPolicy">
+                J'ai lu et j'accepte votre{" "}
+                <a href="#/">Politique de Confidentialité </a>
+              </label>
+            </div>
+            <div className="left-side-button">
+              <button type="submit">
+                s'enregister
+              </button>
+            </div>
           </form>
-          <div className="left-side-policy">
-            <input type="checkbox" id="checkBoxPolicy" required/>
-            <label htmlFor="checkBoxPolicy">
-              J'ai lu et j'accepte votre{" "}
-              <a href="#/">Politique de Confidentialité </a>
-            </label>
-          </div>
-          <div className="left-side-button">
-            <button type="submit" onClick={handleSubmit}>
-              s'enregister
-            </button>
-          </div>
         </div>
       </div>
       <div className="page-right-side"></div>

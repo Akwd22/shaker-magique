@@ -7,7 +7,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=6, write_only=True)
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
-    birthday = serializers.DateTimeField(input_formats=['%d/%m/%Y'], required=True)
+    birthday = serializers.DateTimeField(input_formats=['%Y-%m-%d'], required=True)
     gender = serializers.CharField(max_length=1, required=True)
 
     class Meta:
