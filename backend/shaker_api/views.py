@@ -1,7 +1,9 @@
 from rest_framework import generics
+from rest_framework.views import APIView
 from shaker.models import *
 from .serializers import *
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly, SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
+from .permissions import *
 
 class CocktailList(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
@@ -44,11 +46,11 @@ class StockerList(generics.ListCreateAPIView):
     serializer_class = StockerSerializer
     
 class ProposerList(generics.ListCreateAPIView):
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    permission_classes = [ProposerPermission]
     queryset = Propose.objects.all()
     serializer_class = ProposerSerializer
 
 class ProposeDetail(generics.RetrieveDestroyAPIView):
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    permission_classes = [ProposerDetailPermission]
     queryset = Propose.objects.all()
-    serializer_class = ProposerSerializer    
+    serializer_class = ProposerSerializer

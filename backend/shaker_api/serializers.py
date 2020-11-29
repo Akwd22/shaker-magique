@@ -35,7 +35,6 @@ class StockerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idingredient','idmembre','enreserve')
         model = Stocker
-        
 
 class ProposerSerializer(serializers.ModelSerializer):
     class Meta:
