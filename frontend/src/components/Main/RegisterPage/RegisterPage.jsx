@@ -46,6 +46,9 @@ export default function SignUp() {
         history.push("/connexion");
         console.log(res);
         console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   return (
@@ -55,7 +58,7 @@ export default function SignUp() {
           <div className="left-side-title">
             <h1>inscription</h1>
           </div>
-          <form className="left-side-formulaire"  onSubmit={handleSubmit} noValidate>
+          <form className="left-side-formulaire" onSubmit={handleSubmit}>
             <div className="left-side-form">
               <div className="form-sexe">
                 <div className="form-sexe-femme">
@@ -151,9 +154,7 @@ export default function SignUp() {
               </label>
             </div>
             <div className="left-side-button">
-              <button type="submit">
-                s'enregister
-              </button>
+              <button type="submit">s'enregister</button>
             </div>
           </form>
         </div>
