@@ -52,6 +52,12 @@ function Navbar() {
                 <a href="#/">inscription</a>
               </li>
             </NavLink>
+            <NavLink to="/deconnexion">
+              <li>
+                <i className="fas fa-user"></i>
+                <a href="#/">Déconnexion</a>
+              </li>
+            </NavLink>
           </div>
           <Button
             content={<FontAwesomeIcon icon={faBars} />}

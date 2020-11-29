@@ -9,6 +9,7 @@ import "./App.css";
 import RegisterPage from "./components/Main/RegisterPage/RegisterPage";
 import LoginPage from "./components/Main/LoginPage/LoginPage";
 import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
+import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/cocktail" component={CocktailPage} />
           <Route path="/inscription" component={RegisterPage} />
           <Route path="/connexion" component={LoginPage} />
+          <Route path="/deconnexion" component={LogoutPage} />
           <Route path="/rejoindre-hote" component={JoinHostPage} />
           <Route path="/" component={() => <div>ERREUR 404</div>} />
         </Switch>
