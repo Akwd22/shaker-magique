@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, User
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, User, Group
 from django.conf import settings
 from django import forms
 
@@ -9,7 +9,6 @@ from django import forms
 class CustomAccountManager(BaseUserManager):
 
     def create_superuser(self, user_name, email, first_name, last_name, birthday, password, gender, **other_fields):
-
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
         other_fields.setdefault('is_active', True)
@@ -24,7 +23,6 @@ class CustomAccountManager(BaseUserManager):
         return self.create_user(user_name, email, first_name, last_name, birthday, password, gender, **other_fields)
 
     def create_user(self, user_name, email, first_name, last_name, birthday, password, gender ,**other_fields):
-
         if not user_name:
             raise ValueError(_('Vous devez fournir un nom d''utilisateur'))
 
@@ -34,6 +32,7 @@ class CustomAccountManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(user_name=user_name, email=email, first_name=first_name, last_name=last_name, birthday=birthday, gender=gender, **other_fields)
         user.set_password(password)
+
         user.save()
         return user
 

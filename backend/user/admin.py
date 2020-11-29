@@ -19,12 +19,8 @@ class UserAdminConfig(UserAdmin):
     # Champs du formulaire de modification des membres
     fieldsets = (
         (None, {'fields': ('user_name', 'email', 'first_name', 'last_name', 'birthday', 'gender')}),
-        ('Permissions', {'fields': ('is_staff', 'is_active')})
+        ('Permissions', {'fields': ('is_staff', 'is_active', 'groups', 'user_permissions')})
     )
-
-    '''formfield_overrides = {
-        models.TextField: {'widget': Textarea(attrs={'rows': 20, 'cols': 60})},
-    }'''
 
     # Champs du formulaire d'ajout d'un membre
     add_fieldsets = (

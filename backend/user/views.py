@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from .serializers import CustomUserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
+from django.contrib.auth.models import Group
 
 
 class CustomUserCreate(APIView):
@@ -16,6 +17,8 @@ class CustomUserCreate(APIView):
             user = serializer.save()
             if user:
                 json = serializer.data
+                # Ajouter le nouveau compte au groupe "Membre"
+                user.groups.add(Group.objects.get(name='Membre'))
                 return Response(json, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

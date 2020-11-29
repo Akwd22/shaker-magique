@@ -1,7 +1,7 @@
 from rest_framework import generics
 from shaker.models import *
 from .serializers import *
-from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly, SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
 
 class CocktailList(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]

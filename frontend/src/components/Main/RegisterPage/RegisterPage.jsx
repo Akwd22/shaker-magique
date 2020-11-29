@@ -46,6 +46,7 @@ export default function SignUp() {
         history.push("/connexion");
         console.log(res);
         console.log(res.data);
+        console.log("here");
       })
       .catch((err) => {
         console.log(err);
