@@ -23,3 +23,28 @@ class ProposerDetailPermission(BasePermission):
             return True
 
         return (obj.idmembre == request.user) or request.user.is_superuser
+
+
+class NoterPermission(BasePermission):
+    message = "Vous ne pouvez modifier que vos notes"
+
+    def has_permission(self, request, view):
+
+        if (request.user.is_superuser):
+            return True
+
+        if (request.method == "POST") and (request.data):
+            if int(request.data["idmembre"]) != request.user.id:
+                return False
+
+        return True
+
+class StockerPermission(BasePermission):
+    message = "Vous ne pouvez consulter que votre stock d'ingrédients"
+
+    def has_permission(self, request, view):
+
+        if (request.user.is_superuser):
+            return True
+
+        return False

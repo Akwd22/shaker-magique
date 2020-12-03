@@ -6,12 +6,16 @@ from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly, SAF
 from .permissions import *
 
 class CocktailList(generics.ListCreateAPIView):
+    """Tous les cocktails
+    """
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer
 
 
 class CocktailDetail(generics.RetrieveDestroyAPIView):
+    """Détail d'un cocktail spécifique
+    """
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer
@@ -32,7 +36,9 @@ class IngredientList(generics.ListCreateAPIView):
     serializer_class = IngredientSerializer
 
 class NoterList(generics.ListCreateAPIView):
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    """Toutes les notes de tous les cocktails
+    """
+    permission_classes = [NoterPermission]
     queryset = Noter.objects.all()
     serializer_class = NoterSerializer
 
@@ -42,6 +48,7 @@ class PreferenceList(generics.ListCreateAPIView):
     serializer_class = PreferenceSerializer
     
 class StockerList(generics.ListCreateAPIView):
+    permission_classes = [StockerPermission]
     queryset = Stocker.objects.all()  
     serializer_class = StockerSerializer
     
