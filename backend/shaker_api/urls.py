@@ -14,6 +14,7 @@ urlpatterns = [
     path('ingredients/', IngredientList.as_view(), name='ingredients'),
     path('notes/', NoterList.as_view(), name='notes'),
     path('preferences/', PreferenceList.as_view(), name='preferences'),
+    path('preferences/<int:idmembre>', PreferenceListByMember.as_view(), name='preferencesByMember'),
     path('stock/', StockerList.as_view(), name='stocker'),
     path('proposer/', ProposerList.as_view(), name='Proposer'),
     path('proposer/detail/<int:pk>', ProposeDetail.as_view(), name='ProposerDetail'),

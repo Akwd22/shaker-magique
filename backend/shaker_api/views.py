@@ -53,6 +53,12 @@ class PreferenceList(generics.ListCreateAPIView):
     queryset = Preference.objects.all()
     serializer_class = PreferenceSerializer
 
+class PreferenceListByMember(generics.ListCreateAPIView):
+    permission_classes = [PreferencePermission]
+    serializer_class = PreferenceSerializer
+
+    def get_queryset(self):
+        return Preference.objects.filter(idmembre=self.kwargs['idmembre'])
 
 class StockerList(generics.ListCreateAPIView):
     permission_classes = [StockerPermission]
@@ -78,8 +84,14 @@ class ProposerListByMember(generics.ListCreateAPIView):
     def get_queryset(self):
         return Propose.objects.filter(idmembre=self.kwargs['idmembre'])
 
-    
-    
+    '''def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == 'POST':
+            serializer_class = ProposerSerializerWithoutMembre
+
+        return serializer_class'''
+
 class ProposeDetail(generics.RetrieveDestroyAPIView):
     """[summary]
     Uniquement les cocktails que nous proposons en tant qu'hôte

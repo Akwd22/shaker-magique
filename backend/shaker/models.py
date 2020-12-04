@@ -67,8 +67,9 @@ class Noter(models.Model):
 
 
 class Preference(models.Model):
+    idpreference = models.IntegerField(db_column="IDPREFERENCE", primary_key=True)
     idingredient = models.ForeignKey(Ingredient, models.DO_NOTHING, db_column='IDINGREDIENT')  # Field name made lowercase.
-    idmembre = models.OneToOneField(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
+    idmembre = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='IDMEMBRE')  # Field name made lowercase.
 
     class Meta:
         managed = False;
