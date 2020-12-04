@@ -26,18 +26,23 @@ class ProposerDetailPermission(BasePermission):
 
 
 class NoterPermission(BasePermission):
+    """@todo
+    """
     message = "Vous ne pouvez modifier que vos notes"
 
     def has_permission(self, request, view):
 
+        # N'importe qui, peut GET
+        if request.method in SAFE_METHODS:
+            return True
+
+        # L'admin à tous les droits
         if (request.user.is_superuser):
             return True
 
-        if (request.method == "POST") and (request.data):
-            if int(request.data["idmembre"]) != request.user.id:
-                return False
+        # Un membre ne peut noter qu'uniquement pour lui-même
 
-        return True
+        return False
 
 class StockerPermission(BasePermission):
     message = "Vous ne pouvez consulter que votre stock d'ingrédients"

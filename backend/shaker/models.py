@@ -18,7 +18,7 @@ class Cocktail(models.Model):
     forcealc = models.IntegerField(db_column='FORCEALC', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False;
+        managed = False
         db_table = 'COCKTAIL'
 
 
@@ -30,7 +30,7 @@ class Contenir(models.Model):
     unite = models.CharField(db_column='UNITE', max_length=16, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False;
+        managed = False
         db_table = 'CONTENIR'
         unique_together = (('idcocktail', 'idingredient'),)
 
@@ -40,7 +40,7 @@ class Favori(models.Model):
     idmembre = models.OneToOneField(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False;
+        managed = False
         db_table = 'FAVORI'
         unique_together = (('idmembre', 'idcocktail'),)
 
@@ -51,17 +51,18 @@ class Ingredient(models.Model):
     degrealcool = models.IntegerField(db_column='DEGREALCOOL', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False;
+        managed = False
         db_table = 'INGREDIENT'
 
 
 class Noter(models.Model):
-    idmembre = models.OneToOneField(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
+    idnoter = models.IntegerField(db_column='IDNOTER', primary_key=True)
+    idmembre = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='IDMEMBRE')  # Field name made lowercase.
     idcocktail = models.ForeignKey(Cocktail, models.DO_NOTHING, db_column='IDCOCKTAIL')  # Field name made lowercase.
     note = models.IntegerField(db_column='NOTE')  # Field name made lowercase.
 
     class Meta:
-        managed = False;
+        managed = False
         db_table = 'NOTER'
         unique_together = (('idmembre', 'idcocktail'),)
 
@@ -71,7 +72,7 @@ class Preference(models.Model):
     idmembre = models.OneToOneField(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='IDMEMBRE', primary_key=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False;
+        managed = False
         db_table = 'PREFERENCE'
         unique_together = (('idmembre', 'idingredient'),)
 
@@ -82,7 +83,7 @@ class Propose(models.Model):
     idmembre = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='IDMEMBRE')  # Field name made lowercase.
 
     class Meta:
-        managed = False;
+        managed = False
         db_table = 'PROPOSE'
         unique_together = (('idmembre', 'idcocktail'),)
 
@@ -94,7 +95,7 @@ class Stocker(models.Model):
     enreserve = models.BooleanField(db_column='ENRESERVE')  # Field name made lowercase.
 
     class Meta:
-        managed = False;
+        managed = False
         db_table = 'STOCKER'
         unique_together = (('idmembre', 'idingredient'),)
 
