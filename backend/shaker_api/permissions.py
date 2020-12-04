@@ -9,7 +9,7 @@ class ProposerPermission(BasePermission):
     def has_permission(self, request, view):
 
         if ("idmembre" in request.data) and request.method == "POST":
-            return (int(request.data["idmembre"]) == int(request.user.id)) or request.user.is_superuser
+            return (request.data["idmembre"] == request.user.id) or request.user.is_superuser
 
         return True
 

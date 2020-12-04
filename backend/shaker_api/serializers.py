@@ -40,3 +40,4 @@ class ProposerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail','idmembre')
         model = Propose
+        

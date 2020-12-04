@@ -16,5 +16,6 @@ urlpatterns = [
     path('preferences/', PreferenceList.as_view(), name='preferences'),
     path('stock/', StockerList.as_view(), name='stocker'),
     path('proposer/', ProposerList.as_view(), name='Proposer'),
-    path('proposer/<int:pk>', ProposeDetail.as_view(), name='Proposer'),
+    path('proposer/detail/<int:pk>', ProposeDetail.as_view(), name='ProposerDetail'),
+    path('proposer/<int:idmembre>', ProposerListByMember.as_view(), name='ProposerByMember'),
 ]
