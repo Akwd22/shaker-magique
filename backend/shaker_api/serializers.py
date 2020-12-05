@@ -23,16 +23,10 @@ class FavoriSerializer(serializers.ModelSerializer):
         model  = Favori
 
 
-class IngredientSerializer(serializers.ModelSerializer): 
-
-
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'intitule', 'degrealcool')
         model  = Ingredient
-
-
-class NoterSerializer(serializers.ModelSerializer): 
 
 
 class NoterSerializer(serializers.ModelSerializer):
