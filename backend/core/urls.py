@@ -1,4 +1,4 @@
-"""Shaker_Magique URL Configuration
+"""core URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -27,7 +27,6 @@ urlpatterns = [
     path('api/user/', include('user.urls', namespace='user')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='toekn_refresh'),
-      
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
 ]
- 

@@ -6,15 +6,15 @@ from django import forms
 from django.db import models
 
 
-class UserAdminConfig(UserAdmin):
+class UserAdminConfig(UserAdmin): 
     """Affichage des utilisateurs dans le panel d'administration
     """
     
-    model = Member
+    model         = Member
     search_fields = ('email', 'user_name', 'first_name',)
-    list_filter = ('email', 'user_name', 'first_name', 'is_active', 'is_staff')
-    ordering = ('-start_date',)
-    list_display = ('user_name', 'email', 'first_name', 'last_name', 'birthday', 'gender', 'id_hote', 'is_active', 'is_staff')
+    list_filter   = ('email', 'user_name', 'first_name', 'is_active', 'is_staff')
+    ordering      = ('-start_date',)
+    list_display  = ('user_name', 'email', 'first_name', 'last_name', 'birthday', 'gender', 'id_hote', 'is_active', 'is_staff')
 
     # Champs du formulaire de modification des membres
     fieldsets = (
@@ -26,7 +26,7 @@ class UserAdminConfig(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide'),
-            'fields': ('user_name', 'email', 'first_name', 'last_name', 'birthday', 'gender', 'password1', 'password2', 'is_active', 'is_staff')}
+            'fields' : ('user_name', 'email', 'first_name', 'last_name', 'birthday', 'gender', 'password1', 'password2', 'is_active', 'is_staff')}
          ),
     )
 
