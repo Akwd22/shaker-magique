@@ -33,7 +33,7 @@ function Header() {
       <header>
         <div className="wave-container">{headWave()}</div>
         <div className="header-component">
-          <Navbar />
+          <Navbar/>
           {headFilter()}
         </div>
       </header>

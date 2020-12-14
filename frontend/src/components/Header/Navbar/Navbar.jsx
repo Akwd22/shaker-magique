@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 import { NavLink } from "react-router-dom";
+import { getUser } from "../../Axios/Axios";
 
 function Navbar() {
   const [classNav, setStateClassNav] = useState("navbar-mobile none");
@@ -22,6 +23,27 @@ function Navbar() {
     e.preventDefault();
     setStateClassNav("navbar-mobile slide_to_right");
   };
+  let buttons;
+  
+  if (getUser()) {
+    buttons = (
+      <NavLink to="/connexion">
+        <li>
+          <i className="fas fa-user"></i>
+          <a href="#/">connexion</a>
+        </li>
+      </NavLink>
+    );
+  } else {
+    buttons = (
+      <NavLink to="/deconnexion">
+        <li>
+          <i className="fas fa-user"></i>
+          <a href="#/">Déconnexion</a>
+        </li>
+      </NavLink>
+    );
+  }
 
   return (
     <div className="navbar">
@@ -40,24 +62,7 @@ function Navbar() {
                 <a href="#/">rejoindre un hôte</a>
               </li>
             </NavLink>
-            <NavLink to="/connexion">
-              <li>
-                <i className="fas fa-user"></i>
-                <a href="#/">connexion</a>
-              </li>
-            </NavLink>
-            {/*<NavLink to="/inscription">
-              <li>
-                <i className="fas fa-user"></i>
-                <a href="#/">inscription</a>
-              </li>
-            </NavLink>*/}
-            <NavLink to="/deconnexion">
-              <li>
-                <i className="fas fa-user"></i>
-                <a href="#/">Déconnexion</a>
-              </li>
-            </NavLink>
+            {buttons}
           </div>
           <Button
             content={<FontAwesomeIcon icon={faBars} />}

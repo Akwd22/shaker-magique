@@ -11,17 +11,25 @@ import LoginPage from "./components/Main/LoginPage/LoginPage";
 import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
 import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 import { Component } from "react";
-import axiosInstance from "./components/Axios/Axios";
-import CocktailList from "./components/Main/HomePage/CocktailList/CocktailList";
+import { getUser } from "./components/Axios/Axios";
 
 export default class App extends Component {
+  state = {};
+  componentDidMount = () => {
+    getUser();
+  };
+
   render() {
     return (
       <div className="app">
         <Router>
           <Header />
           <Switch>
-            <Route path="/" exact component={HomePage} />
+            <Route
+              path="/"
+              exact
+              component={() => <HomePage/>}
+            />
             <Route path="/cocktail" component={CocktailPage} />
             <Route path="/inscription" component={RegisterPage} />
             <Route path="/connexion" component={LoginPage} />

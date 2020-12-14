@@ -84,4 +84,11 @@ axiosInstance.interceptors.response.use(
   }
 );
 
+export async function getUser() {
+  let data = await axiosInstance.get("user/current");
+  console.log("DATA : " + data);
+  console.log("DATA : " + JSON.stringify(data.data));
+  return data.data;
+}
+
 export default axiosInstance;

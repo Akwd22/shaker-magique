@@ -2,13 +2,12 @@ import React from "react";
 import CocktailBox from "../CocktailBox_GRID/CocktailBox";
 import "./CocktailList.css";
 import "../../../variables.css";
-import axiosInstance from "../../../Axios/Axios";
+import axiosInstance, { getUser } from "../../../Axios/Axios";
 import { Component } from "react";
 
 export default class CocktailList extends Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
@@ -17,7 +16,8 @@ export default class CocktailList extends Component {
   }
 
   async getCocktails() {
-    await axiosInstance.get("/cocktails")
+    await axiosInstance
+      .get("/cocktails")
       .then((response) => this.setState({ cocktails: response.data }))
       .catch((error) => console.log(error));
   }
@@ -36,17 +36,22 @@ export default class CocktailList extends Component {
   }
 
   ifLog() {
-    if (this.props.user) {
-      return <h2>Salut {this.props.user.first_name}</h2>;
+    let res = getUser();
+    if (res) {
+      
+      return <h2>Bonjour, {res}</h2>;
     }
   }
 
   render() {
     return (
-      <div className="cocktaillist page">
+      <div className="cocktaillist">
+        <div className="title-page">
+          <h3>{this.ifLog()}</h3>
+          <h2>Vos Cocktails</h2>
+        </div>
         <div className="list-cocktail">{this.renderCocktails()}</div>
       </div>
     );
   }
 }
-

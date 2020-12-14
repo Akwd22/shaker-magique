@@ -1,14 +1,14 @@
 import React from "react";
+import { Component } from "react";
 import CocktailList from "./CocktailList/CocktailList";
 import "./HomePage.css";
 
-function HomePage() {
-  return (
-    <div className="homepage">
-      <h2>Vos cocktails</h2>
-      <CocktailList />
-    </div>
-  );
+export default class HomePage extends Component {
+  render() {
+    return (
+      <div className="homepage page">
+        <CocktailList/>
+      </div>
+    );
+  }
 }
-
-export default HomePage;
