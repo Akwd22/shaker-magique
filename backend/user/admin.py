@@ -27,7 +27,7 @@ class UserAdminConfig(UserAdmin):
         (None, {
             'classes': ('wide'),
             'fields' : ('user_name', 'email', 'first_name', 'last_name', 'birthday', 'gender', 'password1', 'password2', 'is_active', 'is_staff')}
-         ),
+        ),
     )
 
 
