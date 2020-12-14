@@ -11,14 +11,10 @@ import LoginPage from "./components/Main/LoginPage/LoginPage";
 import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
 import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 import { Component } from "react";
-import { getUser } from "./components/Axios/Axios";
+import axiosInstance, { getUser } from "./components/Axios/Axios";
+import CocktailList from "./components/Main/HomePage/CocktailList/CocktailList";
 
 export default class App extends Component {
-  state = {};
-  componentDidMount = () => {
-    getUser();
-  };
-
   render() {
     return (
       <div className="app">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 
 import "../../variables.css";
@@ -13,6 +13,7 @@ import { getUser } from "../../Axios/Axios";
 
 function Navbar() {
   const [classNav, setStateClassNav] = useState("navbar-mobile none");
+  const [user, setUser] = useState(undefined);
 
   const action_bars = (e) => {
     e.preventDefault();
@@ -23,27 +24,37 @@ function Navbar() {
     e.preventDefault();
     setStateClassNav("navbar-mobile slide_to_right");
   };
-  let buttons;
-  
-  if (getUser()) {
-    buttons = (
-      <NavLink to="/connexion">
-        <li>
-          <i className="fas fa-user"></i>
-          <a href="#/">connexion</a>
-        </li>
-      </NavLink>
-    );
-  } else {
-    buttons = (
-      <NavLink to="/deconnexion">
-        <li>
-          <i className="fas fa-user"></i>
-          <a href="#/">Déconnexion</a>
-        </li>
-      </NavLink>
-    );
-  }
+
+  const get_user = async function () {
+    let u = await getUser();
+    setUser(u);
+  };
+
+  const log_buttons = function () {
+    if (user) {
+      return (
+        <NavLink to="/deconnexion">
+          <li>
+            <i className="fas fa-user"></i>
+            <a href="#/">Déconnexion</a>
+          </li>
+        </NavLink>
+      );
+    } else {
+      return (
+        <NavLink to="/connexion">
+          <li>
+            <i className="fas fa-user"></i>
+            <a href="#/">connexion</a>
+          </li>
+        </NavLink>
+      );
+    }
+  };
+
+  useEffect(() => {
+    get_user();
+  });
 
   return (
     <div className="navbar">
@@ -62,7 +73,7 @@ function Navbar() {
                 <a href="#/">rejoindre un hôte</a>
               </li>
             </NavLink>
-            {buttons}
+            {log_buttons()}
           </div>
           <Button
             content={<FontAwesomeIcon icon={faBars} />}

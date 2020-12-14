@@ -27,6 +27,8 @@ class Cocktail(models.Model):
     categorie       = models.CharField(db_column='CATEGORIE', max_length=255, choices=cat_choices)
     description     = models.TextField(db_column='DESCRIPTION', blank=True, null=True)
     forcealc        = models.IntegerField(db_column='FORCEALC', blank=True, null=True)
+    ingredients     = models.ManyToManyField('Ingredient', through='Contenir', through_fields=('idcocktail', 'idingredient'))
+    membres         = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Propose', through_fields=('idcocktail', 'idmembre'))
 
     class Meta: 
         managed  = False        # Indique si Django peut gérer la structure de la table lui-même
@@ -75,6 +77,9 @@ class Ingredient(models.Model):
     class Meta: 
         managed  = False
         db_table = 'INGREDIENT'
+
+    def __str__(self):
+        return self.intitule
 
 
 class Noter(models.Model): 

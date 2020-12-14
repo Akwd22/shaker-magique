@@ -35,19 +35,10 @@ export default class CocktailList extends Component {
     return t;
   }
 
-  ifLog() {
-    let res = getUser();
-    if (res) {
-      
-      return <h2>Bonjour, {res}</h2>;
-    }
-  }
-
   render() {
     return (
       <div className="cocktaillist">
         <div className="title-page">
-          <h3>{this.ifLog()}</h3>
           <h2>Vos Cocktails</h2>
         </div>
         <div className="list-cocktail">{this.renderCocktails()}</div>

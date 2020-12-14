@@ -84,11 +84,20 @@ axiosInstance.interceptors.response.use(
   }
 );
 
+/**
+ * Retourne l'utilisateur connecté
+ * undefined si pas connecté
+ */
 export async function getUser() {
-  let data = await axiosInstance.get("user/current");
-  console.log("DATA : " + data);
-  console.log("DATA : " + JSON.stringify(data.data));
-  return data.data;
+  let res;
+
+  try {
+    res = await axiosInstance.get("/user/current");
+  } catch {
+    return undefined;
+  }
+
+  return res.data;
 }
 
 export default axiosInstance;
