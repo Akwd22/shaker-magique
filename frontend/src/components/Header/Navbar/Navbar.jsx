@@ -27,7 +27,10 @@ function Navbar() {
 
   const get_user = async function () {
     let u = await getUser();
-    setUser(u);
+
+    if (JSON.stringify(u) !== JSON.stringify(user)) {
+      setUser(u);
+    }
   };
 
   const log_buttons = function () {
