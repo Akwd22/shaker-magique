@@ -2,9 +2,10 @@ import React from "react";
 import CocktailBox from "../CocktailBox_GRID/CocktailBox";
 import "./CocktailList.css";
 import "../../../variables.css";
-import Axios from "axios";
+import axiosInstance from "../../../Axios/Axios";
+import { Component } from "react";
 
-class CocktailList extends React.Component {
+export default class CocktailList extends Component {
   constructor(props) {
     super(props);
 
@@ -16,37 +17,36 @@ class CocktailList extends React.Component {
   }
 
   async getCocktails() {
-    await Axios.get("/api/cocktails")
+    await axiosInstance.get("/cocktails")
       .then((response) => this.setState({ cocktails: response.data }))
       .catch((error) => console.log(error));
   }
 
   renderCocktails() {
     // Les cocktails n'ont pas encore été chargés
-    if (!this.state.cocktails)
-      return
+    if (!this.state.cocktails) return;
 
     // Créer toutes les CocktailBox
-    let t = []
+    let t = [];
     for (let i = 0; i < this.state.cocktails.length; i++) {
-      t[i] = (<CocktailBox cocktail={this.state.cocktails[i]} />);
+      t[i] = <CocktailBox cocktail={this.state.cocktails[i]} />;
     }
 
-    return t
+    return t;
+  }
+
+  ifLog() {
+    if (this.props.user) {
+      return <h2>Salut {this.props.user.first_name}</h2>;
+    }
   }
 
   render() {
     return (
-      <div className="cocktaillist">
-        <div className="title-page">
-          <h1>Vos cocktails</h1>
-        </div>
-        <div className="list-cocktail">
-          {this.renderCocktails()}
-        </div>
+      <div className="cocktaillist page">
+        <div className="list-cocktail">{this.renderCocktails()}</div>
       </div>
     );
   }
 }
 
-export default CocktailList;

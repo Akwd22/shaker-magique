@@ -46,12 +46,12 @@ function Navbar() {
                 <a href="#/">connexion</a>
               </li>
             </NavLink>
-            <NavLink to="/inscription">
+            {/*<NavLink to="/inscription">
               <li>
                 <i className="fas fa-user"></i>
                 <a href="#/">inscription</a>
               </li>
-            </NavLink>
+            </NavLink>*/}
             <NavLink to="/deconnexion">
               <li>
                 <i className="fas fa-user"></i>

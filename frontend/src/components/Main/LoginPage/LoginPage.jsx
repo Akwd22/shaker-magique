@@ -32,10 +32,14 @@ export default function SignIn() {
       .then((res) => {
         localStorage.setItem("access_token", res.data.access);
         localStorage.setItem("refresh_token", res.data.refresh);
-        axiosInstance.defaults.headers["Authorization"] = "JWT " + localStorage.getItem("access_token");
+        axiosInstance.defaults.headers["Authorization"] =
+          "JWT " + localStorage.getItem("access_token");
         history.push("/");
         //console.log(res);
         //console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 

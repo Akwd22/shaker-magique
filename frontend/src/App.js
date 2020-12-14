@@ -10,25 +10,28 @@ import RegisterPage from "./components/Main/RegisterPage/RegisterPage";
 import LoginPage from "./components/Main/LoginPage/LoginPage";
 import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
 import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
+import { Component } from "react";
+import axiosInstance from "./components/Axios/Axios";
+import CocktailList from "./components/Main/HomePage/CocktailList/CocktailList";
 
-function App() {
-  return (
-    <div className="app">
-      <Router>
-        <Header />
-        <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/cocktail" component={CocktailPage} />
-          <Route path="/inscription" component={RegisterPage} />
-          <Route path="/connexion" component={LoginPage} />
-          <Route path="/deconnexion" component={LogoutPage} />
-          <Route path="/rejoindre-hote" component={JoinHostPage} />
-          <Route path="/" component={() => <div>ERREUR 404</div>} />
-        </Switch>
-        <Footer/>
-      </Router>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <div className="app">
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/cocktail" component={CocktailPage} />
+            <Route path="/inscription" component={RegisterPage} />
+            <Route path="/connexion" component={LoginPage} />
+            <Route path="/deconnexion" component={LogoutPage} />
+            <Route path="/rejoindre-hote" component={JoinHostPage} />
+            <Route path="/" component={() => <div>ERREUR 404</div>} />
+          </Switch>
+          <Footer />
+        </Router>
+      </div>
+    );
+  }
 }
-
-export default App;

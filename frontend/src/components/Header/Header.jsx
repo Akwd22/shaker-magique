@@ -16,7 +16,7 @@ function Header() {
     if (location.pathname === "/") {
       return <FilterComponent />;
     } else {
-      return <TitlePage/>;
+      return <TitlePage />;
     }
   };
 

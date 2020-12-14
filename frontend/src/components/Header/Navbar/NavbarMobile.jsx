@@ -29,7 +29,7 @@ const NavBarMobile = ({ class_name, action_cross }) => {
             <a href="#/">connexion</a>
           </div>
         </NavLink>
-        <NavLink className="container-nav-mobile-div" to="inscription">
+        {/*<NavLink className="container-nav-mobile-div" to="inscription">
           <div>
             <i className="fas fa-user"></i>
             <a href="#/">inscription</a>
@@ -40,7 +40,7 @@ const NavBarMobile = ({ class_name, action_cross }) => {
             <i className="fas fa-user"></i>
             <a href="#/">Déconnexion</a>
           </li>
-        </NavLink>
+        </NavLink>*/}
       </div>
       <FontAwesomeIcon
         icon={faTimes}

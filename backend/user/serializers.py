@@ -25,3 +25,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+    
+class CurrentUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ('user_name', "first_name", "last_name", "email",)
