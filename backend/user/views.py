@@ -1,11 +1,12 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import status
+from rest_framework import status,generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import CustomUserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import *
 from django.contrib.auth.models import Group
+from user.models import *
+from .serializers import *
 
 
 class CustomUserCreate(APIView):
@@ -35,3 +36,10 @@ class BlacklistTokenUpdateView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class UserDetail(generics.RetrieveAPIView): 
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset           = Member.objects.all()
+    serializer_class   = MemberSerializer
+    lookup_field = 'user_name'
+    

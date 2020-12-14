@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, User, Group
 from django.conf import settings
 from django import forms
+import datetime
 
 
 class CustomAccountManager(BaseUserManager):
@@ -48,8 +49,8 @@ class Member(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
-    start_date = models.DateField(default=timezone.now)
-    birthday = models.DateField()
+    start_date = models.DateTimeField(default=timezone.now)
+    birthday = models.DateTimeField(default=timezone.now)
     gender = models.CharField(max_length=1, choices = GENDER, default = "F")
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
