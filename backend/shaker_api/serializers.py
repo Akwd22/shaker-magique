@@ -6,7 +6,7 @@ import pprint
 class CocktailSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'intitule', 'illustrationurl',
-                  'categorie', 'description', 'forcealc')
+                'categorie', 'description', 'forcealc')
         model = Cocktail
 
 

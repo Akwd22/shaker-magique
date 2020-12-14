@@ -6,6 +6,7 @@ app_name = 'shaker_api'
 urlpatterns = [
     path('cocktails/<int:pk>/', CocktailDetail.as_view(), name='cocktail-detail'),
     path('cocktails/', CocktailList.as_view(), name='cocktail-list'),
+    path('cocktails/search', CocktailSearch.as_view(), name='cocktail-search'),
     path('contenir/', ContenirList.as_view(), name='contenir'),
     path('favoris/', FavoriList.as_view(), name='favoris'),
     path('ingredients/', IngredientList.as_view(), name='ingredients'),

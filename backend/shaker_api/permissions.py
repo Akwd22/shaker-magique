@@ -88,7 +88,6 @@ class PreferencePermission(BasePermission):
         """allo.pprint(re.match(regex, request.path_info))
         if(re.match(r'\/'+str   (request.user.id)+"$", request.path_info)):
             return True"""
-                      
         return True   
         
 """
