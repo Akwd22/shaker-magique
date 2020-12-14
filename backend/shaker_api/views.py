@@ -1,8 +1,8 @@
-from rest_framework import generics
+from rest_framework import generics,filters
 from rest_framework.views import APIView
 from shaker.models import *
 from .serializers import *
-from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly, SAFE_METHODS, IsAuthenticated, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
+from rest_framework.permissions import *
 from .permissions import *
 from django.urls import reverse
 
@@ -16,6 +16,19 @@ class CocktailList(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly] # Classe(s) de permission utilisée(s)
     serializer_class   = CocktailSerializer                       # Classe de sérialisation associée
     queryset           = Cocktail.objects.all()
+
+
+class CocktailSearch(generics.ListCreateAPIView): 
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    serializer_class   = CocktailSerializer                       
+    queryset           = Cocktail.objects.all()
+    filter_backends    = [filters.SearchFilter]
+    search_fields = ['intitule','=categorie','description']
+
+# '^' Starts-with search.
+    # '=' Exact matches.
+    # '' Full-text search. (Currently only supported Django's PostgreSQL backend.)
+    # '$' Regex search.
 
 
 class CocktailDetail(generics.RetrieveUpdateDestroyAPIView): 
@@ -76,8 +89,8 @@ class StockerList(generics.ListCreateAPIView):
 class ProposerList(generics.ListCreateAPIView): 
     """[summary]
     Liste de tous les cocktails proposé par des hôtes
-                      Args    : 
-             generics ([type]): [description]
+                    Args    : 
+            generics ([type]): [description]
     """
     permission_classes = [ProposerPermission]
     queryset           = Propose.objects.all()
@@ -102,9 +115,43 @@ class ProposerListByMember(generics.ListCreateAPIView):
 class ProposeDetail(generics.RetrieveDestroyAPIView):
     """[summary]
     Uniquement les cocktails que nous proposons en tant qu'hôte
-                      Args    : 
-             generics ([type]): [description]
+                    Args    : 
+            generics ([type]): [description]
     """
     permission_classes = [ProposerDetailPermission]
     queryset           = Propose.objects.all()
     serializer_class   = ProposerSerializer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    """ Concrete View Classes
+# CreateAPIView
+Used for create-only endpoints.
+# ListAPIView
+Used for read-only endpoints to represent a collection of model instances.
+# RetrieveAPIView
+Used for read-only endpoints to represent a single model instance.
+# DestroyAPIView
+Used for delete-only endpoints for a single model instance.
+# UpdateAPIView
+Used for update-only endpoints for a single model instance.
+# ListCreateAPIView
+Used for read-write endpoints to represent a collection of model instances.
+RetrieveUpdateAPIView
+Used for read or update endpoints to represent a single model instance.
+# RetrieveDestroyAPIView
+Used for read or delete endpoints to represent a single model instance.
+# RetrieveUpdateDestroyAPIView
+Used for read-write-delete endpoints to represent a single model instance.
+"""
