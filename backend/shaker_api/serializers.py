@@ -54,5 +54,5 @@ class ProposerSerializer(serializers.ModelSerializer):
 
 class JoinHostSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'id_hote')
+        fields = ('id_hote',)
         model = Member
