@@ -15,6 +15,7 @@ class ContenirSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
         model = Contenir
+        depth = 1
 
 
 class FavoriSerializer(serializers.ModelSerializer):
@@ -51,6 +52,7 @@ class ProposerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idmembre')
         model = Propose
+        depth = 1
 
 class JoinHostSerializer(serializers.ModelSerializer):
     class Meta:
