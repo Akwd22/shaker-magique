@@ -1,10 +1,13 @@
 from rest_framework import generics,filters
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from shaker.models import *
 from .serializers import *
 from rest_framework.permissions import *
 from .permissions import *
 from django.urls import reverse
+from user.models import Member
+from pprint import PrettyPrinter
 
 
 class CocktailList(generics.ListCreateAPIView): 
@@ -14,7 +17,7 @@ class CocktailList(generics.ListCreateAPIView):
     # permet aussi d'ajouter de nouveaux cocktails (Create)
 
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly] # Classe(s) de permission utilisée(s)
-    serializer_class   = CocktailSerializer                       # Classe de sérialisation associée
+    serializer_class   = CocktailSerializer                     # Classe de sérialisation associée
     queryset           = Cocktail.objects.all()
 
 
@@ -123,6 +126,16 @@ class ProposeDetail(generics.RetrieveDestroyAPIView):
     serializer_class   = ProposerSerializer
 
 
+class JoinHost(generics.RetrieveUpdateAPIView):
+    serializer_class = JoinHostSerializer
+
+    def get_queryset(self):
+        return Member.objects.all()
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = Member.objects.get(pk=kwargs["pk"])
+        json = self.get_serializer(instance)
+        return Response(json.data)
 
 
 
@@ -134,8 +147,7 @@ class ProposeDetail(generics.RetrieveDestroyAPIView):
 
 
 
-
-    """ Concrete View Classes
+""" Concrete View Classes
 # CreateAPIView
 Used for create-only endpoints.
 # ListAPIView

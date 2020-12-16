@@ -1,41 +1,38 @@
 from rest_framework import serializers
+from user.models import Member
 from shaker.models import *
 import pprint
 
 
 class CocktailSerializer(serializers.ModelSerializer):
-    
 
     class Meta:
-        fields = ('id', 'intitule', 'illustrationurl',
-                  'categorie', 'description', 'forcealc', 'ingredients', 'membres')
+        fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description', 'forcealc')
         model = Cocktail
-        depth = 1
 
 
 class ContenirSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
-        model  = Contenir
-
+        model = Contenir
 
 
 class FavoriSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idmembre')
-        model  = Favori
+        model = Favori
 
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'intitule', 'degrealcool')
-        model  = Ingredient
+        model = Ingredient
 
 
 class NoterSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idmembre', 'idcocktail', 'note')
-        model  = Noter
+        model = Noter
 
 
 class PreferenceSerializer(serializers.ModelSerializer):
@@ -55,14 +52,7 @@ class ProposerSerializer(serializers.ModelSerializer):
         fields = ('idcocktail', 'idmembre')
         model = Propose
 
-
-'''class ProposerSerializerWithoutMembre(serializers.ModelSerializer):
+class JoinHostSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('idcocktail',)
-        model = Propose
-    
-    def validate(self, data):
-        pp = pprint.PrettyPrinter()
-        pp.pprint(self.instance)
-        
-        return data'''
+        fields = ('id', 'id_hote')
+        model = Member
