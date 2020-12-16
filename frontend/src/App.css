@@ -42,7 +42,7 @@ body {
 
 /* Responsive */
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
   .page {
     margin-left: 0px;
     margin-right: 0px;
