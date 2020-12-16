@@ -1,6 +1,6 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from .serializers import ProposerSerializer
-import pprint
+from pprint import PrettyPrinter
 import re
 
 
@@ -101,6 +101,12 @@ class JoinHostPermission(BaseException):
     def has_object_permission(self, request, view, obj):
 
         if (request.method in ("PUT", "PATCH")):
+
+            if (request.data):
+                if (request.data["id_hote"] == str(obj.id)):
+                    self.message = "Vous ne pouvez pas vous rejoindre vous-même"
+                    return False
+
             if (request.user.is_staff):
                 return True
 

@@ -136,11 +136,11 @@ class JoinHost(generics.RetrieveUpdateAPIView):
     """
     permission_classes = [JoinHostPermission]
     serializer_class = JoinHostSerializer
-    queryset = Member.objects.none()
+    queryset = Member.objects.all()
 
     def retrieve(self, request, *args, **kwargs):
         instance = get_object_or_404(Member.objects, pk=kwargs["pk"])
-        serializer = self.get_serializer(instance)      # On instancie notre sérialiseur en passant en paramètre notre instance
+        serializer = self.get_serializer(instance) # On instancie notre sérialiseur en passant en paramètre notre instance
         return Response(serializer.data)
 
 
