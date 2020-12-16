@@ -133,6 +133,7 @@ class ProposeDetail(generics.RetrieveDestroyAPIView):
 
 class JoinHost(generics.RetrieveUpdateAPIView):
     """Visualiser l'hôte d'un membre, en joindre ou en quitter un.
+    Pour quitter un hôte, ne rien renseigner comme login.
     """
     permission_classes = [JoinHostPermission]
     serializer_class = JoinHostSerializer
@@ -140,8 +141,31 @@ class JoinHost(generics.RetrieveUpdateAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         instance = get_object_or_404(Member.objects, pk=kwargs["pk"])
-        serializer = self.get_serializer(instance) # On instancie notre sérialiseur en passant en paramètre notre instance
+        serializer = self.get_serializer(instance)  # On instancie notre sérialiseur en passant en paramètre notre instance
         return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        hote_login = serializer.context["request"].data["hote_login"]   # Extraire le login de l'hôte de la requête
+        
+        hote = None
+        if (hote_login):
+            hote = get_object_or_404(Member.objects, user_name=hote_login)  # Récupérer l'hôte par son login
+
+        serializer.save(id_hote=hote)
+
+class JoinHostAnon(generics.UpdateAPIView):
+    """Joindre un hôte en tant qu'anonyme.
+    Si l'hôte existe, le code de retour HTTP est 200, sinon 404.
+    """
+    permission_classes = [AllowAny]
+    serializer_class = JoinHostSerializer
+    queryset = Member.objects.none()
+
+    def update(self, request, *args, **kwargs):
+        hote_login = request.data["hote_login"] # Extraire le login de l'hôte de la requête
+        hote = get_object_or_404(Member.objects, user_name=hote_login) # Récupérer l'hôte par son login
+
+        return Response(None)
 
 
 """ Concrete View Classes

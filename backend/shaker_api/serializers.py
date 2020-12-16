@@ -53,6 +53,11 @@ class ProposerSerializer(serializers.ModelSerializer):
         model = Propose
 
 class JoinHostSerializer(serializers.ModelSerializer):
+    # Champ qui ne fait pas parti du modèle
+    # Il sert uniquement au formulaire
+    hote_login = serializers.CharField(write_only=True, allow_blank=True) 
+
     class Meta:
-        fields = ('id_hote',)
+        fields = ('id_hote', 'hote_login')
+        read_only_fields = ('id_hote',)
         model = Member

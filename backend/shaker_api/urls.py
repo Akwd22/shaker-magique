@@ -16,5 +16,6 @@ urlpatterns = [
     path('stock/', StockerList.as_view(), name='stocker'),
     path('proposer/', ProposerList.as_view(), name='proposer'),
     path('proposer/<int:idmembre>', ProposerListByMember.as_view(), name='proposer-member'),
-    path('hote/<int:pk>', JoinHost.as_view(), name='join-host'),
+    path('joindre_hote/', JoinHostAnon.as_view(), name='join-host-anon'),
+    path('joindre_hote/<int:pk>', JoinHost.as_view(), name='join-host'),
 ]
