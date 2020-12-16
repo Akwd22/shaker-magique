@@ -22,19 +22,37 @@ class CocktailList(generics.ListCreateAPIView):
     serializer_class = CocktailSerializer                     # Classe de sérialisation associée
     queryset = Cocktail.objects.all()
 
-
 class CocktailSearch(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = CocktailSerializer
     queryset = Cocktail.objects.all()
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['intitule', '=categorie', 'description']
+    #filter_backends = [filters.SearchFilter]
+    #search_fields = ['intitule']
 
-# '^' Starts-with search.
-    # '=' Exact matches.
-    # '' Full-text search. (Currently only supported Django's PostgreSQL backend.)
-    # '$' Regex search.
+    def list(self, request, *args, **kwargs):
+        instances = Cocktail.objects.all()
+        p = PrettyPrinter()
 
+        search  = request.query_params.get("search")
+        """cat     = request.query_params.get("categorie")
+        hote    = request.query_params.get("hote")
+        tri     = request.query_params.get("search")"""
+
+        if (search): search = search.split("+")
+
+        trouvé = True
+        for i in search:
+            test = instances.ingredients.filter(intitule__iregex=i)
+            
+            if (not test):
+                trouvé = False
+
+        if (trouvé):
+            print("TROUVE !!!!!")
+        else :
+            print("PAS TROUVE!!!!!!")
+
+        return Response(None)
 
 class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
     """Détail d'un cocktail
