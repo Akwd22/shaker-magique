@@ -23,7 +23,6 @@ class CustomUserCreate(APIView):
                 return Response(json, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = ()
@@ -43,4 +42,3 @@ class CurentUserView(APIView):
     def get(self, request):
         serializer_class  = CurrentUserSerializer(request.user)
         return Response(serializer_class.data)
-    

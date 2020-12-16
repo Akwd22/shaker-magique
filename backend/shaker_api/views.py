@@ -10,6 +10,7 @@ from user.models import Member
 from pprint import PrettyPrinter
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.shortcuts import get_object_or_404
+from django.db.models.query import *
 
 
 class CocktailList(generics.ListCreateAPIView):
@@ -26,33 +27,32 @@ class CocktailSearch(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = CocktailSerializer
     queryset = Cocktail.objects.all()
-    #filter_backends = [filters.SearchFilter]
-    #search_fields = ['intitule']
 
     def list(self, request, *args, **kwargs):
         instances = Cocktail.objects.all()
-        p = PrettyPrinter()
 
         search  = request.query_params.get("search")
-        """cat     = request.query_params.get("categorie")
+        cat     = request.query_params.get("cat")
         hote    = request.query_params.get("hote")
-        tri     = request.query_params.get("search")"""
+        tri     = request.query_params.get("tri")
 
-        if (search): search = search.split("+")
+        if(hote):
+            instances = instances.filter(membres__id=hote)
 
-        trouvé = True
-        for i in search:
-            test = instances.ingredients.filter(intitule__iregex=i)
-            
-            if (not test):
-                trouvé = False
+        if(cat):
+            instances = instances.filter(categorie=cat)
 
-        if (trouvé):
-            print("TROUVE !!!!!")
-        else :
-            print("PAS TROUVE!!!!!!")
+        if(tri):
+            instances = instances.order_by(tri)
 
-        return Response(None)
+        if(search):
+            search = search.split(" ")
+            for i in search :
+                instances = (instances.filter(ingredients__intitule__icontains=i) |  instances.filter(intitule__icontains=i)).distinct()
+
+        
+        serializer = self.get_serializer(instances, many=True)
+        return Response(serializer.data)
 
 class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
     """Détail d'un cocktail

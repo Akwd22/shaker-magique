@@ -28,6 +28,7 @@ class Cocktail(models.Model):
     description     = models.TextField(db_column='DESCRIPTION', blank=True, null=True)
     forcealc        = models.IntegerField(db_column='FORCEALC', blank=True, null=True)
     ingredients     = models.ManyToManyField("Ingredient", through="Contenir", through_fields=("idcocktail", "idingredient"))
+    membres         = models.ManyToManyField(settings.AUTH_USER_MODEL, through="Propose", through_fields=("idcocktail", "idmembre"))
 
     class Meta: 
         managed  = False        # Indique si Django peut gérer la structure de la table lui-même

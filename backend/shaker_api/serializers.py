@@ -7,7 +7,7 @@ import pprint
 class CocktailSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description', 'forcealc', 'ingredients')
+        fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description', 'forcealc', 'ingredients','membres')
         model = Cocktail
 
 
@@ -16,7 +16,7 @@ class ContenirSerializer(serializers.ModelSerializer):
         fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
         model = Contenir
         depth = 1
-
+        
 
 class FavoriSerializer(serializers.ModelSerializer):
     class Meta:
