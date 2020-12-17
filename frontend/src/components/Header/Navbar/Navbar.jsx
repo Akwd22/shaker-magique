@@ -9,11 +9,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 import { NavLink } from "react-router-dom";
-import { getUser } from "../../Axios/Axios";
+import { get_user } from "../../Axios/Axios";
 
 function Navbar() {
   const [classNav, setStateClassNav] = useState("navbar-mobile none");
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(get_user());
 
   const action_bars = (e) => {
     e.preventDefault();
@@ -23,14 +23,6 @@ function Navbar() {
   const action_cross = (e) => {
     e.preventDefault();
     setStateClassNav("navbar-mobile slide_to_right");
-  };
-
-  const get_user = async function () {
-    let u = await getUser();
-
-    if (JSON.stringify(u) !== JSON.stringify(user)) {
-      setUser(u);
-    }
   };
 
   const log_buttons = function () {
@@ -48,7 +40,7 @@ function Navbar() {
         <NavLink to="/connexion">
           <li>
             <i className="fas fa-user"></i>
-            <a href="#/">connexion</a>
+            <a href="#/">Connexion</a>
           </li>
         </NavLink>
       );
@@ -56,7 +48,9 @@ function Navbar() {
   };
 
   useEffect(() => {
-    get_user();
+    if (get_user() != user) {
+      setUser(get_user());
+    }
   });
 
   return (

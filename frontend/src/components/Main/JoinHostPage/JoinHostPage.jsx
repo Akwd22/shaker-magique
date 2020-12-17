@@ -1,28 +1,31 @@
 import React from "react";
 import "./JoinHostPage.css";
 import "../../variables.css";
-import axiosInstance, { getUser, get_hote } from "../../Axios/Axios";
+import axiosInstance, { get_user, get_hote } from "../../Axios/Axios";
 
 class JoinHostPage extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       host_login: get_hote() ? get_hote().login : "",
     };
-
-    console.dir(get_hote())
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e) {
+    const current_user = get_user();
+
     axiosInstance
-      .patch("joindre_hote/", {
+      .patch("joindre_hote/" + (current_user ? current_user.id : ""), {
         hote_login: this.state.host_login,
       })
       .then((response) => {
+        // Vérifier que l'hôte existe
         if (response.status == 200) {
+          // Si le login n'est pas vide, on le rejoint
           if (this.state.host_login != "") {
             localStorage.setItem(
               "hote_rejoint",
@@ -31,18 +34,19 @@ class JoinHostPage extends React.Component {
                 id: response.data["id_hote"],
               })
             );
-            alert("hôte rejoint");
+            // Si le login est vide, alors on quitte l'hôte
           } else {
             localStorage.removeItem("hote_rejoint");
-            alert("hôte quitté");
           }
         }
       })
       .catch((error) => {
         if (error.response.status == 404) {
-          alert("hôte pas trouvé");
+          alert("L'hôte " + this.state.host_login + " n'existe pas.");
+        } else if (error.response.status == 403) {
+          alert("Vous ne pouvez pas vous rejoindre vous-même.");
         } else {
-          alert("erreur inconnue" + error.response.status);
+          alert("Erreur HTTP inconnue : " + error.response.status);
         }
       });
   }
