@@ -55,6 +55,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     id_hote = models.ForeignKey('self', models.DO_NOTHING, default=None, blank=True, null=True)
+    stock_ingredients = models.ManyToManyField("shaker.Ingredient", through="shaker.Stocker", through_fields=("idmembre", "idingredient"))
     
     objects = CustomAccountManager()
 

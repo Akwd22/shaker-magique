@@ -11,6 +11,7 @@ from pprint import PrettyPrinter
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.shortcuts import get_object_or_404
 from django.db.models.query import *
+from django.db.models import Count, Sum
 
 
 class CocktailList(generics.ListCreateAPIView):
@@ -23,7 +24,26 @@ class CocktailList(generics.ListCreateAPIView):
     serializer_class = CocktailSerializer                     # Classe de sérialisation associée
     queryset = Cocktail.objects.all()
 
-class CocktailSearch(generics.ListCreateAPIView):
+
+class CocktailSearch(generics.ListAPIView):
+    """Liste des cocktails par filtrage
+
+    Paramètres URL :
+    - hote=<int>
+    - cat=(A|D|AD)
+    - search=ananas+citron
+    - tri=<nom de la colonne>
+    - manquants=<int>
+
+    Il n'est pas obligé de spécifier tous les paramètres. Si "manquants" est utilisé, alors "hote" doit l'être aussi.
+
+    Exemples :
+    "?search=ananas+oeuf&cat=D&tri=forcealc&hote=3&manquants=0"
+    - Recherche les cocktails de l'hôte 3 avec les ingrédients "ananas" et "oeuf" de catégorie digestif, triés par force, dont tous les ingrédients sont en réserve
+    "?search=alcapulco"
+    - Recherche le cocktail qui se nomme Alcapulco
+    """
+
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = CocktailSerializer
     queryset = Cocktail.objects.all()
@@ -31,28 +51,50 @@ class CocktailSearch(generics.ListCreateAPIView):
     def list(self, request, *args, **kwargs):
         instances = Cocktail.objects.all()
 
-        search  = request.query_params.get("search")
-        cat     = request.query_params.get("cat")
-        hote    = request.query_params.get("hote")
-        tri     = request.query_params.get("tri")
+        search    = request.query_params.get("search")
+        cat       = request.query_params.get("cat")
+        hote      = request.query_params.get("hote")
+        tri       = request.query_params.get("tri")
+        manquants = request.query_params.get("manquants")
 
+        # Récupérer que les cocktails d'un hôte
         if(hote):
             instances = instances.filter(membres__id=hote)
 
+        # Filtrer par catégorie
         if(cat):
             instances = instances.filter(categorie=cat)
 
-        if(tri):
-            instances = instances.order_by(tri)
-
+        # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
         if(search):
             search = search.split(" ")
-            for i in search :
-                instances = (instances.filter(ingredients__intitule__icontains=i) |  instances.filter(intitule__icontains=i)).distinct()
+            for i in search:
+                instances = (instances.filter(ingredients__intitule__icontains=i) | instances.filter(intitule__icontains=i)).distinct()
 
-        
+        # Filtrer par nombre d'ingrédients manquants
+        if (hote and manquants):
+            for cocktail in instances:
+                stock = Stocker.objects.filter(idmembre=hote)                                  # Les ingredients de l'hôte
+                stock = stock.filter(idingredient__in=cocktail.ingredients.values_list("id"))  # Les ingredients de l'hôte qui correspondent au cocktail
+
+                # Exclure le cocktail car l'hôte ne possède un ou plusieurs ingrédients du cocktail
+                if (cocktail.ingredients.count() != stock.count()):
+                    instances = instances.exclude(pk=cocktail.id)
+                    continue
+
+                nb_manquants = stock.count() - stock.aggregate(Sum('enreserve'))['enreserve__sum']  # Calcul du nombre d'ingrédients manquants
+
+                # Exclure le cocktail s'il ne respecte pas le critère du nombre d'ingrédients manquants
+                if (nb_manquants != int(manquants)):
+                    instances = instances.exclude(pk=cocktail.id)
+
+        # Trier les cocktails
+        if (tri):
+            instances = instances.order_by(tri)
+
         serializer = self.get_serializer(instances, many=True)
         return Response(serializer.data)
+
 
 class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
     """Détail d'un cocktail
@@ -164,12 +206,13 @@ class JoinHost(generics.RetrieveUpdateAPIView):
 
     def perform_update(self, serializer):
         hote_login = serializer.context["request"].data["hote_login"]   # Extraire le login de l'hôte de la requête
-        
+
         hote = None
         if (hote_login):
             hote = get_object_or_404(Member.objects, user_name=hote_login)  # Récupérer l'hôte par son login
 
         serializer.save(id_hote=hote)
+
 
 class JoinHostAnon(generics.UpdateAPIView):
     """Joindre un hôte en tant qu'anonyme.
@@ -180,8 +223,8 @@ class JoinHostAnon(generics.UpdateAPIView):
     queryset = Member.objects.none()
 
     def update(self, request, *args, **kwargs):
-        hote_login = request.data["hote_login"] # Extraire le login de l'hôte de la requête
-        hote = get_object_or_404(Member.objects, user_name=hote_login) # Récupérer l'hôte par son login
+        hote_login = request.data["hote_login"]  # Extraire le login de l'hôte de la requête
+        hote = get_object_or_404(Member.objects, user_name=hote_login)  # Récupérer l'hôte par son login
 
         return Response(None)
 
