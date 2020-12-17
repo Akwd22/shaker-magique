@@ -1,7 +1,6 @@
 import React from "react";
 import "../../variables.css";
 import "./CocktailPage.css";
-import { Link } from "react-router-dom";
 
 class CocktailPage extends React.Component {
   render() {
