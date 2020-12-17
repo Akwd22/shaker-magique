@@ -7,8 +7,10 @@ class JoinHostPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      host_login: "",
+      host_login: get_hote() ? get_hote().login : "",
     };
+
+    console.dir(get_hote())
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -22,11 +24,17 @@ class JoinHostPage extends React.Component {
       .then((response) => {
         if (response.status == 200) {
           if (this.state.host_login != "") {
-            localStorage.setItem("hote_rejoint_id", response.data["id_hote"]);
-            alert("hôte rejoint")
+            localStorage.setItem(
+              "hote_rejoint",
+              JSON.stringify({
+                login: this.state.host_login,
+                id: response.data["id_hote"],
+              })
+            );
+            alert("hôte rejoint");
           } else {
-            localStorage.removeItem("hote_rejoint_id")
-            alert("hôte quitté")
+            localStorage.removeItem("hote_rejoint");
+            alert("hôte quitté");
           }
         }
       })
