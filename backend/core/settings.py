@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,9 +95,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # on utilise l'adaptateur postgresql
-        'NAME': 'remy-dut_pts3',  # le nom de notre base de donnees creee precedemment
-        'USER': 'remy-dut',  # attention : remplacez par votre nom d'utilisateur
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'remy-dut_pts3',
+        'USER': 'remy-dut',
         'PASSWORD': 'projetduts3',
         'HOST': 'mysql-remy-dut.alwaysdata.net',
         'PORT': '3306',
@@ -195,3 +196,6 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'

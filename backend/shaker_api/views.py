@@ -1,6 +1,7 @@
-from rest_framework import generics, filters
+from rest_framework import generics, filters, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.parsers import *
 from shaker.models import *
 from .serializers import *
 from rest_framework.permissions import *
@@ -14,16 +15,47 @@ from django.db.models.query import *
 from django.db.models import Count, Sum
 
 
-class CocktailList(generics.ListCreateAPIView):
+
+class CocktailList(generics.ListAPIView):
     """Liste de tous les cocktails
     """
     # Vue qui liste (List) tous les cocktails,
-    # permet aussi d'ajouter de nouveaux cocktails (Create)
 
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]  # Classe(s) de permission utilisée(s)
     serializer_class = CocktailSerializer                     # Classe de sérialisation associée
     queryset = Cocktail.objects.all()
 
+class CocktailCreate(generics.CreateAPIView):
+    # permet d'ajouter de nouveaux cocktails (Create)
+    permission_classes = [IsAdminUser]                  
+    queryset = Cocktail.objects.all()
+    serializer_class = CocktailSerializer 
+
+# class CocktailCreate(APIView):
+#     permission_classes = [IsAdminUser] 
+#     parser_classes = [MultiPartParser, FormParser]
+
+#     def post(self, request, format=None):
+#         print(request.data)
+#         serializer = CocktailSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+#         else:
+#             return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)    
+
+
+
+
+class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
+    """Détail d'un cocktail*
+    """
+    # Vue qui affiche le détail (Retrieve) d'un cocktail,
+    # permet aussi de le modifier (Update), et supprimer (Destroy)
+
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Cocktail.objects.all()
+    serializer_class = CocktailSerializer
 
 class CocktailSearch(generics.ListAPIView):
     """Liste des cocktails par filtrage
@@ -47,6 +79,8 @@ class CocktailSearch(generics.ListAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = CocktailSerializer
     queryset = Cocktail.objects.all()
+    #filter_backends = [filters.SearchFilter]
+    #search_fields = ['intitule']
 
     def list(self, request, *args, **kwargs):
         instances = Cocktail.objects.all()
@@ -70,7 +104,6 @@ class CocktailSearch(generics.ListAPIView):
             search = search.split(" ")
             for i in search:
                 instances = (instances.filter(ingredients__intitule__icontains=i) | instances.filter(intitule__icontains=i)).distinct()
-
         # Filtrer par nombre d'ingrédients manquants
         if (hote and manquants):
             for cocktail in instances:
@@ -94,17 +127,6 @@ class CocktailSearch(generics.ListAPIView):
 
         serializer = self.get_serializer(instances, many=True)
         return Response(serializer.data)
-
-
-class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
-    """Détail d'un cocktail
-    """
-    # Vue qui affiche le détail (Retrieve) d'un cocktail,
-    # permet aussi de le modifier (Update), et supprimer (Destroy)
-
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    queryset = Cocktail.objects.all()
-    serializer_class = CocktailSerializer
 
 
 class ContenirList(generics.ListCreateAPIView):
