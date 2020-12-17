@@ -85,20 +85,28 @@ axiosInstance.interceptors.response.use(
 );
 
 /**
- * Retourne l'utilisateur connecté
- * undefined si pas connecté
+ * Retourner l'utilisateur connecté
+ * @returns Objet avec informations de l'utilisateur
  */
-export async function getUser() {
-  let res;
+export function get_user() {
+  const r_token = localStorage.getItem("refresh_token")
 
-  try {
-    res = await axiosInstance.get("/user/current");
-  } catch {
-    //Erreur
-    return undefined;
-  }
+  // Le token n'existe pas, donc pas d'utilisateur connecté
+  if (!r_token)
+    return null
 
-  return res.data;
+  // Extraction de l'ID du token
+  const payload = atob(r_token.split(".")[1])
+  const user_id = JSON.parse(payload).user_id
+  return {id: user_id};
+}
+
+/**
+ * Retourner l'identifiant et le login de l'hôte rejoint
+ * @returns Objet avec informations de l'hôte
+ */
+export function get_hote() {
+  return JSON.parse(localStorage.getItem("hote_rejoint"));
 }
 
 export default axiosInstance;
