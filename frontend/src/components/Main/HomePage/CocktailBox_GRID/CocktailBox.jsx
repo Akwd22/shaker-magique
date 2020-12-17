@@ -8,12 +8,12 @@ class CocktailBox extends React.Component {
   constructor (props) {
     super(props)
 
-    //console.log(props)
+    console.log(props)
 
     this.state = {
       cocktail_data: this.props.cocktail
     }
-    
+
     console.log(this.state.cocktail_data)
   }
 
@@ -24,7 +24,11 @@ class CocktailBox extends React.Component {
         to="/cocktail"
       >
         <div className="cocktailbox">
-          <div className="cocktailbox-img"></div>
+          <div className="cocktailbox-img">
+            
+            {/*<img src={this.state.cocktail_data.illustrationurl}></img> */}
+            
+          </div>
           <div className="cocktailbox-body">
             <h1>{this.state.cocktail_data.intitule}</h1>
             <h2>Description</h2>
