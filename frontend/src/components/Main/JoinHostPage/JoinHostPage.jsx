@@ -1,7 +1,7 @@
 import React from "react";
 import "./JoinHostPage.css";
 import "../../variables.css";
-import axiosInstance, { getUser } from "../../Axios/Axios";
+import axiosInstance, { getUser, get_hote } from "../../Axios/Axios";
 
 class JoinHostPage extends React.Component {
   constructor(props) {
@@ -29,8 +29,6 @@ class JoinHostPage extends React.Component {
             alert("hôte quitté")
           }
         }
-
-        console.dir(response);
       })
       .catch((error) => {
         if (error.response.status == 404) {

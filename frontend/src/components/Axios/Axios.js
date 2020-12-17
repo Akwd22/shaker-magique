@@ -101,4 +101,12 @@ export async function getUser() {
   return res.data;
 }
 
+/**
+ * Retourne l'identifiant de l'hôte rejoint
+ * @returns null si aucun hôte rejoint, sinon l'identifiant
+ */
+export function get_hote() {
+  return localStorage.getItem("hote_rejoint_id");
+}
+
 export default axiosInstance;
