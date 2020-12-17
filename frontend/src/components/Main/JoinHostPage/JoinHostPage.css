@@ -1,0 +1,65 @@
+.joinhostpage {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin-right: 25%;
+    margin-left: 25%;
+    justify-items: center;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.5);
+  }
+
+.joinhostpage-title {
+    color: #f5926d;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+
+.joinhostpage-input {
+  height: 60px;
+  border-radius: 12px;
+  width: 75%;
+  outline: none;
+  border: 1px solid #d2e0e5;
+  background-color: #f7f8f9;
+  margin-bottom: 40px;
+  line-height: 24px;
+  font-size: 24px;
+  padding: 10px;
+}
+
+.joinhostpage-input::placeholder {
+    font-weight: 500;
+    color: #d2e0e5;
+  }
+
+.joinhostpage-btn {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+    .joinhostpage {
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+}
+  

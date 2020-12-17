@@ -7,14 +7,14 @@ import WaveComponentHome from "./waveComponent/WaveComponentHome";
 import WaveComponentOther from "./waveComponent/WaveComponentOther";
 import TitlePage from "./TitlePage/TitlePage";
 
-function Header() {
+function Header(props) {
   const location = useLocation();
 
   const headFilter = function () {
     //console.log( + location.pathname);
 
     if (location.pathname === "/") {
-      return <FilterComponent />;
+      return <FilterComponent filterFunction={props.filterFunction} />;
     } else {
       return <TitlePage />;
     }

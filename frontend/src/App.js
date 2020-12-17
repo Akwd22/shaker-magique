@@ -11,18 +11,38 @@ import LoginPage from "./components/Main/LoginPage/LoginPage";
 import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
 import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 import { Component } from "react";
+import axiosInstance from "./components/Axios/Axios";
 
 export default class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {cocktails: ""}
+    this.searchFilter = this.searchFilter.bind(this)
+  }
+
+  searchFilter(data) {
+    this.setState({
+      cocktails: data
+    })
+
+
+
+    console.log("filtre/?search="+ data.search +"&cat="+data.cat+"&tri=forcealc&hote=3&manquants=0")
+
+
+  }
+
   render() {
     return (
       <div className="app">
         <Router>
-          <Header />
+          <Header filterFunction={this.searchFilter} />
           <Switch>
             <Route
               path="/"
               exact
-              component={() => <HomePage/>}
+              component={() => <HomePage filter={this.state.cocktails} />}
             />
             <Route path="/cocktail" component={CocktailPage} />
             <Route path="/inscription" component={RegisterPage} />

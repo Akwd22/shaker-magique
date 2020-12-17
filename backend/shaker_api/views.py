@@ -13,6 +13,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from django.shortcuts import get_object_or_404
 from django.db.models.query import *
 from django.db.models import Count, Sum
+import json
 
 
 
@@ -246,9 +247,12 @@ class JoinHostAnon(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         hote_login = request.data["hote_login"]  # Extraire le login de l'hôte de la requête
-        hote = get_object_or_404(Member.objects, user_name=hote_login)  # Récupérer l'hôte par son login
 
-        return Response(None)
+        hote = None
+        if (hote_login):
+            hote = get_object_or_404(Member.objects, user_name=hote_login)  # Récupérer l'hôte par son login
+
+        return Response({"id_hote": hote.id if hote else None})
 
 
 """ Concrete View Classes

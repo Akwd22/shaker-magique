@@ -3,7 +3,7 @@ import "./FilterComponent.css";
 import axiosInstance from "../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
-function FilterComponent() {
+function FilterComponent(props) {
   let history = useHistory();
 
   //Hook d'état symbolisant l'écriture dans la barre de recherche
@@ -22,9 +22,11 @@ function FilterComponent() {
   const goSearch = (e) => {
     console.log("mot recherché : "+ data.search);
     e.preventDefault();
-    history.push({
-      pathname: "/filtre/",
-    })
+    //history.push({
+    //  pathname: "/filtre/",
+    //})
+
+    props.filterFunction({search: data.search, cat:"A"})
   };
 
   /*Quand j'appuie sur le bouton :
