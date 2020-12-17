@@ -14,7 +14,7 @@ class CocktailBox extends React.Component {
       cocktail_data: this.props.cocktail
     }
     
-    console.log(this.state.cocktail_data)
+    //console.log(this.state.cocktail_data)
   }
 
   render() {

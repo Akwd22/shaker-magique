@@ -22,14 +22,10 @@ export default class App extends Component {
   }
 
   searchFilter(data) {
-    this.setState({
-      cocktails: data
-    })
-
-
-
-    console.log("filtre/?search="+ data.search +"&cat="+data.cat+"&tri=forcealc&hote=3&manquants=0")
-
+    axiosInstance.get('')
+    //console.log("filtre/?search="+ data.search +"&cat="+data.cat+"&tri=forcealc&hote=3&manquants=0")
+    //setState
+    console.dir(data);
 
   }
 

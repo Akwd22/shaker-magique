@@ -1,77 +1,107 @@
 import React, { useState, useEffect } from "react";
 import "./FilterComponent.css";
 import axiosInstance from "../../Axios/Axios";
-import { useHistory } from "react-router-dom";
 
 function FilterComponent(props) {
-  let history = useHistory();
-
   //Hook d'état symbolisant l'écriture dans la barre de recherche
-  const [data, setData] = useState({
+  const [dataSearchBar, setDataSearchBar] = useState({
     //De base rien n'est écrit dans la barre de recherche (état initial)
     search: "",
   });
 
-  //Hook d'état symbolisant la réponse du serveur i.e les cocktails correspondant 
-  //aux critères de recherche.
-  const [queryResult, setQueryResult] = useState({
-    cocktails: "",
-  })
+  //Hook d'état symbolisant les catégories choisies
+  const [dataCat, setDataCat] = useState({
+    //De base la checkbox n'est pas coché
+    catCheckedA: false,
+    catCheckedD: false,
+    catCheckedSA: false,
+  });
 
   //Fonction appelé lorsque l'on clique sur le bouton de recherche ou appuie sur entré
   const goSearch = (e) => {
-    console.log("mot recherché : "+ data.search);
+    console.log("mot recherché : " + dataSearchBar.search);
     e.preventDefault();
-    //history.push({
-    //  pathname: "/filtre/",
-    //})
+    props.filterFunction({ search: dataSearchBar.search, cat: dataCat /*Trie*/});
 
-    props.filterFunction({search: data.search, cat:"A"})
+    //console.dir(dataCat);
   };
 
-  /*Quand j'appuie sur le bouton :
-    • Faire une requete à l'url http://localhost:8000/api/cocktails/filtre/
-    en fonction des filtres coché ou non.
-    • Renvoyé la réponse du serveur
-    • Afficher les composants correspondant à la requete 
-  */
-
   //Fonction appelé lorsque l'on écrit dans la barre de recherche
-  const handleChange = (e) =>{
+  const handleChangeSearchBar = (e) => {
     e.preventDefault();
-    setData({ search: e.target.value})
-  }
+    setDataSearchBar({ search: e.target.value });
+  };
+
+  //Fonction appelé lorsque l'on choisit une catégorie dans la SelectBox
+  // AD = Apéritif et digestif
+  // A = apéritif
+  // D = Digestif
+  const handleChangeCheckbox = (e) => {
+    let state = dataCat;
+    if (e.target.id === "checkBox-digestifs") {
+      state.catCheckedD = e.target.checked;
+      //console.dir(e.target.checked);
+      //console.log("cb digestif");
+    }
+    if (e.target.id === "checkBox-apero") {
+      state.catCheckedA = e.target.checked;
+
+      //console.dir(e.target.checked);
+      //console.log("cb apéritif");
+    }
+    if (e.target.id === "checkBox-sans-alcool") {
+      state.catCheckedSA = e.target.checked;
+      //console.dir(e.target.checked);
+      //console.log("cb sans alcool");
+    }
+    setDataCat(state);
+  };
 
   return (
     <div className="filter-component">
       <div className="filter-component-container">
         <form className="filter-component-fom" onSubmit={(e) => goSearch(e)}>
-          <div className="container-search-box" >
+          <div className="container-search-box">
             <button className="search-box-button" type="submit">
-              <i class="fas fa-search" ></i>
+              <i class="fas fa-search"></i>
             </button>
             <input
               type="text"
-              value = {data.search}
+              value={dataSearchBar.search}
               placeholder="Un ingrédient, un titre de cocktail..."
               className="search-box-input"
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleChangeSearchBar(e)}
             />
           </div>
 
           <div className="container-checkbox">
             <div className="checkbox-col1">
               <div className="checkbox-col1-cat">
-                <input type="checkbox" id="checkBox-apero"></input>
+                <input
+                  type="checkbox"
+                  id="checkBox-apero"
+                  checked={dataCat.catChecked}
+                  onChange={handleChangeCheckbox}
+                ></input>
                 <label htmlFor="checkBox-apero">Apéritif</label>
               </div>
               <div className="checkbox-col1-cat">
-                <input type="checkbox" id="checkBox-digestifs"></input>
+                <input
+                  type="checkbox"
+                  id="checkBox-digestifs"
+                  checked={dataCat.catChecked}
+                  onChange={handleChangeCheckbox}
+                ></input>
                 <label htmlFor="checkBox-digestifs">Digestifs</label>
               </div>
               <div className="checkbox-col1-cat">
-                <input type="checkbox" id="checkBox-alcool"></input>
-                <label htmlFor="checkBox-alcool">Sans alcool</label>
+                <input
+                  type="checkbox"
+                  id="checkBox-sans-alcool"
+                  checked={dataCat.catChecked}
+                  onChange={handleChangeCheckbox}
+                ></input>
+                <label htmlFor="checkBox-sans-alcool">Sans alcool</label>
               </div>
             </div>
             <div className="checkbox-col2">
