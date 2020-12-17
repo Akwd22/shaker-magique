@@ -46,7 +46,7 @@ export default function SignIn() {
   return (
     <div className="page login-page">
       <div className="lp-left-side">
-        <form onSubmit={handleSubmit} noValidate>
+        <form onSubmit={handleSubmit}>
           <div className="lp-left-side-component">
             <div className="lp-left-side-title">
               <h1>Connexion</h1>

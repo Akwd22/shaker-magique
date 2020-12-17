@@ -11,7 +11,7 @@ function Header() {
   const location = useLocation();
 
   const headFilter = function () {
-    console.log(location.pathname);
+    //console.log( + location.pathname);
 
     if (location.pathname === "/") {
       return <FilterComponent />;

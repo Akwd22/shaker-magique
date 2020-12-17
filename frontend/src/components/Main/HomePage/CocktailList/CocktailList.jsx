@@ -2,7 +2,7 @@ import React from "react";
 import CocktailBox from "../CocktailBox_GRID/CocktailBox";
 import "./CocktailList.css";
 import "../../../variables.css";
-import axiosInstance, { getUser } from "../../../Axios/Axios";
+import axiosInstance from "../../../Axios/Axios";
 import { Component } from "react";
 
 export default class CocktailList extends Component {

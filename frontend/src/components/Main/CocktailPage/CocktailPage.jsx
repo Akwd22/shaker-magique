@@ -10,6 +10,9 @@ class CocktailPage extends React.Component {
         <div className="cocktailPage-container">
           <div className="cocktailPage-left-container">
             <p></p>
+            <div className="row-stats">
+              <i class="fas fa-star"></i>
+            </div>
           </div>
           <div className="cocktailPage-rigth-container">
             <div className="cocktailPage-rigth-container-header">
@@ -126,7 +129,16 @@ class CocktailPage extends React.Component {
                 <h2 className="cocktailPage-desc-container-title">
                   description
                 </h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate animi minima iste assumenda necessitatibus enim inventore eaque odit, sed repellendus porro laboriosam doloremque quia nihil labore accusamus minus adipisci rerum!Culpa fuga vitae, perferendis beatae odit hic! Eaque, quaerat consequatur esse odio id architecto facere possimus asperiores incidunt dolores placeat consequuntur suscipit minima vitae eligendi sapiente, ducimus culpa tenetur earum?</p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Voluptate animi minima iste assumenda necessitatibus enim
+                  inventore eaque odit, sed repellendus porro laboriosam
+                  doloremque quia nihil labore accusamus minus adipisci
+                  rerum!Culpa fuga vitae, perferendis beatae odit hic! Eaque,
+                  quaerat consequatur esse odio id architecto facere possimus
+                  asperiores incidunt dolores placeat consequuntur suscipit
+                  minima vitae eligendi sapiente, ducimus culpa tenetur earum?
+                </p>
               </div>
             </div>
           </div>

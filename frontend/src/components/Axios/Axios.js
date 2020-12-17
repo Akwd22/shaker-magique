@@ -94,6 +94,7 @@ export async function getUser() {
   try {
     res = await axiosInstance.get("/user/current");
   } catch {
+    //Erreur
     return undefined;
   }
 

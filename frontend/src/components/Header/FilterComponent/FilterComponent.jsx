@@ -6,9 +6,10 @@ function FilterComponent() {
   return (
     <div className="filter-component">
       <div className="filter-component-container">
+        <form className="filter-component-fom" > 
         <div className="container-search-box">
           <a href="/#" className="search-box-button" id="srcBox">
-            <i class="fas fa-search"></i>
+            <i class="fas fa-search" type="submit"></i>
           </a>
           <input
             type="text"
@@ -44,6 +45,7 @@ function FilterComponent() {
             </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
   );
