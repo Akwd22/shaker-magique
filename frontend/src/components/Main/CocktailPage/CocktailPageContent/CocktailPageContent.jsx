@@ -14,8 +14,7 @@ class CocktailPageContent extends React.Component {
   render_tags() {
     const children = [];
     const cat = this.props.cocktail.categorie;
-    const sans_alcool =
-      this.props.cocktail.forcealc == 0 || !this.props.cocktail.forcealc;
+    const alc = this.props.cocktail.forcealc;
 
     if (cat == "A") children.push(<CocktailTag text="Apéritif" />);
     if (cat == "D") children.push(<CocktailTag text="Digestif" />);
@@ -25,7 +24,12 @@ class CocktailPageContent extends React.Component {
         <CocktailTag text="Digestif" />
       );
     }
-    if (sans_alcool) children.push(<CocktailTag text="Sans alcool" />);
+
+    if (!alc || alc == 0) {
+      children.push(<CocktailTag text="Sans alcool" />);
+    } else {
+      children.push(<CocktailTag text={"Force " + alc} />);
+    }
 
     return children;
   }
