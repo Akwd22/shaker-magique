@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./FilterComponent.css";
-import axiosInstance from "../../Axios/Axios";
+import { get_hote } from "../../Axios/Axios";
 
 function FilterComponent(props) {
   //Hook d'état symbolisant l'écriture dans la barre de recherche
@@ -17,12 +17,20 @@ function FilterComponent(props) {
     catCheckedSA: false,
   });
 
+  const [dataTriForce, setDataTriForce] = useState({
+    trie: "",
+  });
+
   //Fonction appelé lorsque l'on clique sur le bouton de recherche ou appuie sur entré
   const goSearch = (e) => {
-    console.log("mot recherché : " + dataSearchBar.search);
+    //console.log("mot recherché : " + dataSearchBar.search);
     e.preventDefault();
-    props.filterFunction({ search: dataSearchBar.search, cat: dataCat /*Trie*/});
-
+    props.filterFunction({
+      search: dataSearchBar.search,
+      cat: dataCat,
+      hote: get_hote(),
+      trie: dataTriForce.trie,
+    });
     //console.dir(dataCat);
   };
 
@@ -32,14 +40,27 @@ function FilterComponent(props) {
     setDataSearchBar({ search: e.target.value });
   };
 
-  //Fonction appelé lorsque l'on choisit une catégorie dans la SelectBox
+  //Fonction appelé lorsque l'on change une valeur dans la selectBox
+  const handleChangeSelectBox = (e) => {
+    if(e.target.value === "Force"){
+      console.log("Option de trie par force")
+      setDataTriForce({ trie: "forcealc" });
+    }
+    else if(e.target.value === "avis"){
+      console.log("Option de trie par avis")
+    }
+  }
+
+  //Fonction appelé lorsque l'on choisit une catégorie dans la liste des checkboxs
   // AD = Apéritif et digestif
   // A = apéritif
   // D = Digestif
+  // SA = Sans alcool
   const handleChangeCheckbox = (e) => {
     let state = dataCat;
     if (e.target.id === "checkBox-digestifs") {
       state.catCheckedD = e.target.checked;
+
       //console.dir(e.target.checked);
       //console.log("cb digestif");
     }
@@ -106,14 +127,17 @@ function FilterComponent(props) {
             </div>
             <div className="checkbox-col2">
               <div className="checkbox-col2-select">
-                <select name="sort" id="select-sort">
+                <select name="sort" id="select-sort" onChange={(e) => handleChangeSelectBox(e)}>
                   <option value="" disabled selected>
                     Trier par...
                   </option>
                   <option value="avis" className="sort-options">
                     Avis
                   </option>
-                  <option value="Force" className="sort-options">
+                  <option
+                    value="Force"
+                    className="sort-options "
+                  >
                     Force
                   </option>
                 </select>

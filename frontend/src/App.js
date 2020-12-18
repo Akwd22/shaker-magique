@@ -11,24 +11,74 @@ import LoginPage from "./components/Main/LoginPage/LoginPage";
 import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
 import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 import { Component } from "react";
-import axiosInstance from "./components/Axios/Axios";
+import axiosInstance, { get_hote } from "./components/Axios/Axios";
 
 export default class App extends Component {
-
+  /**
+   * Constructeur
+   * @param {*} props
+   */
   constructor(props) {
-    super(props)
-    this.state = {cocktails: ""}
-    this.searchFilter = this.searchFilter.bind(this)
+    super(props);
+    this.state = { cocktails: "" };
+    this.searchFilter = this.searchFilter.bind(this);
   }
 
+  /**
+   *
+   * @param {*} data
+   */
   searchFilter(data) {
-    axiosInstance.get('')
-    //console.log("filtre/?search="+ data.search +"&cat="+data.cat+"&tri=forcealc&hote=3&manquants=0")
-    //setState
-    console.dir(data);
+    let hasHote = get_hote();
+    let id_hote;
+    let searchResult = data.search;
+    let hasCat = data.cat;
+    let categorie;
+    let trieForceAlcool = data.trie;
+    let iManquant = 0;
 
+    //Hote
+    if (hasHote) {
+      id_hote = hasHote.id;
+    }
+
+    //Catégorie
+    if (hasCat.catCheckedA) {
+      categorie = "A";
+    }
+    if (hasCat.catCheckedD) {
+      categorie = "D";
+    }
+    if (hasCat.catCheckedSA) {
+      categorie = "SA";
+    }
+    if (hasCat.catCheckedA && hasCat.catCheckedD) {
+      categorie = "AD";
+    }
+
+    //Trie par degré d'alcool
+
+    let url =
+      "/cocktails/filtre/?" +
+      (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "") +
+      (searchResult ? "&search=" + searchResult : "") +
+      (categorie ? "&cat=" + categorie : "") +
+      (trieForceAlcool ? "&tri=" + trieForceAlcool : "");
+
+    axiosInstance
+      .get(url)
+      .then((response) => {
+        this.setState({ cocktails: response.data });
+        console.log(response.data);
+      })
+      .catch((err) => console.log(err));
+    //console.log("filtre/?search="+ data.search +"&cat="+data.cat+"&tri=forcealc&hote=3&manquants=0")
+    console.dir(data);
   }
 
+  /**
+   * Rendu des composants
+   */
   render() {
     return (
       <div className="app">
@@ -38,7 +88,7 @@ export default class App extends Component {
             <Route
               path="/"
               exact
-              component={() => <HomePage filter={this.state.cocktails} />}
+              component={() => <HomePage cocktails={this.state.cocktails} />}
             />
             <Route path="/cocktail" component={CocktailPage} />
             <Route path="/inscription" component={RegisterPage} />
