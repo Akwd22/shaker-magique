@@ -4,17 +4,15 @@ import CocktailList from "./CocktailList/CocktailList";
 import "./HomePage.css";
 
 export default class HomePage extends Component {
-
+  // eslint-disable-next-line no-useless-constructor
   constructor(props) {
-    super(props)
-
-    console.log("données récupérés de la filtercomponent : " + props.filter)
+    super(props);
   }
 
   render() {
     return (
       <div className="homepage page">
-        <CocktailList/>
+        <CocktailList cocktails={this.props.cocktails}/>
       </div>
     );
   }

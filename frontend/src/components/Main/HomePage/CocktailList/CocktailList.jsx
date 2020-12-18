@@ -2,7 +2,7 @@ import React from "react";
 import CocktailBox from "../CocktailBox_GRID/CocktailBox";
 import "./CocktailList.css";
 import "../../../variables.css";
-import axiosInstance from "../../../Axios/Axios";
+import axiosInstance, { get_hote } from "../../../Axios/Axios";
 import { Component } from "react";
 
 export default class CocktailList extends Component {
@@ -11,25 +11,14 @@ export default class CocktailList extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    this.getCocktails();
-  }
-
-  async getCocktails() {
-    await axiosInstance
-      .get("/cocktails")
-      .then((response) => this.setState({ cocktails: response.data }))
-      .catch((error) => console.log(error));
-  }
-
   renderCocktails() {
     // Les cocktails n'ont pas encore été chargés
-    if (!this.state.cocktails) return;
+    if (!this.props.cocktails) return;
 
     // Créer toutes les CocktailBox
     let t = [];
-    for (let i = 0; i < this.state.cocktails.length; i++) {
-      t[i] = <CocktailBox cocktail={this.state.cocktails[i]} />;
+    for (let i = 0; i < this.props.cocktails.length; i++) {
+      t[i] = <CocktailBox cocktail={this.props.cocktails[i]} />;
     }
 
     return t;

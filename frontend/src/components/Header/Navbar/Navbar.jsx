@@ -48,7 +48,7 @@ function Navbar() {
   };
 
   useEffect(() => {
-    if (get_user() != user) {
+    if (get_user() !== user) {
       setUser(get_user());
     }
   });

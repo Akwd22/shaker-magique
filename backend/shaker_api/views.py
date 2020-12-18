@@ -28,9 +28,9 @@ class CocktailList(generics.ListAPIView):
 
 class CocktailCreate(generics.CreateAPIView):
     # permet d'ajouter de nouveaux cocktails (Create)
-    permission_classes = [IsAdminUser]                  
-    queryset = Cocktail.objects.all()
-    serializer_class = CocktailSerializer 
+    permission_classes = [IsAdminUser]
+    serializer_class = CocktailSerializer
+
 
 # class CocktailCreate(APIView):
 #     permission_classes = [IsAdminUser] 
