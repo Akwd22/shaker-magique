@@ -12,6 +12,16 @@ class CocktailBox extends React.Component {
     };
   }
 
+  render_ingredients(){
+    console.dir(this.state.cocktail_data)
+    let children = [];
+
+    for (const ingredient of this.state.cocktail_data.ingredients) {
+      children.push(<p>{ingredient.intitule}</p>);
+    }
+    return children;
+  }
+
   render() {
     return (
       <Link
@@ -30,7 +40,7 @@ class CocktailBox extends React.Component {
           <div className="cocktailbox-body">
             <h1>{this.state.cocktail_data.intitule}</h1>
             <h2>Description</h2>
-            <p>{this.state.cocktail_data.description}</p>
+            {this.render_ingredients()}
           </div>
           <div className="cocktailbox-overlay">
             <div className="cocktail-overlay-body">

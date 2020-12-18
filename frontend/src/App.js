@@ -39,6 +39,9 @@ export default class App extends Component {
       id_hote = hasHote.id;
     }
 
+    /**
+     * Rechargé les filtres si on ne provient pas de la barre de recherche
+     */
     if (!data) {
       data = this.state.filterdata;
     }
@@ -50,7 +53,7 @@ export default class App extends Component {
       let searchResult = data.search;
       let hasCat = data.cat;
       let categorie;
-      let trieForceAlcool = data.trie;
+      let trieForceAlcool = data.trie.trie;
 
       //Catégorie
       if (hasCat.catCheckedA) {
@@ -76,7 +79,8 @@ export default class App extends Component {
       url ="/cocktails/filtre/?" + 
       ( hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "" )
     }
-    
+    //console.dir(state.filterdata);
+
     axiosInstance
       .get(url)
       .then((response) => {
@@ -95,7 +99,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <Router>
-          <Header filterFunction={this.searchFilter} />
+          <Header filterFunction={this.searchFilter} filterData={this.state.filterdata} />
           <Switch>
             <Route
               path="/"

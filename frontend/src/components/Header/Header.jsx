@@ -14,7 +14,7 @@ function Header(props) {
     //console.log( + location.pathname);
 
     if (location.pathname === "/") {
-      return <FilterComponent filterFunction={props.filterFunction} />;
+      return <FilterComponent filterFunction={props.filterFunction} filterData={props.filterData}/>;
     } else {
       return <TitlePage />;
     }
