@@ -67,8 +67,9 @@ class CocktailSearch(generics.ListAPIView):
     - search=ananas+citron
     - tri=<nom de la colonne>
     - manquants=<int>
+    - alc=(0|1)
 
-    Il n'est pas obligé de spécifier tous les paramètres. Si "manquants" est utilisé, alors "hote" doit l'être aussi.
+    Il n'est pas obligé de spécifier tous les paramètres. Si "manquants" est utilisé, alors "hote" doit l'être aussi. L'ordre n'est pas important.
 
     Exemples :
     "?search=ananas+oeuf&cat=D&tri=forcealc&hote=3&manquants=0"
@@ -90,6 +91,7 @@ class CocktailSearch(generics.ListAPIView):
         cat       = request.query_params.get("cat")
         hote      = request.query_params.get("hote")
         tri       = request.query_params.get("tri")
+        alc       = request.query_params.get("alc")
         manquants = request.query_params.get("manquants")
 
         # Récupérer que les cocktails d'un hôte
@@ -99,6 +101,10 @@ class CocktailSearch(generics.ListAPIView):
         # Filtrer par catégorie
         if(cat):
             instances = instances.filter(categorie=cat)
+
+        # Filtrer sans alcool
+        if(alc == "0"):
+            instances = instances.filter(forcealc=0) | instances.filter(forcealc=None)
 
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
         if(search):
