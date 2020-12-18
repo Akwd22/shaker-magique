@@ -41,6 +41,7 @@ class JoinHostPage extends React.Component {
             localStorage.removeItem("hote_rejoint");
             alert("Hôte quitté.")
           }
+          window.location.replace("/");
         }
       })
       .catch((error) => {

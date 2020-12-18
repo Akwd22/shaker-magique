@@ -20,21 +20,18 @@ export default class App extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = { cocktails: "" };
+    this.state = { cocktails: "", filterdata: undefined };
     this.searchFilter = this.searchFilter.bind(this);
   }
-
   /**
    *
    * @param {*} data
    */
   searchFilter(data) {
+    let url;
+    let state = this.state;
     let hasHote = get_hote();
     let id_hote;
-    let searchResult = data.search;
-    let hasCat = data.cat;
-    let categorie;
-    let trieForceAlcool = data.trie;
     let iManquant = 0;
 
     //Hote
@@ -42,38 +39,53 @@ export default class App extends Component {
       id_hote = hasHote.id;
     }
 
-    //Catégorie
-    if (hasCat.catCheckedA) {
-      categorie = "A";
-    }
-    if (hasCat.catCheckedD) {
-      categorie = "D";
-    }
-    if (hasCat.catCheckedSA) {
-      categorie = "SA";
-    }
-    if (hasCat.catCheckedA && hasCat.catCheckedD) {
-      categorie = "AD";
+    if (!data) {
+      data = this.state.filterdata;
     }
 
-    //Trie par degré d'alcool
+    if (data) {
+      //Save les filtres dans l'état
+      // eslint-disable-next-line react/no-direct-mutation-state
+      state.filterdata = data;
+      let searchResult = data.search;
+      let hasCat = data.cat;
+      let categorie;
+      let trieForceAlcool = data.trie;
 
-    let url =
-      "/cocktails/filtre/?" +
-      (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "") +
-      (searchResult ? "&search=" + searchResult : "") +
-      (categorie ? "&cat=" + categorie : "") +
-      (trieForceAlcool ? "&tri=" + trieForceAlcool : "");
+      //Catégorie
+      if (hasCat.catCheckedA) {
+        categorie = "A";
+      }
+      if (hasCat.catCheckedD) {
+        categorie = "D";
+      }
+      if (hasCat.catCheckedSA) {
+        categorie = "SA";
+      }
+      if (hasCat.catCheckedA && hasCat.catCheckedD) {
+        categorie = "AD";
+      }
 
+      url =
+        "/cocktails/filtre/?" +
+        (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "") +
+        (searchResult ? "&search=" + searchResult : "") +
+        (categorie ? "&cat=" + categorie : "") +
+        (trieForceAlcool ? "&tri=" + trieForceAlcool : "");
+    } else {
+      url ="/cocktails/filtre/?" + 
+      ( hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "" )
+    }
+    
     axiosInstance
       .get(url)
       .then((response) => {
-        this.setState({ cocktails: response.data });
-        console.log(response.data);
+        state.cocktails = response.data;
+        this.setState(state);
+        //console.log(response.data);
       })
       .catch((err) => console.log(err));
-    //console.log("filtre/?search="+ data.search +"&cat="+data.cat+"&tri=forcealc&hote=3&manquants=0")
-    console.dir(data);
+    //console.dir(data);
   }
 
   /**

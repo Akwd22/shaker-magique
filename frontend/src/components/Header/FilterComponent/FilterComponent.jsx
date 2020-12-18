@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./FilterComponent.css";
 import { get_hote } from "../../Axios/Axios";
 
@@ -8,6 +8,7 @@ function FilterComponent(props) {
     //De base rien n'est écrit dans la barre de recherche (état initial)
     search: "",
   });
+
 
   //Hook d'état symbolisant les catégories choisies
   const [dataCat, setDataCat] = useState({
@@ -20,6 +21,10 @@ function FilterComponent(props) {
   const [dataTriForce, setDataTriForce] = useState({
     trie: "",
   });
+
+  useEffect(() => {
+    props.filterFunction(undefined);
+  }, []) 
 
   //Fonction appelé lorsque l'on clique sur le bouton de recherche ou appuie sur entré
   const goSearch = (e) => {

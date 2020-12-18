@@ -2,7 +2,7 @@ import React from "react";
 import CocktailBox from "../CocktailBox_GRID/CocktailBox";
 import "./CocktailList.css";
 import "../../../variables.css";
-import axiosInstance, { get_hote } from "../../../Axios/Axios";
+import axiosInstance from "../../../Axios/Axios";
 import { Component } from "react";
 
 export default class CocktailList extends Component {
@@ -10,6 +10,17 @@ export default class CocktailList extends Component {
     super(props);
     this.state = {};
   }
+
+  /*componentDidMount() {
+    this.getCocktails();
+  }
+
+  async getCocktails() {
+    await axiosInstance
+      .get("/cocktails")
+      .then((response) => this.setState({ cocktails: response.data }))
+      .catch((error) => console.log(error));
+  }*/
 
   renderCocktails() {
     // Les cocktails n'ont pas encore été chargés
