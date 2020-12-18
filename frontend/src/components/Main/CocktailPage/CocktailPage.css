@@ -6,124 +6,90 @@
   box-shadow: 4px 6px 8px -4px rgba(0, 0, 0, 0.77);
 }
 
-.cocktailPage-rigth-container-blockInfo {
+.cocktailPage-right-container-blockInfo {
   display: flex;
 }
 
 .cocktailPage-left-container {
   min-width: 35%;
-
-  background: url(../../../assets/imgs/placeholder.jpg) no-repeat;
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
-.cocktailPage-rigth-container {
+.cocktailPage-right-container {
   background-color: white;
 }
 
-.cocktailPage-rigth-container-ingredients {
+.cocktailPage-right-container-ingredients {
   background-color: #7e28001a;
   width: 45%;
   color: #8c9599;
 }
 
-.cocktailPage-rigth-container-desc {
-  background-color: #FFFFFF;
+.cocktailPage-right-container-desc {
+  background-color: #ffffff;
   width: 55%;
   color: #8c9599;
 }
 
 /* HEADER */
 
-.cocktailPage-rigth-container-header {
+.cocktailPage-right-container-header {
   background-color: #f6f6f6;
   width: 100%;
   min-height: 120px;
   padding: 15px 30px;
 }
 
-.cocktailPage-rigth-container-header-row1 {
+.cocktailPage-right-container-header-row1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 6px;
 }
 
-.cocktailPage-rigth-container-header-row1 > h2 {
+.cocktailPage-right-container-header-row1 > h2 {
   color: #f5926d;
   font-size: 40px;
   font-variant: small-caps;
 }
 
-.cocktailPage-rigth-container-header-row1 > p {
+.cocktailPage-right-container-header-row1 > p {
   color: #889296;
   font-size: 20px;
 }
 
-.cocktailPage-rigth-container-header-cat {
+.cocktailPage-right-container-header-cat {
   display: flex;
 }
 
-.header-cat-component {
-  background-color: #ffe2eb;
-  border-radius: 23px;
-  margin-right: 12px;
-}
-
-.header-cat-p {
-  font-size: 16px;
-  padding: 5px 20px;
-  color: #c15475;
-}
-
-.cocktailPage-rigth-container-header-row1 > p > span {
+.cocktailPage-right-container-header-row1 > p > span {
   color: #c25674;
 }
 
-/*INGREDIENTS*/
+.cocktailPage-right-container-desc {
+  padding: 20px 20px 20px 20px;
+}
+
+/* INGREDIENTS */
+
 .cocktailPage-ingredient-container-title,
 .cocktailPage-desc-container-title {
   font-size: 30px;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
-.ingredient-container-list-row {
-  display: flex;
-  font-size: 19px;
-  margin-bottom: 12px;
-}
 
-.list-row-ingredient-quantité {
-  margin-right: 5px;
-}
-
-.cocktailPage-ingredient-container{
+.cocktailPage-ingredient-container {
   padding: 20px 0px 20px 20px;
-}
-
-.cocktailPage-rigth-container-desc{
-  padding: 20px 20px 20px 20px;
-}
-
-.fa-arrow-right {
-  overflow: visible;
-  color: #c15475;
-  background-color: #ffe2eb;
-  border-radius: 8px;
-  padding: 5px;
-}
-
-.list-row-icon {
-  margin-right: 23px;
 }
 
 /*DESCRIPTION*/
 
-.cocktailPage-rigth-container-desc > p {
+.cocktailPage-right-container-desc > p {
   text-align: justify;
 }
-
 
 @media screen and (max-width: 1240px) {
   .cocktailPage-container {
@@ -134,13 +100,11 @@
     height: 500px;
   }
 
-  .cocktailPage-rigth-container {
-  }
-  .cocktailPage-rigth-container-header {
+  .cocktailPage-right-container-header {
     min-height: 85px;
   }
 
-  .cocktailPage-rigth-container-blockInfo {
+  .cocktailPage-right-container-blockInfo {
     flex-direction: column;
   }
 
@@ -148,38 +112,38 @@
     order: 2;
   }
 
-  .cocktailPage-rigth-container-desc {
+  .cocktailPage-right-container-desc {
     width: 100%;
   }
-  .cocktailPage-rigth-container-ingredients {
+  .cocktailPage-right-container-ingredients {
     width: 100%;
   }
 
   /* HEADER */
-  .cocktailPage-rigth-container-header-row1 {
+  .cocktailPage-right-container-header-row1 {
     margin-bottom: 8px;
   }
-  .cocktailPage-rigth-container-header-row1 > h2 {
+  .cocktailPage-right-container-header-row1 > h2 {
     font-size: 25px;
   }
 
-  .cocktailPage-rigth-container-header {
+  .cocktailPage-right-container-header {
     padding: 5px 10px;
   }
 
-  .cocktailPage-rigth-container-header-row1 > p {
+  .cocktailPage-right-container-header-row1 > p {
     font-size: 15px;
   }
 
-  .header-cat-p {
-    padding: 3px 15px;
-    font-size: 14px;
+  /*DESCRIPTION*/
+
+  .cocktailPage-right-container-desc > p {
+    padding: 0px 20px 20px 20px;
   }
 
-  /*INGREDIENTS*/
-
+  /* INGREDIENTS */
   .cocktailPage-ingredient-container,
-  .cocktailPage-rigth-container-desc {
+  .cocktailPage-right-container-desc {
     padding: 5px;
   }
 
@@ -190,20 +154,5 @@
     justify-content: center;
     margin-bottom: 11px;
     margin-top: 11px;
-  }
-
-  .ingredient-container-list-row {
-    font-size: 15px;
-    padding-left: 20px;
-  }
-
-  .list-row-icon {
-    margin-right: 12px;
-  }
-
-  /*DESCRIPTION*/
-
-  .cocktailPage-rigth-container-desc > p {
-    padding: 0px 20px 20px 20px;
   }
 }

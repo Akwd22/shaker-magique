@@ -9,6 +9,7 @@ urlpatterns = [
     path('cocktails/new', CocktailCreate.as_view(), name='cocktail-new'),
     path('cocktails/filtre/', CocktailSearch.as_view(), name='cocktail-search'),
     path('contenir/', ContenirList.as_view(), name='contenir'),
+    path('contenir/<int:pk>/', ContenirDetail.as_view(), name='contenir-detail'),
     path('favoris/', FavoriList.as_view(), name='favoris'),
     path('ingredients/', IngredientList.as_view(), name='ingredients'),
     path('notes/', NoterList.as_view(), name='notes'),

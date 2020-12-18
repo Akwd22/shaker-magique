@@ -4,20 +4,35 @@ from shaker.models import *
 import pprint
 
 
+class CocktailContenirSerializer(serializers.HyperlinkedModelSerializer):
+    """Sérialisateur affichant l'association Contenir pour un cocktail
+
+    https://stackoverflow.com/questions/17256724/include-intermediary-through-model-in-responses-in-django-rest-framework
+    """
+    idingredient = serializers.ReadOnlyField(source="idingredient.id")
+    intitule = serializers.ReadOnlyField(source="idingredient.intitule")
+    degrealcool = serializers.ReadOnlyField(source="idingredient.degrealcool")
+
+    class Meta:
+        fields = ('idingredient', 'intitule', 'degrealcool', 'quantite', 'unite')
+        model = Contenir
+
+
 class CocktailSerializer(serializers.ModelSerializer):
+    ingredients = CocktailContenirSerializer(source="contenir_set", many=True)
 
     class Meta:
         fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description',
-                    'forcealc', 'ingredients','membres')
+                  'forcealc', 'ingredients')
         model = Cocktail
+        depth = 1
 
 
-class ContenirSerializer(serializers.ModelSerializer):
+class ContenirSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
         model = Contenir
-        depth = 1
-        
+
 
 class FavoriSerializer(serializers.ModelSerializer):
     class Meta:
@@ -55,10 +70,11 @@ class ProposerSerializer(serializers.ModelSerializer):
         model = Propose
         depth = 1
 
+
 class JoinHostSerializer(serializers.ModelSerializer):
     # Champ qui ne fait pas parti du modèle
     # Il sert uniquement au formulaire
-    hote_login = serializers.CharField(write_only=True, allow_blank=True) 
+    hote_login = serializers.CharField(write_only=True, allow_blank=True)
 
     class Meta:
         fields = ('id_hote', 'hote_login')

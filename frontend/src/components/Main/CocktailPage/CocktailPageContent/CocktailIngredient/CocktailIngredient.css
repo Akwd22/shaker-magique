@@ -1,0 +1,32 @@
+.cocktail-ingredient {
+  display: flex;
+  font-size: 19px;
+  margin-bottom: 12px;
+}
+
+.cocktail-ingredient-quantite {
+  margin-right: 5px;
+}
+
+.cocktail-ingredient-icon i {
+  overflow: visible;
+  color: #c15475;
+  background-color: #ffe2eb;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.cocktail-ingredient-icon {
+  margin-right: 23px;
+}
+
+@media screen and (max-width: 1240px) {
+  .cocktail-ingredient {
+    font-size: 15px;
+    padding-left: 20px;
+  }
+
+  .cocktail-ingredient-icon {
+    margin-right: 12px;
+  }
+}

@@ -135,6 +135,13 @@ class ContenirList(generics.ListCreateAPIView):
     queryset = Contenir.objects.all()
     serializer_class = ContenirSerializer
 
+class ContenirDetail(generics.RetrieveAPIView):
+    """Lister les ingrédients d'un cocktail spécifique
+    """
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Contenir.objects.all()
+    serializer_class = ContenirSerializer
+
 
 class FavoriList(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]

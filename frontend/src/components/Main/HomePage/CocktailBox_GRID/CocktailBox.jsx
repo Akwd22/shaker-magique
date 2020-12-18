@@ -8,20 +8,16 @@ class CocktailBox extends React.Component {
   constructor (props) {
     super(props)
 
-    console.log(props)
-
     this.state = {
       cocktail_data: this.props.cocktail
     }
-
-    //console.log(this.state.cocktail_data)
   }
 
   render() {
     return (
       <Link
         style={{ color: "inherit", textDecoration: "inherit" }}
-        to="/cocktail"
+        to={"/cocktail/" + this.state.cocktail_data.id}
       >
         <div className="cocktailbox">
           <div className="cocktailbox-img">

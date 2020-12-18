@@ -1,0 +1,18 @@
+.cocktail-tag {
+  background-color: #ffe2eb;
+  border-radius: 23px;
+  margin-right: 12px;
+}
+
+.cocktail-tag-text {
+  font-size: 16px;
+  padding: 5px 20px;
+  color: #c15475;
+}
+
+@media screen and (max-width: 1240px) {
+  .cocktail-tag-text {
+    padding: 3px 15px;
+    font-size: 14px;
+  }
+}

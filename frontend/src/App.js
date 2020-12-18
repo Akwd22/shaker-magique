@@ -40,7 +40,7 @@ export default class App extends Component {
               exact
               component={() => <HomePage filter={this.state.cocktails} />}
             />
-            <Route path="/cocktail" component={CocktailPage} />
+            <Route path="/cocktail/:id" component={CocktailPage} />
             <Route path="/inscription" component={RegisterPage} />
             <Route path="/connexion" component={LoginPage} />
             <Route path="/deconnexion" component={LogoutPage} />

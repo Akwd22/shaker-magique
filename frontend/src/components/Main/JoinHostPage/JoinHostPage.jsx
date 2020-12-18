@@ -34,9 +34,12 @@ class JoinHostPage extends React.Component {
                 id: response.data["id_hote"],
               })
             );
+
+            alert("Hôte rejoint.")
             // Si le login est vide, alors on quitte l'hôte
           } else {
             localStorage.removeItem("hote_rejoint");
+            alert("Hôte quitté.")
           }
         }
       })
