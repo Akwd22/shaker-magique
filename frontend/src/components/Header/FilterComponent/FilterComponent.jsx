@@ -9,7 +9,6 @@ function FilterComponent(props) {
     search: "",
   });
 
-
   //Hook d'état symbolisant les catégories choisies
   const [dataCat, setDataCat] = useState({
     //De base la checkbox n'est pas coché
@@ -20,11 +19,26 @@ function FilterComponent(props) {
 
   const [dataTriForce, setDataTriForce] = useState({
     trie: "",
+    value: "",
   });
 
   useEffect(() => {
+    setDataSearchBar({search: props.filterData ? props.filterData.search : ""});
+    setDataCat({
+      catCheckedA: props.filterData ? props.filterData.cat.catCheckedA : false,
+      catCheckedD: props.filterData ? props.filterData.cat.catCheckedD : false,
+      catCheckedSA: props.filterData ? props.filterData.cat.catCheckedSA : false,
+    });
+
+    setDataTriForce({
+      trie: props.filterData ? props.filterData.trie.trie : "",
+      value: props.filterData ? props.filterData.trie.value : "",
+    })
+
     props.filterFunction(undefined);
-  }, []) 
+    console.log("salut !!!!")
+    console.dir(props);
+  }, []);
 
   //Fonction appelé lorsque l'on clique sur le bouton de recherche ou appuie sur entré
   const goSearch = (e) => {
@@ -34,7 +48,7 @@ function FilterComponent(props) {
       search: dataSearchBar.search,
       cat: dataCat,
       hote: get_hote(),
-      trie: dataTriForce.trie,
+      trie: dataTriForce,
     });
     //console.dir(dataCat);
   };
@@ -47,14 +61,20 @@ function FilterComponent(props) {
 
   //Fonction appelé lorsque l'on change une valeur dans la selectBox
   const handleChangeSelectBox = (e) => {
-    if(e.target.value === "Force"){
-      console.log("Option de trie par force")
-      setDataTriForce({ trie: "forcealc" });
+    let state = dataTriForce;
+    if (e.target.value === "Force") {
+      state.trie = "forcealc";
+      state.value = "Force";
+    } else if (e.target.value === "avis") {
+      /*state.trie = "avis";
+      state.value = "avis";*/
+    }else if (e.target.value === "default"){
+      state.trie = "";
+      state.value = "";
     }
-    else if(e.target.value === "avis"){
-      console.log("Option de trie par avis")
-    }
-  }
+
+    setDataTriForce({...state});
+  };
 
   //Fonction appelé lorsque l'on choisit une catégorie dans la liste des checkboxs
   // AD = Apéritif et digestif
@@ -65,22 +85,14 @@ function FilterComponent(props) {
     let state = dataCat;
     if (e.target.id === "checkBox-digestifs") {
       state.catCheckedD = e.target.checked;
-
-      //console.dir(e.target.checked);
-      //console.log("cb digestif");
     }
     if (e.target.id === "checkBox-apero") {
       state.catCheckedA = e.target.checked;
-
-      //console.dir(e.target.checked);
-      //console.log("cb apéritif");
     }
     if (e.target.id === "checkBox-sans-alcool") {
       state.catCheckedSA = e.target.checked;
-      //console.dir(e.target.checked);
-      //console.log("cb sans alcool");
-    }
-    setDataCat(state);
+    } 
+    setDataCat({...state});
   };
 
   return (
@@ -106,7 +118,7 @@ function FilterComponent(props) {
                 <input
                   type="checkbox"
                   id="checkBox-apero"
-                  checked={dataCat.catChecked}
+                  checked={dataCat.catCheckedA}
                   onChange={handleChangeCheckbox}
                 ></input>
                 <label htmlFor="checkBox-apero">Apéritif</label>
@@ -115,7 +127,7 @@ function FilterComponent(props) {
                 <input
                   type="checkbox"
                   id="checkBox-digestifs"
-                  checked={dataCat.catChecked}
+                  checked={dataCat.catCheckedD}
                   onChange={handleChangeCheckbox}
                 ></input>
                 <label htmlFor="checkBox-digestifs">Digestifs</label>
@@ -124,7 +136,7 @@ function FilterComponent(props) {
                 <input
                   type="checkbox"
                   id="checkBox-sans-alcool"
-                  checked={dataCat.catChecked}
+                  checked={dataCat.catCheckedSA}
                   onChange={handleChangeCheckbox}
                 ></input>
                 <label htmlFor="checkBox-sans-alcool">Sans alcool</label>
@@ -132,17 +144,19 @@ function FilterComponent(props) {
             </div>
             <div className="checkbox-col2">
               <div className="checkbox-col2-select">
-                <select name="sort" id="select-sort" onChange={(e) => handleChangeSelectBox(e)}>
-                  <option value="" disabled selected>
+                <select
+                  name="sort"
+                  id="select-sort"
+                  value={dataTriForce.value}
+                  onChange={(e) => handleChangeSelectBox(e)}
+                >
+                  <option value="default">
                     Trier par...
                   </option>
                   <option value="avis" className="sort-options">
                     Avis
                   </option>
-                  <option
-                    value="Force"
-                    className="sort-options "
-                  >
+                  <option value="Force" className="sort-options ">
                     Force
                   </option>
                 </select>
@@ -150,7 +164,6 @@ function FilterComponent(props) {
               {/*<button type="submit">Recherché</button>*/}
             </div>
           </div>
-  
         </form>
       </div>
     </div>

@@ -107,8 +107,12 @@
   color: #fff;
 }
 
-.sort-options {
+.sort-options  {
   color: black;
+}
+
+#select-sort::after{
+  color: black
 }
 
 /* RESPONSIVE */
