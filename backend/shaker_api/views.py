@@ -91,6 +91,7 @@ class CocktailSearch(generics.ListAPIView):
         hote      = request.query_params.get("hote")
         tri       = request.query_params.get("tri")
         manquants = request.query_params.get("manquants")
+        noalcool = request.query_params.get("noalcool")
 
         # Récupérer que les cocktails d'un hôte
         if(hote):
@@ -99,6 +100,10 @@ class CocktailSearch(generics.ListAPIView):
         # Filtrer par catégorie
         if(cat):
             instances = instances.filter(categorie=cat)
+
+        # Filtrer les cockails sant alcool
+        if(noalcool):
+            instances = instances.filter(forcealc=0)
 
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
         if(search):
