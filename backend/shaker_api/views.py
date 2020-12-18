@@ -28,9 +28,9 @@ class CocktailList(generics.ListAPIView):
 
 class CocktailCreate(generics.CreateAPIView):
     # permet d'ajouter de nouveaux cocktails (Create)
-    permission_classes = [IsAdminUser]                  
-    queryset = Cocktail.objects.all()
-    serializer_class = CocktailSerializer 
+    permission_classes = [IsAdminUser]
+    serializer_class = CocktailSerializer
+
 
 # class CocktailCreate(APIView):
 #     permission_classes = [IsAdminUser] 
@@ -100,10 +100,6 @@ class CocktailSearch(generics.ListAPIView):
         # Filtrer par catégorie
         if(cat):
             instances = instances.filter(categorie=cat)
-
-        # Filtrer les cockails sant alcool
-        if(noalcool):
-            instances = instances.filter(forcealc=0)
 
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
         if(search):
