@@ -142,8 +142,10 @@ function FilterComponent(props) {
                   </option>
                 </select>
               </div>
+              {/*<button type="submit">Recherché</button>*/}
             </div>
           </div>
+  
         </form>
       </div>
     </div>
