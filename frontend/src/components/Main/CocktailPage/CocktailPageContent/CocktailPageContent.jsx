@@ -6,21 +6,28 @@ import { Markup } from "interweave";
 class CocktailPageContent extends React.Component {
   constructor(props) {
     super(props);
-
-    console.dir(props);
   }
 
   /**
-   * Afficher les étiquettes qui correspondent à la catégorie du cocktail
+   * Afficher les étiquettes du cocktail
    */
   render_tags() {
+    const children = [];
     const cat = this.props.cocktail.categorie;
+    const sans_alcool =
+      this.props.cocktail.forcealc == 0 || !this.props.cocktail.forcealc;
 
-    if (cat == "A") return <CocktailTag text="Apéritif" />;
-    if (cat == "D") return <CocktailTag text="Digestif" />;
+    if (cat == "A") children.push(<CocktailTag text="Apéritif" />);
+    if (cat == "D") children.push(<CocktailTag text="Digestif" />);
     if (cat == "AD") {
-      return [<CocktailTag text="Apéritif" />, <CocktailTag text="Digestif" />];
+      children.push(
+        <CocktailTag text="Apéritif" />,
+        <CocktailTag text="Digestif" />
+      );
     }
+    if (sans_alcool) children.push(<CocktailTag text="Sans alcool" />);
+
+    return children;
   }
 
   /**
@@ -83,7 +90,9 @@ class CocktailPageContent extends React.Component {
             </div>
             <div className="cocktailPage-right-container-desc">
               <h2 className="cocktailPage-desc-container-title">description</h2>
-              <Markup content={this.format_description()} />
+              <div className="cocktailPage-desc-container-text">
+                <Markup content={this.format_description()} />
+              </div>
             </div>
           </div>
         </div>

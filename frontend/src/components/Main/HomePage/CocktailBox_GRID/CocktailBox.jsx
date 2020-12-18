@@ -4,13 +4,12 @@ import "../../../variables.css";
 import { Link } from "react-router-dom";
 
 class CocktailBox extends React.Component {
-
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
-      cocktail_data: this.props.cocktail
-    }
+      cocktail_data: this.props.cocktail,
+    };
   }
 
   render() {
@@ -20,17 +19,18 @@ class CocktailBox extends React.Component {
         to={"/cocktail/" + this.state.cocktail_data.id}
       >
         <div className="cocktailbox">
-          <div className="cocktailbox-img">
-            
+          <div
+            className="cocktailbox-img"
+            style={{
+              backgroundImage: `url(${this.state.cocktail_data.illustrationurl})`,
+            }}
+          >
             {/*<img src={this.state.cocktail_data.illustrationurl}></img> */}
-            
           </div>
           <div className="cocktailbox-body">
             <h1>{this.state.cocktail_data.intitule}</h1>
             <h2>Description</h2>
-            <p>
-              {this.state.cocktail_data.description}
-            </p>
+            <p>{this.state.cocktail_data.description}</p>
           </div>
           <div className="cocktailbox-overlay">
             <div className="cocktail-overlay-body">

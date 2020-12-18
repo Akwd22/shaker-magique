@@ -1,13 +1,15 @@
 .cocktailPage-container {
   background-color: lightgreen;
   display: flex;
-  width: 100%;
+  width: 80%;
+  min-height: 730px;
   margin: 20px;
   box-shadow: 4px 6px 8px -4px rgba(0, 0, 0, 0.77);
 }
 
 .cocktailPage-right-container-blockInfo {
   display: flex;
+  height: 100%;
 }
 
 .cocktailPage-left-container {
@@ -19,6 +21,8 @@
 
 .cocktailPage-right-container {
   background-color: white;
+  width: 100%;
+  overflow-y: hidden;
 }
 
 .cocktailPage-right-container-ingredients {
@@ -87,7 +91,7 @@
 
 /*DESCRIPTION*/
 
-.cocktailPage-right-container-desc > p {
+.cocktailPage-desc-container-text {
   text-align: justify;
 }
 
@@ -137,7 +141,7 @@
 
   /*DESCRIPTION*/
 
-  .cocktailPage-right-container-desc > p {
+  .cocktailPage-desc-container-text {
     padding: 0px 20px 20px 20px;
   }
 

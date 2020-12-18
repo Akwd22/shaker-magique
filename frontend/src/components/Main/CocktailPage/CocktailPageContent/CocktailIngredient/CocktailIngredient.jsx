@@ -14,7 +14,7 @@ class CocktailIngredient extends React.Component {
     const unite = this.props.ingredient.unite;
 
     return (
-      " (" + (quantite > 0 ? quantite + " " : "") + (unite ? unite : "") + ")"
+      " (" + (quantite ? quantite + " " : "") + (unite ? unite : "") + ")"
     );
   }
 
