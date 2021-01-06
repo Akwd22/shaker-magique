@@ -12,6 +12,7 @@ import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
 import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 import { Component } from "react";
 import axiosInstance, { get_hote } from "./components/Axios/Axios";
+import ProfilPage from "./components/Main/ProfilPage/ProfilPage";
 
 export default class App extends Component {
   /**
@@ -111,6 +112,7 @@ export default class App extends Component {
             <Route path="/connexion" component={LoginPage} />
             <Route path="/deconnexion" component={LogoutPage} />
             <Route path="/rejoindre-hote" component={JoinHostPage} />
+            <Route path="/profil" component={ProfilPage} />
             <Route path="/" component={() => <div>ERREUR 404</div>} />
           </Switch>
           <Footer />

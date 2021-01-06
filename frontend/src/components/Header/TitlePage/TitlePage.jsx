@@ -20,6 +20,8 @@ function TitlePage() {
       case "/rejoindre-hote":
         res = <h1>rejoindre un hôte</h1>;
         break;
+      case "/profil":
+        res = <h1>Profil</h1>
       default:
         break;
     }
