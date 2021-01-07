@@ -7,6 +7,7 @@ urlpatterns = [
     path('cocktails/<int:pk>/', CocktailDetail.as_view(), name='cocktail-detail'),
     path('cocktails/', CocktailList.as_view(), name='cocktail-list'),
     path('cocktails/new', CocktailCreate.as_view(), name='cocktail-new'),
+    path('cocktails/image/<int:pk>/', CocktailImage.as_view(), name='cocktail-image'),
     path('cocktails/filtre/', CocktailSearch.as_view(), name='cocktail-search'),
     path('contenir/', ContenirList.as_view(), name='contenir'),
     path('contenir/<int:pk>/', ContenirDetail.as_view(), name='contenir-detail'),

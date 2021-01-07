@@ -26,25 +26,23 @@ class CocktailList(generics.ListAPIView):
     serializer_class = CocktailSerializer                     # Classe de sérialisation associée
     queryset = Cocktail.objects.all()
 
-# class CocktailCreate(generics.CreateAPIView):
-#     # permet d'ajouter de nouveaux cocktails (Create)
-#     permission_classes = [IsAdminUser]
-#     serializer_class = CocktailSerializer
-
-
 class CocktailCreate(generics.CreateAPIView):
-    permission_classes = [IsAdminUser] 
-    serializer_class=CustomCocktailSerializer
-
-    def post(self, request, format='json'):
-        print(request.data)
-        serializer = CustomCocktailSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)    
+    # permet d'ajouter de nouveaux cocktails (Create)
+    permission_classes = [IsAdminUser]
+    serializer_class = CustomCocktailSerializer
 
 
+# class CocktailCreate(generics.CreateAPIView):
+#     permission_classes = [IsAdminUser] 
+#     serializer_class=CustomCocktailSerializer
+
+#     def post(self, request, format='json'):
+#         print(request.data)
+#         serializer = CustomCocktailSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+#         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)    
 
 
 class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -56,6 +54,12 @@ class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer
+
+class CocktailImage(generics.RetrieveUpdateAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Cocktail.objects.all()
+    serializer_class = CocktailImageSerializer
+
 
 class CocktailSearch(generics.ListAPIView):
     """Liste des cocktails par filtrage

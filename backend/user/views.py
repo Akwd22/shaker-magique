@@ -36,9 +36,16 @@ class BlacklistTokenUpdateView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-class CurentUserView(APIView):
+class CurentUserView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
-    
-    def get(self, request):
-        serializer_class  = CurrentUserSerializer(request.user)
-        return Response(serializer_class.data)
+    serializer_class  = CurrentUserSerializer
+
+    def get_object(self):
+        obj = Member.objects.get(user_name=self.request.user.user_name)
+        return obj
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.groups.remove(Group.objects.get(name='Membre'))
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -17,7 +17,6 @@ class CocktailContenirSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('idingredient', 'intitule', 'degrealcool', 'quantite', 'unite')
         model = Contenir
 
-
 class CocktailSerializer(serializers.ModelSerializer):
     ingredients = CocktailContenirSerializer(source="contenir_set", many=True)
 
@@ -31,6 +30,13 @@ class CustomCocktailSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description',
                 'forcealc')
+        model = Cocktail
+        depth = 1
+        read_only_fields=("illustrationurl",)
+
+class CocktailImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('illustrationurl',)
         model = Cocktail
         depth = 1
 
