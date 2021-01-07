@@ -23,7 +23,14 @@ class CocktailSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description',
-                  'forcealc', 'ingredients')
+                'forcealc', 'ingredients')
+        model = Cocktail
+        depth = 1
+
+class CustomCocktailSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description',
+                'forcealc')
         model = Cocktail
         depth = 1
 

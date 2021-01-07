@@ -28,12 +28,20 @@ function Navbar() {
   const log_buttons = function () {
     if (user) {
       return (
-        <NavLink to="/deconnexion">
-          <li>
-            <i className="fas fa-user"></i>
-            <a href="#/">Déconnexion</a>
-          </li>
-        </NavLink>
+        <div class="profil-logOut-container">
+          <NavLink to="/profil">
+            <li>
+              <i className="fas fa-user"></i>
+              <a href="#/">Profil</a>
+            </li>
+          </NavLink>
+          <NavLink to="/deconnexion">
+            <li>
+              <i className="fas fa-user"></i>
+              <a href="#/">Déconnexion</a>
+            </li>
+          </NavLink>
+        </div>
       );
     } else {
       return (

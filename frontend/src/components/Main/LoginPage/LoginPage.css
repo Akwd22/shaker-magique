@@ -133,5 +133,9 @@
   }
   .lp-left-side {
     width: 90%;
-  }
+}
+
+.lp-left-side-noaccount{
+  flex-direction: column;
+}
 }
