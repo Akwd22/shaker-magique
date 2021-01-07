@@ -26,24 +26,23 @@ class CocktailList(generics.ListAPIView):
     serializer_class = CocktailSerializer                     # Classe de sérialisation associée
     queryset = Cocktail.objects.all()
 
+# class CocktailCreate(generics.CreateAPIView):
+#     # permet d'ajouter de nouveaux cocktails (Create)
+#     permission_classes = [IsAdminUser]
+#     serializer_class = CocktailSerializer
+
+
 class CocktailCreate(generics.CreateAPIView):
-    # permet d'ajouter de nouveaux cocktails (Create)
-    permission_classes = [IsAdminUser]
-    serializer_class = CocktailSerializer
+    permission_classes = [IsAdminUser] 
+    serializer_class=CustomCocktailSerializer
 
-
-# class CocktailCreate(APIView):
-#     permission_classes = [IsAdminUser] 
-#     parser_classes = [MultiPartParser, FormParser]
-
-#     def post(self, request, format=None):
-#         print(request.data)
-#         serializer = CocktailSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         else:
-#             return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)    
+    def post(self, request, format='json'):
+        print(request.data)
+        serializer = CustomCocktailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)    
 
 
 
@@ -183,10 +182,27 @@ class PreferenceListByMember(generics.ListCreateAPIView):
         return Preference.objects.filter(idmembre=self.kwargs['idmembre'])
 
 
-class StockerList(generics.ListCreateAPIView):
-    permission_classes = [StockerPermission]
-    queryset = Stocker.objects.all()
+class StockList(generics.ListCreateAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Preference.objects.all()
+    serializer_class = PreferenceSerializer
+
+class StockCurrent(generics.ListAPIView):
+    permission_classes=[IsAuthenticated]
     serializer_class = StockerSerializer
+    queryset = Stocker.objects.all()
+    def get_queryset(self):
+        return Stocker.objects.filter(idmembre=self.request.user.id)
+
+class StockUpdate(generics.RetrieveUpdateAPIView):
+    permission_classes=[IsAuthenticated]
+    serializer_class = StockerSerializer
+    lookup_field = 'idingredient'
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = Stocker.objects.get_or_create(idmembre=self.request.user, idingredient=Ingredient.objects.get(pk=self.kwargs['idingredient']))
+        queryset = Stocker.objects.filter(idmembre=self.request.user, idingredient=Ingredient.objects.get(pk=self.kwargs['idingredient']))
+        return queryset
 
 
 class ProposerList(generics.ListCreateAPIView):
@@ -197,8 +213,7 @@ class ProposerList(generics.ListCreateAPIView):
     """
     permission_classes = [ProposerPermission]
     queryset = Propose.objects.all()
-    serializer_class = ProposerSerializer
-
+    serializer_class = StockerSerializer
 
 class ProposerListByMember(generics.ListCreateAPIView):
     permission_classes = [ProposerPermission]
