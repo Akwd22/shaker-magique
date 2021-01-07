@@ -9,11 +9,10 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
-
 def upload_to(instance, filename):
-    return 'cocktail/{filename}'.format(filename=filename)
+    return f'cocktail/{instance}.jpg'
 
-class Cocktail(models.Model): 
+class Cocktail(models.Model):
     """Classe de liaison avec la table Cocktail
     """
 
@@ -28,7 +27,7 @@ class Cocktail(models.Model):
     id              = models.AutoField(db_column='ID', primary_key=True)
     intitule        = models.CharField(db_column='INTITULE', max_length=255)
     illustrationurl = models.ImageField(
-                        _("Image"), upload_to=upload_to, default='cocktail/default.jpg')
+                        _("Image"), upload_to=upload_to, default='cocktail/default.jpg' )
     categorie       = models.CharField(db_column='CATEGORIE', max_length=255, choices=cat_choices)
     description     = models.TextField(db_column='DESCRIPTION', blank=True, null=True)
     forcealc        = models.IntegerField(db_column='FORCEALC', blank=True, null=True)
