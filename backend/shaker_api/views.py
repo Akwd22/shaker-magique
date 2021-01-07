@@ -56,7 +56,7 @@ class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CocktailSerializer
 
 class CocktailImage(generics.RetrieveUpdateAPIView):
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    permission_classes = [AllowAny]
     queryset = Cocktail.objects.all()
     serializer_class = CocktailImageSerializer
 

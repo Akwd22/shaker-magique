@@ -8,9 +8,18 @@
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+import os
+import pprint
 
 def upload_to(instance, filename):
-    return f'cocktail/{instance}.jpg'
+    rel_path = os.path.join('cocktail', f'{instance.id}.jpg')
+    path     = os.path.join(settings.MEDIA_ROOT, rel_path)
+
+    # Écraser l'image actuelle s'il y en a une
+    if os.path.exists(path):
+        os.remove(path)
+
+    return rel_path
 
 class Cocktail(models.Model):
     """Classe de liaison avec la table Cocktail
