@@ -26,7 +26,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
     
-class CurrentUserSerializer(serializers.ModelSerializer):
+class CurrentUserSerializer(serializers.ModelSerializer): 
     def update(self, instance, validated_data):
         for attr, value in validated_data.items():
             if attr == 'password':
@@ -38,5 +38,4 @@ class CurrentUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Member
-        fields = ('user_name', "first_name", "last_name", "email","password",)
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ('user_name', "email","password",)  

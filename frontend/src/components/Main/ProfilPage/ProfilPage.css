@@ -136,6 +136,7 @@ background-image: linear-gradient(
     color: #FF8B61;
     font-size: 40px;
     overflow: visible;
+    cursor: pointer;
 }
 
 .profilPage-left-container-infos-row span{
@@ -153,6 +154,35 @@ background-image: linear-gradient(
 .right-container-infos-row{
   display: flex;
   flex-direction: column;
+}
+
+
+/* LOGOUT Container */
+
+.profilPage-Logout-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profilPage-Logout-container > button {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
+  margin-top: 20px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {

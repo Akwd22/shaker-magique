@@ -36,8 +36,6 @@ function FilterComponent(props) {
     })
 
     props.filterFunction(undefined);
-    console.log("salut !!!!")
-    console.dir(props);
   }, []);
 
   //Fonction appelé lorsque l'on clique sur le bouton de recherche ou appuie sur entré
