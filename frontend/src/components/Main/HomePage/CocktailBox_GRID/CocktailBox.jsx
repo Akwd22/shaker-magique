@@ -13,7 +13,7 @@ class CocktailBox extends React.Component {
   }
 
   render_ingredients(){
-    console.dir(this.state.cocktail_data)
+    //console.dir(this.state.cocktail_data)
     let children = [];
 
     for (const ingredient of this.state.cocktail_data.ingredients) {

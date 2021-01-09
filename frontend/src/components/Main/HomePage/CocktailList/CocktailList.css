@@ -17,6 +17,10 @@
     font-weight: bold;
 }
 
+.title-page > h2 {
+    color: #C05474;
+}
+
 @media screen and (max-width: 768px){
     .title-page{
         margin-left: 3%;

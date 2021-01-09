@@ -85,11 +85,11 @@ export default function ProfilPageContent(props) {
         <div className="profilPage-right-container">
           <div className="right-container-infos">
             <div className="right-container-infos-row">
-              <img className="img-righ-container" src={cocktail} alt="" />
+              <img className="img-righ-container img-rigt-1" src={cocktail} alt="" />
               <button>Consulter sa liste de cocktails</button>
             </div>
             <div className="right-container-infos-row">
-              <img className="img-righ-container" src={orangejuice} alt="" />
+              <img className="img-righ-container img-rigt-2" src={orangejuice} alt="" />
               <button>
                 Consulter sa liste d'ingrédients
               </button>

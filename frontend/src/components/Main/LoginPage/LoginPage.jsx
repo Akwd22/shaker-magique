@@ -22,8 +22,6 @@ export default function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-
     axiosInstance
       .post(`token/`, {
         user_name: formData.username,
