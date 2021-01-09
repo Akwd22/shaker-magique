@@ -110,10 +110,27 @@ class CocktailSearch(generics.ListAPIView):
             instances = instances.filter(forcealc=0) | instances.filter(forcealc=None)
 
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
+            #rhum vodka, ananas
         if(search):
-            search = search.split(" ")
-            for i in search:
-                instances = (instances.filter(ingredients__intitule__icontains=i) | instances.filter(intitule__icontains=i)).distinct()
+            import pprinter
+            p = pprint.PrettyPrinter()
+            ouet = search.split(",")
+            ou = ouet[0].split(" ")
+            et=[]
+            if (len(ouet)>1):
+                et = ouet[1].split(" ")
+
+            temp = {}
+            n=0
+            for i in ou:
+                temp[n] = (instances.filter(ingredients__intitule__icontains=i) | instances.filter(intitule__icontains=i)).distinct()
+                for j in et:
+                    p.pprint(temp[n])
+                    temp[n] = temp[n].filter(ingredients__intitule__icontains=j) | temp[n].filter(intitule__icontains=j)
+                n+=1
+            for x in range(n):
+                instances =  temp[0].union(temp[x])
+
         # Filtrer par nombre d'ingrédients manquants
         if (hote and manquants):
             for cocktail in instances:
