@@ -133,7 +133,7 @@ class Stocker(models.Model):
     idstocker    = models.IntegerField(db_column='IDSTOCKER', primary_key=True)
     idingredient = models.ForeignKey(Ingredient, models.DO_NOTHING, db_column='IDINGREDIENT')
     idmembre     = models.ForeignKey(settings.AUTH_USER_MODEL, models.DO_NOTHING, db_column='IDMEMBRE')
-    enreserve    = models.BooleanField(db_column='ENRESERVE')
+    enreserve    = models.BooleanField(db_column='ENRESERVE', default=0)
 
     class Meta: 
         managed         = False
