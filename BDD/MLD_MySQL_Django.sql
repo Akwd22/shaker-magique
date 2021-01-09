@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `COCKTAIL` (
   `FORCEALC` int(2) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `CHK_CATEGORIE` CHECK (`CATEGORIE` = 'A' or `CATEGORIE` = 'D' or `CATEGORIE` = 'AD')
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -92,9 +92,9 @@ CREATE TABLE IF NOT EXISTS `COMPTE` (
 -- Listage de la structure de la table remy-dut_pts3. CONTENIR
 CREATE TABLE IF NOT EXISTS `CONTENIR` (
   `IDCONTENIR` int(4) NOT NULL AUTO_INCREMENT,
-  `IDCOCKTAIL` int(4) DEFAULT NULL,
-  `IDINGREDIENT` int(4) DEFAULT NULL,
-  `QUANTITE` int(2) NOT NULL,
+  `IDCOCKTAIL` int(4) NOT NULL,
+  `IDINGREDIENT` int(4) NOT NULL,
+  `QUANTITE` int(2) DEFAULT NULL,
   `UNITE` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`IDCONTENIR`),
   KEY `CONTENIR_IDCOCKTAIL` (`IDCOCKTAIL`),
@@ -171,11 +171,11 @@ CREATE TABLE IF NOT EXISTS `FAVORI` (
 
 -- Listage de la structure de la table remy-dut_pts3. INGREDIENT
 CREATE TABLE IF NOT EXISTS `INGREDIENT` (
-  `ID` int(4) NOT NULL,
+  `ID` int(4) NOT NULL AUTO_INCREMENT,
   `INTITULE` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `DEGREALCOOL` int(2) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -253,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `STOCKER` (
   KEY `STOCKER_IDMEMBRE` (`IDMEMBRE`),
   CONSTRAINT `STOCKER_IDINGREDIENT` FOREIGN KEY (`IDINGREDIENT`) REFERENCES `INGREDIENT` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `STOCKER_IDMEMBRE` FOREIGN KEY (`IDMEMBRE`) REFERENCES `user_member` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `token_blacklist_blacklistedtoken` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `token_id` (`token_id`),
   CONSTRAINT `token_blacklist_blac_token_id_3cc7fe56_fk_token_bla` FOREIGN KEY (`token_id`) REFERENCES `token_blacklist_outstandingtoken` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -281,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `token_blacklist_outstandingtoken` (
   UNIQUE KEY `token_blacklist_outstandingtoken_jti_hex_d9bdf6f7_uniq` (`jti`),
   KEY `token_blacklist_outs_user_id_83bc629a_fk_user_memb` (`user_id`),
   CONSTRAINT `token_blacklist_outs_user_id_83bc629a_fk_user_memb` FOREIGN KEY (`user_id`) REFERENCES `user_member` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -306,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `user_member` (
   UNIQUE KEY `email` (`email`),
   KEY `user_member_id_hote_id_cb362f60_fk_user_member_user_id` (`id_hote_id`),
   CONSTRAINT `user_member_id_hote_id_cb362f60_fk_user_member_user_id` FOREIGN KEY (`id_hote_id`) REFERENCES `user_member` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -320,7 +320,7 @@ CREATE TABLE IF NOT EXISTS `user_member_groups` (
   KEY `user_member_groups_group_id_5cb2e492_fk_auth_group_id` (`group_id`),
   CONSTRAINT `user_member_groups_group_id_5cb2e492_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `user_member_groups_member_id_d5a34ab2_fk_user_member_id` FOREIGN KEY (`member_id`) REFERENCES `user_member` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
