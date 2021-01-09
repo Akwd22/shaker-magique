@@ -27,6 +27,16 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return instance
     
 class CurrentUserSerializer(serializers.ModelSerializer):
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            if attr == 'password':
+                instance.set_password(value)
+            else:
+                setattr(instance, attr, value)
+        instance.save()
+        return instance
+
     class Meta:
         model = Member
-        fields = ('user_name', "first_name", "last_name", "email",)
+        fields = ('user_name', "first_name", "last_name", "email","password",)
+        extra_kwargs = {'password': {'write_only': True}}
