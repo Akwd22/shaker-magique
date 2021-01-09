@@ -155,14 +155,33 @@ class CocktailSearch(generics.ListAPIView):
 class ContenirList(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Contenir.objects.all()
-    serializer_class = ContenirSerializer
+    serializer_class = ContenirListSerializer
 
-class ContenirDetail(generics.RetrieveAPIView):
-    """Lister les ingrédients d'un cocktail spécifique
+    def create(self, request, *args, **kwargs):
+        """
+        #checks if post request data is an array initializes serializer with many=True
+        else executes default CreateModelMixin.create function 
+        """
+        is_many = isinstance(request.data, list)
+        if not is_many:
+            return super(ContenirList, self).create(request, *args, **kwargs)
+        else:
+            serializer = self.get_serializer(data=request.data, many=True)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class ContenirDetail(generics.RetrieveUpdateDestroyAPIView):
+    """Afficher une relation contenir ingrédient/cocktail
     """
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Contenir.objects.all()
-    serializer_class = ContenirSerializer
+    serializer_class = ContenirDetailSerializer
+
+    def get_object(self):
+        return Contenir.objects.get(idcocktail=self.kwargs['idcocktail'], idingredient=self.kwargs['idingredient'],)
 
 
 class FavoriList(generics.ListCreateAPIView):
@@ -171,7 +190,12 @@ class FavoriList(generics.ListCreateAPIView):
     serializer_class = FavoriSerializer
 
 
-class IngredientList(generics.ListCreateAPIView):
+class IngredientsList(generics.ListCreateAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+
+class IngredientsDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer

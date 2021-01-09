@@ -82,8 +82,8 @@ class Favori(models.Model):
         unique_together = (('idmembre', 'idcocktail'),)
 
 
-class Ingredient(models.Model): 
-    id          = models.IntegerField(db_column='ID', primary_key=True)
+class Ingredient(models.Model):
+    id          = models.AutoField(db_column='ID', primary_key=True)
     intitule    = models.CharField(db_column='INTITULE', max_length=255)
     degrealcool = models.IntegerField(db_column='DEGREALCOOL', blank=True, null=True)
 
