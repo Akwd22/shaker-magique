@@ -8,7 +8,6 @@ from rest_framework.permissions import *
 from .permissions import *
 from django.urls import reverse
 from user.models import Member
-from pprint import PrettyPrinter
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.shortcuts import get_object_or_404
 from django.db.models.query import *
@@ -112,8 +111,6 @@ class CocktailSearch(generics.ListAPIView):
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
             #rhum vodka, ananas
         if(search):
-            import pprinter
-            p = pprint.PrettyPrinter()
             ouet = search.split(",")
             ou = ouet[0].split(" ")
             et=[]
@@ -125,7 +122,6 @@ class CocktailSearch(generics.ListAPIView):
             for i in ou:
                 temp[n] = (instances.filter(ingredients__intitule__icontains=i) | instances.filter(intitule__icontains=i)).distinct()
                 for j in et:
-                    p.pprint(temp[n])
                     temp[n] = temp[n].filter(ingredients__intitule__icontains=j) | temp[n].filter(intitule__icontains=j)
                 n+=1
             for x in range(n):
