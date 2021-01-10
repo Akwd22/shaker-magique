@@ -9,6 +9,7 @@ import { get_user, is_logged, usePermission } from "../../Axios/Axios";
 import AdminEditCocktailInfo from "./AdminEditCocktailInfo";
 import AdminEditCocktailTable from "./AdminEditCocktailTable";
 import "./AdminEditCocktailPage.css";
+import { useHistory } from "react-router-dom";
 
 function AdminEditCocktailPage(props) {
   const isAdmin = usePermission("admin");
@@ -21,6 +22,8 @@ function AdminEditCocktailPage(props) {
   const [image, setImage] = React.useState();
   const [ingredients, setIngredients] = React.useState([]);
   const [selectedIngredients, setSelectedIngredients] = React.useState([]);
+
+  const history = useHistory();
 
   React.useEffect(async () => {
     // On récupère tous les ingrédients
@@ -55,10 +58,16 @@ function AdminEditCocktailPage(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let ok;
+
     if (props.mode === "create") {
-      apiCreateCocktail(cocktail, image, selectedIngredients);
+      ok = apiCreateCocktail(cocktail, image, selectedIngredients);
     } else {
-      apiUpdateCocktail(cocktail, image, selectedIngredients);
+      ok = apiUpdateCocktail(cocktail, image, selectedIngredients);
+    }
+
+    if (ok) {
+      history.replace("/admin/cocktails");
     }
   };
 

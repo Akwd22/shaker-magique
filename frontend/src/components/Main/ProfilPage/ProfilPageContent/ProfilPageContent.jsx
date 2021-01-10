@@ -35,12 +35,12 @@ export default function ProfilPageContent(props) {
   }
 
   const routeChangeHostCocktails = () =>{
-    let path = "/host/cocktails";
+    let path = "/hote/cocktails";
     history.push(path);
   }
 
   const routeChangeHostIngredients = () =>{
-    let path = "/mes-ingredients";
+    let path = "/hote/ingredients";
     history.push(path);
   }
  

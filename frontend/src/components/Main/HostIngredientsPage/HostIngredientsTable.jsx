@@ -11,6 +11,11 @@ export default function HostIngredientsTable(props) {
         accessor: "intitule",
       },
       {
+        Header: "Degré",
+        accessor: "degrealcool",
+        Cell: ({ value }) => (value > 0 ? `${value}°` : null),
+      },
+      {
         Header: "En stock",
         accessor: "enreserve",
         Cell: CheckboxCell,

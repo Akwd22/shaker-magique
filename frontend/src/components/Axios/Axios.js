@@ -280,12 +280,14 @@ export async function apiAddIngredientsToCocktail(id, ingredients) {
     elt.idcocktail = id;
   });
 
-  await axiosInstance.post("contenir/", ingredients).catch(({ response }) => {
-    ok = false;
-    alert(
-      `Erreur ajout ingrédients au cocktail ${id} : ${response.status} ${response.statusText}`
-    );
-  });
+  await axiosInstance
+    .post(`contenir/${id}/`, ingredients)
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur ajout ingrédients au cocktail ${id} : ${response.status} ${response.statusText}`
+      );
+    });
 
   return ok;
 }
@@ -338,14 +340,17 @@ export async function apiUpdateCocktail(cocktail, image, ingredients) {
   let ok = true;
 
   // Modification du cocktail
-  /*await axiosInstance
-    .post(`cocktails/${cocktail.id}`, cocktail)
+  await axiosInstance
+    .patch(`cocktails/${cocktail.id}/`, {
+      ...cocktail,
+      illustrationurl: undefined,
+    })
     .catch(({ response }) => {
       ok = false;
       alert(
         `Erreur modification cocktail : ${response.status} ${response.statusText}`
       );
-    });*/
+    });
 
   if (!ok) return;
 
@@ -353,7 +358,7 @@ export async function apiUpdateCocktail(cocktail, image, ingredients) {
 
   if (!ok) return;
 
-  //if (ingredients) ok = apiAddIngredientsToCocktail(createdId, ingredients);
+  if (ingredients) ok = apiAddIngredientsToCocktail(cocktail.id, ingredients);
 
   return ok;
 }
@@ -395,7 +400,7 @@ export async function apiUpdateIngredientStock(id, stock) {
   let ok = true;
 
   await axiosInstance
-    .put(`stockupdate/${id}`, { enreserve: stock })
+    .put(`stockupdate/${id}/`, { enreserve: stock })
     .catch(({ response }) => {
       ok = false;
       alert(

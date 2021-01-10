@@ -123,7 +123,12 @@ export default class App extends Component {
             <Route path="/deconnexion" component={LogoutPage} />
             <Route path="/rejoindre-hote" component={JoinHostPage} />
             <Route path="/profil" component={ProfilPage} />
-            <Route path="/mes-ingredients" component={HostIngredientsPage} />
+            <Route
+              path="/hote/cocktails"
+              exact
+              component={HostCocktailPage}
+            ></Route>
+            <Route path="/hote/ingredients" component={HostIngredientsPage} />
             <Route
               path="/admin/cocktails"
               exact
@@ -158,11 +163,6 @@ export default class App extends Component {
                 <AdminEditIngredientPage mode="edit" {...props} />
               )}
             />
-            <Route
-              path="/host/cocktails"
-              exact
-              component={HostCocktailPage}
-            ></Route>
             <Route path="/" component={() => <div>ERREUR 404</div>} />
           </Switch>
           <Footer />
