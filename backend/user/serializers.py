@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from user.models import Member
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 
 class CustomUserSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(required=True)
@@ -25,8 +28,22 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
-    
+
+
 class CurrentUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ('user_name', "first_name", "last_name", "email",)
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """Sérialiseur pour ajouter des champs dans le token
+    """
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Champs supplémentaires
+        token['is_staff'] = user.is_staff
+
+        return token

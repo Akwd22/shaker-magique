@@ -1,0 +1,97 @@
+.admin-edit-cocktail-info {
+  display: flex;
+  width: 100%;
+  padding: 25px;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.admin-edit-cocktail-info-col1 {
+  background-color: #fa976d;
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+
+.admin-edit-cocktail-info-col1 label {
+  color: white;
+  font-size: 90px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-edit-cocktail-info-col1 label:hover {
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.admin-edit-cocktail-info-col1 input {
+  display: none;
+}
+
+.admin-edit-cocktail-info-col2 {
+  margin-left: 20px;
+  width: 70%;
+  overflow: visible;
+}
+
+.admin-edit-cocktail-info-col2 input[type="text"],
+input[type="number"],
+textarea {
+  height: 52px;
+  border-radius: 12px;
+  outline: none;
+  border: 1px solid #d2e0e5;
+  background-color: #f7f8f9;
+  line-height: 24px;
+  font-size: 20px;
+  padding: 10px;
+  color: black;
+  width: 100%;
+}
+
+.admin-edit-cocktail-info-col2 input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+  color: #d2e0e5;
+}
+
+.admin-edit-cocktail-info-col2 textarea {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 225px;
+}
+
+.admin-edit-cocktail-info-cat {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.admin-edit-cocktail-info-cat label {
+  margin-right: 10px;
+}
+
+.admin-edit-cocktail-info-cat input {
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 1024px) {
+  .admin-edit-cocktail-info {
+    flex-direction: column;
+  }
+
+  .admin-edit-cocktail-info-col1 {
+    height: 375px;
+    margin-bottom: 30px;
+    width: 200px;
+  }
+}

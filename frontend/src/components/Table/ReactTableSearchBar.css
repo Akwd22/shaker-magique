@@ -1,0 +1,40 @@
+.react-table-searchbar {
+  height: 50px;
+  border-radius: 12px;
+  width: 70%;
+  outline: none;
+  border: 1px solid #d2e0e5;
+  background-color: #f7f8f9;
+  line-height: 24px;
+  font-size: 24px;
+  display: grid;
+  grid-template-columns: 90% 1fr;
+  padding-left: 15px;
+}
+
+.react-table-searchbar input {
+  width: 95%;
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.react-table-searchbar input::placeholder {
+  font-size: 20px;
+  color: #d2e0e5;
+}
+
+.react-table-searchbar button {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  color: #889296;
+}
+
+.react-table-searchbar button:hover {
+  color: black;
+}

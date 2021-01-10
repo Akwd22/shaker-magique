@@ -1,0 +1,7 @@
+.admin-cocktails-page-container {
+  width: 800px;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #707070;
+}

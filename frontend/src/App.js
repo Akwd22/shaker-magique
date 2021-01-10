@@ -13,6 +13,8 @@ import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 import { Component } from "react";
 import axiosInstance, { get_hote } from "./components/Axios/Axios";
 import ProfilPage from "./components/Main/ProfilPage/ProfilPage";
+import AdminCocktailsPage from "./components/Main/AdminCocktailsPage/AdminCocktailsPage";
+import AdminEditCocktailPage from "./components/Main/AdminEditCocktailPage/AdminEditCocktailPage";
 
 export default class App extends Component {
   /**
@@ -77,8 +79,9 @@ export default class App extends Component {
         (categorie ? "&cat=" + categorie : "") +
         (trieForceAlcool ? "&tri=" + trieForceAlcool : "");
     } else {
-      url ="/cocktails/filtre/?" + 
-      ( hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "" )
+      url =
+        "/cocktails/filtre/?" +
+        (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "");
     }
     //console.dir(state.filterdata);
 
@@ -100,7 +103,10 @@ export default class App extends Component {
     return (
       <div className="app">
         <Router>
-          <Header filterFunction={this.searchFilter} filterData={this.state.filterdata} />
+          <Header
+            filterFunction={this.searchFilter}
+            filterData={this.state.filterdata}
+          />
           <Switch>
             <Route
               path="/"
@@ -113,6 +119,21 @@ export default class App extends Component {
             <Route path="/deconnexion" component={LogoutPage} />
             <Route path="/rejoindre-hote" component={JoinHostPage} />
             <Route path="/profil" component={ProfilPage} />
+            <Route
+              path="/admin/cocktails"
+              exact
+              component={AdminCocktailsPage}
+            />
+            <Route
+              path="/admin/cocktails/modifier/:id"
+              exact
+              component={() => <AdminEditCocktailPage mode="edit" />}
+            />
+            <Route
+              path="/admin/cocktails/creer"
+              exact
+              component={() => <AdminEditCocktailPage mode="create" />}
+            />
             <Route path="/" component={() => <div>ERREUR 404</div>} />
           </Switch>
           <Footer />

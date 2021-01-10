@@ -2,7 +2,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status,generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import CustomUserSerializer, CurrentUserSerializer
+from .serializers import CustomUserSerializer, CurrentUserSerializer, CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import *
 from django.contrib.auth.models import Group
@@ -49,3 +49,6 @@ class CurentUserView(generics.RetrieveUpdateDestroyAPIView):
         instance.groups.remove(Group.objects.get(name='Membre'))
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer

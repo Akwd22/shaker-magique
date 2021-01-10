@@ -89,16 +89,23 @@ axiosInstance.interceptors.response.use(
  * @returns Objet avec informations de l'utilisateur
  */
 export function get_user() {
-  const r_token = localStorage.getItem("refresh_token")
+  const token = localStorage.getItem("access_token");
 
   // Le token n'existe pas, donc pas d'utilisateur connecté
-  if (!r_token)
-    return null
+  if (!token) return null;
 
-  // Extraction de l'ID du token
-  const payload = atob(r_token.split(".")[1])
-  const user_id = JSON.parse(payload).user_id
-  return {id: user_id};
+  // Extraction informations du token
+  const payload = atob(token.split(".")[1]);
+  const object = JSON.parse(payload);
+  return { id: object.user_id, is_staff: object.is_staff };
+}
+
+/**
+ * Retourner si l'utilisateur est connecté
+ * @returns true si connecté
+ */
+export function is_logged() {
+  return localStorage.getItem("access_token") !== null;
 }
 
 /**
@@ -107,6 +114,121 @@ export function get_user() {
  */
 export function get_hote() {
   return JSON.parse(localStorage.getItem("hote_rejoint"));
+}
+
+export async function apiDeleteCocktail(idCocktail) {
+  let ok = true;
+
+  await axiosInstance
+    .delete("cocktails/" + idCocktail)
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur suppression cocktail ${idCocktail} : ${response.status} ${response.statusText}`
+      );
+    });
+
+  return ok;
+}
+
+export async function apiGetCocktails() {
+  let cocktails = [];
+
+  await axiosInstance
+    .get("cocktails/")
+    .then(({ data }) => {
+      cocktails = data;
+    })
+    .catch(({ response }) => {
+      alert(
+        `Erreur récupération cocktails : ${response.status} ${response.statusText}`
+      );
+    });
+
+  return cocktails;
+}
+
+export async function apiGetIngredients() {
+  let ingredients = [];
+
+  await axiosInstance
+    .get("ingredients/")
+    .then(({ data }) => {
+      ingredients = data;
+    })
+    .catch(({ response }) => {
+      alert(
+        `Erreur récupération ingrédients : ${response.status} ${response.statusText}`
+      );
+    });
+
+  return ingredients;
+}
+
+export function usePermission(group) {
+  if (group === "admin") {
+    return is_logged() ? get_user().is_staff : false;
+  }
+
+  throw new Error(`Le groupe utilisateur ${group} n'existe pas.`);
+}
+
+/**
+ * Mettre à jour l'image d'un cocktail
+ * @param {int} id      ID du cocktail
+ * @param {File} image  Fichier image
+ */
+export async function apiUpdateCocktailImage(id, image) {
+  if (!image) throw new Error("L'image est vide.");
+
+  let ok = true;
+
+  const data = new FormData();
+  data.append("illustrationurl", image);
+  axiosInstance
+    .put(`cocktails/image/${id}/`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur modification image cocktail : ${response.status} ${response.statusText}`
+      );
+    });
+
+  return ok;
+}
+
+/**
+ * Créer un nouveau cocktail
+ * @param {*} cocktail    Champs du cocktail remplis
+ * @param {File} image    Fichier image du cocktail
+ * @param {*} ingredients Ingrédients contenus
+ */
+export async function apiCreateCocktail(cocktail, image, ingredients) {
+  let ok = true;
+  let createId = null;
+
+  // Création du cocktail
+  await axiosInstance
+    .post("cocktails/new", cocktail)
+    .then(({ data }) => {
+      createId = data.id;
+    })
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur création cocktail : ${response.status} ${response.statusText}`
+      );
+    });
+
+  if (!ok) return;
+
+  if (image) ok = await apiUpdateCocktailImage(createId, image);
+
+  return ok;
 }
 
 export default axiosInstance;
