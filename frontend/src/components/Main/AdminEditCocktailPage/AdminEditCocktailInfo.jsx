@@ -4,7 +4,7 @@ import { get_user, is_logged, usePermission } from "../../Axios/Axios";
 import "./AdminEditCocktailInfo.css";
 
 function AdminEditCocktailInfo(props) {
-  const [cocktail, setCocktail] = React.useState({});
+  const [cocktail, setCocktail] = React.useState(props.cocktail);
   const [image, setImage] = React.useState();
 
   const handleUpload = (e) => {
@@ -19,6 +19,10 @@ function AdminEditCocktailInfo(props) {
     props.onChange(cocktail, image);
   }, [cocktail, image]);
 
+  React.useEffect(() => {
+    setCocktail(props.cocktail);
+  }, [props.cocktail]);
+
   return (
     <div className="admin-edit-cocktail-info">
       <div
@@ -26,7 +30,7 @@ function AdminEditCocktailInfo(props) {
         style={{
           backgroundImage: image
             ? `url(${window.URL.createObjectURL(image)})`
-            : "",
+            : `url(${cocktail.illustrationurl})`,
         }}
       >
         <label for="upload">
@@ -44,6 +48,7 @@ function AdminEditCocktailInfo(props) {
           type="text"
           name="intitule"
           placeholder="Titre du cocktail"
+          value={cocktail.intitule}
           onChange={handleChange}
           required
         />
@@ -54,6 +59,7 @@ function AdminEditCocktailInfo(props) {
             type="radio"
             value="A"
             onChange={handleChange}
+            checked={cocktail.categorie === "A"}
             required
           />
           <label for="aperitif">Apéritif</label>
@@ -62,6 +68,7 @@ function AdminEditCocktailInfo(props) {
             name="categorie"
             type="radio"
             value="D"
+            checked={cocktail.categorie === "D"}
             onChange={handleChange}
           />
           <label for="digestif">Digestif</label>
@@ -70,12 +77,14 @@ function AdminEditCocktailInfo(props) {
             name="categorie"
             type="radio"
             value="AD"
+            checked={cocktail.categorie === "AD"}
             onChange={handleChange}
           />
           <label for="lesdeux">Les deux</label>
         </div>
         <textarea
           name="description"
+          value={cocktail.description}
           placeholder="Description du cocktail. Les balises HTML sont utilisables."
           onChange={handleChange}
         />
@@ -84,6 +93,7 @@ function AdminEditCocktailInfo(props) {
           name="forcealc"
           min="0"
           placeholder="Force"
+          value={cocktail.forcealc}
           onChange={handleChange}
           required
         />

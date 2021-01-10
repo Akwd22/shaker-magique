@@ -15,13 +15,13 @@ import "./AdminEditCocktailTable.css";
  *
  * @param {*} props Props de la table et la ligne
  */
-export const AdminEditCocktailEditboxCell = function (props) {
+const AdminEditCocktailEditboxCell = function (props) {
   return props.data[props.row.index].contenir ? (
     <EditboxCell {...props} />
   ) : null;
 };
 
-export default function AdminEditCocktailTable({ ingredients }) {
+export default function AdminEditCocktailTable(props) {
   const columns = React.useMemo(
     () => [
       {
@@ -48,16 +48,21 @@ export default function AdminEditCocktailTable({ ingredients }) {
     []
   );
 
-  const [data, setData] = React.useState(ingredients);
+  const [data, setData] = React.useState(props.ingredients);
+  const [selected, setSelected] = React.useState([]);
 
   React.useEffect(() => {
-    setData(ingredients);
-  }, [ingredients]);
+    setData(props.ingredients);
+  }, [props.ingredients]);
+
+  React.useEffect(() => {
+    props.onChange(data);
+  }, [data]);
 
   // When our cell renderer calls updateData, we'll use
   // the rowIndex, columnId and new value to update the
   // original data
-  const updateData = async (rowIndex, columnId, value) => {
+  const updateData = (rowIndex, columnId, value) => {
     setData((old) =>
       old.map((row, index) => {
         if (index === rowIndex) {
@@ -70,6 +75,10 @@ export default function AdminEditCocktailTable({ ingredients }) {
       })
     );
   };
+
+  React.useEffect(() => {
+    props.onChange(selected);
+  }, [selected]);
 
   const [instance, setInstance] = React.useState(null);
 

@@ -87,6 +87,10 @@ export default function AdminCocktailTable({ cocktails, search }) {
         });
       }
     }
+
+    if (columnId === "edit") {
+      window.location.href = `/admin/cocktails/modifier/${data[rowIndex].id}`;
+    }
   };
 
   const [instance, setInstance] = React.useState(null);

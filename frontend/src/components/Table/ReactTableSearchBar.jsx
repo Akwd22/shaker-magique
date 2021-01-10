@@ -15,7 +15,6 @@ export default function ReactTableSearchBar(props) {
   return (
     <div className="react-table-searchbar">
       <input
-        type="text"
         placeholder={props.placeholder}
         value={search}
         onChange={handleChange}

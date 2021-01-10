@@ -61,7 +61,7 @@ class FavoriSerializer(serializers.ModelSerializer):
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('intitule', 'degrealcool')
+        fields = ('id', 'intitule', 'degrealcool')
         model = Ingredient
 
 

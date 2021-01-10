@@ -127,7 +127,9 @@ export default class App extends Component {
             <Route
               path="/admin/cocktails/modifier/:id"
               exact
-              component={() => <AdminEditCocktailPage mode="edit" />}
+              component={(props) => (
+                <AdminEditCocktailPage mode="edit" {...props} />
+              )}
             />
             <Route
               path="/admin/cocktails/creer"
