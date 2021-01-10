@@ -40,11 +40,17 @@ class CocktailImageSerializer(serializers.ModelSerializer):
         model = Cocktail
         depth = 1
 
-
-class ContenirSerializer(serializers.HyperlinkedModelSerializer):
+class ContenirListSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
         model = Contenir
+
+
+class ContenirDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
+        model = Contenir
+        read_only_fields=("idcocktail","idingredient",)
 
 
 class FavoriSerializer(serializers.ModelSerializer):
@@ -55,7 +61,7 @@ class FavoriSerializer(serializers.ModelSerializer):
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'intitule', 'degrealcool')
+        fields = ('intitule', 'degrealcool')
         model = Ingredient
 
 
@@ -75,6 +81,7 @@ class StockerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idingredient', 'idmembre', 'enreserve')
         model = Stocker
+        read_only_fields=("idingredient", "idmembre",)
 
 
 class ProposerSerializer(serializers.ModelSerializer):

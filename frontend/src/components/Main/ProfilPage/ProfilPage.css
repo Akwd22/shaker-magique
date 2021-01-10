@@ -7,6 +7,7 @@
   margin: 20px;
   box-shadow: 4px 6px 8px -4px rgba(0, 0, 0, 0.77);
   position: relative;
+  border-radius: 10px;
 }
 
 .profilPage-left-container {
@@ -61,22 +62,22 @@
   line-height: 24px;
   font-size: 20px;
   padding: 10px;
-  color: #D2E0E5;
+  color: #d2e0e5;
 }
 
-.profilPage-left-container-infos-row input::placeholder{
+.profilPage-left-container-infos-row input::placeholder {
   font-size: 20px;
-  color:#D2E0E5;
+  color: #d2e0e5;
 }
 
-
-.right-container-infos-row > button, .profilPage-left-form-button > button {
-background-image: linear-gradient(
-  to right,
-  #bb4e75 0%,
-  #ff9d6c 51%,
-  #bb4e75 100%
-);
+.right-container-infos-row > button,
+.profilPage-left-form-button > button {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
 }
 
 .profilPage-left-form-button > button {
@@ -91,12 +92,13 @@ background-image: linear-gradient(
   cursor: pointer;
 }
 
-.profilPage-right-container{
+.profilPage-right-container {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.right-container-infos-row{
+.right-container-infos-row {
   display: flex;
 }
 
@@ -114,45 +116,81 @@ background-image: linear-gradient(
   font-size: 13px;
   height: 51px;
 }
-.profilPage-left-form-button > button{
-    border-radius: 10px;
-
+.profilPage-left-form-button > button {
+  border-radius: 10px;
 }
 
-.profilPage-left-form{
+.profilPage-left-form {
   display: flex;
   flex-direction: column;
   margin-right: 5%;
   margin-left: 5%;
 }
 
-.left-container-last-row{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+.left-container-last-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.fa-sign-out-alt{
-    color: #FF8B61;
-    font-size: 40px;
-    overflow: visible;
+.fa-sign-out-alt {
+  color: #ff8b61;
+  font-size: 40px;
+  overflow: visible;
+  cursor: pointer;
 }
 
-.profilPage-left-container-infos-row span{
+.profilPage-left-container-infos-row span {
   margin-bottom: 6px;
   color: #889296;
 }
 
-.img-righ-container{
+.img-righ-container {
   max-width: 100%;
   max-height: 100%;
-    object-fit: contain;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  object-fit: contain;
+  margin-bottom: 10px;
 }
-.right-container-infos-row{
+
+.img-rigt-2{
+  margin-top: 10px;
+}
+
+.right-container-infos-row {
   display: flex;
   flex-direction: column;
+}
+
+/* LOGOUT Container */
+
+.profilPage-Logout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profilPage-Logout-container > button {
+  background-image: linear-gradient(
+    to right,
+    #bb4e75 0%,
+    #ff9d6c 51%,
+    #bb4e75 100%
+  );
+  margin-top: 20px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.left-container-last-row {
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -189,10 +227,10 @@ background-image: linear-gradient(
     margin-top: 170px;
   }
 
-  .profilPage-left-container-infos-row span{
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: #889296;
+  .profilPage-left-container-infos-row span {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #889296;
   }
 
   .profilPage-left-container-infos-row input {
@@ -200,12 +238,8 @@ background-image: linear-gradient(
     margin-bottom: 10px;
     padding: 10px;
   }
-  .profilPage-left-container-infos-row input::placeholder{
+  .profilPage-left-container-infos-row input::placeholder {
     font-size: 14px;
-  }
-
-  .left-container-last-row{
-    margin-top: 20px;
   }
 
   .profilPage-left-form-button > button {
@@ -223,10 +257,7 @@ background-image: linear-gradient(
     width: 119px;
   }
 
-  .img-righ-container{
-    margin-top: 5px;
-    margin-bottom: 0px;
+  .img-righ-container {
+    margin-bottom: 2px;
   }
-  
-
 }

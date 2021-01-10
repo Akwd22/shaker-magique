@@ -8,7 +8,6 @@ from rest_framework.permissions import *
 from .permissions import *
 from django.urls import reverse
 from user.models import Member
-from pprint import PrettyPrinter
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.shortcuts import get_object_or_404
 from django.db.models.query import *
@@ -110,10 +109,24 @@ class CocktailSearch(generics.ListAPIView):
             instances = instances.filter(forcealc=0) | instances.filter(forcealc=None)
 
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
+            #rhum vodka, ananas
         if(search):
-            search = search.split(" ")
-            for i in search:
-                instances = (instances.filter(ingredients__intitule__icontains=i) | instances.filter(intitule__icontains=i)).distinct()
+            ouet = search.split(",")
+            ou = ouet[0].split(" ")
+            et=[]
+            if (len(ouet)>1):
+                et = ouet[1].split(" ")
+
+            temp = {}
+            n=0
+            for i in ou:
+                temp[n] = (instances.filter(ingredients__intitule__icontains=i) | instances.filter(intitule__icontains=i)).distinct()
+                for j in et:
+                    temp[n] = temp[n].filter(ingredients__intitule__icontains=j) | temp[n].filter(intitule__icontains=j)
+                n+=1
+            for x in range(n):
+                instances =  temp[0].union(temp[x])
+
         # Filtrer par nombre d'ingrédients manquants
         if (hote and manquants):
             for cocktail in instances:
@@ -142,14 +155,33 @@ class CocktailSearch(generics.ListAPIView):
 class ContenirList(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Contenir.objects.all()
-    serializer_class = ContenirSerializer
+    serializer_class = ContenirListSerializer
 
-class ContenirDetail(generics.RetrieveAPIView):
-    """Lister les ingrédients d'un cocktail spécifique
+    def create(self, request, *args, **kwargs):
+        """
+        #checks if post request data is an array initializes serializer with many=True
+        else executes default CreateModelMixin.create function 
+        """
+        is_many = isinstance(request.data, list)
+        if not is_many:
+            return super(ContenirList, self).create(request, *args, **kwargs)
+        else:
+            serializer = self.get_serializer(data=request.data, many=True)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class ContenirDetail(generics.RetrieveUpdateDestroyAPIView):
+    """Afficher une relation contenir ingrédient/cocktail
     """
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Contenir.objects.all()
-    serializer_class = ContenirSerializer
+    serializer_class = ContenirDetailSerializer
+
+    def get_object(self):
+        return Contenir.objects.get(idcocktail=self.kwargs['idcocktail'], idingredient=self.kwargs['idingredient'],)
 
 
 class FavoriList(generics.ListCreateAPIView):
@@ -158,7 +190,12 @@ class FavoriList(generics.ListCreateAPIView):
     serializer_class = FavoriSerializer
 
 
-class IngredientList(generics.ListCreateAPIView):
+class IngredientsList(generics.ListCreateAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Ingredient.objects.all()
+    serializer_class = IngredientSerializer
+
+class IngredientsDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer

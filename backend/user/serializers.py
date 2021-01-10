@@ -30,12 +30,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return instance
 
 
-class CurrentUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Member
-        fields = ('user_name', "first_name", "last_name", "email",)
-
-
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """Sérialiseur pour ajouter des champs dans le token
     """
@@ -47,3 +41,17 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['is_staff'] = user.is_staff
 
         return token
+    
+class CurrentUserSerializer(serializers.ModelSerializer): 
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            if attr == 'password':
+                instance.set_password(value)
+            else:
+                setattr(instance, attr, value)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = Member
+        fields = ('user_name', "email","password",)  
