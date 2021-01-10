@@ -131,6 +131,21 @@ export async function apiDeleteCocktail(idCocktail) {
   return ok;
 }
 
+export async function apiDeleteIngredient(idIngredient) {
+  let ok = true;
+
+  await axiosInstance
+    .delete("ingredients/detail/" + idIngredient)
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur suppression ingrédients ${idIngredient} : ${response.status} ${response.statusText}`
+      );
+    });
+
+  return ok;
+}
+
 export async function apiGetCocktail(id) {
   let cocktail;
 
@@ -148,11 +163,44 @@ export async function apiGetCocktail(id) {
   return cocktail;
 }
 
+export async function apiGetIngredient(id) {
+  let ingredient;
+
+  await axiosInstance
+    .get(`ingredients/detail/${id}`)
+    .then(({ data }) => {
+      ingredient = data;
+    })
+    .catch(({ response }) => {
+      alert(
+        `Erreur récupération ingredient : ${response.status} ${response.statusText}`
+      );
+    });
+    return ingredient;
+}
+
 export async function apiGetCocktails() {
   let cocktails = [];
 
   await axiosInstance
     .get("cocktails/")
+    .then(({ data }) => {
+      cocktails = data;
+    })
+    .catch(({ response }) => {
+      alert(
+        `Erreur récupération cocktails : ${response.status} ${response.statusText}`
+      );
+    });
+
+  return cocktails;
+}
+
+export async function apiGetCocktailsProposer() {
+  let cocktails = [];
+
+  await axiosInstance
+    .get("/proposer/" + get_user().id)
     .then(({ data }) => {
       cocktails = data;
     })
@@ -185,6 +233,9 @@ export async function apiGetIngredients() {
 export function usePermission(group) {
   if (group === "admin") {
     return is_logged() ? get_user().is_staff : false;
+  }
+  if (group === "user") {
+    return is_logged() ? get_user() : false;
   }
 
   if (group === "user") {
@@ -273,6 +324,10 @@ export async function apiCreateCocktail(cocktail, image, ingredients) {
   return ok;
 }
 
+// export async function apiCreateIngredient(ingredient){
+
+// }
+
 /**
  * Modifier un cocktail
  * @param {*} cocktail    Champs du cocktail remplis
@@ -301,6 +356,14 @@ export async function apiUpdateCocktail(cocktail, image, ingredients) {
   //if (ingredients) ok = apiAddIngredientsToCocktail(createdId, ingredients);
 
   return ok;
+}
+
+export async function apiUpdateIngredient(ingredient) {
+  let ok = true;
+
+  //Modification de l'ingredient
+
+  if (!ok) return;
 }
 
 /**

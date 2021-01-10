@@ -1,0 +1,10 @@
+.host-cocktails-filter {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 139px;
+  background-color: white;
+  padding: 30px;
+  align-items: center;
+  justify-content: center;
+}

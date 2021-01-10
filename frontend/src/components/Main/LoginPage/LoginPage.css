@@ -80,7 +80,6 @@
 
 .lp-left-side-noaccount {
   display: flex;
-  align-items: center;
   column-gap: 7px;
   margin-top: 40px;
   font-size: 20px;
@@ -133,9 +132,14 @@
   }
   .lp-left-side {
     width: 90%;
+  }
+
+  .lp-left-side-noaccount {
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  
 }
 
-.lp-left-side-noaccount{
-  flex-direction: column;
-}
-}

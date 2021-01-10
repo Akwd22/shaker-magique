@@ -8,7 +8,7 @@ import "./HostIngredientsPage.css";
 function HostIngredientsPage(props) {
   const isLogged = usePermission("user");
 
-  //if (!isLogged) window.location.replace("/");
+  if (!isLogged) window.location.replace("/");
 
   const [ingredients, setIngredients] = React.useState([]);
   const [search, setSearch] = React.useState();

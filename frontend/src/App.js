@@ -16,6 +16,9 @@ import ProfilPage from "./components/Main/ProfilPage/ProfilPage";
 import AdminCocktailsPage from "./components/Main/AdminCocktailsPage/AdminCocktailsPage";
 import AdminEditCocktailPage from "./components/Main/AdminEditCocktailPage/AdminEditCocktailPage";
 import HostIngredientsPage from "./components/Main/HostIngredientsPage/HostIngredientsPage";
+import HostCocktailPage from "./components/Main/HostCocktailPage/HostCocktailPage";
+import AdminIngredientPage from "./components/Main/AdminIngredientPage/AdminIngredientPage";
+import AdminEditIngredientPage from "./components/Main/AdminEditIngredientPage/AdminEditIngredientPage";
 
 export default class App extends Component {
   /**
@@ -138,6 +141,28 @@ export default class App extends Component {
               exact
               component={() => <AdminEditCocktailPage mode="create" />}
             />
+            <Route
+              path="/admin/ingredients"
+              exact
+              component={AdminIngredientPage}
+            />
+            <Route
+              path="/admin/ingredients/creer"
+              exact
+              component={() => <AdminEditIngredientPage mode="create" />}
+            />
+            <Route
+              path="/admin/ingredients/modifier/:id"
+              exact
+              component={(props) => (
+                <AdminEditIngredientPage mode="edit" {...props} />
+              )}
+            />
+            <Route
+              path="/host/cocktails"
+              exact
+              component={HostCocktailPage}
+            ></Route>
             <Route path="/" component={() => <div>ERREUR 404</div>} />
           </Switch>
           <Footer />

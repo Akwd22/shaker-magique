@@ -88,7 +88,6 @@ class ProposerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idmembre')
         model = Propose
-        depth = 1
 
 
 class JoinHostSerializer(serializers.ModelSerializer):

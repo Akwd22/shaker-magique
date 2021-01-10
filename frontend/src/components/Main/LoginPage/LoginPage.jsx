@@ -72,11 +72,12 @@ export default function SignIn() {
             <div className="lp-left-side-button">
               <button type="submit">Se connecter</button>
             </div>
-            <div className="lp-left-side-noaccount">
-              <span>Vous n'avez pas de compte ?</span><a href="/inscription">Inscription</a>
-            </div>
           </div>
         </form>
+        <div className="lp-left-side-noaccount">
+          <span>Vous n'avez pas de compte ?</span>
+          <a href="/inscription">Inscription</a>
+        </div>
       </div>
       <div className="lp-right-side"></div>
     </div>

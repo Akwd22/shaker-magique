@@ -29,11 +29,21 @@ export default function ProfilPageContent(props) {
       });
   };
 
-  const routeChange = () =>{ 
+  const routeChangeLogOut = () =>{ 
     let path = `/deconnexion`; 
     history.push(path);
   }
 
+  const routeChangeHostCocktails = () =>{
+    let path = "/host/cocktails";
+    history.push(path);
+  }
+
+  const routeChangeHostIngredients = () =>{
+    let path = "/mes-ingredients";
+    history.push(path);
+  }
+ 
   {
     return (
       <div className="profilPage-container">
@@ -78,7 +88,7 @@ export default function ProfilPageContent(props) {
               <div className="profilPage-left-form-button">
                 <button type="submit" onClick={handle_submit} >Sauvegarder</button>
               </div>
-              <i class="fas fa-sign-out-alt" onClick={routeChange}></i>
+              <i class="fas fa-sign-out-alt" onClick={routeChangeLogOut}></i>
             </div>
           </div>
         </div>
@@ -86,11 +96,11 @@ export default function ProfilPageContent(props) {
           <div className="right-container-infos">
             <div className="right-container-infos-row">
               <img className="img-righ-container img-rigt-1" src={cocktail} alt="" />
-              <button>Consulter sa liste de cocktails</button>
+              <button onClick={routeChangeHostCocktails} >Consulter sa liste de cocktails</button>
             </div>
             <div className="right-container-infos-row">
               <img className="img-righ-container img-rigt-2" src={orangejuice} alt="" />
-              <button>
+              <button onClick={routeChangeHostIngredients}>
                 Consulter sa liste d'ingrédients
               </button>
             </div>
