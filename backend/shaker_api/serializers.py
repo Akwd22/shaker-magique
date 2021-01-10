@@ -18,7 +18,7 @@ class CocktailContenirSerializer(serializers.HyperlinkedModelSerializer):
         model = Contenir
 
 class CocktailSerializer(serializers.ModelSerializer):
-    ingredients = CocktailContenirSerializer(source="contenir_set", many=True)
+    ingredients = CocktailContenirSerializer(read_only=True, source="contenir_set", many=True)
 
     class Meta:
         fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description',
@@ -45,37 +45,25 @@ class ContenirListSerializer(serializers.ModelSerializer):
         fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
         model = Contenir
 
-
-class ContenirDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
-        model = Contenir
-        read_only_fields=("idcocktail","idingredient",)
-
-
 class FavoriSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idmembre')
         model = Favori
 
-
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'intitule', 'degrealcool')
+        fields = ('intitule', 'degrealcool')
         model = Ingredient
-
 
 class NoterSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idmembre', 'idcocktail', 'note')
         model = Noter
 
-
 class PreferenceSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idingredient', 'idmembre')
         model = Preference
-
 
 class StockerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -83,12 +71,10 @@ class StockerSerializer(serializers.ModelSerializer):
         model = Stocker
         read_only_fields=("idingredient", "idmembre",)
 
-
 class ProposerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idmembre')
         model = Propose
-
 
 class JoinHostSerializer(serializers.ModelSerializer):
     # Champ qui ne fait pas parti du modèle
