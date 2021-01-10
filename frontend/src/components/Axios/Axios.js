@@ -173,7 +173,7 @@ export async function apiGetIngredient(id) {
     })
     .catch(({ response }) => {
       alert(
-        `Erreur récupération ingredient : ${response.status} ${response.statusText}`
+        `Erreur récupération ingredient solo : ${response.status} ${response.statusText}`
       );
     });
   return ingredient;
@@ -328,7 +328,6 @@ export async function apiCreateCocktail(cocktail, image, ingredients) {
 
 export async function apiCreateIngredient(ingredient) {
   let ok = true;
-
   await axiosInstance
     .post("/ingredients/", ingredient)
     .catch(({ response }) => {
@@ -385,7 +384,6 @@ export async function apiUpdateIngredient(ingredient) {
         `Erreur modification ingredient : ${response.status} ${response.statusText}`
       );
     });
-
   return ok;
 }
 
