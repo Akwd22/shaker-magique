@@ -11,7 +11,11 @@ import AdminEditCocktailTable from "./AdminEditCocktailTable";
 import "./AdminEditCocktailPage.css";
 
 function AdminEditCocktailPage(props) {
-  //const isAdmin = usePermission("admin");
+  const isAdmin = usePermission("admin");
+
+  if (!isAdmin) {
+    window.location.replace("/");
+  }
 
   const [cocktail, setCocktail] = React.useState({});
   const [image, setImage] = React.useState();

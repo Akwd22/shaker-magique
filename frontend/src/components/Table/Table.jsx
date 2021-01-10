@@ -119,6 +119,39 @@ export const ButtonCell = ({
   );
 };
 
+/**
+ * Créer une cellule contenant un bouton de suppression
+ * @param {*} props Props de la table et la ligne
+ */
+export const DeleteButtonCell = (props) => {
+  const onClick = (e, index, id, value) => {
+    if (window.confirm("Voulez-vous vraiment supprimer cet élément ?"))
+      props.updateData(index, id, value);
+  };
+
+  return (
+    <ButtonCell {...props} onClick={onClick}>
+      <i class="fas fa-trash"></i>
+    </ButtonCell>
+  );
+};
+
+/**
+ * Créer une cellule contenant un bouton d'édition
+ * @param {*} props Props de la table et la ligne
+ */
+export const EditButtonCell = (props) => {
+  const onClick = (e, index, id, value) => {
+    props.updateData(index, id, value);
+  };
+
+  return (
+    <ButtonCell {...props} onClick={onClick}>
+      <i class="fas fa-edit"></i>
+    </ButtonCell>
+  );
+};
+
 // Be sure to pass our updateData option
 export function ReactTable({
   columns,

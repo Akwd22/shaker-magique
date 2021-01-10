@@ -1,40 +1,9 @@
 import React from "react";
 import { apiDeleteCocktail } from "../../Axios/Axios";
-import { ButtonCell, ReactTable } from "../../Table/Table";
+import { ButtonCell, DeleteButtonCell, EditButtonCell, ReactTable } from "../../Table/Table";
 import "./AdminCocktailTable.css";
 
-/**
- * Créer une cellule contenant un bouton de suppression
- * @param {*} props Props de la table et la ligne
- */
-const DeleteButtonCell = (props) => {
-  const onClick = (e, index, id, value) => {
-    if (window.confirm("Voulez-vous vraiment supprimer ce cocktail ?"))
-      props.updateData(index, id, value);
-  };
 
-  return (
-    <ButtonCell {...props} onClick={onClick}>
-      <i class="fas fa-trash"></i>
-    </ButtonCell>
-  );
-};
-
-/**
- * Créer une cellule contenant un bouton d'édition
- * @param {*} props Props de la table et la ligne
- */
-const EditButtonCell = (props) => {
-  const onClick = (e, index, id, value) => {
-    props.updateData(index, id, value);
-  };
-
-  return (
-    <ButtonCell {...props} onClick={onClick}>
-      <i class="fas fa-edit"></i>
-    </ButtonCell>
-  );
-};
 
 export default function AdminCocktailTable({ cocktails, search }) {
   const columns = React.useMemo(
