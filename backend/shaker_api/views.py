@@ -152,10 +152,20 @@ class CocktailSearch(generics.ListAPIView):
         return Response(serializer.data)
 
 
-class ContenirList(generics.ListCreateAPIView):
+class ContenirDetail(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Contenir.objects.all()
     serializer_class = ContenirListSerializer
+    lookup_field = "idcocktail"
+
+    def post(self, request, *args, **kwargs):
+        ingredients = Contenir.objects.filter(idcocktail=self.kwargs['idcocktail'])
+        for ingredient in ingredients:
+            ingredient.delete()
+        return self.create(request, *args,**kwargs)
+
+    def get_queryset(self):
+        return Contenir.objects.filter(idcocktail=self.kwargs['idcocktail'])
 
     def create(self, request, *args, **kwargs):
         """
@@ -171,17 +181,6 @@ class ContenirList(generics.ListCreateAPIView):
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-
-class ContenirDetail(generics.RetrieveUpdateDestroyAPIView):
-    """Afficher une relation contenir ingrédient/cocktail
-    """
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    queryset = Contenir.objects.all()
-    serializer_class = ContenirDetailSerializer
-
-    def get_object(self):
-        return Contenir.objects.get(idcocktail=self.kwargs['idcocktail'], idingredient=self.kwargs['idingredient'],)
 
 
 class FavoriList(generics.ListCreateAPIView):
@@ -246,15 +245,16 @@ class StockUpdate(generics.RetrieveUpdateAPIView):
         return queryset
 
 
-class ProposerList(generics.ListCreateAPIView):
-    """[summary]
-    Liste de tous les cocktails proposé par des hôtes
-                    Args    : 
-            generics ([type]): [description]
-    """
+class ProposerDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [ProposerPermission]
     queryset = Propose.objects.all()
-    serializer_class = StockerSerializer
+    serializer_class = ProposerSerializer
+    lookup_field = 'idcocktail'
+    
+    def get_queryset(self, *args, **kwargs):
+        queryset = Propose.objects.get_or_create(idmembre=self.request.user, idcocktail=Cocktail.objects.get(pk=self.kwargs['idcocktail']))
+        queryset = Propose.objects.filter(idmembre=self.request.user, idcocktail=Cocktail.objects.get(pk=self.kwargs['idcocktail']))
+        return queryset
 
 class ProposerListByMember(generics.ListCreateAPIView):
     permission_classes = [ProposerPermission]
