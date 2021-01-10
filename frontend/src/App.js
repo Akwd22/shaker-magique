@@ -15,6 +15,7 @@ import axiosInstance, { get_hote } from "./components/Axios/Axios";
 import ProfilPage from "./components/Main/ProfilPage/ProfilPage";
 import AdminCocktailsPage from "./components/Main/AdminCocktailsPage/AdminCocktailsPage";
 import AdminEditCocktailPage from "./components/Main/AdminEditCocktailPage/AdminEditCocktailPage";
+import HostIngredientsPage from "./components/Main/HostIngredientsPage/HostIngredientsPage";
 
 export default class App extends Component {
   /**
@@ -119,6 +120,7 @@ export default class App extends Component {
             <Route path="/deconnexion" component={LogoutPage} />
             <Route path="/rejoindre-hote" component={JoinHostPage} />
             <Route path="/profil" component={ProfilPage} />
+            <Route path="/mes-ingredients" component={HostIngredientsPage} />
             <Route
               path="/admin/cocktails"
               exact

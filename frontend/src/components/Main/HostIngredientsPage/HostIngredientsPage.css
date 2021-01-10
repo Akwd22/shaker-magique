@@ -1,0 +1,17 @@
+.host-ingredients-page-container {
+  width: 800px;
+  height: 900px;
+  background-color: white;
+  border: solid 1px #707070;
+  overflow: hidden;
+}
+
+.host-ingredients-search {
+  background-color: #f2e9e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #707070;
+}

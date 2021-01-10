@@ -187,6 +187,10 @@ export function usePermission(group) {
     return is_logged() ? get_user().is_staff : false;
   }
 
+  if (group === "user") {
+    return is_logged();
+  }
+
   throw new Error(`Le groupe utilisateur ${group} n'existe pas.`);
 }
 
@@ -295,6 +299,46 @@ export async function apiUpdateCocktail(cocktail, image, ingredients) {
   if (!ok) return;
 
   //if (ingredients) ok = apiAddIngredientsToCocktail(createdId, ingredients);
+
+  return ok;
+}
+
+/**
+ * Récupérer le stock d'ingrédients de l'utilisateur connecté
+ */
+export async function apiGetCurrentStock() {
+  let ingredients = [];
+
+  await axiosInstance
+    .get(`stockcurrent/`)
+    .then(({ data }) => {
+      ingredients = data;
+    })
+    .catch(({ response }) => {
+      alert(
+        `Erreur récupération stock d'ingrédients : ${response.status} ${response.statusText}`
+      );
+    });
+
+  return ingredients;
+}
+
+/**
+ * Modifier le stock d'un ingrédient de l'utilisateur connecté
+ * @param {int} id      ID de l'ingrédient
+ * @param {bool} stock  En réserve ou non
+ */
+export async function apiUpdateIngredientStock(id, stock) {
+  let ok = true;
+
+  await axiosInstance
+    .put(`stockupdate/${id}`, { enreserve: stock })
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur modification stock ingrédient ${id} pour ${stock} : ${response.status} ${response.statusText}`
+      );
+    });
 
   return ok;
 }
