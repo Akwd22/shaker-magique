@@ -7,6 +7,7 @@ import {
   usePermission,
 } from "../../Axios/Axios";
 import "./HostCocktailPage.css";
+import { useHistory } from "react-router-dom";
 
 function HostCocktailPage() {
   const [cocktails, setCocktails] = useState([]);
@@ -14,6 +15,7 @@ function HostCocktailPage() {
   const isUser = usePermission("user");
 
   if (!isUser) window.location.replace("/");
+
   const handleSearch = (search) => {
     setSearch(search);
   };

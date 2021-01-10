@@ -19,6 +19,7 @@ import HostIngredientsPage from "./components/Main/HostIngredientsPage/HostIngre
 import HostCocktailPage from "./components/Main/HostCocktailPage/HostCocktailPage";
 import AdminIngredientPage from "./components/Main/AdminIngredientPage/AdminIngredientPage";
 import AdminEditIngredientPage from "./components/Main/AdminEditIngredientPage/AdminEditIngredientPage";
+import AdminPage from "./components/Main/AdminPage/AdminPage";
 
 export default class App extends Component {
   /**
@@ -129,6 +130,7 @@ export default class App extends Component {
               component={HostCocktailPage}
             ></Route>
             <Route path="/hote/ingredients" component={HostIngredientsPage} />
+            <Route path="/admin" exact component={AdminPage} />
             <Route
               path="/admin/cocktails"
               exact

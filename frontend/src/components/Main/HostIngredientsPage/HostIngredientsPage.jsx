@@ -4,11 +4,12 @@ import ReactTableSearchBar from "../../Table/ReactTableSearchBar";
 import { apiGetCurrentStock, apiGetIngredients } from "../../Axios/Axios";
 import { usePermission } from "../../Axios/Axios";
 import "./HostIngredientsPage.css";
+import { useHistory } from "react-router-dom";
 
 function HostIngredientsPage(props) {
-  const isLogged = usePermission("user");
+  const isUser = usePermission("user");
 
-  if (!isLogged) window.location.replace("/");
+  if (!isUser) window.location.replace("/");
 
   const [ingredients, setIngredients] = React.useState([]);
   const [search, setSearch] = React.useState();
@@ -25,7 +26,7 @@ function HostIngredientsPage(props) {
       // ... cocher, celui en stock par l'utilisateur
       selected.forEach((j) => {
         if (i.id === j.idingredient && j.enreserve) {
-            i.enreserve = true;
+          i.enreserve = true;
         }
       });
     });

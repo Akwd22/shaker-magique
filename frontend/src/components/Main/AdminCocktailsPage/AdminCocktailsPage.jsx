@@ -4,11 +4,13 @@ import AdminCocktailTable from "./AdminCocktailTable";
 import AdminCocktailsFilter from "./AdminCocktailsFilter";
 import { get_user, is_logged, usePermission } from "../../Axios/Axios";
 import "./AdminCocktailsPage.css";
+import { useHistory } from "react-router-dom";
 
 function AdminCocktailsPage() {
   const isAdmin = usePermission("admin");
+  const history = useHistory();
 
-  if (!isAdmin) window.location.replace("/");
+  if (!isAdmin) history.replace("/");
 
   const [cocktails, setCocktails] = React.useState([]);
   const [search, setSearch] = React.useState();

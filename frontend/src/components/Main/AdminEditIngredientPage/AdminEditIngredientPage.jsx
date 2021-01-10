@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { apiGetIngredient, usePermission } from "../../Axios/Axios";
 import AdminEditIngredientInfo from "./AdminEditIngredientInfo";
 import "./AdminEditIngredientPage.css";
 
 function AdminEditIngredientPage(props) {
   const isAdmin = usePermission("admin");
+  const history = useHistory();
   const [ingredient, setIngredient] = useState({});
-  if (!isAdmin) {
-    window.location.replace("/");
-  }
+
+  if (!isAdmin) history.replace("/");
 
   useEffect(async () => {
     if (props.mode === "edit") {

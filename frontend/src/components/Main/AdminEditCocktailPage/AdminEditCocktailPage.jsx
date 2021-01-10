@@ -13,17 +13,14 @@ import { useHistory } from "react-router-dom";
 
 function AdminEditCocktailPage(props) {
   const isAdmin = usePermission("admin");
+  const history = useHistory();
 
-  if (!isAdmin) {
-    window.location.replace("/");
-  }
+  if (!isAdmin) history.replace("/");
 
   const [cocktail, setCocktail] = React.useState({});
   const [image, setImage] = React.useState();
   const [ingredients, setIngredients] = React.useState([]);
   const [selectedIngredients, setSelectedIngredients] = React.useState([]);
-
-  const history = useHistory();
 
   React.useEffect(async () => {
     // On récupère tous les ingrédients
@@ -55,15 +52,15 @@ function AdminEditCocktailPage(props) {
     setIngredients(ingredients);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let ok;
 
     if (props.mode === "create") {
-      ok = apiCreateCocktail(cocktail, image, selectedIngredients);
+      ok = await apiCreateCocktail(cocktail, image, selectedIngredients);
     } else {
-      ok = apiUpdateCocktail(cocktail, image, selectedIngredients);
+      ok = await apiUpdateCocktail(cocktail, image, selectedIngredients);
     }
 
     if (ok) {
@@ -94,18 +91,23 @@ function AdminEditCocktailPage(props) {
 
   return (
     <div className="page admin-edit-cocktail-page">
-      <div className="admin-edit-cocktail-container">
-        <form className="admin-edit-cocktail-form" onSubmit={handleSubmit}>
-          <AdminEditCocktailInfo onChange={handleChange} cocktail={cocktail} />
-          <AdminEditCocktailTable
-            onChange={handleIngredientChange}
-            ingredients={ingredients}
-          />
-          <button className="admin-edit-cocktail-create">
-            {props.mode === "create" ? "Créer" : "Modifier"} le cocktail
-          </button>
-        </form>
-      </div>
+      {isAdmin && (
+        <div className="admin-edit-cocktail-container">
+          <form className="admin-edit-cocktail-form" onSubmit={handleSubmit}>
+            <AdminEditCocktailInfo
+              onChange={handleChange}
+              cocktail={cocktail}
+            />
+            <AdminEditCocktailTable
+              onChange={handleIngredientChange}
+              ingredients={ingredients}
+            />
+            <button className="admin-edit-cocktail-create">
+              {props.mode === "create" ? "Créer" : "Modifier"} le cocktail
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
