@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { apiGetIngredient, usePermission } from "../../Axios/Axios";
+import { useHistory } from "react-router-dom";
+import {
+    apiCreateIngredient,
+  apiGetIngredient,
+  apiUpdateIngredient,
+  usePermission,
+} from "../../Axios/Axios";
 import AdminEditIngredientInfo from "./AdminEditIngredientInfo";
 import "./AdminEditIngredientPage.css";
 
 function AdminEditIngredientPage(props) {
   const isAdmin = usePermission("admin");
   const [ingredient, setIngredient] = useState({});
+  const history = useHistory();
+
   if (!isAdmin) {
     window.location.replace("/");
   }
@@ -21,12 +29,19 @@ function AdminEditIngredientPage(props) {
     setIngredient(ingredient);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let ok;
+
     if (props.mode === "create") {
-      //apiCreateIngredient(ingredients);
+      ok = await apiCreateIngredient(ingredient);
     } else {
-      //apiUpdateIngredient(ingredients);
+      ok = await apiUpdateIngredient(ingredient);
+    }
+
+    if (ok) {
+      history.replace("/admin/ingredients");
     }
   };
 
@@ -38,10 +53,10 @@ function AdminEditIngredientPage(props) {
             ingredient={ingredient}
             onChange={handleChange}
           />
+          <button className="admin-edit-ingredient-button">
+            {props.mode === "create" ? "Créer" : "Modifier"} l'ingredient
+          </button>
         </form>
-        <button className="admin-edit-ingredient-button">
-          {props.mode === "create" ? "Créer" : "Modifier"} l'ingredient
-        </button>
       </div>
     </div>
   );

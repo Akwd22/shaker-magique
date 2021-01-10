@@ -8,9 +8,11 @@ function AdminEditIngredientInfo(props) {
     setIngredient({ ...ingredient, [e.target.name]: e.target.value });
   };
 
+  useEffect( () => props.onChange(ingredient), [ingredient]);
+
   useEffect(() => setIngredient(props.ingredient), [props.ingredient]);
 
-  
+
   return (
     <div className="admin-edit-ingredient-info">
       <input
@@ -23,7 +25,7 @@ function AdminEditIngredientInfo(props) {
       />
       <input
         type="number"
-        name="forcealc"
+        name="degrealcool"
         min="0"
         placeholder="Force"
         value={ingredient.degrealcool}

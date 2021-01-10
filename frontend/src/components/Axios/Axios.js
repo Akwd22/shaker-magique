@@ -176,7 +176,7 @@ export async function apiGetIngredient(id) {
         `Erreur récupération ingredient : ${response.status} ${response.statusText}`
       );
     });
-    return ingredient;
+  return ingredient;
 }
 
 export async function apiGetCocktails() {
@@ -326,9 +326,20 @@ export async function apiCreateCocktail(cocktail, image, ingredients) {
   return ok;
 }
 
-// export async function apiCreateIngredient(ingredient){
+export async function apiCreateIngredient(ingredient) {
+  let ok = true;
 
-// }
+  await axiosInstance
+    .post("/ingredients/", ingredient)
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur création ingredient : ${response.status} ${response.statusText}`
+      );
+    });
+
+    return ok;
+}
 
 /**
  * Modifier un cocktail
@@ -366,9 +377,16 @@ export async function apiUpdateCocktail(cocktail, image, ingredients) {
 export async function apiUpdateIngredient(ingredient) {
   let ok = true;
 
-  //Modification de l'ingredient
+  await axiosInstance
+    .patch(`ingredients/detail/${ingredient.id}/`, ingredient)
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur modification ingredient : ${response.status} ${response.statusText}`
+      );
+    });
 
-  if (!ok) return;
+  return ok;
 }
 
 /**
