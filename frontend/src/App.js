@@ -20,6 +20,8 @@ import HostCocktailPage from "./components/Main/HostCocktailPage/HostCocktailPag
 import AdminIngredientPage from "./components/Main/AdminIngredientPage/AdminIngredientPage";
 import AdminEditIngredientPage from "./components/Main/AdminEditIngredientPage/AdminEditIngredientPage";
 import AdminPage from "./components/Main/AdminPage/AdminPage";
+import MentionsLegalesPage from "./components/Main/MentionsLegalesPage/MentionsLegalesPage";
+import ConfidentialitePage from "./components/Main/ConfidentialitePage/ConfidentialitePage";
 
 export default class App extends Component {
   /**
@@ -165,6 +167,8 @@ export default class App extends Component {
                 <AdminEditIngredientPage mode="edit" {...props} />
               )}
             />
+            <Route path="/mentions-legales" component={MentionsLegalesPage} />
+            <Route path="/confidentialite" component={ConfidentialitePage} />
             <Route path="/" component={() => <div>ERREUR 404</div>} />
           </Switch>
           <Footer />
