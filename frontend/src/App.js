@@ -63,7 +63,12 @@ export default class App extends Component {
       let searchResult = data.search;
       let hasCat = data.cat;
       let categorie;
-      let trieForceAlcool = data.trie.trie;
+      let trie = data.trie.trie;
+
+      if (trie === "manquant") {
+        iManquant = 1;
+        trie = null;
+      }
 
       //Catégorie
       if (hasCat.catCheckedA) {
@@ -84,7 +89,7 @@ export default class App extends Component {
         (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "") +
         (searchResult ? "&search=" + searchResult : "") +
         (categorie ? "&cat=" + categorie : "") +
-        (trieForceAlcool ? "&tri=" + trieForceAlcool : "");
+        (trie ? "&tri=" + trie : "");
     } else {
       url =
         "/cocktails/filtre/?" +

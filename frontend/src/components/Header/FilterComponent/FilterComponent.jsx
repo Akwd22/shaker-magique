@@ -64,8 +64,11 @@ function FilterComponent(props) {
       state.trie = "forcealc";
       state.value = "Force";
     } else if (e.target.value === "avis") {
-      /*state.trie = "avis";
-      state.value = "avis";*/
+      state.trie = "avis";
+      state.value = "avis";
+    } else if (e.target.value === "manquant") {
+      state.trie = "manquant";
+      state.value = "manquant";
     }else if (e.target.value === "default"){
       state.trie = "";
       state.value = "";
@@ -156,6 +159,9 @@ function FilterComponent(props) {
                   </option>
                   <option value="Force" className="sort-options ">
                     Force
+                  </option>
+                  <option value="manquant" className="sort-options ">
+                    1 ingr. manquant
                   </option>
                 </select>
               </div>
