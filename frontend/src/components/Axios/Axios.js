@@ -337,7 +337,7 @@ export async function apiCreateIngredient(ingredient) {
       );
     });
 
-    return ok;
+  return ok;
 }
 
 /**
@@ -424,6 +424,34 @@ export async function apiUpdateIngredientStock(id, stock) {
       );
     });
 
+  return ok;
+}
+
+export async function apiDeleteCocktailsProposer(id) {
+  let ok = true;
+
+  await axiosInstance
+    .delete(`/proposer/detail/${id}/`)
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur suppression proposition cocktails ${id} : ${response.status} ${response.statusText}`
+      );
+    });
+  return ok;
+}
+
+export async function apiGetCocktailsProposer2(id) {
+  let ok = true;
+
+  await axiosInstance
+    .get(`/proposer/detail/${id}/`)
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur get proposition cocktails ${id} : ${response.status} ${response.statusText}`
+      );
+    });
   return ok;
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { apiDeleteCocktailsProposer, apiGetCocktailsProposer, apiGetCocktailsProposer2 } from "../../Axios/Axios";
 import { boolSortType, CheckboxCell, ReactTable } from "../../Table/Table";
 import "./HostCocktailPageTable.css";
 
@@ -24,6 +25,14 @@ export default function HostCocktailPageTable({ cocktails, search }) {
   const [instance, setInstance] = useState(null);
 
   const updateData = (rowIndex, columnId, value) => {
+    if(columnId === "proposer"){
+      if(value){
+        apiGetCocktailsProposer2(data[rowIndex].id);
+      }else{
+        apiDeleteCocktailsProposer(data[rowIndex].id);
+      }
+    }
+
     setData((old) =>
       old.map((row, index) => {
         if (index === rowIndex) {
@@ -46,6 +55,7 @@ export default function HostCocktailPageTable({ cocktails, search }) {
   }
 
   useEffect(() => {
+    console.dir(data);
     setData(cocktails);
   }, [cocktails]);
 
