@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.db.models import Avg
 from user.models import Member
 from shaker.models import *
 import pprint
@@ -17,22 +18,30 @@ class CocktailContenirSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('idingredient', 'intitule', 'degrealcool', 'quantite', 'unite')
         model = Contenir
 
+
 class CocktailSerializer(serializers.ModelSerializer):
     ingredients = CocktailContenirSerializer(read_only=True, source="contenir_set", many=True)
+    note = serializers.SerializerMethodField(method_name="calculate_note")
+
+    def calculate_note(self, obj):
+        avg = Noter.objects.filter(idcocktail=obj.id).aggregate(note=Avg("note"))
+        return avg["note"]
 
     class Meta:
         fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description',
-                'forcealc', 'ingredients')
+                  'forcealc', 'ingredients', 'note')
         model = Cocktail
         depth = 1
+
 
 class CustomCocktailSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description',
-                'forcealc')
+                  'forcealc')
         model = Cocktail
         depth = 1
-        read_only_fields=("illustrationurl",)
+        read_only_fields = ("illustrationurl",)
+
 
 class CocktailImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,41 +49,49 @@ class CocktailImageSerializer(serializers.ModelSerializer):
         model = Cocktail
         depth = 1
 
+
 class ContenirListSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idingredient', 'quantite', 'unite')
         model = Contenir
+
 
 class FavoriSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idmembre')
         model = Favori
 
+
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'intitule', 'degrealcool')
         model = Ingredient
+
 
 class NoterSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idmembre', 'idcocktail', 'note')
         model = Noter
 
+
 class PreferenceSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idingredient', 'idmembre')
         model = Preference
 
+
 class StockerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idingredient', 'idmembre', 'enreserve')
         model = Stocker
-        read_only_fields=("idingredient", "idmembre",)
+        read_only_fields = ("idingredient", "idmembre",)
+
 
 class ProposerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('idcocktail', 'idmembre')
         model = Propose
+
 
 class JoinHostSerializer(serializers.ModelSerializer):
     # Champ qui ne fait pas parti du modèle
