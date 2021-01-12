@@ -21,15 +21,15 @@
   align-items: center;
 }
 
-.testtest {
-  font-size: 10px;
-  scale: 1%
+.cocktailbox-score {
+  margin-bottom: 10px;
 }
 
 .cocktailbox-body {
-  margin: 15px 20px 20px 20px;
   grid-column: 2;
   overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr 40px;
 }
 
 .cocktailbox-body h1 {
@@ -48,10 +48,21 @@
   color: #c05474;
 }
 
-.cocktailbox-body p {
+.cocktailbox-body-content {
+  padding: 15px 20px 20px 20px;
+  height: 100%;
+}
+
+.cocktailbox-body-content p {
   font-size: 16px;
   text-align: justify;
   color: #889296;
+}
+
+.cocktailbox-body-tags {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 3px;
 }
 
 /* Gestion effet hover */

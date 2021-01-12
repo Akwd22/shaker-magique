@@ -2,6 +2,8 @@
   background-color: #ffe2eb;
   border-radius: 23px;
   margin-right: 12px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .cocktail-tag-text {

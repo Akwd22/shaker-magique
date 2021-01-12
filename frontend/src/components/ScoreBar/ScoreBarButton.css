@@ -3,6 +3,14 @@
   border: none;
   outline: none;
   color: #f9f9f9;
+}
+
+.score-bar-btn-small {
+  font-size: 13px;
+  padding-bottom: 5px;
+}
+
+.score-bar-btn-medium {
   font-size: 32px;
 }
 

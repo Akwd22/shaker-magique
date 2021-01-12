@@ -1,5 +1,5 @@
 import React from "react";
-import CocktailTag from "./CocktailTag/CocktailTag";
+import CocktailTag from "../../../CocktailTag/CocktailTag";
 import CocktailIngredient from "./CocktailIngredient/CocktailIngredient";
 import ScoreBar from "../../../ScoreBar/ScoreBar";
 import { Markup } from "interweave";
@@ -66,7 +66,7 @@ class CocktailPageContent extends React.Component {
           }}
         >
           <div className="cocktailPage-left-container-score">
-            <ScoreBar cocktail={this.props.cocktail} readOnly={false} />
+            <ScoreBar cocktail={this.props.cocktail} readOnly={false} size="medium" />
           </div>
         </div>
         <div className="cocktailPage-right-container">

@@ -3,6 +3,7 @@ import "./CocktailBox.css";
 import "../../../variables.css";
 import { Link } from "react-router-dom";
 import ScoreBar from "../../../ScoreBar/ScoreBar";
+import CocktailTag from "../../../CocktailTag/CocktailTag";
 
 class CocktailBox extends React.Component {
   constructor(props) {
@@ -14,13 +15,26 @@ class CocktailBox extends React.Component {
   }
 
   render_ingredients() {
-    //console.dir(this.state.cocktail_data)
     let children = [];
 
     for (const ingredient of this.state.cocktail_data.ingredients) {
       children.push(<p>{ingredient.intitule}</p>);
     }
+
     return children;
+  }
+
+  render_tag() {
+    let text;
+
+    if (this.state.cocktail_data) {
+      text =
+        this.state.cocktail_data.forcealc > 0
+          ? `Force ${this.state.cocktail_data.forcealc}`
+          : "Sans alcool";
+    }
+
+    return <CocktailTag text={text} />;
   }
 
   render() {
@@ -37,13 +51,20 @@ class CocktailBox extends React.Component {
             }}
           >
             <div className="cocktailbox-score">
-              <ScoreBar className="testtest" cocktail={this.state.cocktail_data} readOnly={true} />
+              <ScoreBar
+                cocktail={this.state.cocktail_data}
+                readOnly={true}
+                size="small"
+              />
             </div>
           </div>
           <div className="cocktailbox-body">
-            <h1>{this.state.cocktail_data.intitule}</h1>
-            <h2>Description</h2>
-            {this.render_ingredients()}
+            <div className="cocktailbox-body-content">
+              <h1>{this.state.cocktail_data.intitule}</h1>
+              <h2>Description</h2>
+              {this.render_ingredients()}
+            </div>
+            <div className="cocktailbox-body-tags">{this.render_tag()}</div>
           </div>
           <div className="cocktailbox-overlay">
             <div className="cocktail-overlay-body">

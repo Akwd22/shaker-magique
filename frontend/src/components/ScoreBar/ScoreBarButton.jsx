@@ -23,7 +23,9 @@ export default function ScoreBarButton(props) {
 
   return (
     <button
-      className={"score-bar-btn" + (props.active ? " score-bar-btn-active" : "")}
+      className={
+        "score-bar-btn" + (props.size ? " score-bar-btn-" + props.size : "") + (props.active ? " score-bar-btn-active" : "")
+      }
       type="button"
       onClick={() => props.onClick(props.index)}
     >

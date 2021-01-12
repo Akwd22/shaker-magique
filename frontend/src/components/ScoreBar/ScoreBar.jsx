@@ -53,6 +53,7 @@ export default function ScoreBar(props) {
           index={i}
           filling={getFilling(i)}
           onClick={handleClick}
+          size={props.size}
           active={active}
         />
       );
