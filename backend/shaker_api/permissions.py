@@ -10,7 +10,7 @@ class ProposerPermission(BasePermission):
     def has_permission(self, request, view):
 
         if ("idmembre" in request.data) and request.method == "POST":
-            return (int(request.data["idmembre"]) == int(request.user.id)) or request.user.is_superuser
+            return (int(request.data["idmembre"]) == int(request.user.id)) or request.user.is_staff
 
         return True
 
@@ -23,30 +23,27 @@ class ProposerDetailPermission(BasePermission):
         if request.method in SAFE_METHODS:
             return True
 
-        return (obj.idmembre == request.user) or request.user.is_superuser
+        return (obj.idmembre == request.user) or request.user.is_staff
 
 
 class NoterPermission(BasePermission):
-    """@todo
-    """
-    message = "Vous ne pouvez modifier que vos notes"
+    message = "Vous ne pouvez gérer que vos notes"
 
     def has_permission(self, request, view):
 
-        if request.method in SAFE_METHODS:
-            return True
-
-        # N'importe qui, peut GET
-        if request.method in SAFE_METHODS:
-            return True
-
         # L'admin à tous les droits
-        if (request.user.is_superuser):
+        if (request.user.is_staff):
             return True
+
+        # Un anonyme ne peut pas noter
+        if (request.user.is_anonymous) and request.method == "POST":
+            return False
 
         # Un membre ne peut noter qu'uniquement pour lui-même
+        if request.method == "POST" and ("idmembre" in request.data):
+            return (int(request.data["idmembre"]) == int(request.user.id))
 
-        return False
+        return True
 
 
 class StockerPermission(BasePermission):
@@ -54,7 +51,7 @@ class StockerPermission(BasePermission):
 
     def has_permission(self, request, view):
 
-        if (request.user.is_superuser):
+        if (request.user.is_staff):
             return True
 
         return False
@@ -80,7 +77,7 @@ class PreferencePermission(BasePermission):
             return True
 
         if("idmembre" in request.data) and request.method == "POST":
-            return (int(request.data["idmembre"]) == int(request.user.id)) or request.user.is_superuser
+            return (int(request.data["idmembre"]) == int(request.user.id)) or request.user.is_staff
 
         if not(request.user.id):
             return False
