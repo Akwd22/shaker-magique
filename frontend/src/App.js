@@ -35,7 +35,7 @@ export default class App extends Component {
       filterdata: undefined,
       loading: false,
       currentPage: 1,
-      postsPerPage: 9,
+      postsPerPage: 6,
       totalPosts: 0,
     };
     this.searchFilter = this.searchFilter.bind(this);
@@ -109,7 +109,8 @@ export default class App extends Component {
       .then((response) => {
         state.cocktails = response.data;
         this.setState(state);
-        //console.log(response.data);
+        this.setState({currentPage: 1});
+        console.log(response.data);
       })
       .catch((err) => console.log(err));
     //console.dir(data);
@@ -164,7 +165,8 @@ export default class App extends Component {
               exact
               component={() => (
                 <HomePage
-                  cocktails={currentPosts}
+                  cocktails={this.state.cocktails}
+                  cocktailsSlice={currentPosts}
                   totalPosts={totalPosts}
                   loading={loading}
                   postsPerPage={postsPerPage}
