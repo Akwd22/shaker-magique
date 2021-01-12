@@ -21,7 +21,7 @@ export default class HomePage extends Component {
     return (
       <div className="homepage page">
         <div className="cocktailist-wrapper">
-          <CocktailList cocktails={this.props.cocktails} />
+          <CocktailList cocktails={this.props.cocktailsSlice} />
         </div>
         <div className="pagination-wrapper">
           <Pagination
