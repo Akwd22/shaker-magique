@@ -18,11 +18,14 @@ function AdminEditIngredientPage(props) {
     window.location.replace("/");
   }
 
-  useEffect(async () => {
-    if (props.mode === "edit") {
-      const ingredient = await apiGetIngredient(props.match.params.id);
-      setIngredient(ingredient);
+  useEffect(() => {
+    async function selfFunction() {
+      if (props.mode === "edit") {
+        const ingredient = await apiGetIngredient(props.match.params.id);
+        setIngredient(ingredient);
+      }
     }
+    selfFunction();
   }, []);
 
   const handleChange = (ingredient) => {

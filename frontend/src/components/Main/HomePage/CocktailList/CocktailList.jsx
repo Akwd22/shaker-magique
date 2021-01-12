@@ -2,13 +2,9 @@ import React from "react";
 import CocktailBox from "../CocktailBox_GRID/CocktailBox";
 import "./CocktailList.css";
 import "../../../variables.css";
-import axiosInstance from "../../../Axios/Axios";
 import { Component } from "react";
-import Pagination from "../../Pagination/Pagination";
 export default class CocktailList extends Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   renderCocktails() {
     // Les cocktails n'ont pas encore été chargés

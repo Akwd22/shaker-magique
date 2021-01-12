@@ -113,7 +113,7 @@ export const ButtonCell = ({
   }, [initialValue]);
 
   return (
-    <a className={className + "-button"} onClick={onClick}>
+    <a className={className + "-button"} onClick={onClick} href="#\">
       {children}
     </a>
   );
@@ -131,7 +131,7 @@ export const DeleteButtonCell = (props) => {
 
   return (
     <ButtonCell {...props} onClick={onClick}>
-      <i class="fas fa-trash"></i>
+      <i className="fas fa-trash"></i>
     </ButtonCell>
   );
 };
@@ -147,7 +147,7 @@ export const EditButtonCell = (props) => {
 
   return (
     <ButtonCell {...props} onClick={onClick}>
-      <i class="fas fa-edit"></i>
+      <i className="fas fa-edit"></i>
     </ButtonCell>
   );
 };
@@ -210,9 +210,9 @@ export function ReactTable({
                   <span>
                     {column.isSorted ? (
                       column.isSortedDesc ? (
-                        <i class="fas fa-arrow-down"></i>
+                        <i className="fas fa-arrow-down"></i>
                       ) : (
-                        <i class="fas fa-arrow-up"></i>
+                        <i className="fas fa-arrow-up"></i>
                       )
                     ) : (
                       ""

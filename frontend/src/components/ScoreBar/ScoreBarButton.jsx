@@ -9,11 +9,11 @@ export default function ScoreBarButton(props) {
   const getIcon = () => {
     switch (props.filling) {
       case "empty":
-        return <i class="far fa-star"></i>;
+        return <i className="far fa-star"></i>;
       case "half":
-        return <i class="fas fa-star-half-alt"></i>;
+        return <i className="fas fa-star-half-alt"></i>;
       case "full":
-        return <i class="fas fa-star"></i>;
+        return <i className="fas fa-star"></i>;
       default:
         throw new Error(
           `Valeur '${props.filling}' pour props 'filling' invalide`

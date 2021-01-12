@@ -99,7 +99,7 @@ export default class App extends Component {
         (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "") +
         (searchResult ? "&search=" + searchResult : "") +
         (categorie ? "&cat=" + categorie : "") +
-        (alc == 0 ? "&alc=" + alc : "") +
+        (alc === 0 ? "&alc=" + alc : "") +
         (trie ? "&tri=" + trie : "");
     } else {
       url =

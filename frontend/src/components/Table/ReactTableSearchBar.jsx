@@ -23,7 +23,7 @@ export default function ReactTableSearchBar(props) {
         }}
       />
       <button type="button" onClick={handleClick}>
-        <i class="fas fa-search"></i>
+        <i className="fas fa-search"></i>
       </button>
     </div>
   );

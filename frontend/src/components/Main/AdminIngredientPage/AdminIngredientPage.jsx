@@ -14,8 +14,11 @@ export default function AdminIngredientPage() {
   const [ingredients, setIngredients] = useState([]);
   const [search, setSearch] = useState();
 
-  useEffect(async () => {
-    setIngredients(await apiGetIngredients());
+  useEffect(() => {
+    async function selfFunction() {
+      setIngredients(await apiGetIngredients());
+    }
+    selfFunction();
   }, []);
 
   const handleSearch = (search) => {

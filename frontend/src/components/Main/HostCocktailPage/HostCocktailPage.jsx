@@ -7,7 +7,6 @@ import {
   usePermission,
 } from "../../Axios/Axios";
 import "./HostCocktailPage.css";
-import { useHistory } from "react-router-dom";
 
 function HostCocktailPage() {
   const [cocktails, setCocktails] = useState([]);

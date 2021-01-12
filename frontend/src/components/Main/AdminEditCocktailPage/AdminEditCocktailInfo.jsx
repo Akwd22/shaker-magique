@@ -1,6 +1,4 @@
 import React from "react";
-import { apiGetCocktails } from "../../Axios/Axios";
-import { get_user, is_logged, usePermission } from "../../Axios/Axios";
 import "./AdminEditCocktailInfo.css";
 
 function AdminEditCocktailInfo(props) {
@@ -34,7 +32,7 @@ function AdminEditCocktailInfo(props) {
         }}
       >
         <label for="upload">
-          <i class="fas fa-upload"></i>
+          <i className="fas fa-upload"></i>
         </label>
         <input
           type="file"

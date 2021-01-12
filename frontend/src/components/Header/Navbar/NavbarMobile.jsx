@@ -45,7 +45,7 @@ const NavBarMobile = ({ class_name, action_cross }) => {
     if (get_user() !== user) {
       setUser(get_user());
     }
-  });
+  }, );
 
   return (
     <div className={class_name}>

@@ -2,9 +2,6 @@ import React from "react";
 import "./CocktailIngredient.css";
 
 class CocktailIngredient extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   /**
    * Formater la quantité et l'unité en un affichage convenable
@@ -22,7 +19,7 @@ class CocktailIngredient extends React.Component {
     return (
       <div className="cocktail-ingredient">
         <div className="cocktail-ingredient-icon">
-          <i class="fas fa-arrow-right"></i>
+          <i className="fas fa-arrow-right"></i>
         </div>
         <div className="cocktail-ingredient-text">
           <p>

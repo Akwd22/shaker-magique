@@ -3,12 +3,8 @@ import CocktailTag from "./CocktailTag/CocktailTag";
 import CocktailIngredient from "./CocktailIngredient/CocktailIngredient";
 import ScoreBar from "../../../ScoreBar/ScoreBar";
 import { Markup } from "interweave";
-import { is_logged } from "../../../Axios/Axios";
 
 class CocktailPageContent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   /**
    * Afficher les étiquettes du cocktail
@@ -18,16 +14,16 @@ class CocktailPageContent extends React.Component {
     const cat = this.props.cocktail.categorie;
     const alc = this.props.cocktail.forcealc;
 
-    if (cat == "A") children.push(<CocktailTag text="Apéritif" />);
-    if (cat == "D") children.push(<CocktailTag text="Digestif" />);
-    if (cat == "AD") {
+    if (cat === "A") children.push(<CocktailTag text="Apéritif" />);
+    if (cat === "D") children.push(<CocktailTag text="Digestif" />);
+    if (cat === "AD") {
       children.push(
         <CocktailTag text="Apéritif" />,
         <CocktailTag text="Digestif" />
       );
     }
 
-    if (!alc || alc == 0) {
+    if (!alc || alc === 0) {
       children.push(<CocktailTag text="Sans alcool" />);
     } else {
       children.push(<CocktailTag text={"Force " + alc} />);

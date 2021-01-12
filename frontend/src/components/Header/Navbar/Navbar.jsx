@@ -28,7 +28,7 @@ function Navbar() {
   const log_buttons = function () {
     if (user) {
       return (
-        <div class="profil-logOut-container">
+        <div className="profil-logOut-container">
           <NavLink to="/profil">
             <li>
               <i className="fas fa-user"></i>
@@ -59,7 +59,7 @@ function Navbar() {
     if (get_user() !== user) {
       setUser(get_user());
     }
-  });
+  }, );
 
   return (
     <div className="navbar">
