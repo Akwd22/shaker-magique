@@ -65,19 +65,14 @@ class CocktailPageContent extends React.Component {
             backgroundImage: `url(${this.props.cocktail.illustrationurl})`,
           }}
         >
-          {/*
-          <div className="row-stats">
-            <i class="fas fa-star"></i>
-            </div>
-          */}
+          <div className="cocktailPage-left-container-score">
+            <ScoreBar cocktail={this.props.cocktail} readOnly={false} />
+          </div>
         </div>
         <div className="cocktailPage-right-container">
           <div className="cocktailPage-right-container-header">
             <div className="cocktailPage-right-container-header-row1">
               <h2>{this.props.cocktail.intitule}</h2>
-              {/*<p>
-                Par <span>Prénom</span> <span>Nom</span>
-              </p>*/}
             </div>
             <div className="cocktailPage-right-container-header-cat">
               {this.render_tags()}
@@ -99,10 +94,6 @@ class CocktailPageContent extends React.Component {
               <div className="cocktailPage-desc-container-text">
                 <Markup content={this.format_description()} />
               </div>
-              <ScoreBar
-                cocktail={this.props.cocktail}
-                readOnly={false}
-              />
             </div>
           </div>
         </div>

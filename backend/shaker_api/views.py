@@ -219,7 +219,7 @@ class NoterList(generics.ListCreateAPIView):
         return self.create(request, *args, **kwargs)
 
 
-class NoterUserDetail(generics.RetrieveAPIView):
+class NoterUserDetail(generics.RetrieveDestroyAPIView):
     """La note d'un utilisateur pour un cocktail
     """
     permission_classes = [AllowAny]

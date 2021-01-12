@@ -95,6 +95,17 @@
   text-align: justify;
 }
 
+/* NOTE MOYENNE */
+.cocktailPage-left-container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.cocktailPage-left-container-score {
+  margin-bottom: 30px;
+}
+
 @media screen and (max-width: 1240px) {
   .cocktailPage-container {
     flex-direction: column;

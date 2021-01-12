@@ -1,10 +1,12 @@
 import React from "react";
 import {
+  apiDeleteNoteCocktail,
   apiGetCocktailUserNote,
   apiNoterCocktail,
   is_logged,
 } from "../Axios/Axios";
 import ScoreBarButton from "./ScoreBarButton";
+import "./ScoreBar.css";
 
 export default function ScoreBar(props) {
   const [cocktailAvg, setCocktailAvg] = React.useState(props.cocktail.moyenne);
@@ -61,7 +63,16 @@ export default function ScoreBar(props) {
 
   const handleClick = async (index) => {
     if (!props.readOnly && is_logged()) {
-      const updatedAvg = await apiNoterCocktail(props.cocktail.id, index);
+      let updatedAvg;
+
+      // Si on a re-cliqué sur sa note, alors on retire la note
+      if (index === userScore) {
+        updatedAvg = await apiDeleteNoteCocktail(props.cocktail.id);
+        index = 0;
+      } else {
+        updatedAvg = await apiNoterCocktail(props.cocktail.id, index);
+      }
+
       if (updatedAvg) {
         setCocktailAvg(updatedAvg);
         setUserScore(index);

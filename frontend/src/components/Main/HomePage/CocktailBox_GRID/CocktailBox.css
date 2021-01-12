@@ -16,6 +16,14 @@
     center;
   background-size: cover;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.testtest {
+  font-size: 10px;
+  scale: 1%
 }
 
 .cocktailbox-body {
@@ -37,7 +45,7 @@
   font-weight: 500;
   text-transform: uppercase;
   margin-bottom: 3px;
-  color: #C05474;
+  color: #c05474;
 }
 
 .cocktailbox-body p {

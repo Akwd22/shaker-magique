@@ -2,6 +2,7 @@ import React from "react";
 import "./CocktailBox.css";
 import "../../../variables.css";
 import { Link } from "react-router-dom";
+import ScoreBar from "../../../ScoreBar/ScoreBar";
 
 class CocktailBox extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class CocktailBox extends React.Component {
     };
   }
 
-  render_ingredients(){
+  render_ingredients() {
     //console.dir(this.state.cocktail_data)
     let children = [];
 
@@ -35,7 +36,9 @@ class CocktailBox extends React.Component {
               backgroundImage: `url(${this.state.cocktail_data.illustrationurl})`,
             }}
           >
-            {/*<img src={this.state.cocktail_data.illustrationurl}></img> */}
+            <div className="cocktailbox-score">
+              <ScoreBar className="testtest" cocktail={this.state.cocktail_data} readOnly={true} />
+            </div>
           </div>
           <div className="cocktailbox-body">
             <h1>{this.state.cocktail_data.intitule}</h1>

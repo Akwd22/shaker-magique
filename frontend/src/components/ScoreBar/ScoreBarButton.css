@@ -2,9 +2,14 @@
   background: none;
   border: none;
   outline: none;
+  color: #f9f9f9;
   font-size: 32px;
 }
 
+.score-bar-btn:hover {
+  color: #f3d59a;
+}
+
 .score-bar-btn-active {
-  color: red;
+  color: #ffce6b;
 }

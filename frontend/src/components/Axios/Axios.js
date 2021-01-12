@@ -526,4 +526,31 @@ export async function apiNoterCocktail(id, note) {
   return updatedAvg;
 }
 
+/**
+ * Enlever la note d'un utilisateur pour un cocktail
+ * @param {int} id        ID du cocktail
+ * @returns {number|null} Nouvelle note moyenne
+ */
+export async function apiDeleteNoteCocktail(id) {
+  let ok = true;
+  let updatedAvg;
+
+  // Noter le cocktail
+  await axiosInstance
+    .delete(`/notes/${get_user().id}/${id}/`)
+    .catch(({ response }) => {
+      ok = false;
+      alert(
+        `Erreur suppression note cocktail ${id} pour : ${response.status} ${response.statusText}`
+      );
+    });
+
+  // Récupérer la nouvelle moyenne du cocktail
+  if (ok) {
+    updatedAvg = await apiGetCocktailMoyenne(id);
+  }
+
+  return updatedAvg;
+}
+
 export default axiosInstance;
