@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 import { NavLink } from "react-router-dom";
-import { get_user } from "../../Axios/Axios";
+import { get_user, is_logged } from "../../Axios/Axios";
 
 function Navbar() {
   const [classNav, setStateClassNav] = useState("navbar-mobile none");
@@ -59,7 +59,7 @@ function Navbar() {
     if (get_user() !== user) {
       setUser(get_user());
     }
-  }, );
+  }, [is_logged()]);
 
   return (
     <div className="navbar">

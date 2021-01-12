@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import { NavLink } from "react-router-dom";
-import { get_user } from "../../Axios/Axios";
+import { get_user, is_logged } from "../../Axios/Axios";
 
 const NavBarMobile = ({ class_name, action_cross }) => {
   const [user, setUser] = useState(get_user());
@@ -45,7 +45,7 @@ const NavBarMobile = ({ class_name, action_cross }) => {
     if (get_user() !== user) {
       setUser(get_user());
     }
-  }, );
+  }, [is_logged()]);
 
   return (
     <div className={class_name}>

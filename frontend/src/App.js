@@ -35,7 +35,7 @@ export default class App extends Component {
       filterdata: undefined,
       loading: false,
       currentPage: 1,
-      postsPerPage: 3,
+      postsPerPage: 9,
       totalPosts: 0,
     };
     this.searchFilter = this.searchFilter.bind(this);

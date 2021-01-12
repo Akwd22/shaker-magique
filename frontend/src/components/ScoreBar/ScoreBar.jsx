@@ -14,7 +14,7 @@ export default function ScoreBar(props) {
 
   // Récupérer la note de l'utilisateur
   React.useEffect(async () => {
-    if (is_logged()) {
+    if (!props.readOnly && is_logged()) {
       setUserScore(await apiGetCocktailUserNote(props.cocktail.id));
     }
   }, []);
