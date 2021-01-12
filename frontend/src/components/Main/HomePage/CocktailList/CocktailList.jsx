@@ -4,23 +4,11 @@ import "./CocktailList.css";
 import "../../../variables.css";
 import axiosInstance from "../../../Axios/Axios";
 import { Component } from "react";
-
+import Pagination from "../../Pagination/Pagination";
 export default class CocktailList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
-
-  /*componentDidMount() {
-    this.getCocktails();
-  }
-
-  async getCocktails() {
-    await axiosInstance
-      .get("/cocktails")
-      .then((response) => this.setState({ cocktails: response.data }))
-      .catch((error) => console.log(error));
-  }*/
 
   renderCocktails() {
     // Les cocktails n'ont pas encore été chargés
@@ -31,11 +19,10 @@ export default class CocktailList extends Component {
     for (let i = 0; i < this.props.cocktails.length; i++) {
       t[i] = <CocktailBox cocktail={this.props.cocktails[i]} />;
     }
-
     return t;
   }
 
-  render() {
+  render() {    
     return (
       <div className="cocktaillist">
         <div className="title-page">

@@ -14,17 +14,25 @@ const NavBarMobile = ({ class_name, action_cross }) => {
   const log_buttons = function () {
     if (user) {
       return (
-        <NavLink to="/deconnexion">
-          <li>
-            <i className="fas fa-user"></i>
-            <a href="#/">Déconnexion</a>
-          </li>
-        </NavLink>
+        <span className="profil-logOut-container-mobile">
+          <NavLink to="/profil">
+              <li className="first-liste-nav-mobile">
+                <i className="fas fa-user"></i>
+                <a href="#/">Profil</a>
+              </li>
+          </NavLink>
+          <NavLink to="/deconnexion" className="second-link-nav-mobile">
+              <li c>
+                <i className="fas fa-user"></i>
+                <a href="#/">Déconnexion</a>
+              </li>
+          </NavLink>
+        </span>
       );
     } else {
       return (
         <NavLink to="/connexion">
-          <li>
+          <li className="Login-row-navmobile">
             <i className="fas fa-user"></i>
             <a href="#/">Connexion</a>
           </li>
@@ -54,7 +62,7 @@ const NavBarMobile = ({ class_name, action_cross }) => {
             <a href="#/">rejoindre un hote</a>
           </div>
         </NavLink>
-        <div>{log_buttons()}</div>
+        {log_buttons()}
       </div>
       <FontAwesomeIcon
         icon={faTimes}

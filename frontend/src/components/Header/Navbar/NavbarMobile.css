@@ -1,3 +1,7 @@
+.none {
+  display: none !important;
+}
+
 .navbar-mobile {
   background-image: linear-gradient(135deg, #bb4e75 10%, #ff9d6c 100%);
   display: block;
@@ -53,8 +57,7 @@
   display: flex;
 }
 
-
-.container-nav-mobile-div:last-child div{
+.container-nav-mobile-div:last-child div {
   border-bottom: none;
 }
 
@@ -78,4 +81,16 @@
   right: 10px;
   top: 10px;
   cursor: pointer;
+}
+
+.profil-logOut-container-mobile {
+  flex-direction: column;
+}
+
+.profil-logOut-container-mobile li, .Login-row-navmobile {
+  padding: 25px;
+}
+
+.first-liste-nav-mobile {
+  border-bottom: 1px solid #ccc;
 }

@@ -1,0 +1,9 @@
+.homepage{
+    flex-direction: column;
+}
+
+.cocktail-loagind-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

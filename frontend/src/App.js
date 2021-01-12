@@ -30,14 +30,21 @@ export default class App extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = { cocktails: "", filterdata: undefined };
+    this.state = {
+      cocktails: [],
+      filterdata: undefined,
+      loading: false,
+      currentPage: 1,
+      postsPerPage: 9,
+      totalPosts: 0,
+    };
     this.searchFilter = this.searchFilter.bind(this);
   }
   /**
    *
    * @param {*} data
    */
-  searchFilter(data) {
+   async searchFilter(data) {
     let url;
     let state = this.state;
     let hasHote = get_hote();
@@ -97,7 +104,7 @@ export default class App extends Component {
     }
     //console.dir(state.filterdata);
 
-    axiosInstance
+    await axiosInstance
       .get(url)
       .then((response) => {
         state.cocktails = response.data;
@@ -108,10 +115,42 @@ export default class App extends Component {
     //console.dir(data);
   }
 
+
+  componentDidMount() {
+    const getCocktails = async () => {
+      this.setState({ loading: true });
+      await this.searchFilter();
+      this.setState({ loading: false });
+    };
+
+    getCocktails();
+  }
+
   /**
    * Rendu des composants
    */
   render() {
+    const { currentPage, postsPerPage, cocktails, loading } = this.state;
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = cocktails.slice(indexOfFirstPost, indexOfLastPost);
+    let totalPosts = cocktails.length;
+
+    const paginate = (pageNum) => this.setState({ currentPage: pageNum });
+    
+    const nextPage = () => {
+      currentPage === indexOfLastPost
+        ? this.setState({ currentPage: currentPage })
+        : this.setState({ currentPage: currentPage + 1 });
+    };
+
+    const prevPage = () => {
+      currentPage === 1
+        ? this.setState({ currentPage: currentPage })
+        : this.setState({ currentPage: currentPage - 1 });
+    };
+
     return (
       <div className="app">
         <Router>
@@ -123,7 +162,17 @@ export default class App extends Component {
             <Route
               path="/"
               exact
-              component={() => <HomePage cocktails={this.state.cocktails} />}
+              component={() => (
+                <HomePage
+                  cocktails={currentPosts}
+                  totalPosts={totalPosts}
+                  loading={loading}
+                  postsPerPage={postsPerPage}
+                  paginate={paginate}
+                  nextPage={nextPage}
+                  prevPage={prevPage}
+                />
+              )}
             />
             <Route path="/cocktail/:id" component={CocktailPage} />
             <Route path="/inscription" component={RegisterPage} />

@@ -86,8 +86,8 @@ function Navbar() {
             action={action_bars}
           ></Button>
         </div>
-        <NavBarMobile class_name={classNav} action_cross={action_cross} />
       </nav>
+      <NavBarMobile class_name={classNav} action_cross={action_cross} />
     </div>
   );
 }
