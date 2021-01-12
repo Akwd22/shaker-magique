@@ -5,7 +5,7 @@ import {
   apiGetCocktail,
   apiUpdateCocktail,
 } from "../../Axios/Axios";
-import { get_user, is_logged, usePermission } from "../../Axios/Axios";
+import { usePermission } from "../../Axios/Axios";
 import AdminEditCocktailInfo from "./AdminEditCocktailInfo";
 import AdminEditCocktailTable from "./AdminEditCocktailTable";
 import "./AdminEditCocktailPage.css";
@@ -37,7 +37,7 @@ function AdminEditCocktailPage(props) {
       ingredients.forEach((i) => {
         // ... cocher, celui qui est contenu dans le cocktail
         selected.forEach((j) => {
-          if (i.id == j.idingredient) {
+          if (i.id === j.idingredient) {
             i.contenir = true;
             i.quantite = j.quantite;
             i.unite = j.unite;

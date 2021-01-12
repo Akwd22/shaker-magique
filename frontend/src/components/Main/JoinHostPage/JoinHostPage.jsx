@@ -24,9 +24,9 @@ class JoinHostPage extends React.Component {
       })
       .then((response) => {
         // Vérifier que l'hôte existe
-        if (response.status == 200) {
+        if (response.status === 200) {
           // Si le login n'est pas vide, on le rejoint
-          if (this.state.host_login != "") {
+          if (this.state.host_login !== "") {
             localStorage.setItem(
               "hote_rejoint",
               JSON.stringify({
@@ -45,9 +45,9 @@ class JoinHostPage extends React.Component {
         }
       })
       .catch((error) => {
-        if (error.response.status == 404) {
+        if (error.response.status === 404) {
           alert("L'hôte " + this.state.host_login + " n'existe pas.");
-        } else if (error.response.status == 403) {
+        } else if (error.response.status === 403) {
           alert("Vous ne pouvez pas vous rejoindre vous-même.");
         } else {
           alert("Erreur HTTP inconnue : " + error.response.status);

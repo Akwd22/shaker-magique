@@ -2,9 +2,6 @@ import React from "react";
 import "./CocktailTag.css";
 
 class CocktailTag extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

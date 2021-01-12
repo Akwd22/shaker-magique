@@ -1,5 +1,4 @@
 import React from "react";
-import { apiDeleteCocktail } from "../../Axios/Axios";
 import {
   CheckboxCell,
   EditboxCell,

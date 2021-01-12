@@ -35,7 +35,7 @@ export default class App extends Component {
       filterdata: undefined,
       loading: false,
       currentPage: 1,
-      postsPerPage: 6,
+      postsPerPage: 3,
       totalPosts: 0,
     };
     this.searchFilter = this.searchFilter.bind(this);
@@ -44,7 +44,8 @@ export default class App extends Component {
    *
    * @param {*} data
    */
-   async searchFilter(data) {
+  async searchFilter(data) {
+    console.dir(data)
     let url;
     let state = this.state;
     let hasHote = get_hote();
@@ -69,8 +70,10 @@ export default class App extends Component {
       state.filterdata = data;
       let searchResult = data.search;
       let hasCat = data.cat;
+      let hasCatSa = data.catSa
       let categorie;
       let trie = data.trie.trie;
+      let alc
 
       if (trie === "manquant") {
         iManquant = 1;
@@ -84,8 +87,8 @@ export default class App extends Component {
       if (hasCat.catCheckedD) {
         categorie = "D";
       }
-      if (hasCat.catCheckedSA) {
-        categorie = "SA";
+      if (hasCatSa.catCheckedSA) {
+        alc = 0;
       }
       if (hasCat.catCheckedA && hasCat.catCheckedD) {
         categorie = "AD";
@@ -96,6 +99,7 @@ export default class App extends Component {
         (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "") +
         (searchResult ? "&search=" + searchResult : "") +
         (categorie ? "&cat=" + categorie : "") +
+        (alc === 0 ? "&alc=" + alc : "") +
         (trie ? "&tri=" + trie : "");
     } else {
       url =
@@ -109,13 +113,12 @@ export default class App extends Component {
       .then((response) => {
         state.cocktails = response.data;
         this.setState(state);
-        this.setState({currentPage: 1});
+        this.setState({ currentPage: 1 });
         console.log(response.data);
       })
       .catch((err) => console.log(err));
     //console.dir(data);
   }
-
 
   componentDidMount() {
     const getCocktails = async () => {
@@ -139,7 +142,7 @@ export default class App extends Component {
     let totalPosts = cocktails.length;
 
     const paginate = (pageNum) => this.setState({ currentPage: pageNum });
-    
+
     const nextPage = () => {
       currentPage === indexOfLastPost
         ? this.setState({ currentPage: currentPage })

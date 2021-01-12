@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./FilterComponent.css";
 import { get_hote } from "../../Axios/Axios";
 
@@ -14,6 +14,9 @@ function FilterComponent(props) {
     //De base la checkbox n'est pas coché
     catCheckedA: false,
     catCheckedD: false,
+  });
+
+  const [SaCat, setSaCat] = useState({
     catCheckedSA: false,
   });
 
@@ -23,17 +26,23 @@ function FilterComponent(props) {
   });
 
   useEffect(() => {
-    setDataSearchBar({search: props.filterData ? props.filterData.search : ""});
+    setDataSearchBar({
+      search: props.filterData ? props.filterData.search : "",
+    });
     setDataCat({
       catCheckedA: props.filterData ? props.filterData.cat.catCheckedA : false,
       catCheckedD: props.filterData ? props.filterData.cat.catCheckedD : false,
-      catCheckedSA: props.filterData ? props.filterData.cat.catCheckedSA : false,
+    });
+    setSaCat({
+      catCheckedSA: props.filterData
+        ? props.filterData.cat.catCheckedSA
+        : false,
     });
 
     setDataTriForce({
       trie: props.filterData ? props.filterData.trie.trie : "",
       value: props.filterData ? props.filterData.trie.value : "",
-    })
+    });
 
     props.filterFunction(undefined);
   }, []);
@@ -45,10 +54,10 @@ function FilterComponent(props) {
     props.filterFunction({
       search: dataSearchBar.search,
       cat: dataCat,
+      catSa: SaCat,
       hote: get_hote(),
       trie: dataTriForce,
     });
-    //console.dir(dataCat);
   };
 
   //Fonction appelé lorsque l'on écrit dans la barre de recherche
@@ -69,12 +78,12 @@ function FilterComponent(props) {
     } else if (e.target.value === "manquant") {
       state.trie = "manquant";
       state.value = "manquant";
-    }else if (e.target.value === "default"){
+    } else if (e.target.value === "default") {
       state.trie = "";
       state.value = "";
     }
 
-    setDataTriForce({...state});
+    setDataTriForce({ ...state });
   };
 
   //Fonction appelé lorsque l'on choisit une catégorie dans la liste des checkboxs
@@ -90,11 +99,16 @@ function FilterComponent(props) {
     if (e.target.id === "checkBox-apero") {
       state.catCheckedA = e.target.checked;
     }
+    setDataCat({ ...state });
+  };
+
+  const handleChangeCheckboxSansAlcool = (e) => {
+    let state = SaCat;
     if (e.target.id === "checkBox-sans-alcool") {
       state.catCheckedSA = e.target.checked;
-    } 
-    setDataCat({...state});
-  };
+    }
+    setSaCat({...state});
+  }
 
   return (
     <div className="filter-component">
@@ -137,8 +151,8 @@ function FilterComponent(props) {
                 <input
                   type="checkbox"
                   id="checkBox-sans-alcool"
-                  checked={dataCat.catCheckedSA}
-                  onChange={handleChangeCheckbox}
+                  checked={SaCat.catCheckedSA}
+                  onChange={handleChangeCheckboxSansAlcool}
                 ></input>
                 <label htmlFor="checkBox-sans-alcool">Sans alcool</label>
               </div>
@@ -151,9 +165,7 @@ function FilterComponent(props) {
                   value={dataTriForce.value}
                   onChange={(e) => handleChangeSelectBox(e)}
                 >
-                  <option value="default">
-                    Trier par...
-                  </option>
+                  <option value="default">Trier par...</option>
                   <option value="avis" className="sort-options">
                     Avis
                   </option>

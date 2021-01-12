@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { apiGetCocktails } from "../../Axios/Axios";
 import AdminCocktailTable from "./AdminCocktailTable";
 import AdminCocktailsFilter from "./AdminCocktailsFilter";
-import { get_user, is_logged, usePermission } from "../../Axios/Axios";
+import { usePermission } from "../../Axios/Axios";
 import "./AdminCocktailsPage.css";
 import { useHistory } from "react-router-dom";
 
@@ -15,8 +15,15 @@ function AdminCocktailsPage() {
   const [cocktails, setCocktails] = React.useState([]);
   const [search, setSearch] = React.useState();
 
-  React.useEffect(async () => {
-    setCocktails(await apiGetCocktails());
+  // React.useEffect(async () => {
+  //   setCocktails(await apiGetCocktails());
+  // }, []);
+
+  useEffect(() => {
+    async function selfFunction() {
+      setCocktails(await apiGetCocktails());
+    }
+    selfFunction();
   }, []);
 
   const handleSearch = (search) => {

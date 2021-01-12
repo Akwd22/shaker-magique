@@ -21,19 +21,19 @@ export class Pagination extends Component {
         <ul className="pagination pagination-container">
           <div className="wrapper-link">
             <li className="page-item">
-              <a className="page-link" href="#" onClick={() => prevPage()}>
+              <a className="page-link" href="\#" onClick={() => prevPage()}>
                 précédent
               </a>
             </li>
             {pageNumbers.map((num) => (
               <li className="page-item" key={num}>
-                <a onClick={() => paginate(num)} href="#" className="page-link">
+                <a onClick={() => paginate(num)} href="\#" className="page-link">
                   {num}
                 </a>
               </li>
             ))}
             <li className="page-item">
-              <a className="page-link" href="#" onClick={() => nextPage()}>
+              <a className="page-link" href="\#" onClick={() => nextPage()}>
                 suivant
               </a>
             </li>
