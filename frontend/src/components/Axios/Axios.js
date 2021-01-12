@@ -444,15 +444,86 @@ export async function apiDeleteCocktailsProposer(id) {
 export async function apiGetCocktailsProposer2(id) {
   let ok = true;
 
+  await axiosInstance.get(`/proposer/detail/${id}/`).catch(({ response }) => {
+    ok = false;
+    alert(
+      `Erreur get proposition cocktails ${id} : ${response.status} ${response.statusText}`
+    );
+  });
+
+  return ok;
+}
+
+/**
+ * Récupérer la note d'un utilisateur pour un cocktail
+ * @param {int} id        ID du cocktail
+ * @returns {number|null} Note de l'utilisateur'
+ */
+export async function apiGetCocktailUserNote(id) {
+  let score;
+
   await axiosInstance
-    .get(`/proposer/detail/${id}/`)
+    .get(`/notes/${get_user().id}/${id}/`)
+    .then(({ data }) => {
+      score = data.note;
+    })
+    .catch(({ response }) => {
+      /*alert(
+        `Erreur get note utilisateur pour cocktail ${id} : ${response.status} ${response.statusText}`
+      );*/
+    });
+
+  return score;
+}
+
+/**
+ * Récupérer la moyenne d'un cocktail
+ * @param {int} id        ID du cocktail
+ * @returns {number|null} Moyenne du cocktail
+ */
+export async function apiGetCocktailMoyenne(id) {
+  let avg;
+
+  await axiosInstance
+    .get(`/notes/${id}/`)
+    .then(({ data }) => {
+      avg = data.moyenne;
+    })
+    .catch(({ response }) => {
+      alert(
+        `Erreur get moyenne cocktail ${id} : ${response.status} ${response.statusText}`
+      );
+    });
+
+  return avg;
+}
+
+/**
+ * Noter un cocktail
+ * @param {int} id        ID du cocktail
+ * @param {number} note   Note désirée
+ * @returns {number|null} Nouvelle note moyenne
+ */
+export async function apiNoterCocktail(id, note) {
+  let ok = true;
+  let updatedAvg;
+
+  // Noter le cocktail
+  await axiosInstance
+    .post(`/notes/`, { idmembre: get_user().id, idcocktail: id, note: note })
     .catch(({ response }) => {
       ok = false;
       alert(
-        `Erreur get proposition cocktails ${id} : ${response.status} ${response.statusText}`
+        `Erreur noter ${note} cocktail ${id} pour : ${response.status} ${response.statusText}`
       );
     });
-  return ok;
+
+  // Récupérer la nouvelle moyenne du cocktail
+  if (ok) {
+    updatedAvg = await apiGetCocktailMoyenne(id);
+  }
+
+  return updatedAvg;
 }
 
 export default axiosInstance;

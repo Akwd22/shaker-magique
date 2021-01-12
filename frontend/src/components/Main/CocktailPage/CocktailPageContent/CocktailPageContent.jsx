@@ -1,7 +1,9 @@
 import React from "react";
 import CocktailTag from "./CocktailTag/CocktailTag";
 import CocktailIngredient from "./CocktailIngredient/CocktailIngredient";
+import ScoreBar from "../../../ScoreBar/ScoreBar";
 import { Markup } from "interweave";
+import { is_logged } from "../../../Axios/Axios";
 
 class CocktailPageContent extends React.Component {
   constructor(props) {
@@ -97,6 +99,10 @@ class CocktailPageContent extends React.Component {
               <div className="cocktailPage-desc-container-text">
                 <Markup content={this.format_description()} />
               </div>
+              <ScoreBar
+                cocktail={this.props.cocktail}
+                readOnly={false}
+              />
             </div>
           </div>
         </div>

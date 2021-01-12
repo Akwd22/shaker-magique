@@ -15,7 +15,6 @@ from django.db.models import Count, Sum
 import json
 
 
-
 class CocktailList(generics.ListAPIView):
     """Liste de tous les cocktails
     """
@@ -25,6 +24,7 @@ class CocktailList(generics.ListAPIView):
     serializer_class = CocktailSerializer                     # Classe de sérialisation associée
     queryset = Cocktail.objects.all()
 
+
 class CocktailCreate(generics.CreateAPIView):
     # permet d'ajouter de nouveaux cocktails (Create)
     permission_classes = [IsAdminUser]
@@ -32,7 +32,7 @@ class CocktailCreate(generics.CreateAPIView):
 
 
 # class CocktailCreate(generics.CreateAPIView):
-#     permission_classes = [IsAdminUser] 
+#     permission_classes = [IsAdminUser]
 #     serializer_class=CustomCocktailSerializer
 
 #     def post(self, request, format='json'):
@@ -41,7 +41,7 @@ class CocktailCreate(generics.CreateAPIView):
 #         if serializer.is_valid():
 #             serializer.save()
 #             return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)    
+#         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -53,6 +53,7 @@ class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer
+
 
 class CocktailImage(generics.RetrieveUpdateAPIView):
     permission_classes = [AllowAny]
@@ -89,11 +90,11 @@ class CocktailSearch(generics.ListAPIView):
     def list(self, request, *args, **kwargs):
         instances = Cocktail.objects.all()
 
-        search    = request.query_params.get("search")
-        cat       = request.query_params.get("cat")
-        hote      = request.query_params.get("hote")
-        tri       = request.query_params.get("tri")
-        alc       = request.query_params.get("alc")
+        search = request.query_params.get("search")
+        cat = request.query_params.get("cat")
+        hote = request.query_params.get("hote")
+        tri = request.query_params.get("tri")
+        alc = request.query_params.get("alc")
         manquants = request.query_params.get("manquants")
 
         # Récupérer que les cocktails d'un hôte
@@ -109,23 +110,23 @@ class CocktailSearch(generics.ListAPIView):
             instances = instances.filter(forcealc=0) | instances.filter(forcealc=None)
 
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
-            #rhum vodka, ananas
+            # rhum vodka, ananas
         if(search):
             ouet = search.split(",")
             ou = ouet[0].split(" ")
-            et=[]
-            if (len(ouet)>1):
+            et = []
+            if (len(ouet) > 1):
                 et = ouet[1].split(" ")
 
             temp = {}
-            n=0
+            n = 0
             for i in ou:
                 temp[n] = (instances.filter(ingredients__intitule__icontains=i) | instances.filter(intitule__icontains=i)).distinct()
                 for j in et:
                     temp[n] = temp[n].filter(ingredients__intitule__icontains=j) | temp[n].filter(intitule__icontains=j)
-                n+=1
+                n += 1
             for x in range(n):
-                instances =  temp[0].union(temp[x])
+                instances = temp[0].union(temp[x])
 
         # Filtrer par nombre d'ingrédients manquants
         if (hote and manquants):
@@ -162,7 +163,7 @@ class ContenirDetail(generics.ListCreateAPIView):
         ingredients = Contenir.objects.filter(idcocktail=self.kwargs['idcocktail'])
         for ingredient in ingredients:
             ingredient.delete()
-        return self.create(request, *args,**kwargs)
+        return self.create(request, *args, **kwargs)
 
     def get_queryset(self):
         return Contenir.objects.filter(idcocktail=self.kwargs['idcocktail'])
@@ -194,6 +195,7 @@ class IngredientsList(generics.ListCreateAPIView):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
 
+
 class IngredientsDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Ingredient.objects.all()
@@ -206,6 +208,41 @@ class NoterList(generics.ListCreateAPIView):
     permission_classes = [NoterPermission]
     queryset = Noter.objects.all()
     serializer_class = NoterSerializer
+
+    def post(self, request, *args, **kwargs):
+        obj = Noter.objects.filter(idcocktail=request.data["idcocktail"], idmembre=request.data["idmembre"])
+
+        # Supprimer la note existante s'il y en avait une
+        if (obj):
+            obj.delete()
+
+        return self.create(request, *args, **kwargs)
+
+
+class NoterUserDetail(generics.RetrieveAPIView):
+    """La note d'un utilisateur pour un cocktail
+    """
+    permission_classes = [AllowAny]
+    serializer_class = NoterSerializer
+    lookup_field = "idmembre"
+
+    def get_queryset(self):
+        return Noter.objects.filter(idcocktail=self.kwargs["idcocktail"], idmembre=self.kwargs["idmembre"])
+
+
+class NoterAvgCocktail(generics.RetrieveAPIView):
+    """La note moyenne d'un cocktail
+    """
+    permission_classes = [AllowAny]
+    serializer_class = NoterSerializer
+    lookup_field = "idcocktail"
+
+    def get_queryset(self):
+        return Noter.objects.filter(idcocktail=self.kwargs["idcocktail"])
+
+    def retrieve(self, request, *args, **kwargs):
+        avg = Noter.objects.filter(idcocktail=self.kwargs["idcocktail"]).aggregate(moyenne=Avg("note"))
+        return Response({"idcocktail": self.kwargs["idcocktail"], "moyenne": avg["moyenne"]})
 
 
 class PreferenceList(generics.ListCreateAPIView):
@@ -227,15 +264,18 @@ class StockList(generics.ListCreateAPIView):
     queryset = Preference.objects.all()
     serializer_class = PreferenceSerializer
 
+
 class StockCurrent(generics.ListAPIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     serializer_class = StockerSerializer
     queryset = Stocker.objects.all()
+
     def get_queryset(self):
         return Stocker.objects.filter(idmembre=self.request.user.id)
 
+
 class StockUpdate(generics.RetrieveUpdateAPIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     serializer_class = StockerSerializer
     lookup_field = 'idingredient'
 
@@ -250,11 +290,12 @@ class ProposerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Propose.objects.all()
     serializer_class = ProposerSerializer
     lookup_field = 'idcocktail'
-    
+
     def get_queryset(self, *args, **kwargs):
         queryset = Propose.objects.get_or_create(idmembre=self.request.user, idcocktail=Cocktail.objects.get(pk=self.kwargs['idcocktail']))
         queryset = Propose.objects.filter(idmembre=self.request.user, idcocktail=Cocktail.objects.get(pk=self.kwargs['idcocktail']))
         return queryset
+
 
 class ProposerListByMember(generics.ListCreateAPIView):
     permission_classes = [ProposerPermission]

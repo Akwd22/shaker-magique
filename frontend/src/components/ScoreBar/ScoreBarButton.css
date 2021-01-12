@@ -1,0 +1,10 @@
+.score-bar-btn {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 32px;
+}
+
+.score-bar-btn-active {
+  color: red;
+}
