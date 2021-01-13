@@ -8,17 +8,16 @@ export class Pagination extends Component {
   render() {
     // Valiables utile pour la pagination
     const {
-      postsPerPage,
-      totalPosts,
       paginate,
       nextPage,
       prevPage,
     } = this.props;
     const pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-      pageNumbers.push(i);
-    }
+    pageNumbers.push(1);
+    pageNumbers.push(Math.max(this.props.indexMaxPage));
+
+
 
     return (
       <nav className="pagination-container">
@@ -31,7 +30,11 @@ export class Pagination extends Component {
             </li>
             {pageNumbers.map((num) => (
               <li className="page-item" key={num}>
-                <a onClick={() => paginate(num)} href="\#" className="page-link">
+                <a
+                  onClick={() => paginate(num)}
+                  href="\#"
+                  className="page-link"
+                >
                   {num}
                 </a>
               </li>
