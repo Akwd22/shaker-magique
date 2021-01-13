@@ -12,6 +12,7 @@ export default function SignIn() {
   });
 
   const [formData, updateFormData] = useState(initialFormData);
+  const [lastError, setLastError] = useState();
 
   const handleChange = (e) => {
     updateFormData({
@@ -64,6 +65,7 @@ export default function SignIn() {
                 placeholder="Mot de passe"
                 onChange={handleChange}
               />
+              {lastError && <p className="error-msg">{lastError}</p>}
             </div>
             <div className="lp-left-side-remember">
               <input type="checkbox" id="checkBoxRemember" />

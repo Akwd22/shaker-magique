@@ -40,6 +40,11 @@ body {
   }
 }
 
+/* Messages d'erreur */
+.error-msg {
+  color: red;
+}
+
 /* Responsive */
 
 @media screen and (max-width: 768px) {

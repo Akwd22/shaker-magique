@@ -54,6 +54,7 @@
   border: none;
   outline: none;
   cursor: pointer;
+  margin-top: 5px;
 }
 
 @media screen and (max-width: 1024px) {
