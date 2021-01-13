@@ -82,17 +82,6 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-'''DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # on utilise l'adaptateur postgresql
-        'NAME': 'remy-dut_pts3',  # le nom de notre base de donnees creee precedemment
-        'USER': 'root',  # attention : remplacez par votre nom d'utilisateur
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}'''
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

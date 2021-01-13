@@ -14,11 +14,8 @@ from django.db.models.query import *
 from django.db.models import Count, Sum
 import json
 
-
+#vue de tous les cocktails(List)
 class CocktailList(generics.ListAPIView):
-    """Liste de tous les cocktails
-    """
-    # Vue qui liste (List) tous les cocktails,
 
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]  # Classe(s) de permission utilisée(s)
     serializer_class = CocktailSerializer                     # Classe de sérialisation associée
@@ -27,50 +24,32 @@ class CocktailList(generics.ListAPIView):
         queryset = Cocktail.objects.prefetch_related('contenir_set')
         return queryset
 
-
+#vue de creation d'un cocktail
 class CocktailCreate(generics.CreateAPIView):
-    # permet d'ajouter de nouveaux cocktails (Create)
     permission_classes = [IsAdminUser]
     serializer_class = CustomCocktailSerializer
 
-
-# class CocktailCreate(generics.CreateAPIView):
-#     permission_classes = [IsAdminUser]
-#     serializer_class=CustomCocktailSerializer
-
-#     def post(self, request, format='json'):
-#         print(request.data)
-#         serializer = CustomCocktailSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
-
-
+# Vue qui affiche le détail d'un cocktail,
 class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
-    """Détail d'un cocktail*
-    """
-    # Vue qui affiche le détail (Retrieve) d'un cocktail,
-    # permet aussi de le modifier (Update), et supprimer (Destroy)
 
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Cocktail.objects.all()
     serializer_class = CocktailSerializer
 
-
+#vue de l'image d'un cocktail
 class CocktailImage(generics.RetrieveUpdateAPIView):
     permission_classes = [AllowAny]
     queryset = Cocktail.objects.all()
     serializer_class = CocktailImageSerializer
 
-
+#vue d'une recherche
 class CocktailSearch(generics.ListAPIView):
     """Liste des cocktails par filtrage
 
     Paramètres URL :
     - hote=<int>
     - cat=(A|D|AD)
-    - search=ananas+citron
+    - search='rhum vodka, citron' ici la recherche correspond a 'rhum et citron ou vodka et citron'
     - tri=<nom de la colonne>
     - manquants=<int>
     - alc=(0|1)
@@ -115,7 +94,6 @@ class CocktailSearch(generics.ListAPIView):
             instances = instances.filter(forcealc=0) | instances.filter(forcealc=None)
 
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
-            # rhum vodka, ananas
         if(search):
             ouet = search.split(",")
             ou = ouet[0].split(" ")
@@ -161,7 +139,7 @@ class CocktailSearch(generics.ListAPIView):
         serializer = self.get_serializer(instances, many=True)
         return Response(serializer.data)
 
-
+#vue des ingredients d'un cocktail
 class ContenirDetail(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Contenir.objects.all()
@@ -198,18 +176,17 @@ class FavoriList(generics.ListCreateAPIView):
     queryset = Favori.objects.all()
     serializer_class = FavoriSerializer
 
-
+#vue de tous les ingrédients
 class IngredientsList(generics.ListCreateAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
 
-
+#vue d'un ingredient(admin)
 class IngredientsDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
-
 
 class NoterList(generics.ListCreateAPIView):
     """Toutes les notes de tous les cocktails
@@ -273,7 +250,7 @@ class StockList(generics.ListCreateAPIView):
     queryset = Preference.objects.all()
     serializer_class = PreferenceSerializer
 
-
+#vue des ingredients de l'utilisateur actuel
 class StockCurrent(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = StockerSerializer
@@ -282,7 +259,7 @@ class StockCurrent(generics.ListAPIView):
     def get_queryset(self):
         return Stocker.objects.filter(idmembre=self.request.user.id)
 
-
+#vue de modification des ingredient d'un utilisateur
 class StockUpdate(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = StockerSerializer
@@ -293,7 +270,7 @@ class StockUpdate(generics.RetrieveUpdateAPIView):
         queryset = Stocker.objects.filter(idmembre=self.request.user, idingredient=Ingredient.objects.get(pk=self.kwargs['idingredient']))
         return queryset
 
-
+#vue d'un cocktail de l'utilisateur actuel
 class ProposerDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [ProposerPermission]
     queryset = Propose.objects.all()
@@ -305,14 +282,13 @@ class ProposerDetail(generics.RetrieveUpdateDestroyAPIView):
         queryset = Propose.objects.filter(idmembre=self.request.user, idcocktail=Cocktail.objects.get(pk=self.kwargs['idcocktail']))
         return queryset
 
-
+#vue des cocktails d'un utilisateurs
 class ProposerListByMember(generics.ListCreateAPIView):
     permission_classes = [ProposerPermission]
     serializer_class = ProposerSerializer
 
     def get_queryset(self):
         return Propose.objects.filter(idmembre=self.kwargs['idmembre'])
-
     '''def get_serializer_class(self):
         serializer_class = self.serializer_class
 
@@ -322,21 +298,9 @@ class ProposerListByMember(generics.ListCreateAPIView):
         return serializer_class'''
 
 
-class ProposeDetail(generics.RetrieveDestroyAPIView):
-    """[summary]
-    Uniquement les cocktails que nous proposons en tant qu'hôte
-                    Args    : 
-            generics ([type]): [description]
-    """
-    permission_classes = [ProposerDetailPermission]
-    queryset = Propose.objects.all()
-    serializer_class = ProposerSerializer
-
-
+# Visualiser l'hôte d'un membre, en joindre ou en quitter un.
+# Pour quitter un hôte, ne rien renseigner comme login.
 class JoinHost(generics.RetrieveUpdateAPIView):
-    """Visualiser l'hôte d'un membre, en joindre ou en quitter un.
-    Pour quitter un hôte, ne rien renseigner comme login.
-    """
     permission_classes = [JoinHostPermission]
     serializer_class = JoinHostSerializer
     queryset = Member.objects.all()
@@ -355,11 +319,10 @@ class JoinHost(generics.RetrieveUpdateAPIView):
 
         serializer.save(id_hote=hote)
 
-
+# Joindre un hôte en tant qu'anonyme.
+# Si l'hôte existe, le code de retour HTTP est 200, sinon 404.
 class JoinHostAnon(generics.UpdateAPIView):
-    """Joindre un hôte en tant qu'anonyme.
-    Si l'hôte existe, le code de retour HTTP est 200, sinon 404.
-    """
+    
     permission_classes = [AllowAny]
     serializer_class = JoinHostSerializer
     queryset = Member.objects.none()
