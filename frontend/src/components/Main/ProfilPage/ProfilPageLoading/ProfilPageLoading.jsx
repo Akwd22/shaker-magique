@@ -1,6 +1,9 @@
 import React from 'react'
 import "../ProfilPage.css"
 
+/**
+ * Composant ProfilPageLoading
+ */
 function ProfilPageLoading() {
     return (
         <div>

@@ -3,7 +3,14 @@ import { apiDeleteCocktailsProposer, apiGetCocktailsProposer, apiGetCocktailsPro
 import { boolSortType, CheckboxCell, ReactTable } from "../../Table/Table";
 import "./HostCocktailPageTable.css";
 
+/**
+ * Composant HostCocktailPageTable
+ * @param {*} param0 
+ */
 export default function HostCocktailPageTable({ cocktails, search }) {
+  /**
+   * Colonne de la table
+   */
   const columns = useMemo(
     () => [
       {
@@ -20,10 +27,11 @@ export default function HostCocktailPageTable({ cocktails, search }) {
     []
   );
 
+  // Variables d'étas
   const [data, setData] = useState(cocktails);
-
   const [instance, setInstance] = useState(null);
 
+  // Fonction appelé lors de la mise à jour de la table
   const updateData = (rowIndex, columnId, value) => {
     if(columnId === "proposer"){
       if(value){

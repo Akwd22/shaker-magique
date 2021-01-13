@@ -8,13 +8,26 @@ import {
 } from "../../Axios/Axios";
 import "./HostCocktailPage.css";
 
+/**
+ * Composant HostCocktailPage
+ */
 function HostCocktailPage() {
+  /**
+   * Variables d'états
+   */
   const [cocktails, setCocktails] = useState([]);
   const [search, setSearch] = useState();
   const isUser = usePermission("user");
 
+  /**
+   * Page accessible uniquement si on est connecté
+   */
   if (!isUser) window.location.replace("/");
 
+  /**
+   * Fonction de recherche des cocktails parmis la liste
+   * @param {*} search 
+   */
   const handleSearch = (search) => {
     setSearch(search);
   };
@@ -36,6 +49,7 @@ function HostCocktailPage() {
       });
     });
 
+    //On met à jour l'état
     setCocktails(cocktails);
   }, []);
 

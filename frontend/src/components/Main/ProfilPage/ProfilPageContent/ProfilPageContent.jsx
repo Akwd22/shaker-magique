@@ -6,30 +6,39 @@ import orangejuice from "../../../../assets/imgs/orangejuice.png";
 import axiosInstance from "../../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
+/**
+ * Composant ProfilPageContent
+ * @param {*} props 
+ */
 export default function ProfilPageContent(props) {
   const pseudoInputRef = useRef(null);
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const history = useHistory();
 
+  /**
+   * Fonction appelé lorsque le formulaire est validé
+   * @param {*} e 
+   */
   const handle_submit = (e) => {
     e.preventDefault();
-    axiosInstance
+    axiosInstance //Requete
       .patch("user/current/", {
-        user_name: pseudoInputRef.current.value,
+        user_name: pseudoInputRef.current.value, //On envoie les informations que l'on souhaite modfier 
         email: emailInputRef.current.value,
         password: passwordInputRef.current.value
-          ? passwordInputRef.current.value
-          : undefined,
+          ? passwordInputRef.current.value //Si on ne modifie pas le mot de passe
+          : undefined,                     // On envoie pas le champs "password"
       })
       .then(() => {
-        window.location.reload();
+        window.location.reload(); // Lorsque l'on a envoyer la requette on recharger la page
       })
       .catch((err) => {
         console.dir(err);
       });
   };
 
+  /** Fonction de redirection  */
   const routeChangeLogOut = () => {
     let path = `/deconnexion`;
     history.push(path);
@@ -52,7 +61,7 @@ export default function ProfilPageContent(props) {
           <img
             className="profilPage-left-container-icon"
             src={iconProfil}
-            alt=""
+            alt="Icon de décoration pour votre profil"
           />
         </div>
         <div className="profilPage-left-container-infos">
@@ -100,7 +109,7 @@ export default function ProfilPageContent(props) {
             <img
               className="img-righ-container img-rigt-1"
               src={cocktail}
-              alt=""
+              alt="Icone symbolisant un cocktail "
             />
             <button onClick={routeChangeHostCocktails}>
               Consulter sa liste de cocktails
@@ -110,7 +119,7 @@ export default function ProfilPageContent(props) {
             <img
               className="img-righ-container img-rigt-2"
               src={orangejuice}
-              alt=""
+              alt="Icone symbolisant un fruit"
             />
             <button onClick={routeChangeHostIngredients}>
               Consulter sa liste d'ingrédients

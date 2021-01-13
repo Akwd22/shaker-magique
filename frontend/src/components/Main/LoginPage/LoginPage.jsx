@@ -4,16 +4,25 @@ import "../../variables.css";
 import axiosInstance, { apiUserConnect } from "../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
+/**
+ * Composant SignIn
+ */
 export default function SignIn() {
-  const history = useHistory();
+  const history = useHistory(); // avoir l'url
+  // Valeurs initiales pour le formulaire de connexion
   const initialFormData = Object.freeze({
     username: "",
     password: "",
   });
 
+  //variable détat
   const [formData, updateFormData] = useState(initialFormData);
   const [lastError, setLastError] = useState();
 
+  /**
+   * Fonction appelé dès que la valeur des inputs changent
+   * @param {*} e
+   */
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -71,7 +80,10 @@ export default function SignIn() {
           <a href="/inscription">Inscription</a>
         </div>
       </div>
-      <div className="lp-right-side"></div>
+      <div
+        className="lp-right-side"
+        alt="Image d'un cocktail coloré a droite de vos informations de connexion"
+      ></div>
     </div>
   );
 }

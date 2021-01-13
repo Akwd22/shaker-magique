@@ -5,10 +5,16 @@ import AdminIngredientTable from "./AdminIngredientTable";
 import { apiGetIngredients, usePermission } from "../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
+/**
+ * Composant AdminIngredientPage
+ */
 export default function AdminIngredientPage() {
   const isAdmin = usePermission("admin");
   const history = useHistory();
 
+  /**
+   * Page accessible uniquement en tant qu'administateur
+   */
   if (!isAdmin) history.replace("/");
 
   const [ingredients, setIngredients] = useState([]);

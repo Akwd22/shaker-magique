@@ -25,6 +25,7 @@ function AdminEditCocktailInfo(props) {
     <div className="admin-edit-cocktail-info">
       <div
         className="admin-edit-cocktail-info-col1"
+        alt="Image du cocktail que vous pouvez soit ajouté ou modifié"
         style={{
           backgroundImage: image
             ? `url(${window.URL.createObjectURL(image)})`
@@ -32,7 +33,7 @@ function AdminEditCocktailInfo(props) {
         }}
       >
         <label for="upload">
-          <i className="fas fa-upload"></i>
+          <i className="fas fa-upload" alt="Icon pour upload sa photo de cocktail"></i>
         </label>
         <input
           type="file"

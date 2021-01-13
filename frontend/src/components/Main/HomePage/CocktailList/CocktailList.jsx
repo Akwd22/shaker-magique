@@ -3,9 +3,13 @@ import CocktailBox from "../CocktailBox_GRID/CocktailBox";
 import "./CocktailList.css";
 import "../../../variables.css";
 import { Component } from "react";
+/**
+ * Composant CocktailList
+ */
 export default class CocktailList extends Component {
-
-
+  /**
+   *Fonction qui affiche tout les cocktailBox
+   */
   renderCocktails() {
     // Les cocktails n'ont pas encore été chargés
     if (!this.props.cocktails) return;
@@ -18,7 +22,7 @@ export default class CocktailList extends Component {
     return t;
   }
 
-  render() {    
+  render() {
     return (
       <div className="cocktaillist">
         <div className="title-page">

@@ -4,16 +4,21 @@ import "./ProfilPage.css";
 import ProfilPageContent from "./ProfilPageContent/ProfilPageContent";
 import ProfilPageLoading from "./ProfilPageLoading/ProfilPageLoading";
 
+/**
+ * Composant ProfilPage
+ */
 function ProfilPage() {
+  // variable d'état
   const [userState, setUserState] = useState({
     user: get_user() ? get_user() : "",
     isLogin: false,
     loading: true,
   });
 
+  /**Fonction pour récupérer le profil de l'utilisateur connecté */
   const get_profil = () => {
     axiosInstance
-      .patch("user/current/")
+      .patch("user/current/") // requete
       .then((response) => {
         setUserState({ loading: false, isLogin: true, user: response.data });
       })
@@ -22,6 +27,9 @@ function ProfilPage() {
       });
   };
 
+  /**
+   * Tant que le composant est monté on execute la fonction get_profil()
+   */
   useEffect(() => {
     get_profil();
   }, []);

@@ -11,21 +11,30 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { get_user, is_logged } from "../../Axios/Axios";
 
+/**
+ * Composant Navbar
+ */
 function Navbar() {
+  //Etat qui change la classe de la navbar pour pouvoir s'adapter lorsque l'on est sur un format mobile
   const [classNav, setStateClassNav] = useState("navbar-mobile none");
+  // Etat pour savoir si l'utilisateur est connecté
   const [user, setUser] = useState(get_user());
 
+  // Fonction appellé lorsque l'on clique sur le bouton hamburger en format mobile
   const action_bars = (e) => {
     e.preventDefault();
     setStateClassNav("navbar-mobile slide_to_left");
   };
 
+    // Fonction appellé lorsque l'on re-clique sur le bouton hamburger pour fermer la sidebar en format mobile
   const action_cross = (e) => {
     e.preventDefault();
     setStateClassNav("navbar-mobile slide_to_right");
   };
 
+  // Fonction d'affichage conditionnel, on change les composant de la navbar si on est connecté ou non
   const log_buttons = function () {
+    //Si on est connecté
     if (user) {
       return (
         <div className="profil-logOut-container">
@@ -44,6 +53,7 @@ function Navbar() {
         </div>
       );
     } else {
+      // Déconnecté
       return (
         <NavLink to="/connexion">
           <li>
@@ -55,6 +65,7 @@ function Navbar() {
     }
   };
 
+  //Hook d'effet appellé dès que le composant est monté 
   useEffect(() => {
     if (get_user() !== user) {
       setUser(get_user());

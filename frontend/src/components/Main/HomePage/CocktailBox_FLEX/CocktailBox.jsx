@@ -9,7 +9,7 @@ function CocktailBox() {
       <div className="cocktailbox-container">
         <div className="cocktail-box-container-row">
           <div className="container-col-img">
-            <img className="" src="img/placeholder.jpg" alt=""></img>
+            <img className="" src="img/placeholder.jpg" ></img>
           </div>
           <div className="container-col-desc">
             <h2>Description</h2>
