@@ -271,7 +271,7 @@ class StockUpdate(generics.RetrieveUpdateAPIView):
         return queryset
 
 #vue d'un cocktail de l'utilisateur actuel
-class ProposerDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProposerDetail(generics.RetrieveDestroyAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Propose.objects.all()
     serializer_class = ProposerSerializer
