@@ -95,11 +95,15 @@ class CocktailSearch(generics.ListAPIView):
 
         # Filtrer par mots-clés (recherche dans titre cocktail et titre ingrédients)
         if(search):
+            import pprint
+            p=pprint.PrettyPrinter()
             ouet = search.split(",")
             et = ouet[0].split(" ")
+            ouet.pop(0)
             ou = []
-            if (len(ouet) > 1):
-                ou = ouet[1].split(" ")
+            for i in ouet:
+                ou += i.split(" ")
+                p.pprint(ou)
             n = 0
             temp = {}
             for i in et:
