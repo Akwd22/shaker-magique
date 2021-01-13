@@ -119,15 +119,7 @@ class CocktailSearch(generics.ListAPIView):
                 stock = Stocker.objects.filter(idmembre=hote)                                  # Les ingredients de l'hôte
                 stock = stock.filter(idingredient__in=cocktail.ingredients.values_list("id"))  # Les ingredients de l'hôte qui correspondent au cocktail
 
-                # Exclure le cocktail car l'hôte ne possède un ou plusieurs ingrédients du cocktail
-                if (cocktail.ingredients.count() != stock.count()):
-                    instances = instances.exclude(pk=cocktail.id)
-                    continue
-
-                nb_manquants = 0
-                # Si le cocktail possède des ingrédients (fix bug)
-                if (cocktail.ingredients.count() > 0):
-                    nb_manquants = stock.count() - stock.aggregate(Sum('enreserve'))['enreserve__sum']  # Calcul du nombre d'ingrédients manquants
+                nb_manquants = cocktail.ingredients.count() -stock.filter(enreserve=1).aggregate(Count('enreserve')) # Calcul du nombre d'ingrédients manquants
 
                 # Exclure le cocktail s'il ne respecte pas le critère du nombre d'ingrédients manquants
                 if (nb_manquants != int(manquants)):
