@@ -17,7 +17,11 @@ class CustomUserCreate(APIView):
     def post(self, request, format='json'):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
-            user = serializer.save()
+            try:
+                user = serializer.save()
+            except:
+                return Response(serializer.errors, status=status.HTTP_409_CONFLICT)
+
             if user:
                 json = serializer.data
                 # Ajouter le nouveau compte au groupe "Membre"
@@ -47,26 +51,6 @@ class CurentUserView(generics.RetrieveUpdateDestroyAPIView):
     def get_object(self):
         obj = Member.objects.get(user_name=self.request.user.user_name)
         return obj
-
-    # def update(self, request, *args, **kwargs):
-    #     if (request.data.get("password")):
-    #         try:
-    #             validate_password(request.data["password"])
-    #         except:
-    #             return Response({"password": "validators"})
-
-    #     partial = kwargs.pop('partial', False)
-    #     instance = self.get_object()
-    #     serializer = self.get_serializer(instance, data=request.data, partial=partial)
-    #     serializer.is_valid(raise_exception=True)
-    #     self.perform_update(serializer)
-
-    #     if getattr(instance, '_prefetched_objects_cache', None):
-    #         # If 'prefetch_related' has been applied to a queryset, we need to
-    #         # forcibly invalidate the prefetch cache on the instance.
-    #         instance._prefetched_objects_cache = {}
-
-    #     return Response(serializer.data)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

@@ -672,4 +672,25 @@ export async function apiUpdateUserProfile(data) {
   return updatedData;
 }
 
+/**
+ * Créer un nouveau compte
+ * @param {*} data Nouvelles données
+ */
+export async function apiCreateAccount(data) {
+  let updatedData;
+
+  await axiosInstance.post(`user/register/`, data).catch((error) => {
+    if (error.response.status === 409)
+      throw new APIError("Le nom d'utilisateur ou l'e-mail est déjà utilisé.", error.response);
+    if (error.response.status === 400) {
+      if (error.response.data.password)
+        throw new APIError(error.response.data.password, error.response);
+    }
+
+    APIError.unhandledException(error);
+  });
+
+  return updatedData;
+}
+
 export default axiosInstance;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./RegisterPage.css";
 import "../../variables.css";
-import axiosInstance from "../../Axios/Axios";
+import axiosInstance, { apiCreateAccount } from "../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
 /**
@@ -22,6 +22,7 @@ export default function SignUp() {
   });
 
   const [formData, updateFormData] = useState(initialFormData);
+  const [lastError, setLastError] = useState();
 
   // Fonction appelé dès le changement des inputs
   const handleChange = (e) => {
@@ -34,13 +35,18 @@ export default function SignUp() {
 
   /**
    * Fonction appellé dès que le fomulaire est validé
-   * @param {*} e 
+   * @param {*} e
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axiosInstance //requete au serveur backend
-      .post(`user/register/`, { // données à envoyer 
+    if (formData.password !== formData.passwordConfirm) {
+      setLastError("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    try {
+      await apiCreateAccount({
         gender: formData.gender,
         email: formData.email,
         user_name: formData.username,
@@ -49,16 +55,13 @@ export default function SignUp() {
         first_name: formData.firstname,
         last_name: formData.lastname,
         birthday: formData.birthday,
-      })
-      .then((res) => {
-        history.push("/connexion"); // Une fois la requette envoyé, redirection sur la page de connexion
-        console.log(res);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
       });
+      history.replace("/connexion");
+    } catch (e) {
+      setLastError(e.message);
+    }
   };
+
   return (
     <div className="page register-page-component">
       <div className="page-left-side">
@@ -111,13 +114,7 @@ export default function SignUp() {
                   onChange={handleChange}
                 />
               </div>
-              <input
-                type="date"
-                name="birthday"
-                id="birthday"
-                onChange={handleChange}
-                required
-              />
+              <input type="date" name="birthday" id="birthday" onChange={handleChange} required />
               <input
                 type="text"
                 name="username"
@@ -134,9 +131,7 @@ export default function SignUp() {
                 onChange={handleChange}
                 required
               />
-              <span>
-                6 caractères minimum, au moins 1 chiffre et une lettre{" "}
-              </span>
+              <span>6 caractères minimum, au moins 1 chiffre et une lettre </span>
               <input
                 type="password"
                 name="password"
@@ -154,11 +149,11 @@ export default function SignUp() {
                 required
               />
             </div>
+            {lastError && <p className="error-msg">{lastError}</p>}
             <div className="left-side-policy">
               <input type="checkbox" id="checkBoxPolicy" required />
               <label htmlFor="checkBoxPolicy">
-                J'ai lu et j'accepte votre{" "}
-                <a href="#/">Politique de Confidentialité </a>
+                J'ai lu et j'accepte la <a href="/confidentialite">politique de confidentialité</a>
               </label>
             </div>
             <div className="left-side-button">
@@ -167,7 +162,10 @@ export default function SignUp() {
           </form>
         </div>
       </div>
-      <div className="page-right-side" alt="Image d'un cocktail coloré a droite de vos informations d'inscriptions"></div>
+      <div
+        className="page-right-side"
+        alt="Image d'un cocktail coloré a droite de vos informations d'inscriptions"
+      ></div>
     </div>
   );
 }
