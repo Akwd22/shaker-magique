@@ -21,17 +21,11 @@ class CocktailContenirSerializer(serializers.HyperlinkedModelSerializer):
 
 class CocktailSerializer(serializers.ModelSerializer):
     ingredients = CocktailContenirSerializer(read_only=True, source="contenir_set", many=True)
-    moyenne = serializers.SerializerMethodField(method_name="calculate_note")
-
-    def calculate_note(self, obj):
-        avg = Noter.objects.filter(idcocktail=obj.id).aggregate(moyenne=Avg("note"))
-        return avg["moyenne"]
 
     class Meta:
         fields = ('id', 'intitule', 'illustrationurl', 'categorie', 'description',
-                  'forcealc', 'ingredients', 'moyenne')
+                   'forcealc', 'ingredients', 'moyenne')
         model = Cocktail
-        depth = 1
 
 
 class CustomCocktailSerializer(serializers.ModelSerializer):

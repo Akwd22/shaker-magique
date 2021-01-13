@@ -74,10 +74,8 @@ export default function ScoreBar(props) {
         updatedAvg = await apiNoterCocktail(props.cocktail.id, index);
       }
 
-      if (updatedAvg) {
-        setCocktailAvg(updatedAvg);
-        setUserScore(index);
-      }
+      setCocktailAvg(updatedAvg);
+      setUserScore(index);
     }
   };
 

@@ -22,7 +22,10 @@ class CocktailList(generics.ListAPIView):
 
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]  # Classe(s) de permission utilisée(s)
     serializer_class = CocktailSerializer                     # Classe de sérialisation associée
-    queryset = Cocktail.objects.all()
+
+    def get_queryset(self):
+        queryset = Cocktail.objects.prefetch_related('contenir_set')
+        return queryset
 
 
 class CocktailCreate(generics.CreateAPIView):
@@ -83,12 +86,14 @@ class CocktailSearch(generics.ListAPIView):
 
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = CocktailSerializer
-    queryset = Cocktail.objects.all()
     #filter_backends = [filters.SearchFilter]
     #search_fields = ['intitule']
 
+    def get_queryset(self):
+        return Cocktail.objects.prefetch_related('contenir_set')
+
     def list(self, request, *args, **kwargs):
-        instances = Cocktail.objects.all()
+        instances = self.get_queryset()
 
         search = request.query_params.get("search")
         cat = request.query_params.get("cat")
@@ -147,7 +152,11 @@ class CocktailSearch(generics.ListAPIView):
 
         # Trier les cocktails
         if (tri):
-            instances = instances.order_by(tri)
+            if (tri == "moyenne"):
+                # moyenne étant un attribut n'existant pas dans la BDD, il faut trier avec la méthode Python
+                instances = sorted(instances, key=lambda x: (x.moyenne is not None, x.moyenne), reverse=True)
+            else:
+                instances = instances.order_by(tri)
 
         serializer = self.get_serializer(instances, many=True)
         return Response(serializer.data)
@@ -208,7 +217,7 @@ class NoterList(generics.ListCreateAPIView):
     permission_classes = [NoterPermission]
     queryset = Noter.objects.all()
     serializer_class = NoterSerializer
-
+        
     def post(self, request, *args, **kwargs):
         obj = Noter.objects.filter(idcocktail=request.data["idcocktail"], idmembre=request.data["idmembre"])
 

@@ -72,9 +72,9 @@ function FilterComponent(props) {
     if (e.target.value === "Force") {
       state.trie = "forcealc";
       state.value = "Force";
-    } else if (e.target.value === "avis") {
-      state.trie = "avis";
-      state.value = "avis";
+    } else if (e.target.value === "moyenne") {
+      state.trie = "moyenne";
+      state.value = "moyenne";
     } else if (e.target.value === "manquant") {
       state.trie = "manquant";
       state.value = "manquant";
@@ -166,8 +166,8 @@ function FilterComponent(props) {
                   onChange={(e) => handleChangeSelectBox(e)}
                 >
                   <option value="default">Trier par...</option>
-                  <option value="avis" className="sort-options">
-                    Avis
+                  <option value="moyenne" className="sort-options">
+                    Note
                   </option>
                   <option value="Force" className="sort-options ">
                     Force

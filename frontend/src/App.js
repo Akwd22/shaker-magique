@@ -33,7 +33,7 @@ export default class App extends Component {
     this.state = {
       cocktails: [],
       filterdata: undefined,
-      loading: false,
+      loading: true,
       currentPage: 1,
       postsPerPage: 9,
       totalPosts: 0,
@@ -45,7 +45,6 @@ export default class App extends Component {
    * @param {*} data
    */
   async searchFilter(data) {
-    console.dir(data)
     let url;
     let state = this.state;
     let hasHote = get_hote();
@@ -114,20 +113,11 @@ export default class App extends Component {
         state.cocktails = response.data;
         this.setState(state);
         this.setState({ currentPage: 1 });
+        this.setState({ loading: false });
         console.log(response.data);
       })
       .catch((err) => console.log(err));
     //console.dir(data);
-  }
-
-  componentDidMount() {
-    const getCocktails = async () => {
-      this.setState({ loading: true });
-      await this.searchFilter();
-      this.setState({ loading: false });
-    };
-
-    getCocktails();
   }
 
   /**

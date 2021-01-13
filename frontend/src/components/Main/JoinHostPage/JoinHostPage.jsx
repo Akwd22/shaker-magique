@@ -19,7 +19,7 @@ class JoinHostPage extends React.Component {
     const current_user = get_user();
 
     axiosInstance
-      .patch("joindre_hote/" + (current_user ? current_user.id : "")  , {
+      .patch("joindre_hote/" + (current_user ? current_user.id : "") + "/" , {
         hote_login: this.state.host_login,
       })
       .then((response) => {
