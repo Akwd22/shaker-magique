@@ -11,7 +11,7 @@ import LoginPage from "./components/Main/LoginPage/LoginPage";
 import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
 import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 import { Component } from "react";
-import axiosInstance, { get_hote } from "./components/Axios/Axios";
+import axiosInstance, { get_hote, get_user, is_logged } from "./components/Axios/Axios";
 import ProfilPage from "./components/Main/ProfilPage/ProfilPage";
 import AdminCocktailsPage from "./components/Main/AdminCocktailsPage/AdminCocktailsPage";
 import AdminEditCocktailPage from "./components/Main/AdminEditCocktailPage/AdminEditCocktailPage";
@@ -57,6 +57,20 @@ export default class App extends Component {
     }
 
     /**
+     * Construire le paramètre hôte et manquants
+     * @returns {string} Query string hôte, manquants
+     */
+    const getHoteManquant = () => {
+      let params = hasHote ? `hote=${id_hote}&manquants=${iManquant}` : "";
+
+      if (!hasHote && is_logged() && iManquant > 0) {
+        params = `hote=${get_user().id}&manquants=${iManquant}`;
+      }
+
+      return params;
+    };
+
+    /**
      * Rechargé les filtres si on ne provient pas de la barre de recherche
      */
     if (!data) {
@@ -69,10 +83,10 @@ export default class App extends Component {
       state.filterdata = data;
       let searchResult = data.search;
       let hasCat = data.cat;
-      let hasCatSa = data.catSa
+      let hasCatSa = data.catSa;
       let categorie;
       let trie = data.trie.trie;
-      let alc
+      let alc;
 
       if (trie === "manquant") {
         iManquant = 1;
@@ -95,15 +109,13 @@ export default class App extends Component {
 
       url =
         "/cocktails/filtre/?" +
-        (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "") +
+        (getHoteManquant()) +
         (searchResult ? "&search=" + searchResult : "") +
         (categorie ? "&cat=" + categorie : "") +
         (alc === 0 ? "&alc=" + alc : "") +
         (trie ? "&tri=" + trie : "");
     } else {
-      url =
-        "/cocktails/filtre/?" +
-        (hasHote ? "hote=" + id_hote + "&manquants=" + iManquant : "");
+      url = "/cocktails/filtre/?" + (getHoteManquant());
     }
     //console.dir(state.filterdata);
 
@@ -130,13 +142,15 @@ export default class App extends Component {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = cocktails.slice(indexOfFirstPost, indexOfLastPost);
     let totalPosts = cocktails.length;
-    
-    let indexMaxPage =  Math.ceil(totalPosts / postsPerPage);
 
-    const paginate = (pageNum) => {this.setState({ currentPage: pageNum })};
+    let indexMaxPage = Math.ceil(totalPosts / postsPerPage);
+
+    const paginate = (pageNum) => {
+      this.setState({ currentPage: pageNum });
+    };
 
     const nextPage = () => {
-      console.log(indexMaxPage)
+      console.log(indexMaxPage);
       currentPage === indexMaxPage
         ? this.setState({ currentPage: currentPage })
         : this.setState({ currentPage: currentPage + 1 });
@@ -151,10 +165,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <Router>
-          <Header
-            filterFunction={this.searchFilter}
-            filterData={this.state.filterdata}
-          />
+          <Header filterFunction={this.searchFilter} filterData={this.state.filterdata} />
           <Switch>
             <Route
               path="/"
@@ -179,35 +190,21 @@ export default class App extends Component {
             <Route path="/deconnexion" component={LogoutPage} />
             <Route path="/rejoindre-hote" component={JoinHostPage} />
             <Route path="/profil" component={ProfilPage} />
-            <Route
-              path="/hote/cocktails"
-              exact
-              component={HostCocktailPage}
-            ></Route>
+            <Route path="/hote/cocktails" exact component={HostCocktailPage}></Route>
             <Route path="/hote/ingredients" component={HostIngredientsPage} />
             <Route path="/admin" exact component={AdminPage} />
-            <Route
-              path="/admin/cocktails"
-              exact
-              component={AdminCocktailsPage}
-            />
+            <Route path="/admin/cocktails" exact component={AdminCocktailsPage} />
             <Route
               path="/admin/cocktails/modifier/:id"
               exact
-              component={(props) => (
-                <AdminEditCocktailPage mode="edit" {...props} />
-              )}
+              component={(props) => <AdminEditCocktailPage mode="edit" {...props} />}
             />
             <Route
               path="/admin/cocktails/creer"
               exact
               component={() => <AdminEditCocktailPage mode="create" />}
             />
-            <Route
-              path="/admin/ingredients"
-              exact
-              component={AdminIngredientPage}
-            />
+            <Route path="/admin/ingredients" exact component={AdminIngredientPage} />
             <Route
               path="/admin/ingredients/creer"
               exact
@@ -216,9 +213,7 @@ export default class App extends Component {
             <Route
               path="/admin/ingredients/modifier/:id"
               exact
-              component={(props) => (
-                <AdminEditIngredientPage mode="edit" {...props} />
-              )}
+              component={(props) => <AdminEditIngredientPage mode="edit" {...props} />}
             />
             <Route path="/mentions-legales" component={MentionsLegalesPage} />
             <Route path="/confidentialite" component={ConfidentialitePage} />
