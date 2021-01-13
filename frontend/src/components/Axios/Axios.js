@@ -602,9 +602,9 @@ export async function apiUserConnect(login, password) {
     })
     .catch((error) => {
       if (error.response.status === 401) {
-        throw new APIError("Nom d'utilisateur ou mot de passe invalide", error.response);
+        throw new APIError("Nom d'utilisateur ou mot de passe invalide.", error.response);
       } else if (error.response.status === 400) {
-        throw new APIError("Tous les champs sont obligatoires", error.response);
+        throw new APIError("Tous les champs sont obligatoires.", error.response);
       } else {
         APIError.unhandledException(error);
       }
@@ -623,6 +623,53 @@ export async function apiUserLogout() {
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
   axiosInstance.defaults.headers["Authorization"] = null;
+}
+
+/**
+ * Récupérer le profil de l'utilisateur
+ * @returns {*} Profil
+ */
+export async function apiGetCurrentUser() {
+  let data;
+
+  await axiosInstance
+    .patch("user/current/")
+    .then((response) => {
+      data = response.data;
+    })
+    .catch((error) => {
+      APIError.unhandledException(error);
+    });
+
+  return data;
+}
+
+/**
+ * Mettre à jour le profil de l'utilisateur
+ * @param {*} data Nouvelles données
+ */
+export async function apiUpdateUserProfile(data) {
+  let updatedData;
+
+  await axiosInstance
+    .patch("user/current/", data)
+    .then(({ data }) => {
+      updatedData = data;
+    })
+    .catch((error) => {
+      if (error.response.status === 400) {
+        if (error.response.data.user_name)
+          throw new APIError(error.response.data.user_name, error.response);
+        if (error.response.data.email)
+          throw new APIError(error.response.data.email, error.response);
+        if (error.response.data.password)
+          throw new APIError(error.response.data.password, error.response);
+      }
+
+      APIError.unhandledException(error);
+    });
+
+  return updatedData;
 }
 
 export default axiosInstance;

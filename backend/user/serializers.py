@@ -55,3 +55,4 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ('user_name', "email","password",)  
+        extra_kwargs = {'password': {'write_only': True, 'required': False}}

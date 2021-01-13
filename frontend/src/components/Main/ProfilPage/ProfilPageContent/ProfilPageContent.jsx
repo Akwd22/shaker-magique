@@ -1,41 +1,42 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "../ProfilPage.css";
 import iconProfil from "../../../../assets/imgs/iconProfil.png";
 import cocktail from "../../../../assets/imgs/cocktail.png";
 import orangejuice from "../../../../assets/imgs/orangejuice.png";
-import axiosInstance from "../../../Axios/Axios";
+import axiosInstance, { apiUpdateUserProfile } from "../../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
 /**
  * Composant ProfilPageContent
- * @param {*} props 
+ * @param {*} props
  */
 export default function ProfilPageContent(props) {
   const pseudoInputRef = useRef(null);
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
+  const [lastError, setLastError] = useState();
   const history = useHistory();
 
   /**
    * Fonction appelé lorsque le formulaire est validé
-   * @param {*} e 
+   * @param {*} e
    */
-  const handle_submit = (e) => {
+  const handle_submit = async (e) => {
     e.preventDefault();
-    axiosInstance //Requete
-      .patch("user/current/", {
-        user_name: pseudoInputRef.current.value, //On envoie les informations que l'on souhaite modfier 
+
+    try {
+      await apiUpdateUserProfile({
+        user_name: pseudoInputRef.current.value, //On envoie les informations que l'on souhaite modfier
         email: emailInputRef.current.value,
         password: passwordInputRef.current.value
           ? passwordInputRef.current.value //Si on ne modifie pas le mot de passe
-          : undefined,                     // On envoie pas le champs "password"
-      })
-      .then(() => {
-        window.location.reload(); // Lorsque l'on a envoyer la requette on recharger la page
-      })
-      .catch((err) => {
-        console.dir(err);
+          : undefined, // On envoie pas le champs "password"
       });
+
+      window.location.reload();
+    } catch (e) {
+      setLastError(e.message);
+    }
   };
 
   /** Fonction de redirection  */
@@ -92,6 +93,7 @@ export default function ProfilPageContent(props) {
                 ref={passwordInputRef}
               />
             </div>
+            {lastError && <p className="error-msg">{lastError}</p>}
           </form>
           <div className="left-container-last-row">
             <div className="profilPage-left-form-button">
@@ -111,9 +113,7 @@ export default function ProfilPageContent(props) {
               src={cocktail}
               alt="Icone symbolisant un cocktail "
             />
-            <button onClick={routeChangeHostCocktails}>
-              Consulter sa liste de cocktails
-            </button>
+            <button onClick={routeChangeHostCocktails}>Consulter sa liste de cocktails</button>
           </div>
           <div className="right-container-infos-row">
             <img
@@ -121,9 +121,7 @@ export default function ProfilPageContent(props) {
               src={orangejuice}
               alt="Icone symbolisant un fruit"
             />
-            <button onClick={routeChangeHostIngredients}>
-              Consulter sa liste d'ingrédients
-            </button>
+            <button onClick={routeChangeHostIngredients}>Consulter sa liste d'ingrédients</button>
           </div>
         </div>
       </div>

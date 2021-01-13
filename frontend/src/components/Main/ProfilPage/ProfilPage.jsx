@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance, { get_user } from "../../Axios/Axios";
+import { useHistory } from "react-router-dom";
+import axiosInstance, { apiGetCurrentUser, get_user } from "../../Axios/Axios";
 import "./ProfilPage.css";
 import ProfilPageContent from "./ProfilPageContent/ProfilPageContent";
 import ProfilPageLoading from "./ProfilPageLoading/ProfilPageLoading";
@@ -8,6 +9,8 @@ import ProfilPageLoading from "./ProfilPageLoading/ProfilPageLoading";
  * Composant ProfilPage
  */
 function ProfilPage() {
+  const history = useHistory();
+
   // variable d'état
   const [userState, setUserState] = useState({
     user: get_user() ? get_user() : "",
@@ -16,15 +19,12 @@ function ProfilPage() {
   });
 
   /**Fonction pour récupérer le profil de l'utilisateur connecté */
-  const get_profil = () => {
-    axiosInstance
-      .patch("user/current/") // requete
-      .then((response) => {
-        setUserState({ loading: false, isLogin: true, user: response.data });
-      })
-      .catch((err) => {
-        console.dir("Erreur HTTP " + err.response.status);
-      });
+  const get_profil = async () => {
+    const data = await apiGetCurrentUser();
+
+    if (data) {
+      setUserState({ user: data, isLogin: true, loading: false });
+    }
   };
 
   /**
@@ -45,7 +45,7 @@ function ProfilPage() {
           <h2>Vous devez être connecté pour acceder à votre profil</h2>
           <button
             onClick={() => {
-              window.location.href = "/connexion";
+              history.replace("/connexion");
             }}
           >
             Se connecter
