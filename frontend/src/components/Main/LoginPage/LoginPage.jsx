@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import "../../variables.css";
-import axiosInstance from "../../Axios/Axios";
+import axiosInstance, { apiUserConnect } from "../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
 export default function SignIn() {
@@ -21,25 +21,15 @@ export default function SignIn() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axiosInstance
-      .post(`token/`, {
-        user_name: formData.username,
-        password: formData.password,
-      })
-      .then((res) => {
-        localStorage.setItem("access_token", res.data.access);
-        localStorage.setItem("refresh_token", res.data.refresh);
-        axiosInstance.defaults.headers["Authorization"] =
-          "JWT " + localStorage.getItem("access_token");
-        history.push("/");
-        //console.log(res);
-        //console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    try {
+      await apiUserConnect(formData.username, formData.password);
+      history.replace("/");
+    } catch (e) {
+      setLastError(e.message);
+    }
   };
 
   return (

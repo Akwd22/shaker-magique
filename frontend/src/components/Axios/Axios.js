@@ -570,4 +570,32 @@ export async function apiJoinHost(host = "") {
     });
 }
 
+/**
+ * Se connecter à un compte
+ * @param {*} login     Nom d'utilisateur
+ * @param {*} password  Mot de passe
+ */
+export async function apiUserConnect(login, password) {
+  await axiosInstance
+    .post(`token/`, {
+      user_name: login,
+      password: password,
+    })
+    .then(({ data }) => {
+      localStorage.setItem("access_token", data.access);
+      localStorage.setItem("refresh_token", data.refresh);
+      axiosInstance.defaults.headers["Authorization"] =
+        "JWT " + localStorage.getItem("access_token");
+    })
+    .catch((error) => {
+      if (error.response.status === 401) {
+        throw new APIError("Nom d'utilisateur ou mot de passe invalide", error.response);
+      } else if (error.response.status === 400) {
+        throw new APIError("Tous les champs sont obligatoires", error.response);
+      } else {
+        APIError.unhandledException(error);
+      }
+    });
+}
+
 export default axiosInstance;
