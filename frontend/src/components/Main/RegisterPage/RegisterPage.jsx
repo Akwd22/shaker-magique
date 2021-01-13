@@ -4,8 +4,12 @@ import "../../variables.css";
 import axiosInstance from "../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
+/**
+ * composant SignUp
+ */
 export default function SignUp() {
-  const history = useHistory();
+  const history = useHistory(); //avoir l'url
+  //Initialisation des données du formulaire à envoyer
   const initialFormData = Object.freeze({
     gender: "",
     email: "",
@@ -19,6 +23,7 @@ export default function SignUp() {
 
   const [formData, updateFormData] = useState(initialFormData);
 
+  // Fonction appelé dès le changement des inputs
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -27,12 +32,15 @@ export default function SignUp() {
     });
   };
 
+  /**
+   * Fonction appellé dès que le fomulaire est validé
+   * @param {*} e 
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
 
-    axiosInstance
-      .post(`user/register/`, {
+    axiosInstance //requete au serveur backend
+      .post(`user/register/`, { // données à envoyer 
         gender: formData.gender,
         email: formData.email,
         user_name: formData.username,
@@ -43,10 +51,9 @@ export default function SignUp() {
         birthday: formData.birthday,
       })
       .then((res) => {
-        history.push("/connexion");
+        history.push("/connexion"); // Une fois la requette envoyé, redirection sur la page de connexion
         console.log(res);
         console.log(res.data);
-        console.log("here");
       })
       .catch((err) => {
         console.log(err);
@@ -160,7 +167,7 @@ export default function SignUp() {
           </form>
         </div>
       </div>
-      <div className="page-right-side"></div>
+      <div className="page-right-side" alt="Image d'un cocktail coloré a droite de vos informations d'inscriptions"></div>
     </div>
   );
 }

@@ -2,9 +2,11 @@ import React from "react";
 import ReactTableSearchBar from "../../Table/ReactTableSearchBar";
 import "./AdminIngredientFilter.css";
 
+/**
+ * Composant AdminIngredientFilter
+ * @param {*} props 
+ */
 function AdminIngredientFilter(props) {
-
-
   return (
     <div className="admin-ingredients-filter">
       <ReactTableSearchBar

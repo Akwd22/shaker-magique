@@ -8,11 +8,18 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { get_user, is_logged } from "../../Axios/Axios";
 
+/**
+ * Composant Navbar Mobile
+ * @param {*} param0 
+ */
 const NavBarMobile = ({ class_name, action_cross }) => {
   const [user, setUser] = useState(get_user());
 
+  /**
+   * De même que pour la navbar, fonction d'affichage conditionnel
+   */
   const log_buttons = function () {
-    if (user) {
+    if (user) { // connecté
       return (
         <span className="profil-logOut-container-mobile">
           <NavLink to="/profil">
@@ -29,7 +36,7 @@ const NavBarMobile = ({ class_name, action_cross }) => {
           </NavLink>
         </span>
       );
-    } else {
+    } else { // déconnecté
       return (
         <NavLink to="/connexion">
           <li className="Login-row-navmobile">
@@ -41,6 +48,7 @@ const NavBarMobile = ({ class_name, action_cross }) => {
     }
   };
 
+  //Hook d'éffet appellé dès que le composant est monté
   useEffect(() => {
     if (get_user() !== user) {
       setUser(get_user());

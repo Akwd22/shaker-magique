@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./FilterComponent.css";
 import { get_hote } from "../../Axios/Axios";
 
+/**
+ * Composant FilterComponent
+ * @param {*} props 
+ */
 function FilterComponent(props) {
   //Hook d'état symbolisant l'écriture dans la barre de recherche
   const [dataSearchBar, setDataSearchBar] = useState({
@@ -16,16 +20,22 @@ function FilterComponent(props) {
     catCheckedD: false,
   });
 
+  //Hook détat symbolisant la catégorie "Sans alcool"
   const [SaCat, setSaCat] = useState({
     catCheckedSA: false,
   });
 
+  //Hook détat symbolisant le fait de pouvoir trier
   const [dataTriForce, setDataTriForce] = useState({
     trie: "",
     value: "",
   });
 
+  /**
+   * Hook d'éffet appellé dès que le composant est monté 
+   **/
   useEffect(() => {
+    /**Changement des états en fonction de ce que l'utilisateur choisi */
     setDataSearchBar({
       search: props.filterData ? props.filterData.search : "",
     });
@@ -90,7 +100,6 @@ function FilterComponent(props) {
   // AD = Apéritif et digestif
   // A = apéritif
   // D = Digestif
-  // SA = Sans alcool
   const handleChangeCheckbox = (e) => {
     let state = dataCat;
     if (e.target.id === "checkBox-digestifs") {
@@ -102,6 +111,7 @@ function FilterComponent(props) {
     setDataCat({ ...state });
   };
 
+  //Fonction appelé lorsque l'on choisit la catégorie sans alcool
   const handleChangeCheckboxSansAlcool = (e) => {
     let state = SaCat;
     if (e.target.id === "checkBox-sans-alcool") {

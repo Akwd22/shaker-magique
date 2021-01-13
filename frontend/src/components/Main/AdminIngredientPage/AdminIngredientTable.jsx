@@ -7,7 +7,12 @@ import {
 } from "../../Table/Table";
 import "./AdminIngredientTable.css";
 
+/**
+ * Composant AdminIngredientTable
+ * @param {*} param0 
+ */
 function AdminIngredientTable({ ingredients, search }) {
+  //Colonne du tableau
   const columns = useMemo(
     () => [
       {
@@ -26,6 +31,12 @@ function AdminIngredientTable({ ingredients, search }) {
     setData(ingredients);
   }, [ingredients]);
 
+  /**
+   * Fonction appelé lorque l'on met à jour la table
+   * @param {*} rowIndex 
+   * @param {*} columnId 
+   * @param {*} value 
+   */
   const updateData = async (rowIndex, columnId, value) => {
     if (columnId === "delete") {
       if (await apiDeleteIngredient(data[rowIndex].id)) {
@@ -36,6 +47,7 @@ function AdminIngredientTable({ ingredients, search }) {
       }
     }
 
+    //Modifier un ingredient
     if (columnId === "edit") {
       window.location.href = `/admin/ingredients/modifier/${data[rowIndex].id}`;
     }

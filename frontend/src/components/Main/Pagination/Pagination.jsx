@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import "./Pagination.css";
 
+/**
+ * Composant Pagination
+ */
 export class Pagination extends Component {
   render() {
+    // Valiables utile pour la pagination
     const {
       postsPerPage,
       totalPosts,

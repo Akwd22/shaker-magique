@@ -57,6 +57,7 @@ class CocktailPageContent extends React.Component {
       <div className="cocktailPage-container">
         <div
           className="cocktailPage-left-container"
+          alt = "image du cocktail selectioné"
           style={{
             backgroundImage: `url(${this.props.cocktail.illustrationurl})`,
           }}

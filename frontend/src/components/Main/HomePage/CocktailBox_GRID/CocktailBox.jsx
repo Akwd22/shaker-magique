@@ -5,15 +5,20 @@ import { Link } from "react-router-dom";
 import ScoreBar from "../../../ScoreBar/ScoreBar";
 import CocktailTag from "../../../CocktailTag/CocktailTag";
 
+/**
+ * Composant CocktailBox
+ */
 class CocktailBox extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       cocktail_data: this.props.cocktail,
     };
   }
 
+  /**
+   * Fonction qui affiche les ingredients nécéssaire pour le cocktail
+   */
   render_ingredients() {
     let children = [];
 
@@ -24,6 +29,9 @@ class CocktailBox extends React.Component {
     return children;
   }
 
+  /**
+   * Fonction qui affiche les catégorie du cocktail
+   */
   render_tag() {
     let text;
 
@@ -46,6 +54,7 @@ class CocktailBox extends React.Component {
         <div className="cocktailbox">
           <div
             className="cocktailbox-img"
+            alt = "Imagine represent votre cocktail"
             style={{
               backgroundImage: `url(${this.state.cocktail_data.illustrationurl})`,
             }}

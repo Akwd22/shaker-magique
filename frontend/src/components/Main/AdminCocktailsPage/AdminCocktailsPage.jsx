@@ -15,10 +15,6 @@ function AdminCocktailsPage() {
   const [cocktails, setCocktails] = React.useState([]);
   const [search, setSearch] = React.useState();
 
-  // React.useEffect(async () => {
-  //   setCocktails(await apiGetCocktails());
-  // }, []);
-
   useEffect(() => {
     async function selfFunction() {
       setCocktails(await apiGetCocktails());

@@ -2,6 +2,9 @@ import axios from "axios";
 
 const baseURL = "http://127.0.0.1:8000/api/";
 
+/**
+ * Variable appelé dès que l'on souhaite faire une requete au serveur django (backend)
+ */
 const axiosInstance = axios.create({
   baseURL: baseURL,
   timeout: 15000,
@@ -14,6 +17,9 @@ const axiosInstance = axios.create({
   },
 });
 
+/**
+ * Gestion des erreurs lors de la requete avec le serveur backend
+ */
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
@@ -74,7 +80,6 @@ axiosInstance.interceptors.response.use(
       }
     }
 
-    // specific error handling done elsewhere
     return Promise.reject(error);
   }
 );
@@ -142,6 +147,11 @@ export class APIError extends Error {
   }
 }
 
+
+/**
+ * Retourner ...
+ * @returns true or false
+ */
 export async function apiDeleteCocktail(idCocktail) {
   let ok = true;
 
@@ -153,6 +163,10 @@ export async function apiDeleteCocktail(idCocktail) {
   return ok;
 }
 
+/**
+ * Retourner l'identifiant et le login de l'hôte rejoint
+ * @returns Objet avec informations de l'hôte
+ */
 export async function apiDeleteIngredient(idIngredient) {
   let ok = true;
 

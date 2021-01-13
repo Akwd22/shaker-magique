@@ -4,16 +4,25 @@ import "../../variables.css";
 import axiosInstance from "../../Axios/Axios";
 import { useHistory } from "react-router-dom";
 
+/**
+ * Composant SignIn
+ */
 export default function SignIn() {
-  const history = useHistory();
+  const history = useHistory(); // avoir l'url
+  // Valeurs initiales pour le formulaire de connexion
   const initialFormData = Object.freeze({
     username: "",
     password: "",
   });
 
+  //variable détat
   const [formData, updateFormData] = useState(initialFormData);
   const [lastError, setLastError] = useState();
 
+  /**
+   * Fonction appelé dès que la valeur des inputs changent
+   * @param {*} e
+   */
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -21,21 +30,23 @@ export default function SignIn() {
     });
   };
 
+  /**
+   * Fonction appellé lors de la validation du formulaire
+   * @param {*} e
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosInstance
+    axiosInstance // Requete pour se connecté
       .post(`token/`, {
         user_name: formData.username,
         password: formData.password,
       })
-      .then((res) => {
+      .then((res) => { //Création des cookies
         localStorage.setItem("access_token", res.data.access);
         localStorage.setItem("refresh_token", res.data.refresh);
         axiosInstance.defaults.headers["Authorization"] =
           "JWT " + localStorage.getItem("access_token");
-        history.push("/");
-        //console.log(res);
-        //console.log(res.data);
+        history.push("/"); // Redirection sur la page d'accueil, une fois connecté
       })
       .catch((err) => {
         console.log(err);
@@ -81,7 +92,10 @@ export default function SignIn() {
           <a href="/inscription">Inscription</a>
         </div>
       </div>
-      <div className="lp-right-side"></div>
+      <div
+        className="lp-right-side"
+        alt="Image d'un cocktail coloré a droite de vos informations de connexion"
+      ></div>
     </div>
   );
 }
