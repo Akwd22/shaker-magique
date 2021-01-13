@@ -7,7 +7,7 @@ const baseURL = "http://127.0.0.1:8000/api/";
  */
 const axiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 15000,
+  timeout: 10000,
   headers: {
     Authorization: localStorage.getItem("access_token")
       ? "JWT " + localStorage.getItem("access_token")
@@ -29,29 +29,34 @@ axiosInstance.interceptors.response.use(
 
     if (typeof error.response === "undefined") {
       alert(
-        "A server/network error occurred. " +
-          "Looks like CORS might be the problem. " +
-          "Sorry about this - we will get it fixed shortly."
+        "Une erreur de serveur/réseau s'est produite. " +
+          "CORS pourrait être le problème. " +
+          "Contactez l'administrateur du site concernant l'erreur."
       );
       return Promise.reject(error);
     }
 
     if (error.response.status === 401 && originalRequest.url === baseURL + "token/refresh/") {
-      window.location.href = "/login/";
+      logout_user();
+      window.location.assign("/connexion/");
       return Promise.reject(error);
     }
 
+    console.dir(error.response);
+
+    // Générer un nouveau access_token s'il a expiré durant la session
+    // def 401    Unauthorized
     if (
       error.response.data.code === "token_not_valid" &&
-      error.response.status === 401 &&
-      error.response.statusText === "Unauthorized"
+      error.response.status === 403 &&
+      error.response.statusText === "Forbidden"
     ) {
       const refreshToken = localStorage.getItem("refresh_token");
 
       if (refreshToken) {
         const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
 
-        // exp date in token is expressed in seconds, while now() returns milliseconds:
+        // Date d'expiration dans le token est en secondes, alors que now() donne des millisecondes
         const now = Math.ceil(Date.now() / 1000);
         console.log(tokenParts.exp);
 
@@ -67,16 +72,16 @@ axiosInstance.interceptors.response.use(
 
               return axiosInstance(originalRequest);
             })
-            .catch((err) => {
-              console.log(err);
+            .catch((error) => {
+              APIError.unhandledException(error);
             });
         } else {
-          console.log("Refresh token is expired", tokenParts.exp, now);
-          window.location.href = "/connexion/";
+          logout_user();
+          window.location.assign("/connexion/");
         }
       } else {
-        console.log("Refresh token not available.");
-        window.location.href = "/connexion/";
+        logout_user();
+        window.location.assign("/connexion/");
       }
     }
 
@@ -106,6 +111,15 @@ export function get_user() {
  */
 export function is_logged() {
   return localStorage.getItem("access_token") !== null;
+}
+
+/**
+ * Déconnecter l'utilisateur du site, retire les cookies de session
+ */
+export function logout_user() {
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
+  axiosInstance.defaults.headers["Authorization"] = null;
 }
 
 /**
@@ -143,7 +157,7 @@ export class APIError extends Error {
       ` : ${exception.response.status} ${exception.response.statusText}. Contactez l'administrateur du site concernant l'erreur.`;
 
     console.error(text, exception.response);
-    alert(text);
+    //alert(text);
   }
 }
 
@@ -154,9 +168,9 @@ export class APIError extends Error {
 export async function apiDeleteCocktail(idCocktail) {
   let ok = true;
 
-  await axiosInstance.delete("cocktails/" + idCocktail).catch(({ response }) => {
+  await axiosInstance.delete("cocktails/" + idCocktail).catch((error) => {
     ok = false;
-    alert(`Erreur suppression cocktail ${idCocktail} : ${response.status} ${response.statusText}`);
+    APIError.unhandledException(`Erreur suppression cocktail ${idCocktail}`, error);
   });
 
   return ok;
@@ -169,11 +183,9 @@ export async function apiDeleteCocktail(idCocktail) {
 export async function apiDeleteIngredient(idIngredient) {
   let ok = true;
 
-  await axiosInstance.delete("ingredients/detail/" + idIngredient).catch(({ response }) => {
+  await axiosInstance.delete("ingredients/detail/" + idIngredient).catch((error) => {
     ok = false;
-    alert(
-      `Erreur suppression ingrédients ${idIngredient} : ${response.status} ${response.statusText}`
-    );
+    APIError.unhandledException(`Erreur suppression ingrédients ${idIngredient}`, error);
   });
 
   return ok;
@@ -187,8 +199,8 @@ export async function apiGetCocktail(id) {
     .then(({ data }) => {
       cocktail = data;
     })
-    .catch(({ response }) => {
-      alert(`Erreur récupération cocktail : ${response.status} ${response.statusText}`);
+    .catch((error) => {
+      APIError.unhandledException(`Erreur récupération cocktail`, error);
     });
 
   return cocktail;
@@ -202,8 +214,8 @@ export async function apiGetIngredient(id) {
     .then(({ data }) => {
       ingredient = data;
     })
-    .catch(({ response }) => {
-      alert(`Erreur récupération ingredient solo : ${response.status} ${response.statusText}`);
+    .catch((error) => {
+      APIError.unhandledException(`Erreur récupération ingredient solo`, error);
     });
   return ingredient;
 }
@@ -216,8 +228,8 @@ export async function apiGetCocktails() {
     .then(({ data }) => {
       cocktails = data;
     })
-    .catch(({ response }) => {
-      alert(`Erreur récupération cocktails : ${response.status} ${response.statusText}`);
+    .catch((error) => {
+      APIError.unhandledException(`Erreur récupération cocktails`, error);
     });
 
   return cocktails;
@@ -231,8 +243,8 @@ export async function apiGetCocktailsProposer() {
     .then(({ data }) => {
       cocktails = data;
     })
-    .catch(({ response }) => {
-      alert(`Erreur récupération cocktails : ${response.status} ${response.statusText}`);
+    .catch((error) => {
+      APIError.unhandledException(`Erreur récupération cocktails`, error);
     });
 
   return cocktails;
@@ -246,8 +258,8 @@ export async function apiGetIngredients() {
     .then(({ data }) => {
       ingredients = data;
     })
-    .catch(({ response }) => {
-      alert(`Erreur récupération ingrédients : ${response.status} ${response.statusText}`);
+    .catch((error) => {
+      APIError.unhandledException(`Erreur récupération ingrédients`, error);
     });
 
   return ingredients;
@@ -286,9 +298,9 @@ export async function apiUpdateCocktailImage(id, image) {
         "Content-Type": "multipart/form-data",
       },
     })
-    .catch(({ response }) => {
+    .catch((error) => {
       ok = false;
-      alert(`Erreur modification image cocktail : ${response.status} ${response.statusText}`);
+      APIError.unhandledException(`Erreur modification image cocktail`, error);
     });
 
   return ok;
@@ -301,9 +313,9 @@ export async function apiAddIngredientsToCocktail(id, ingredients) {
     elt.idcocktail = id;
   });
 
-  await axiosInstance.post(`contenir/${id}/`, ingredients).catch(({ response }) => {
+  await axiosInstance.post(`contenir/${id}/`, ingredients).catch((error) => {
     ok = false;
-    alert(`Erreur ajout ingrédients au cocktail ${id} : ${response.status} ${response.statusText}`);
+    APIError.unhandledException(`Erreur ajout ingrédients au cocktail ${id}`, error);
   });
 
   return ok;
@@ -325,9 +337,9 @@ export async function apiCreateCocktail(cocktail, image, ingredients) {
     .then(({ data }) => {
       createdId = data.id;
     })
-    .catch(({ response }) => {
+    .catch((error) => {
       ok = false;
-      alert(`Erreur création cocktail : ${response.status} ${response.statusText}`);
+      APIError.unhandledException(`Erreur création cocktail`, error);
     });
 
   if (!ok) return;
@@ -343,9 +355,9 @@ export async function apiCreateCocktail(cocktail, image, ingredients) {
 
 export async function apiCreateIngredient(ingredient) {
   let ok = true;
-  await axiosInstance.post("/ingredients/", ingredient).catch(({ response }) => {
+  await axiosInstance.post("/ingredients/", ingredient).catch((error) => {
     ok = false;
-    alert(`Erreur création ingredient : ${response.status} ${response.statusText}`);
+    APIError.unhandledException(`Erreur création ingredient`, error);
   });
 
   return ok;
@@ -366,9 +378,9 @@ export async function apiUpdateCocktail(cocktail, image, ingredients) {
       ...cocktail,
       illustrationurl: undefined,
     })
-    .catch(({ response }) => {
+    .catch((error) => {
       ok = false;
-      alert(`Erreur modification cocktail : ${response.status} ${response.statusText}`);
+      APIError.unhandledException(`Erreur modification cocktail`, error);
     });
 
   if (!ok) return;
@@ -385,12 +397,10 @@ export async function apiUpdateCocktail(cocktail, image, ingredients) {
 export async function apiUpdateIngredient(ingredient) {
   let ok = true;
 
-  await axiosInstance
-    .patch(`ingredients/detail/${ingredient.id}/`, ingredient)
-    .catch(({ response }) => {
-      ok = false;
-      alert(`Erreur modification ingredient : ${response.status} ${response.statusText}`);
-    });
+  await axiosInstance.patch(`ingredients/detail/${ingredient.id}/`, ingredient).catch((error) => {
+    ok = false;
+    APIError.unhandledException(`Erreur modification ingredient`, error);
+  });
   return ok;
 }
 
@@ -405,8 +415,8 @@ export async function apiGetCurrentStock() {
     .then(({ data }) => {
       ingredients = data;
     })
-    .catch(({ response }) => {
-      alert(`Erreur récupération stock d'ingrédients : ${response.status} ${response.statusText}`);
+    .catch((error) => {
+      APIError.unhandledException(`Erreur récupération stock d'ingrédients`, error);
     });
 
   return ingredients;
@@ -420,11 +430,9 @@ export async function apiGetCurrentStock() {
 export async function apiUpdateIngredientStock(id, stock) {
   let ok = true;
 
-  await axiosInstance.put(`stockupdate/${id}/`, { enreserve: stock }).catch(({ response }) => {
+  await axiosInstance.put(`stockupdate/${id}/`, { enreserve: stock }).catch((error) => {
     ok = false;
-    alert(
-      `Erreur modification stock ingrédient ${id} pour ${stock} : ${response.status} ${response.statusText}`
-    );
+    APIError.unhandledException(`Erreur modification stock ingrédient ${id} pour ${stock}`, error);
   });
 
   return ok;
@@ -433,11 +441,9 @@ export async function apiUpdateIngredientStock(id, stock) {
 export async function apiDeleteCocktailsProposer(id) {
   let ok = true;
 
-  await axiosInstance.delete(`/proposer/detail/${id}/`).catch(({ response }) => {
+  await axiosInstance.delete(`/proposer/detail/${id}/`).catch((error) => {
     ok = false;
-    alert(
-      `Erreur suppression proposition cocktails ${id} : ${response.status} ${response.statusText}`
-    );
+    APIError.unhandledException(`Erreur suppression proposition cocktails ${id}`, error);
   });
   return ok;
 }
@@ -445,9 +451,9 @@ export async function apiDeleteCocktailsProposer(id) {
 export async function apiGetCocktailsProposer2(id) {
   let ok = true;
 
-  await axiosInstance.get(`/proposer/detail/${id}/`).catch(({ response }) => {
+  await axiosInstance.get(`/proposer/detail/${id}/`).catch((error) => {
     ok = false;
-    alert(`Erreur get proposition cocktails ${id} : ${response.status} ${response.statusText}`);
+    APIError.unhandledException(`Erreur get proposition cocktails ${id}`, error);
   });
 
   return ok;
@@ -466,9 +472,9 @@ export async function apiGetCocktailUserNote(id) {
     .then(({ data }) => {
       score = data.note;
     })
-    .catch(({ response }) => {
+    .catch((error) => {
       /*alert(
-        `Erreur get note utilisateur pour cocktail ${id} : ${response.status} ${response.statusText}`
+        `Erreur get note utilisateur pour cocktail ${id}`, error
       );*/
     });
 
@@ -488,8 +494,8 @@ export async function apiGetCocktailMoyenne(id) {
     .then(({ data }) => {
       avg = data.moyenne;
     })
-    .catch(({ response }) => {
-      alert(`Erreur get moyenne cocktail ${id} : ${response.status} ${response.statusText}`);
+    .catch((error) => {
+      APIError.unhandledException(`Erreur get moyenne cocktail ${id}`, error);
     });
 
   return avg;
@@ -508,9 +514,9 @@ export async function apiNoterCocktail(id, note) {
   // Noter le cocktail
   await axiosInstance
     .post(`/notes/`, { idmembre: get_user().id, idcocktail: id, note: note })
-    .catch(({ response }) => {
+    .catch((error) => {
       ok = false;
-      alert(`Erreur noter ${note} cocktail ${id} pour : ${response.status} ${response.statusText}`);
+      APIError.unhandledException(`Erreur noter ${note} cocktail ${id} pour`, error);
     });
 
   // Récupérer la nouvelle moyenne du cocktail
@@ -531,11 +537,9 @@ export async function apiDeleteNoteCocktail(id) {
   let updatedAvg;
 
   // Noter le cocktail
-  await axiosInstance.delete(`/notes/${get_user().id}/${id}/`).catch(({ response }) => {
+  await axiosInstance.delete(`/notes/${get_user().id}/${id}/`).catch((error) => {
     ok = false;
-    alert(
-      `Erreur suppression note cocktail ${id} pour : ${response.status} ${response.statusText}`
-    );
+    APIError.unhandledException(`Erreur suppression note cocktail ${id} pour`, error);
   });
 
   // Récupérer la nouvelle moyenne du cocktail
@@ -615,14 +619,17 @@ export async function apiUserConnect(login, password) {
  * Se déconnecter du compte
  */
 export async function apiUserLogout() {
-  await axiosInstance.post("user/logout/blacklist/", {
-    refresh_token: localStorage.getItem("refresh_token"),
-  });
-
-  // Effacer les cookies de session
-  localStorage.removeItem("access_token");
-  localStorage.removeItem("refresh_token");
-  axiosInstance.defaults.headers["Authorization"] = null;
+  await axiosInstance
+    .post("user/logout/blacklist/", {
+      refresh_token: localStorage.getItem("refresh_token"),
+    })
+    .catch(() => {})
+    .finally(() => {
+      // Effacer les cookies de session
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      axiosInstance.defaults.headers["Authorization"] = null;
+    });
 }
 
 /**

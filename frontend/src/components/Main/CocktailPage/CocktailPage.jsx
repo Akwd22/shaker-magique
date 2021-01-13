@@ -1,5 +1,5 @@
 import React from "react";
-import axiosInstance from "../../Axios/Axios";
+import axiosInstance, { apiGetCocktail } from "../../Axios/Axios";
 import "../../variables.css";
 import "./CocktailPage.css";
 import CocktailPageContent from "./CocktailPageContent/CocktailPageContent";
@@ -17,15 +17,9 @@ class CocktailPage extends React.Component {
     this.get_cocktail();
   }
 
-  get_cocktail() {
-    axiosInstance
-      .get("cocktails/" + this.props.match.params.id + "/")
-      .then((response) => {
-        this.setState({ loading: false, cocktail: response.data });
-      })
-      .catch((error) => {
-        alert("Erreur HTTP " + error.response.status);
-      });
+  async get_cocktail() {
+    const cocktail = await apiGetCocktail(this.props.match.params.id);
+    this.setState({ loading: false, cocktail: cocktail });
   }
 
   render() {
