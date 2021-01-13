@@ -1,4 +1,8 @@
 .politique-confidentialite-container {
-    background-color: white;
-    width: 80%;
+  background-color: white;
+  width: 80%;
+}
+
+.politique-confidentialite-container p {
+  text-align: justify;
 }
