@@ -5,7 +5,6 @@ import ScoreBar from "../../../ScoreBar/ScoreBar";
 import { Markup } from "interweave";
 
 class CocktailPageContent extends React.Component {
-
   /**
    * Afficher les étiquettes du cocktail
    */
@@ -17,10 +16,7 @@ class CocktailPageContent extends React.Component {
     if (cat === "A") children.push(<CocktailTag text="Apéritif" />);
     if (cat === "D") children.push(<CocktailTag text="Digestif" />);
     if (cat === "AD") {
-      children.push(
-        <CocktailTag text="Apéritif" />,
-        <CocktailTag text="Digestif" />
-      );
+      children.push(<CocktailTag text="Apéritif" />, <CocktailTag text="Digestif" />);
     }
 
     if (!alc || alc === 0) {
@@ -49,6 +45,10 @@ class CocktailPageContent extends React.Component {
    * Formater la description pour afficher notamment les sauts de ligne
    */
   format_description() {
+    if (!this.props.cocktail.description) {
+      return "";
+    }
+
     return this.props.cocktail.description.replace(/(?:\r\n|\r|\n)/g, "<br>");
   }
 
@@ -57,7 +57,7 @@ class CocktailPageContent extends React.Component {
       <div className="cocktailPage-container">
         <div
           className="cocktailPage-left-container"
-          alt = "image du cocktail selectioné"
+          alt="image du cocktail selectioné"
           style={{
             backgroundImage: `url(${this.props.cocktail.illustrationurl})`,
           }}
@@ -71,16 +71,12 @@ class CocktailPageContent extends React.Component {
             <div className="cocktailPage-right-container-header-row1">
               <h2>{this.props.cocktail.intitule}</h2>
             </div>
-            <div className="cocktailPage-right-container-header-cat">
-              {this.render_tags()}
-            </div>
+            <div className="cocktailPage-right-container-header-cat">{this.render_tags()}</div>
           </div>
           <div className="cocktailPage-right-container-blockInfo">
             <div className="cocktailPage-right-container-ingredients">
               <div className="cocktailPage-ingredient-container">
-                <h2 className="cocktailPage-ingredient-container-title">
-                  ingrédients
-                </h2>
+                <h2 className="cocktailPage-ingredient-container-title">ingrédients</h2>
                 <div className="cocktailPage-ingredient-container-list">
                   {this.render_ingredients()}
                 </div>

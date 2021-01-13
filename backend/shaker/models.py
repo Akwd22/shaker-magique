@@ -57,6 +57,12 @@ class Cocktail(models.Model):
         # dès l'initialisation du modèle
         Noter.cache_avg()
 
+    def delete(self):
+        """Supprimer l'instance et retirer du cache de moyenne
+        """
+        Noter.cached_moyenne.pop(self.id)
+        super().delete()
+
     class Meta:
         managed = False        # Indique si Django peut gérer la structure de la table lui-même
         db_table = 'COCKTAIL'   # Nom de la table dans la BDD
@@ -153,6 +159,15 @@ class Noter(models.Model):
             Noter.cached_moyenne.pop(id)
         else:
             Noter.cached_moyenne[id] = queryset
+
+    @staticmethod
+    def delete_cache_avg(id):
+        """Supprimer un cocktail du cache des moyenne
+
+        Args:
+            id (int): ID du cocktail
+        """
+        Noter.cache_avg.pop(id)
 
     def delete(self):
         """Supprimer l'instance et mettre à jour le cache
