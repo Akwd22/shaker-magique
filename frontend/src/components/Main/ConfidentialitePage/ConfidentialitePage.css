@@ -1,8 +1,24 @@
 .politique-confidentialite-container {
-  background-color: white;
+  background-color: #DFDCDC;
   width: 80%;
+  padding: 10px;
 }
 
 .politique-confidentialite-container p {
   text-align: justify;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.politique-confidentialite-container h2 {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.politique-confidentialite-container h3 {
+  text-transform: uppercase;
+}
+
+.politique-confidentialite-container a{
+  color:#F7946D;
 }
