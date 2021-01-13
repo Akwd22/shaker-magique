@@ -1,4 +1,24 @@
 .mentions-legales-container {
-    background-color: white;
+    background-color: #DFDCDC;
     width: 80%;
+    padding: 10px;
+}
+
+.mentions-legales-container p {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+
+.mentions-legales-container h2 {
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.mentions-legales-container h3 {
+    text-transform: uppercase;
+}
+
+.mentions-legales-container a {
+    color:#F7946D;
 }
