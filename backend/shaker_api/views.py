@@ -122,7 +122,10 @@ class CocktailSearch(generics.ListAPIView):
                     instances = instances.exclude(pk=cocktail.id)
                     continue
 
-                nb_manquants = stock.count() - stock.aggregate(Sum('enreserve'))['enreserve__sum']  # Calcul du nombre d'ingrédients manquants
+                nb_manquants = 0
+                # Si le cocktail possède des ingrédients (fix bug)
+                if (cocktail.ingredients.count() > 0):
+                    nb_manquants = stock.count() - stock.aggregate(Sum('enreserve'))['enreserve__sum']  # Calcul du nombre d'ingrédients manquants
 
                 # Exclure le cocktail s'il ne respecte pas le critère du nombre d'ingrédients manquants
                 if (nb_manquants != int(manquants)):
