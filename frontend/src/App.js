@@ -130,11 +130,14 @@ export default class App extends Component {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = cocktails.slice(indexOfFirstPost, indexOfLastPost);
     let totalPosts = cocktails.length;
+    
+    let indexMaxPage =  Math.ceil(totalPosts / postsPerPage);
 
-    const paginate = (pageNum) => this.setState({ currentPage: pageNum });
+    const paginate = (pageNum) => {this.setState({ currentPage: pageNum })};
 
     const nextPage = () => {
-      currentPage === indexOfLastPost
+      console.log(indexMaxPage)
+      currentPage === indexMaxPage
         ? this.setState({ currentPage: currentPage })
         : this.setState({ currentPage: currentPage + 1 });
     };
@@ -166,6 +169,7 @@ export default class App extends Component {
                   paginate={paginate}
                   nextPage={nextPage}
                   prevPage={prevPage}
+                  indexMaxPage={indexMaxPage}
                 />
               )}
             />

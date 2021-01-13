@@ -10,7 +10,7 @@ from django.contrib.auth.models import Group
 from rest_framework import viewsets
 from user.models import Member
 
-
+#vue de creation d'un utilisateur
 class CustomUserCreate(APIView):
     permission_classes = [AllowAny]
 
@@ -29,7 +29,7 @@ class CustomUserCreate(APIView):
                 return Response(json, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+#vue de l'utilisateur actuel
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = ()
@@ -43,7 +43,7 @@ class BlacklistTokenUpdateView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
+#vue qui permet la déconnexion
 class CurentUserView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = CurrentUserSerializer

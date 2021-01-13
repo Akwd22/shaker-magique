@@ -36,7 +36,8 @@ export default class HomePage extends Component {
             paginate={this.props.paginate}
             nextPage={this.props.nextPage}
             prevPage={this.props.prevPage}
-          />
+            indexMaxPage={this.props.indexMaxPage}
+            />
         </div>
       </div>
     );

@@ -3,7 +3,7 @@ from user.models import Member
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
+#serializer de creation d'un utilisateur
 class CustomUserSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True)
@@ -29,19 +29,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    """Sérialiseur pour ajouter des champs dans le token
-    """
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        # Champs supplémentaires
-        token['is_staff'] = user.is_staff
-
-        return token
-    
+#serializer de l'utilisateur actuel
 class CurrentUserSerializer(serializers.ModelSerializer): 
     def update(self, instance, validated_data):
         for attr, value in validated_data.items():
@@ -55,4 +43,17 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ('user_name', "email","password",)  
-        extra_kwargs = {'password': {'write_only': True, 'required': False}}
+        
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """Sérialiseur pour ajouter des champs dans le token
+    """
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Champs supplémentaires
+        token['is_staff'] = user.is_staff
+
+        return token
+
+
