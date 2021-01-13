@@ -7,18 +7,14 @@ import "./Pagination.css";
 export class Pagination extends Component {
   render() {
     // Valiables utile pour la pagination
-    const {
-      paginate,
-      nextPage,
-      prevPage,
-    } = this.props;
+    const { paginate, nextPage, prevPage } = this.props;
     const pageNumbers = [];
 
     pageNumbers.push(1);
-    pageNumbers.push(Math.max(this.props.indexMaxPage));
-
-
-
+    if (this.props.indexMaxPage > 1) {
+      pageNumbers.push(Math.max(this.props.indexMaxPage));
+    }
+    
     return (
       <nav className="pagination-container">
         <ul className="pagination pagination-container">

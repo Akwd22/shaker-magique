@@ -38,7 +38,7 @@ class CocktailDetail(generics.RetrieveUpdateDestroyAPIView):
 
 #vue de l'image d'un cocktail
 class CocktailImage(generics.RetrieveUpdateAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdminUser]
     queryset = Cocktail.objects.all()
     serializer_class = CocktailImageSerializer
 
@@ -271,8 +271,8 @@ class StockUpdate(generics.RetrieveUpdateAPIView):
         return queryset
 
 #vue d'un cocktail de l'utilisateur actuel
-class ProposerDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [ProposerPermission]
+class ProposerDetail(generics.RetrieveDestroyAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Propose.objects.all()
     serializer_class = ProposerSerializer
     lookup_field = 'idcocktail'
@@ -283,7 +283,7 @@ class ProposerDetail(generics.RetrieveUpdateDestroyAPIView):
         return queryset
 
 #vue des cocktails d'un utilisateurs
-class ProposerListByMember(generics.ListCreateAPIView):
+class ProposerListByMember(generics.ListAPIView):
     permission_classes = [ProposerPermission]
     serializer_class = ProposerSerializer
 

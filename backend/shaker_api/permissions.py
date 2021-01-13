@@ -69,7 +69,7 @@ class PreferencePermission(BasePermission):
     message = "Vous pouvez uniquement ajouté de nouveaux ingrédients préféré à votre liste"
 
     def has_permission(self, request, view):
-        allo = pprint.PrettyPrinter()
+        #allo = pprint.PrettyPrinter()
         # allo.pprint(request.path_info)
         # regex = r"3'$"
 
