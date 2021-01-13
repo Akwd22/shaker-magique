@@ -99,10 +99,10 @@ class JoinHostPermission(BaseException):
 
         if (request.method in ("PUT", "PATCH")):
 
-            if (request.data):
-                if (request.data["hote_login"] == obj.user_name):
-                    self.message = "Vous ne pouvez pas vous rejoindre vous-même"
-                    return False
+            # if (request.data):
+            #     if (request.data["hote_login"] == obj.user_name):
+            #         self.message = "Vous ne pouvez pas vous rejoindre vous-même"
+            #         return False
 
             if (request.user.is_staff):
                 return True

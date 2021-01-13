@@ -147,7 +147,6 @@ export class APIError extends Error {
   }
 }
 
-
 /**
  * Retourner ...
  * @returns true or false
@@ -610,6 +609,20 @@ export async function apiUserConnect(login, password) {
         APIError.unhandledException(error);
       }
     });
+}
+
+/**
+ * Se déconnecter du compte
+ */
+export async function apiUserLogout() {
+  await axiosInstance.post("user/logout/blacklist/", {
+    refresh_token: localStorage.getItem("refresh_token"),
+  });
+
+  // Effacer les cookies de session
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
+  axiosInstance.defaults.headers["Authorization"] = null;
 }
 
 export default axiosInstance;
