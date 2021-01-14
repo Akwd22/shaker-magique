@@ -1,8 +1,7 @@
 -- --------------------------------------------------------
--- 主机:                           127.0.0.1
--- 服务器版本:                        5.7.11 - MySQL Community Server (GPL)
--- 服务器操作系统:                      Win32
--- HeidiSQL 版本:                  11.0.0.5919
+-- Version du serveur:           5.7.11 - MySQL Community Server (GPL)
+-- SE du serveur:                	Win32
+-- HeidiSQL Version:             11.0.0.5919
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -11,51 +10,79 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- 正在导出表  pts3-dut_pts3.COCKTAIL 的数据：~5 rows (大约)
-/*!40000 ALTER TABLE `COCKTAIL` DISABLE KEYS */;
-INSERT INTO `COCKTAIL` (`ID`, `INTITULE`, `ILLUSTRATIONURL`, `CATEGORIE`, `DESCRIPTION`, `FORCEALC`) VALUES
-	(1, 'Acapulco', 'a', 'A', 'Verre à COCKTAIL\ntranche d’ananas sur le bord du verre et long zeste de citron vert dans le verre\n\nGlace pilée dans 1/2 shaker\nAjout Tequila, cointreau, ananas, sucre et oeuf\nShake 15 secondes\nServir et ajouter quelques glaçons\nTerminer avec grenadine + la déco', 1),
-	(2, 'Alexandra', 'a', 'AD', 'Verre à COCKTAIL\nVerre givré au cacao\n\nQuelques cubes de glace au shaker\nAjout crème de cacao, cognac, crème fraiche\nShake 20 secondes\nServir dans le verre en retenant la glace\nSaupoudrer de cacao', 0),
-	(3, 'Blue Lagoon', '', 'A', 'Verre à long drink (grand tumbler)\ngivrer fortement le verre au curaçao+sucre\n\nVerser liquides dans le shaker\nAjouter de la glace pilée\nShake 10 secondes\nServir le tout dans le verre givré', NULL),
-	(4, 'Godfather', '', 'D', 'Verre à digestif\n\nMettre 2 glaçons dans le verre\nAjouter alcools et mélanger', NULL),
-	(5, 'Love Cocktail', '', 'A', 'Grand tumbler\n\nGlaçons dans 1/2 shaker\nVerser les ingrédients\nShake 5 secondes\nServir dans verres à long drink en retenant la glace\nAjouter 2 glaçons par verre', NULL);
-/*!40000 ALTER TABLE `COCKTAIL` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.auth_group : ~0 rows (environ)
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.COMPTE 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `COMPTE` DISABLE KEYS */;
-/*!40000 ALTER TABLE `COMPTE` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.auth_group_permissions : ~0 rows (environ)
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.CONTENIR 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `CONTENIR` DISABLE KEYS */;
-INSERT INTO `CONTENIR` (`QUANTITE`, `UNITE`, `IDCOCKTAIL`, `IDINGREDIENT`) VALUES
-	('3', 'doses', 1, 2),
-	('2', 'doses', 1, 19),
-	('1', 'trait', 1, 30),
-	('0', '1/2 blanc', 1, 43),
-	('5', 'doses', 1, 57),
-	('1', 'cc', 1, 64),
-	('1', 'pincee', 2, 8),
-	('1', 'cuillère', 2, 21),
-	('1', 'doses', 2, 65),
-	('2', 'doses', 2, 66),
-	('1', 'doses', 3, 15),
-	('1', 'doses', 3, 24),
-	('1', 'doses', 3, 62),
-	('5', 'doses', 4, 1),
-	('5', 'doses', 4, 63),
-	('2', 'doses', 5, 34),
-	('3', 'doses', 5, 46),
-	('3', 'doses', 5, 48),
-	('2', 'doses', 5, 56);
-/*!40000 ALTER TABLE `CONTENIR` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.auth_permission : ~0 rows (environ)
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.FAVORI 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `FAVORI` DISABLE KEYS */;
-/*!40000 ALTER TABLE `FAVORI` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.cocktail : ~0 rows (environ)
+/*!40000 ALTER TABLE `cocktail` DISABLE KEYS */;
+INSERT INTO `cocktail` (`ID`, `INTITULE`, `ILLUSTRATIONURL`, `CATEGORIE`, `DESCRIPTION`, `FORCEALC`) VALUES
+	(1, 'Acapulco', 'cocktail/default.jpg', 'A', 'Verre à COCKTAIL\ntranche d’ananas sur le bord du verre et long zeste de citron vert dans le verre\n\nGlace pilée dans 1/2 shaker\nAjout Tequila, cointreau, ananas, sucre et oeuf\nShake 15 secondes\nServir et ajouter quelques glaçons\nTerminer avec grenadine + la déco', 1),
+	(2, 'Alexandra', 'cocktail/default.jpg', 'AD', 'Verre à COCKTAIL\nVerre givré au cacao\n\nQuelques cubes de glace au shaker\nAjout crème de cacao, cognac, crème fraiche\nShake 20 secondes\nServir dans le verre en retenant la glace\nSaupoudrer de cacao', 0),
+	(3, 'Blue Lagoon', 'cocktail/default.jpg', 'A', 'Verre à long drink (grand tumbler)\ngivrer fortement le verre au curaçao+sucre\n\nVerser liquides dans le shaker\nAjouter de la glace pilée\nShake 10 secondes\nServir le tout dans le verre givré', NULL),
+	(4, 'Godfather', 'cocktail/default.jpg', 'D', 'Verre à digestif\n\nMettre 2 glaçons dans le verre\nAjouter alcools et mélanger', NULL),
+	(5, 'Love Cocktail', 'cocktail/default.jpg', 'A', 'Grand tumbler\n\nGlaçons dans 1/2 shaker\nVerser les ingrédients\nShake 5 secondes\nServir dans verres à long drink en retenant la glace\nAjouter 2 glaçons par verre', NULL);
+/*!40000 ALTER TABLE `cocktail` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.INGREDIENT 的数据：~66 rows (大约)
-/*!40000 ALTER TABLE `INGREDIENT` DISABLE KEYS */;
-INSERT INTO `INGREDIENT` (`ID`, `INTITULE`, `DEGREALCOOL`) VALUES
+-- Listage des données de la table shakermagique.compte : ~0 rows (environ)
+/*!40000 ALTER TABLE `compte` DISABLE KEYS */;
+/*!40000 ALTER TABLE `compte` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.contenir : ~0 rows (environ)
+/*!40000 ALTER TABLE `contenir` DISABLE KEYS */;
+INSERT INTO `contenir` (`IDCONTENIR`, `IDCOCKTAIL`, `IDINGREDIENT`, `QUANTITE`, `UNITE`) VALUES
+	(22, 1, 2, 3, 'doses'),
+	(23, 1, 19, 2, 'doses'),
+	(24, 1, 30, 1, 'trait'),
+	(25, 1, 43, 0, '1/2 blanc'),
+	(26, 1, 57, 5, 'doses'),
+	(27, 1, 64, 1, 'cc'),
+	(28, 2, 8, 1, 'pincee'),
+	(29, 2, 21, 1, 'cuillère'),
+	(30, 2, 65, 1, 'doses'),
+	(31, 2, 66, 2, 'doses'),
+	(32, 3, 15, 1, 'doses'),
+	(33, 3, 24, 1, 'doses'),
+	(34, 3, 62, 1, 'doses'),
+	(35, 4, 1, 5, 'doses'),
+	(36, 4, 63, 5, 'doses'),
+	(37, 5, 34, 2, 'doses'),
+	(38, 5, 46, 3, 'doses'),
+	(39, 5, 48, 3, 'doses'),
+	(40, 5, 56, 2, 'doses');
+/*!40000 ALTER TABLE `contenir` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.django_admin_log : ~0 rows (environ)
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.django_content_type : ~0 rows (environ)
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.django_migrations : ~0 rows (environ)
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.django_session : ~0 rows (environ)
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.favori : ~0 rows (environ)
+/*!40000 ALTER TABLE `favori` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favori` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.ingredient : ~0 rows (environ)
+/*!40000 ALTER TABLE `ingredient` DISABLE KEYS */;
+INSERT INTO `ingredient` (`ID`, `INTITULE`, `DEGREALCOOL`) VALUES
 	(1, 'Amaretto', 28),
 	(2, 'Jus d\'ananas', 0),
 	(3, 'Angostura', 0),
@@ -122,27 +149,47 @@ INSERT INTO `INGREDIENT` (`ID`, `INTITULE`, `DEGREALCOOL`) VALUES
 	(64, 'Sucre en poudre', 0),
 	(65, 'Crème de cacao', 20),
 	(66, 'Cognac', 50);
-/*!40000 ALTER TABLE `INGREDIENT` ENABLE KEYS */;
+/*!40000 ALTER TABLE `ingredient` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.MEMBRE 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `MEMBRE` DISABLE KEYS */;
-/*!40000 ALTER TABLE `MEMBRE` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.membre : ~0 rows (environ)
+/*!40000 ALTER TABLE `membre` DISABLE KEYS */;
+/*!40000 ALTER TABLE `membre` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.NOTER 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `NOTER` DISABLE KEYS */;
-/*!40000 ALTER TABLE `NOTER` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.noter : ~0 rows (environ)
+/*!40000 ALTER TABLE `noter` DISABLE KEYS */;
+/*!40000 ALTER TABLE `noter` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.PREFERENCE 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `PREFERENCE` DISABLE KEYS */;
-/*!40000 ALTER TABLE `PREFERENCE` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.preference : ~0 rows (environ)
+/*!40000 ALTER TABLE `preference` DISABLE KEYS */;
+/*!40000 ALTER TABLE `preference` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.PROPOSE 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `PROPOSE` DISABLE KEYS */;
-/*!40000 ALTER TABLE `PROPOSE` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.propose : ~0 rows (environ)
+/*!40000 ALTER TABLE `propose` DISABLE KEYS */;
+/*!40000 ALTER TABLE `propose` ENABLE KEYS */;
 
--- 正在导出表  pts3-dut_pts3.STOCKER 的数据：~0 rows (大约)
-/*!40000 ALTER TABLE `STOCKER` DISABLE KEYS */;
-/*!40000 ALTER TABLE `STOCKER` ENABLE KEYS */;
+-- Listage des données de la table shakermagique.stocker : ~0 rows (environ)
+/*!40000 ALTER TABLE `stocker` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stocker` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.token_blacklist_blacklistedtoken : ~0 rows (environ)
+/*!40000 ALTER TABLE `token_blacklist_blacklistedtoken` DISABLE KEYS */;
+/*!40000 ALTER TABLE `token_blacklist_blacklistedtoken` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.token_blacklist_outstandingtoken : ~0 rows (environ)
+/*!40000 ALTER TABLE `token_blacklist_outstandingtoken` DISABLE KEYS */;
+/*!40000 ALTER TABLE `token_blacklist_outstandingtoken` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.user_member : ~0 rows (environ)
+/*!40000 ALTER TABLE `user_member` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_member` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.user_member_groups : ~0 rows (environ)
+/*!40000 ALTER TABLE `user_member_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_member_groups` ENABLE KEYS */;
+
+-- Listage des données de la table shakermagique.user_member_user_permissions : ~0 rows (environ)
+/*!40000 ALTER TABLE `user_member_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_member_user_permissions` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

@@ -1,7 +1,6 @@
 -- --------------------------------------------------------
--- Hôte:                         mysql-remy-dut.alwaysdata.net
 -- Version du serveur:           10.5.5-MariaDB - MariaDB Server
--- SE du serveur:                Linux
+-- SE du serveur:                	Linux
 -- HeidiSQL Version:             11.1.0.6116
 -- --------------------------------------------------------
 
@@ -13,11 +12,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Listage de la structure de la base pour remy-dut_pts3
-CREATE DATABASE IF NOT EXISTS `remy-dut_pts3` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `remy-dut_pts3`;
+-- Listage de la structure de la base pour shakermagique
+CREATE DATABASE IF NOT EXISTS `shakermagique` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `shakermagique`;
 
--- Listage de la structure de la table remy-dut_pts3. auth_group
+-- Listage de la structure de la table shakermagique. auth_group
 CREATE TABLE IF NOT EXISTS `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
@@ -27,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `auth_group` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. auth_group_permissions
+-- Listage de la structure de la table shakermagique. auth_group_permissions
 CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
@@ -41,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. auth_permission
+-- Listage de la structure de la table shakermagique. auth_permission
 CREATE TABLE IF NOT EXISTS `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -54,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `auth_permission` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. COCKTAIL
+-- Listage de la structure de la table shakermagique. COCKTAIL
 CREATE TABLE IF NOT EXISTS `COCKTAIL` (
   `ID` int(4) NOT NULL AUTO_INCREMENT,
   `INTITULE` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -68,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `COCKTAIL` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. COMPTE
+-- Listage de la structure de la table shakermagique. COMPTE
 CREATE TABLE IF NOT EXISTS `COMPTE` (
   `ID` int(4) NOT NULL,
   `LOGIN` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
@@ -89,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `COMPTE` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. CONTENIR
+-- Listage de la structure de la table shakermagique. CONTENIR
 CREATE TABLE IF NOT EXISTS `CONTENIR` (
   `IDCONTENIR` int(4) NOT NULL AUTO_INCREMENT,
   `IDCOCKTAIL` int(4) NOT NULL,
@@ -105,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `CONTENIR` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. django_admin_log
+-- Listage de la structure de la table shakermagique. django_admin_log
 CREATE TABLE IF NOT EXISTS `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
@@ -124,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. django_content_type
+-- Listage de la structure de la table shakermagique. django_content_type
 CREATE TABLE IF NOT EXISTS `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app_label` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -135,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `django_content_type` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. django_migrations
+-- Listage de la structure de la table shakermagique. django_migrations
 CREATE TABLE IF NOT EXISTS `django_migrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -146,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. django_session
+-- Listage de la structure de la table shakermagique. django_session
 CREATE TABLE IF NOT EXISTS `django_session` (
   `session_key` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `session_data` longtext COLLATE utf8_unicode_ci NOT NULL,
@@ -157,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. FAVORI
+-- Listage de la structure de la table shakermagique. FAVORI
 CREATE TABLE IF NOT EXISTS `FAVORI` (
   `IDCOCKTAIL` int(4) NOT NULL,
   `IDMEMBRE` int(4) NOT NULL,
@@ -169,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `FAVORI` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. INGREDIENT
+-- Listage de la structure de la table shakermagique. INGREDIENT
 CREATE TABLE IF NOT EXISTS `INGREDIENT` (
   `ID` int(4) NOT NULL AUTO_INCREMENT,
   `INTITULE` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -179,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `INGREDIENT` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. MEMBRE
+-- Listage de la structure de la table shakermagique. MEMBRE
 CREATE TABLE IF NOT EXISTS `MEMBRE` (
   `ID` int(4) NOT NULL,
   `PRENOM` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -198,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `MEMBRE` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. NOTER
+-- Listage de la structure de la table shakermagique. NOTER
 CREATE TABLE IF NOT EXISTS `NOTER` (
   `IDNOTER` int(4) NOT NULL AUTO_INCREMENT,
   `IDMEMBRE` int(4) DEFAULT NULL,
@@ -214,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `NOTER` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. PREFERENCE
+-- Listage de la structure de la table shakermagique. PREFERENCE
 CREATE TABLE IF NOT EXISTS `PREFERENCE` (
   `IDPREFERENCE` int(4) NOT NULL AUTO_INCREMENT,
   `IDINGREDIENT` int(4) DEFAULT NULL,
@@ -228,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `PREFERENCE` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. PROPOSE
+-- Listage de la structure de la table shakermagique. PROPOSE
 CREATE TABLE IF NOT EXISTS `PROPOSE` (
   `IDPROPOSE` int(4) NOT NULL AUTO_INCREMENT,
   `IDCOCKTAIL` int(4) DEFAULT NULL,
@@ -242,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `PROPOSE` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. STOCKER
+-- Listage de la structure de la table shakermagique. STOCKER
 CREATE TABLE IF NOT EXISTS `STOCKER` (
   `IDSTOCKER` int(4) NOT NULL AUTO_INCREMENT,
   `IDINGREDIENT` int(4) DEFAULT NULL,
@@ -257,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `STOCKER` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. token_blacklist_blacklistedtoken
+-- Listage de la structure de la table shakermagique. token_blacklist_blacklistedtoken
 CREATE TABLE IF NOT EXISTS `token_blacklist_blacklistedtoken` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `blacklisted_at` datetime(6) NOT NULL,
@@ -269,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `token_blacklist_blacklistedtoken` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. token_blacklist_outstandingtoken
+-- Listage de la structure de la table shakermagique. token_blacklist_outstandingtoken
 CREATE TABLE IF NOT EXISTS `token_blacklist_outstandingtoken` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` longtext COLLATE utf8_unicode_ci NOT NULL,
@@ -285,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `token_blacklist_outstandingtoken` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. user_member
+-- Listage de la structure de la table shakermagique. user_member
 CREATE TABLE IF NOT EXISTS `user_member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
@@ -310,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `user_member` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. user_member_groups
+-- Listage de la structure de la table shakermagique. user_member_groups
 CREATE TABLE IF NOT EXISTS `user_member_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` int(11) NOT NULL,
@@ -324,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `user_member_groups` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de la table remy-dut_pts3. user_member_user_permissions
+-- Listage de la structure de la table shakermagique. user_member_user_permissions
 CREATE TABLE IF NOT EXISTS `user_member_user_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` int(11) NOT NULL,

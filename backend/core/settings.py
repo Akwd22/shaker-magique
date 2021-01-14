@@ -145,7 +145,8 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    # Indiquer l'URL du frontend sans / à la fin
+    "http://localhost:3000" 
 ]
 
 # Custom user model
@@ -188,3 +189,5 @@ SIMPLE_JWT = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
