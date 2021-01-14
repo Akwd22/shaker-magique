@@ -1,5 +1,5 @@
 import React from "react";
-import axiosInstance, { apiGetCocktail } from "../../Axios/Axios";
+import axiosInstance, { apiGetCocktail } from "../../../Axios";
 import "../../variables.css";
 import "./CocktailPage.css";
 import CocktailPageContent from "./CocktailPageContent/CocktailPageContent";

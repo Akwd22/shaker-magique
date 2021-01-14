@@ -3,7 +3,7 @@ import "../ProfilPage.css";
 import iconProfil from "../../../../assets/imgs/iconProfil.png";
 import cocktail from "../../../../assets/imgs/cocktail.png";
 import orangejuice from "../../../../assets/imgs/orangejuice.png";
-import axiosInstance, { apiUpdateUserProfile } from "../../../Axios/Axios";
+import axiosInstance, { apiUpdateUserProfile } from "../../../../Axios";
 import { useHistory } from "react-router-dom";
 
 /**

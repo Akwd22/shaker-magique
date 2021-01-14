@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { apiGetCocktails } from "../../Axios/Axios";
+import { apiGetCocktails } from "../../../Axios";
 import AdminCocktailTable from "./AdminCocktailTable";
 import AdminCocktailsFilter from "./AdminCocktailsFilter";
-import { usePermission } from "../../Axios/Axios";
+import { usePermission } from "../../../Axios";
 import "./AdminCocktailsPage.css";
 import { useHistory } from "react-router-dom";
 

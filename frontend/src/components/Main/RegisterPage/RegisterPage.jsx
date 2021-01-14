@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./RegisterPage.css";
 import "../../variables.css";
-import axiosInstance, { apiCreateAccount } from "../../Axios/Axios";
+import axiosInstance, { apiCreateAccount } from "../../../Axios";
 import { useHistory } from "react-router-dom";
 
 /**

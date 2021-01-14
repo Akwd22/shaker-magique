@@ -5,7 +5,7 @@ import {
   apiGetIngredient,
   apiUpdateIngredient,
   usePermission,
-} from "../../Axios/Axios";
+} from "../../../Axios";
 import AdminEditIngredientInfo from "./AdminEditIngredientInfo";
 import "./AdminEditIngredientPage.css";
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AdminIngredientPage.css";
 import AdminIngredientFilter from "./AdminIngredientFilter";
 import AdminIngredientTable from "./AdminIngredientTable";
-import { apiGetIngredients, usePermission } from "../../Axios/Axios";
+import { apiGetIngredients, usePermission } from "../../../Axios";
 import { useHistory } from "react-router-dom";
 
 /**

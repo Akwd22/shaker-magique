@@ -11,7 +11,7 @@ import LoginPage from "./components/Main/LoginPage/LoginPage";
 import JoinHostPage from "./components/Main/JoinHostPage/JoinHostPage";
 import LogoutPage from "./components/Main/LogoutPage/LogoutPage";
 import { Component } from "react";
-import axiosInstance, { get_hote, get_user, is_logged } from "./components/Axios/Axios";
+import axiosInstance, { get_hote, get_user, is_logged } from "./Axios";
 import ProfilPage from "./components/Main/ProfilPage/ProfilPage";
 import AdminCocktailsPage from "./components/Main/AdminCocktailsPage/AdminCocktailsPage";
 import AdminEditCocktailPage from "./components/Main/AdminEditCocktailPage/AdminEditCocktailPage";

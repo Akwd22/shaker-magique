@@ -4,8 +4,8 @@ import {
   apiGetIngredients,
   apiGetCocktail,
   apiUpdateCocktail,
-} from "../../Axios/Axios";
-import { usePermission } from "../../Axios/Axios";
+} from "../../../Axios";
+import { usePermission } from "../../../Axios";
 import AdminEditCocktailInfo from "./AdminEditCocktailInfo";
 import AdminEditCocktailTable from "./AdminEditCocktailTable";
 import "./AdminEditCocktailPage.css";

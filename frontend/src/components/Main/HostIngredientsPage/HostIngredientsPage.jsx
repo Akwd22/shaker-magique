@@ -1,8 +1,8 @@
 import React from "react";
 import HostIngredientsTable from "./HostIngredientsTable";
 import ReactTableSearchBar from "../../Table/ReactTableSearchBar";
-import { apiGetCurrentStock, apiGetIngredients } from "../../Axios/Axios";
-import { usePermission } from "../../Axios/Axios";
+import { apiGetCurrentStock, apiGetIngredients } from "../../../Axios";
+import { usePermission } from "../../../Axios";
 import "./HostIngredientsPage.css";
 import { useHistory } from "react-router-dom";
 

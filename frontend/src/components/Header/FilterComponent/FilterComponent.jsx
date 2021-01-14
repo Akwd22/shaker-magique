@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./FilterComponent.css";
-import { get_hote } from "../../Axios/Axios";
+import { get_hote } from "../../../Axios";
 
 /**
  * Composant FilterComponent

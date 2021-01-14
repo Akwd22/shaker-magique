@@ -1,5 +1,5 @@
 import React from "react";
-import { apiDeleteCocktail } from "../../Axios/Axios";
+import { apiDeleteCocktail } from "../../../Axios";
 import { DeleteButtonCell, EditButtonCell, ReactTable } from "../../Table/Table";
 import "./AdminCocktailTable.css";
 

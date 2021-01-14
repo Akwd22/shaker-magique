@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import axiosInstance, { apiUserLogout } from "../../Axios/Axios";
+import axiosInstance, { apiUserLogout } from "../../../Axios";
 import { useHistory } from "react-router-dom";
 
 /**

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { apiDeleteCocktailsProposer, apiGetCocktailsProposer, apiGetCocktailsProposer2 } from "../../Axios/Axios";
+import { apiDeleteCocktailsProposer, apiGetCocktailsProposer, apiGetCocktailsProposer2 } from "../../../Axios";
 import { boolSortType, CheckboxCell, ReactTable } from "../../Table/Table";
 import "./HostCocktailPageTable.css";
 

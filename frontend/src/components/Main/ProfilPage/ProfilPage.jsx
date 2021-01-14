@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import axiosInstance, { apiGetCurrentUser, get_user } from "../../Axios/Axios";
+import axiosInstance, { apiGetCurrentUser, get_user } from "../../../Axios";
 import "./ProfilPage.css";
 import ProfilPageContent from "./ProfilPageContent/ProfilPageContent";
 import ProfilPageLoading from "./ProfilPageLoading/ProfilPageLoading";

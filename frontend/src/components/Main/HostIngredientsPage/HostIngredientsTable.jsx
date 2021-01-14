@@ -1,5 +1,5 @@
 import React from "react";
-import { apiUpdateIngredientStock } from "../../Axios/Axios";
+import { apiUpdateIngredientStock } from "../../../Axios";
 import { CheckboxCell, ReactTable, boolSortType } from "../../Table/Table";
 import "./HostIngredientsTable.css";
 

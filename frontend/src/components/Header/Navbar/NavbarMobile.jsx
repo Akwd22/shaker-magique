@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import { NavLink } from "react-router-dom";
-import { get_user, is_logged } from "../../Axios/Axios";
+import { get_user, is_logged } from "../../../Axios";
 
 /**
  * Composant Navbar Mobile

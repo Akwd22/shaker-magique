@@ -5,7 +5,7 @@ import {
   apiGetCocktails,
   apiGetCocktailsProposer,
   usePermission,
-} from "../../Axios/Axios";
+} from "../../../Axios";
 import "./HostCocktailPage.css";
 
 /**

@@ -4,7 +4,7 @@ import {
   apiGetCocktailUserNote,
   apiNoterCocktail,
   is_logged,
-} from "../Axios/Axios";
+} from "../../Axios";
 import ScoreBarButton from "./ScoreBarButton";
 import "./ScoreBar.css";
 

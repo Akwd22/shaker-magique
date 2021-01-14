@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import "../../variables.css";
-import axiosInstance, { apiUserConnect } from "../../Axios/Axios";
+import axiosInstance, { apiUserConnect } from "../../../Axios";
 import { useHistory } from "react-router-dom";
 
 /**

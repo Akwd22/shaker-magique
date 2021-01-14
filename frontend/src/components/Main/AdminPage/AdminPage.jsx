@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { usePermission } from "../../Axios/Axios";
+import { usePermission } from "../../../Axios";
 import "./AdminPage.css";
 
 export default function AdminPage() {

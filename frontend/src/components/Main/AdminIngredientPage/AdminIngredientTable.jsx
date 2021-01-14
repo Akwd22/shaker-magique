@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { apiDeleteIngredient } from "../../Axios/Axios";
+import { apiDeleteIngredient } from "../../../Axios";
 import {
   DeleteButtonCell,
   EditButtonCell,

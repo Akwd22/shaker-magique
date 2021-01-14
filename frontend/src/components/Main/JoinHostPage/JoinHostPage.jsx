@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./JoinHostPage.css";
 import "../../variables.css";
-import axiosInstance, { get_user, get_hote, apiJoinHost, APIError } from "../../Axios/Axios";
+import axiosInstance, { get_user, get_hote, apiJoinHost, APIError } from "../../../Axios";
 
 export default function JoinHostPage() {
   const [hostLogin, setHostLogin] = useState(get_hote() ? get_hote().login : "");
