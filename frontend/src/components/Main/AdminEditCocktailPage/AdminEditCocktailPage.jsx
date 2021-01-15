@@ -93,7 +93,7 @@ function AdminEditCocktailPage(props) {
     <div className="page admin-edit-cocktail-page">
       {isAdmin && (
         <div className="admin-edit-cocktail-container">
-          <form className="admin-edit-cocktail-form" onSubmit={handleSubmit}>
+          <form className="admin-edit-cocktail-form" onSubmit={handleSubmit} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}>
             <AdminEditCocktailInfo
               onChange={handleChange}
               cocktail={cocktail}
