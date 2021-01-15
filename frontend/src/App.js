@@ -136,6 +136,8 @@ export default class App extends Component {
    * Rendu des composants
    */
   render() {
+
+    // TOUT CELA EST NECESSAIRE POUR LA PAGINATION
     const { currentPage, postsPerPage, cocktails, loading } = this.state;
 
     const indexOfLastPost = currentPage * postsPerPage;
@@ -161,7 +163,9 @@ export default class App extends Component {
         ? this.setState({ currentPage: currentPage })
         : this.setState({ currentPage: currentPage - 1 });
     };
+    // Fin pagination
 
+    
     return (
       <div className="app">
         <Router>
