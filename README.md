@@ -1,3 +1,6 @@
+# URL
+Le site est actuellement en cours de déploiement
+
 # License
 
 Ce projet a été réalisé pour un client. À ce titre, les différents éléments utilisés dans ce projet appartiennent à leurs propriétaires respectifs.
@@ -80,6 +83,7 @@ late.
 * [Rémy Auloy](https://github.com/Taarjax) 
 * [Eddy Druet](https://github.com/Akwd22) 
 * [Loic Boichut](https://github.com/locxt) 
+
 
 
 
