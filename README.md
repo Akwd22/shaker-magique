@@ -77,9 +77,8 @@ late.
 
 # License
 
-Ce projet a été réalisé dans un cadre pédagogique. À ce titre, il n'a pas vocation à être utilisé en-dehors de ce cadre. Les différents éléments utilisés dans ce projet appartiennent à leurs propriétaires respectifs.
+Ce projet a été réalisé pour un client. À ce titre, les différents éléments utilisés dans ce projet appartiennent à leurs propriétaires respectifs.
 
-This project was carried out in a pedagogical framework. As such, it is not intended to be used outside this framework. The various elements used in this project belong to their respective owners.
-
+This project was carried out for a client. As such, the various elements used in this project belong to their respective owners.
 
 
