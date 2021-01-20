@@ -61,7 +61,7 @@ if you offer a cocktail in your menu, but you don't have all the ingredients for
 If you do not check the filter, then this one will not appear, unless you check the filter for. But we will detail this more
 late.
 
-# Contributors (https://github.com/Taarjax/Projet-S3/graphs/contributors) 
+# [Contributors] (https://github.com/Taarjax/Projet-S3/graphs/contributors) 
 
 * [Rémy Auloy](https://github.com/Taarjax) 
 * [Eddy Druet](https://github.com/Akwd22) 
