@@ -1,3 +1,9 @@
+# License
+
+Ce projet a été réalisé pour un client. À ce titre, les différents éléments utilisés dans ce projet appartiennent à leurs propriétaires respectifs.
+
+This project was carried out for a client. As such, the various elements used in this project belong to their respective owners.
+
 # Présentation
 
 ## FRENCH 
@@ -75,10 +81,5 @@ late.
 * [Eddy Druet](https://github.com/Akwd22) 
 * [Loic Boichut](https://github.com/locxt) 
 
-# License
-
-Ce projet a été réalisé pour un client. À ce titre, les différents éléments utilisés dans ce projet appartiennent à leurs propriétaires respectifs.
-
-This project was carried out for a client. As such, the various elements used in this project belong to their respective owners.
 
 
