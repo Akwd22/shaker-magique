@@ -1,6 +1,3 @@
-# Projet-S3
-Projet "Shaker magique" S3
-
 # Présentation
 
 ## FRENCH 
