@@ -1,10 +1,9 @@
 # Projet-S3
 Projet "Shaker magique" S3
 
+# Présentation
 
-# FRENCH
-
-## Présentation
+## FRENCH 
 
 Notre projet s’appelle « Shaker Magique », le principe de base est simple : concevoir un site
 web proposant aux utilisateurs une liste de cocktails.
@@ -34,9 +33,9 @@ réaliser alors celui-ci n’apparaitra pas, à moins de cocher le filtre pour. 
 tard.
 
 
-# ENGLISH
+## ENGLISH
 
-Our project is called "Magic Shaker", the basic principle is simple: to design a site
+Our project is called "Shaker Magique", the basic principle is simple: to design a site
 web offering users a list of cocktails.
 
 You should know that on this site, there are 3 categories of users :
@@ -61,3 +60,18 @@ friends at "cocktail parties" or other, depending on the ingredients you have in
 if you offer a cocktail in your menu, but you don't have all the ingredients for it.
 If you do not check the filter, then this one will not appear, unless you check the filter for. But we will detail this more
 late.
+
+# Contributors (https://github.com/Taarjax/Projet-S3/graphs/contributors) 
+
+* [Rémy Auloy](https://github.com/Taarjax) 
+* [Eddy Druet](https://github.com/Akwd22) 
+* [Loic Boichut](https://github.com/locxt) 
+
+# License
+
+Ce projet a été réalisé dans un cadre pédagogique. À ce titre, il n'a pas vocation à être utilisé en-dehors de ce cadre. Les différents éléments utilisés dans ce projet appartiennent à leurs propriétaires respectifs.
+
+This project was carried out in a pedagogical framework. As such, it is not intended to be used outside this framework. The various elements used in this project belong to their respective owners.
+
+
+
