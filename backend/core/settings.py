@@ -86,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'remy-dut_pts3',
-        'USER': 'remy-dut',
-        'PASSWORD': 'projetduts3',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': 'mysql-remy-dut.alwaysdata.net',
         'PORT': '3306',
     }
