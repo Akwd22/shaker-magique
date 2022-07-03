@@ -26,7 +26,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Home Page Screenshot][project-image]](https://example.com)
 
 This project is called **Shaker Magique**, the basic principle is simple: a website offering users a list of cocktails manageable by a host.
 
@@ -69,14 +69,14 @@ The development was done in a team of 6 people.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow the steps described in the document `docs/documentation-utilisateur.pdf` at section *III - Guide d'installation de l'application*.
+To get a local copy up and running follow the steps described in the document `docs/manuel-utilisation.pdf` at section *III - Guide d'installation de l'application*.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+This project was made for a client. As such, the various elements used in this project belong to their respective owners.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -99,6 +99,4 @@ This project was made primarily by:
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
+[project-image]: project-image.png
