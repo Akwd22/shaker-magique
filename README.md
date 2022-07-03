@@ -5,7 +5,7 @@
 <div align="center">
   <h3 align="center">Shaker Magique</h3>
   <p align="center">
-    <a href="#">View Demo</a>
+    <a href="#">View Demo (TODO)</a>
   </p>
 </div>
 
