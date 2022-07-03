@@ -1,0 +1,7 @@
+{
+  "short_name": "Shaker Magique",
+  "name": "Shaker Magique",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff"
+}
