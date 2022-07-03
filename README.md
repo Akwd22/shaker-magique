@@ -16,6 +16,7 @@
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#context">Context</a></li>
     <li><a href="#built-with">Built With</a></li>
+    <li><a href="#documentation">Documentation</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contributors">Contributors</a></li>
@@ -68,6 +69,11 @@ The development was done in a team of 6 people.
 - [JSON Web Token](https://jwt.io/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- DOCUMENTATION -->
+## Documentation
+
+You can find documentation files such as the requirements analysis, and UML diagrams in the folder `docs/`.
 
 <!-- GETTING STARTED -->
 ## Getting Started
