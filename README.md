@@ -26,7 +26,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Home Page Screenshot][project-image]](https://example.com)
+<div align="center">
+  <img src="project-image.png">
+</div>
+<br />
 
 This project is called **Shaker Magique**, the basic principle is simple: a website offering users a list of cocktails manageable by a host.
 
@@ -96,7 +99,3 @@ This project was made primarily by:
 * [Font Awesome](https://fontawesome.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[project-image]: project-image.png
