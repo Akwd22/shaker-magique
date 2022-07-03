@@ -1,89 +1,104 @@
-# URL
-Le site est actuellement en cours de déploiement
+<div id="top"></div>
 
-# License
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <h3 align="center">Shaker Magique</h3>
+  <p align="center">
+    <a href="#">View Demo</a>
+  </p>
+</div>
 
-Ce projet a été réalisé pour un client. À ce titre, les différents éléments utilisés dans ce projet appartiennent à leurs propriétaires respectifs.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#context">Context</a></li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contributors">Contributors</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-This project was carried out for a client. As such, the various elements used in this project belong to their respective owners.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-# Présentation
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-## FRENCH 
+This project is called **Shaker Magique**, the basic principle is simple: a website offering users a list of cocktails manageable by a host.
 
-Notre projet s’appelle « Shaker Magique », le principe de base est simple : concevoir un site
-web proposant aux utilisateurs une liste de cocktails.
+There are three categories of users:
 
-Vous devez savoir que sur ce site, il existe 3 catégories d’utilisateur :
-* Le visiteur, c’est-à-dire utiliser le site sans vous connecter à un compte. Un visiteur n’a
-que très peu de possibilités, il peut rejoindre un hôte (un hôte est un utilisateur, qui offre
-la possibilité de visualiser sa carte de cocktails), afin de voir les cocktails que celui-ci
-propose, ou alors consulter parmi la liste de tous les cocktails de la base de données. Ainsi,
-un visiteur ne peut pas créer sa propre liste de cocktail.
+- The **guest**, who is not connected: he has only a few possibilities, he can join a host (a **host** is a user, who proposes cocktail recipes), in order to see the cocktails that this host proposes, or to consult among the list of all the cocktails independently of the host.
+- The **member** has an account: he has the same possibilities as the **guest**, but he can become a **host** and create his own list of cocktails and manage his ingredient stock to propose to other users, only available cocktails.
+- The **admin** : he has access to the administration panel. From it, he can consult the list of cocktails where he can manage all the cocktails of the website. Also, he has access to the list of all the ingredients and can manage them.
 
- * L’utilisateur, lui possède un compte, ainsi, en plus de pouvoir réaliser ce que peut faire un
-visiteur, il peut également créer sa propre liste de cocktails et d’ingrédients aux autres
-utilisateurs/visiteurs.
+The usefulness of the site lies in the possibility of proposing its own list of cocktails to its friends during parties for example, according to the ingredients that the organizer of the party (host) has in stock. Because yes, if you propose a cocktail in your menu, but you don't have all the ingredients to make it, then it won't appear, unless you check the ad hoc filter.
 
- * Administrateur, explicitement, un administrateur peut tout faire sur le site, et a accès au
-panneau d’administration via l’URL « /admin ». Ce panneau d’administration offre la
-possibilité de consulter toute la liste des cocktails du site, il peut également ajouter un
-nouveau cocktail, en modifier ou même supprimer un cocktail. De même, il a accès à la
-liste de tous les ingrédients et peut en créer, ajouter et supprimer.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- CONTEXT -->
+## Context
 
-Vous l’aurez compris, l’utilité du site est de pouvoir proposer sa propre liste de cocktails à ses
-amis lors de « soirées cocktail » ou autre, en fonction des ingrédients que vous avez en stock. Car oui
-si vous proposez un cocktail dans votre carte, mais que vous n’avez pas tous les ingrédients pour le
-réaliser alors celui-ci n’apparaitra pas, à moins de cocher le filtre pour. Mais nous détaillerons cela plus
-tard.
+This project is an academic project realized during the **second year** in the **University and Technological Institute (IUT)** of Computer Science.
+Note that this project was not only an academic project, but also a request for a real use for a professor.
 
+The development was done in a team of 6 people.
 
-## ENGLISH
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Our project is called "Shaker Magique", the basic principle is simple: to design a site
-web offering users a list of cocktails.
+## Built With
 
-You should know that on this site, there are 3 categories of users :
-* The visitor, i.e. using the site without logging in to an account. A visitor has
-that very few possibilities, it can join a host (a host is a user, who offers
-the possibility to view its cocktail card), in order to see the cocktails that this one
-proposes, or consult among the list of all the cocktails in the database. Thus,
-a visitor cannot create his own cocktail list.
+### Front-End
 
- * The user, he has an account, so in addition to being able to do what a
-visitor, he can also create his own list of cocktails and ingredients for others.
-users/visitors.
+- [React](https://reactjs.org/)
+  - [React Router](https://reactrouter.com/)
+  - [React Table](https://react-table-v7.tanstack.com/)
+- [Axios](https://axios-http.com/)
 
- * Administrator, explicitly, an administrator can do everything on the site, and has access to the
-control panel via the URL "/admin". This administration panel offers the
-possibility of consulting the whole list of cocktails on the site, he can also add a
-new cocktail, modify or even delete a cocktail. Similarly, he has access to the
-list of all ingredients and can create, add and delete them.
+### Back-End
 
-You will have understood it, the usefulness of the site is to be able to propose its own list of cocktails to its
-friends at "cocktail parties" or other, depending on the ingredients you have in stock. Because yes
-if you offer a cocktail in your menu, but you don't have all the ingredients for it.
-If you do not check the filter, then this one will not appear, unless you check the filter for. But we will detail this more
-late.
+- [Django REST framework](https://www.django-rest-framework.org/)
+- [JSON Web Token](https://jwt.io/)
 
-# Made With
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-## Frontend
-  * HTML/CSS
-  * Javascript with ReactJS
-  
-## Backend
-  * Django 
-  * Django Rest Framework
-  * Mysql
+<!-- GETTING STARTED -->
+## Getting Started
 
-# [Contributors](https://github.com/Taarjax/Projet-S3/graphs/contributors) 
+To get a local copy up and running follow the steps described in the document `docs/documentation-utilisateur.pdf` at section *III - Guide d'installation de l'application*.
 
-* [Rémy Auloy](https://github.com/Taarjax) 
-* [Eddy Druet](https://github.com/Akwd22) 
-* [Loic Boichut](https://github.com/locxt) 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- LICENSE -->
+## License
 
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- Contributors -->
+## Contributors
+
+This project was made primarily by:
+- [Eddy D.](https://github.com/Akwd22)
+- [Rémy A.](https://github.com/Taarjax)
+- [Loïc B.](https://github.com/locxt)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [Font Awesome](https://fontawesome.com)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[product-screenshot]: images/screenshot.png
