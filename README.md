@@ -62,6 +62,7 @@ The development was done in a team of 6 people.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- BUILT WITH -->
 ## Built With
 
 ### Front-End
