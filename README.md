@@ -32,7 +32,7 @@
 </div>
 <br />
 
-This project is called **Shaker Magique**, the basic principle is simple: a website offering users a list of cocktails manageable by a host.
+This project is called **Shaker Magique**, the principle is simple: a website offering users a list of cocktails manageable by a host (e.g. a party host).
 
 There are three categories of users:
 
@@ -42,12 +42,20 @@ There are three categories of users:
 
 The usefulness of the site lies in the possibility of proposing its own list of cocktails to its friends during parties for example, according to the ingredients that the organizer of the party (host) has in stock. Because yes, if you propose a cocktail in your menu, but you don't have all the ingredients to make it, then it won't appear, unless you check the ad hoc filter.
 
+### Features
+
+- [x] Find cocktail recipes with various search filters.
+- [x] Rate out of 5 stars the cocktail recipes.
+- [x] Join a party host to view their list of available cocktails.
+- [x] As a party host, manage your cocktail recipes and your ingredient stock.
+- [x] Mobile-focused experience.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTEXT -->
 ## Context
 
-This project is an academic project realized during the **second year** in the **University and Technological Institute (IUT)** of Computer Science.
+This project is an academic project made during the **second year** in the **University and Technological Institute (IUT)** of Computer Science.
 Note that this project was not only an academic project, but also a request for a real use for a professor.
 
 The development was done in a team of 6 people.
@@ -73,7 +81,9 @@ The development was done in a team of 6 people.
 <!-- DOCUMENTATION -->
 ## Documentation
 
-You can find documentation files such as the requirements analysis, and UML diagrams in the folder `docs/`.
+You can find documentation files such as the requirements analysis, technical details, and UML diagrams in the folder `docs/`.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -102,6 +112,6 @@ This project was made primarily by:
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [Font Awesome](https://fontawesome.com)
+* [Font Awesome](https://fontawesome.com) for icons.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
