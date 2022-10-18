@@ -4,9 +4,6 @@
 <br />
 <div align="center">
   <h3 align="center">Shaker Magique</h3>
-  <p align="center">
-    <a href="#">View Demo (TODO)</a>
-  </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -45,10 +42,9 @@ The usefulness of the site lies in the possibility of proposing its own list of 
 ### Features
 
 - [x] Find cocktail recipes with various search filters.
-- [x] Rate out of 5 stars the cocktail recipes.
 - [x] Join a party host to view their list of available cocktails.
 - [x] As a party host, manage your cocktail recipes and your ingredient stock.
-- [x] Mobile-focused experience.
+- [x] Rate out of 5 stars the cocktail recipes.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
